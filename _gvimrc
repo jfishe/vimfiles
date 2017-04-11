@@ -1,0 +1,4 @@
+set termencoding=utf-8
+set guifont=Fixedsys:h11
+set background=dark
+colorscheme solarized
