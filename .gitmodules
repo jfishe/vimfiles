@@ -13,9 +13,6 @@
 [submodule "vimfiles/bundle/vim-latex"]
 	path = vimfiles/bundle/vim-latex
 	url = https://github.com/vim-latex/vim-latex.git
-[submodule "vimfiles/bundle/vim-pandoc"]
-	path = vimfiles/bundle/vim-pandoc
-	url = https://github.com/dsanson/vim-pandoc.git
 [submodule "vimfiles/bundle/vim-pandoc-syntax"]
 	path = vimfiles/bundle/vim-pandoc-syntax
 	url = https://github.com/vim-pandoc/vim-pandoc-syntax.git
