@@ -25,3 +25,6 @@
 [submodule "vimfiles/bundle/vimwiki"]
 	path = vimfiles/bundle/vimwiki
 	url = https://github.com/vimwiki/vimwiki.git
+[submodule "vimfiles/bundle/vim-pandoc"]
+	path = vimfiles/bundle/vim-pandoc
+	url = https://github.com/vim-pandoc/vim-pandoc.git

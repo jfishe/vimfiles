@@ -1,7 +1,6 @@
-
-let g:vimwiki_ext2syntax = {'.md': 'markdown',
-	\ '.mkd': 'markdown',
-       	\ '.wiki': 'media'}
+"let g:vimwiki_ext2syntax = {'.md': 'markdown',
+"	\ '.mkd': 'markdown',
+"       	\ '.wiki': 'media'}
 
 let wiki_1 = {}
 let my_docs = 'U:/My Documents'

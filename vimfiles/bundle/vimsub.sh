@@ -5,7 +5,6 @@ for a in \
 "https://github.com/davidhalter/jedi-vim.git" \
 "https://github.com/tpope/vim-fugitive.git" \
 "https://github.com/vim-latex/vim-latex.git" \
-"https://github.com/dsanson/vim-pandoc.git" \
 "https://github.com/vim-pandoc/vim-pandoc.git" \
 "https://github.com/vim-pandoc/vim-pandoc-syntax.git" \
 "https://github.com/altercation/vim-colors-solarized.git" \
