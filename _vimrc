@@ -108,3 +108,8 @@ function MyDiff()
   endif
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
+
+"Get listing of map assignments
+function MyMaps()
+    redir @" | silent map | redir END | new | put!
+endfunction
