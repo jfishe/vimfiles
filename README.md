@@ -9,3 +9,5 @@ vimsub.sh semi-automates adding bundles as git submodules because my list was ge
 For vim-jedi to work with Anaconda, if you haven't compiled vim to know where site-package are, set PYTHONPATH. E.g., set PYTHONPATH=C:\Users\fishe\Anaconda3\Lib\site-packages. This will mess up activate/deactivate conda environments so adjust PYTHONPATH if you switch.
 
 https://conda.io/docs/using/envs.html#saved-environment-variables provides directions.
+
+In order for root to work without activate root before opening Vim, set user environment variable PYTHONPATH. In order for it to work after activate root follow the instructions in the link above, but the path is Anaconda3\etc\conda.
