@@ -1,30 +1,40 @@
 [submodule "vimfiles/bundle/vim-pathogen"]
+    ignore = dirty
 	path = vimfiles/bundle/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen.git
 [submodule "vimfiles/bundle/calendar-vim"]
+    ignore = dirty
 	path = vimfiles/bundle/calendar-vim
 	url = https://github.com/mattn/calendar-vim.git
 [submodule "vimfiles/bundle/jedi-vim"]
+    ignore = dirty
 	path = vimfiles/bundle/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
 [submodule "vimfiles/bundle/vim-fugitive"]
+    ignore = dirty
 	path = vimfiles/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule "vimfiles/bundle/vim-latex"]
+    ignore = dirty
 	path = vimfiles/bundle/vim-latex
 	url = https://github.com/vim-latex/vim-latex.git
 [submodule "vimfiles/bundle/vim-pandoc-syntax"]
+    ignore = dirty
 	path = vimfiles/bundle/vim-pandoc-syntax
 	url = https://github.com/vim-pandoc/vim-pandoc-syntax.git
 [submodule "vimfiles/bundle/vim-colors-solarized"]
+    ignore = dirty
 	path = vimfiles/bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "vimfiles/bundle/vim-surround"]
+    ignore = dirty
 	path = vimfiles/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
 [submodule "vimfiles/bundle/vimwiki"]
+    ignore = dirty
 	path = vimfiles/bundle/vimwiki
 	url = https://github.com/vimwiki/vimwiki.git
 [submodule "vimfiles/bundle/vim-pandoc"]
+    ignore = dirty
 	path = vimfiles/bundle/vim-pandoc
 	url = https://github.com/vim-pandoc/vim-pandoc.git
