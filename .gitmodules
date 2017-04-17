@@ -38,3 +38,6 @@
     ignore = dirty
 	path = vimfiles/bundle/vim-pandoc
 	url = https://github.com/vim-pandoc/vim-pandoc.git
+[submodule "vimfiles/bundle/ale"]
+	path = vimfiles/bundle/ale
+	url = https://github.com/w0rp/ale.git
