@@ -41,3 +41,6 @@
 [submodule "vimfiles/bundle/ale"]
 	path = vimfiles/bundle/ale
 	url = https://github.com/w0rp/ale.git
+[submodule "vimfiles/bundle/vim-sensible"]
+	path = vimfiles/bundle/vim-sensible
+	url = https://github.com/tpope/vim-sensible.git
