@@ -30,20 +30,23 @@ execute pathogen#infect()
 execute pathogen#helptags()
 
 " ================ Indentation ======================
+" Commented lines relocated to sensible.vim
 
-set autoindent
+"set autoindent
 set smartindent
-set smarttab
+"set smarttab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 set expandtab
-set backspace=indent,eol,start " Proper backspace behavior.
+"set backspace=indent,eol,start " Proper backspace behavior.
 
 " ================ Buffers ======================
+" Commented lines relocated to sensible.vim
+
 set hidden                     " Possibility to have more than one
                                " unsaved buffers.
-set ruler                      " Shows the current line number at the bottom.
+"set ruler                      " Shows the current line number at the bottom.
                                " right of the screen.
 
 " Display tabs and trailing spaces visually
@@ -56,7 +59,7 @@ if has("multi_byte")
   "setglobal bomb
   set fileencodings=ucs-bom,utf-8,latin1
 endif
-set list listchars=tab:\ \ ,trail:·
+"set list listchars=tab:\ \ ,trail:·
 
 " ================ Completion =======================
 
@@ -78,8 +81,9 @@ set sidescrolloff=15
 set sidescroll=1
 
 " ================ Search ===========================
+" Commented lines relocated to sensible.vim
 
-set incsearch       " Find the next match as we type the search
+"set incsearch       " Find the next match as we type the search
 set hlsearch        " Highlight searches by default
 set ignorecase      " Ignore case when searching...
 set smartcase       " ...unless we type a capital
