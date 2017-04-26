@@ -1,3 +1,3 @@
-map <F3> :r! bash -c "date --iso-8601"<cr>
+map <F3> iJournal <ESC>:read! bash -c "date --iso-8601"<CR>kJ=
 
 setlocal spell spelllang=en_us
