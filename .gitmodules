@@ -39,11 +39,14 @@
 	path = vimfiles/bundle/vim-pandoc
 	url = https://github.com/vim-pandoc/vim-pandoc.git
 [submodule "vimfiles/bundle/ale"]
+    ignore = dirty
 	path = vimfiles/bundle/ale
 	url = https://github.com/w0rp/ale.git
 [submodule "vimfiles/bundle/vim-sensible"]
+    ignore = dirty
 	path = vimfiles/bundle/vim-sensible
 	url = https://github.com/tpope/vim-sensible.git
 [submodule "vimfiles/bundle/vim-conda"]
+    ignore = dirty
 	path = vimfiles/bundle/vim-conda
 	url = https://github.com/jfishe/vim-conda.git
