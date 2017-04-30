@@ -44,3 +44,6 @@
 [submodule "vimfiles/bundle/vim-sensible"]
 	path = vimfiles/bundle/vim-sensible
 	url = https://github.com/tpope/vim-sensible.git
+[submodule "vimfiles/bundle/vim-conda"]
+	path = vimfiles/bundle/vim-conda
+	url = https://github.com/jfishe/vim-conda.git
