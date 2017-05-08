@@ -1,20 +1,27 @@
-" Locate Documents folder or user home directory
+" vim:tabstop=2:shiftwidth=2:expandtab:foldmethod=marker:textwidth=79
+" Vimwiki plugin file
+" Locate Documents folder or user home directory {{{
+" Finds My Documents or Documents folder even if it's not located in
+" $HOMEDRIVE$HOMEPATH or $HOME.
+" Defaults to $HOME for non-windows.
+" Tested on Windows10 and Windows7
 if has("win32") || has("win64")
-    function! s:GetMyDocuments()
+    function! s:GetMyDocuments() "{{{
         let KEY_NAME = '"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders"'
         let VALUE_NAME = "Personal"
         let cmd = "REG QUERY " . KEY_NAME . " /v " . VALUE_NAME 
         echo cmd
-        let mydocs = systemlist(cmd)
-        let mydocs = split(mydocs[2], "    ")[2][:-2]
-        echo mydocs
-        return mydocs
-    endfunction
+        let my_docs = systemlist(cmd)
+        let my_docs = split(my_docs[2], "    ")[2][:-2]
+        echo my_docs
+        return my_docs
+    endfunction "}}}
     silent let my_docs = <SID>GetMyDocuments()
 else
     let my_docs = $HOME
-endif
+endif "}}}
 
+" Define g:vimwiki_list {{{
 let g:vimwiki_ext2syntax = {'.md': 'markdown',
 	\ '.mkd': 'markdown',
        	\ '.wiki': 'media'}
@@ -33,4 +40,4 @@ let wiki_1.template_default = 'default'
 let wiki_1.template_ext = '.tpl'
 let wiki_1.mathjax_folder = '../mathjax'
 
-let g:vimwiki_list = [wiki_1]
+let g:vimwiki_list = [wiki_1] "}}}
