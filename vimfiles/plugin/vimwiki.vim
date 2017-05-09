@@ -41,3 +41,6 @@ let wiki_1.template_ext = '.tpl'
 let wiki_1.mathjax_folder = '../mathjax'
 
 let g:vimwiki_list = [wiki_1] "}}}
+
+" Folding {{{
+let g:vimwiki_folding='syntax'"}}}
