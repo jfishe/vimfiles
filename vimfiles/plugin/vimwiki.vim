@@ -1,5 +1,8 @@
 " vim:tabstop=2:shiftwidth=2:expandtab:foldmethod=marker:textwidth=79
 " Vimwiki plugin file
+
+au BufRead,BufNewFile *.wiki set filetype=vimwiki
+
 " Locate Documents folder or user home directory {{{
 " Finds My Documents or Documents folder even if it's not located in
 " $HOMEDRIVE$HOMEPATH or $HOME.

@@ -1,12 +1,11 @@
 "set pythonthreedll='c:\users\fishe\anaconda3\envs\test'
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
-behave mswin
 
 set fileformat=unix		"LF EOL only
+"set fileformats-=dos		"Force LF EOL only on all; won't handle dos
+"files gracefully
 set visualbell			"No sounds
-
-au BufRead,BufNewFile *.wiki set filetype=vimwiki
 
 "Turn off keep backup files unless write fails
 set writebackup
