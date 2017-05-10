@@ -33,6 +33,7 @@ execute pathogen#helptags()
 " Commented lines relocated to sensible.vim
 
 "set autoindent
+set autochdir  " change directory to the file in the current
 set smartindent
 "set smarttab
 set shiftwidth=4
