@@ -19,3 +19,9 @@ In order for root to work without activate root before opening Vim, set user env
 ### vim-conda
 
 vim-conda resolves the vim-jedi issue and allows switching envs within Vim. There are several versions depending on python2, python3 or allowing both.
+
+## [Gutentags](https://github.com/ludovicchabant/vim-gutentags)
+
+* Gutentags handles Vim integration nicely.
+* [universal-ctags](https://github.com/universal-ctags/ctags) provides
+  direction for obtaining pre-built ctags binary without needing source-forge.

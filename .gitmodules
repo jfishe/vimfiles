@@ -50,3 +50,7 @@
     ignore = dirty
 	path = vimfiles/bundle/vim-conda
 	url = https://github.com/jfishe/vim-conda.git
+[submodule "vimfiles/bundle/vim-gutentags"]
+    ignore = dirty
+	path = vimfiles/bundle/vim-gutentags
+	url = https://github.com/ludovicchabant/vim-gutentags.git
