@@ -23,6 +23,12 @@ if has('persistent_undo')
   set undofile
 endif
 
+" Cache tags instead of polluting project directories
+if !isdirectory(expand('~').'/vimfiles/backups/gutentags')
+  silent exe "!mkdir " . $HOME . '\vimfiles\backups\gutentags > NUL 2>&1'
+endif
+let g:gutentags_cache_dir="~/vimfiles/backups/gutentags"
+
 "Load bundles
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
