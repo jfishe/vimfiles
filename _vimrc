@@ -54,6 +54,8 @@ set hidden                     " Possibility to have more than one
                                " unsaved buffers.
 "set ruler                      " Shows the current line number at the bottom.
                                " right of the screen.
+set switchbuf+=split
+set switchbuf+=useopen
 
 " Display tabs and trailing spaces visually
 if has("multi_byte")
