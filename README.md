@@ -6,6 +6,14 @@ vimsub.sh semi-automates adding bundles as git submodules because my list was ge
 
 ## Anaconda
 
+### conda update
+
+If conda update fails due to ssl: certificate_verify_failed:
+    * conda remove certifi
+    * conda install certifi
+    * Exit Anaconda Prompt and restart if continues failing.
+    * conda update --all
+
 ### PYTHONPATH Considered Harmful
 
 The following works but can have surprising side-effects per [PYTHONPATH Considered Harmful](https://soundcloud.com/talkpython/22-pythonpath-considered-harmful).
