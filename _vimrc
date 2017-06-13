@@ -56,6 +56,7 @@ set hidden                     " Possibility to have more than one
                                " right of the screen.
 set switchbuf+=split
 set switchbuf+=useopen
+autocmd VimResized * wincmd =
 
 " Display tabs and trailing spaces visually
 if has("multi_byte")
@@ -68,6 +69,9 @@ if has("multi_byte")
   set fileencodings=ucs-bom,utf-8,latin1
 endif
 "set list listchars=tab:\ \ ,trail:·
+
+" ================ Jump =============================
+set relativenumber
 
 " ================ Completion =======================
 
@@ -94,6 +98,7 @@ set sidescroll=1
 "set incsearch       " Find the next match as we type the search
 set hlsearch        " Highlight searches by default
 set ignorecase      " Ignore case when searching...
+set infercase       " Smarter completions
 set smartcase       " ...unless we type a capital
 
 "Get listing of map assignments

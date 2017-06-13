@@ -5,16 +5,10 @@ nnoremap <Right> <C-W><C-L>
 nnoremap <Left> <C-W><C-H>
 
 "navigate within wrapped line
-nnoremap j gj
-nnoremap k gk
-vnoremap j gj
-vnoremap k gk
-"nnoremap <Down> gj
-"nnoremap <Up> gk
-"vnoremap <Down> gj
-"vnoremap <Up> gk
-"inoremap <Down> <C-o>gj
-"inoremap <Up> <C-o>gk
+nnoremap <expr> j v:count ? 'j' : 'gj'
+nnoremap <expr> k v:count ? 'k' : 'gk'
+vnoremap <expr> j v:count ? 'j' : 'gj'
+vnoremap <expr> k v:count ? 'k' : 'gk'
 
 " Enable folding with the spacebar
 nnoremap <space> za
