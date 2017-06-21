@@ -9,10 +9,14 @@ vimsub.sh semi-automates adding bundles as git submodules because my list was ge
 ### conda update
 
 If conda update fails due to ssl: certificate_verify_failed:
-    * conda remove certifi
-    * conda install certifi
-    * Exit Anaconda Prompt and restart if continues failing.
-    * conda update --all
+
+```DOS
+SET CONDA_SSL_VERIFY=false
+conda update conda requests pyopenssl cryptography
+SET CONDA_SSL_VERIFY=
+```
+
+The problem seems resolved in Anaconda3 v4.4, which may be due to pyopenssl v17.0, so caution may be in order for `conda update --all` because conda-forge is a higher-priority channel.
 
 ### PYTHONPATH Considered Harmful
 
