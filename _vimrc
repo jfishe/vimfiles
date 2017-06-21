@@ -57,6 +57,7 @@ set hidden                     " Possibility to have more than one
 set switchbuf+=split
 set switchbuf+=useopen
 autocmd VimResized * wincmd =
+set nofoldenable
 
 " Display tabs and trailing spaces visually
 if has("multi_byte")
