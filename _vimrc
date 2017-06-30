@@ -14,20 +14,34 @@ set nobackup
 " ================ Persistent Undo ==================
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
-if has('persistent_undo') && !isdirectory(expand('~').'/vimfiles/backups')
-  silent exe "!mkdir " . $HOME . '\vimfiles\backups > NUL 2>&1'
+if has('win32') || has('win64')
+    let s:vimfiles=$HOME . '/vimfiles'
+else
+    let s:vimfiles=$HOME . '/.vim'
+endif
+
+if has('persistent_undo') && !isdirectory(s:vimfiles . '/backups')
+    if has('win32') || has('win64')
+        silent exe "!mkdir " . s:vimfiles . '\backups > NUL 2>&1'
+    else
+        silent exe "!mkdir " . s:vimfiles . '/backups > /dev/null 2>&1'
+    endif
 endif
 
 if has('persistent_undo')
-  set undodir=~/vimfiles/backups
+  let &undodir=s:vimfiles . '/backups'
   set undofile
 endif
 
 " Cache tags instead of polluting project directories
-if !isdirectory(expand('~').'/vimfiles/backups/gutentags')
-  silent exe "!mkdir " . $HOME . '\vimfiles\backups\gutentags > NUL 2>&1'
+if !isdirectory(s:vimfiles . '/backups/gutentags')
+    if has('win32') || has('win64')
+        silent exe "!mkdir " . s:vimfiles . '\backups\gutentags  > NUL 2>&1'
+    else
+        silent exe "!mkdir " . s:vimfiles . '/backups/gutentags  > /dev/null 2>&1'
+    endif
 endif
-let g:gutentags_cache_dir="~/vimfiles/backups/gutentags"
+let g:gutentags_cache_dir=s:vimfiles . "/backups/gutentags"
 
 "Load bundles
 runtime bundle/vim-pathogen/autoload/pathogen.vim
