@@ -1,0 +1,5 @@
+set termencoding=utf-8
+"set guifont=Fixedsys:h11
+set guifont=Consolas:h11:cANSI:qDRAFT
+set background=dark
+colorscheme solarized

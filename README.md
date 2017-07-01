@@ -4,6 +4,24 @@ Windows Vim 8 configuration files based on the recommendations of [Ruslan Osipov
 
 vimsub.sh semi-automates adding bundles as git submodules because my list was getting a little long.
 
+:help vimrc recommends moving vimrc and gvimrc to vimfiles to make the setup more portable.
+
+To install in Unix based systems:
+
+```
+cd ~
+git clone https://github.com/jfishe/vimfiles.git .vim
+git submodule update --init
+```
+
+To install in Windows:
+
+```
+cd %USERPROFILE%
+git clone https://github.com/jfishe/vimfiles.git .vim
+git submodule update --init
+```
+
 ## Anaconda
 
 ### conda update

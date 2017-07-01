@@ -14,12 +14,8 @@ set nobackup
 " ================ Persistent Undo ==================
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
+" Assumes vimrc is in .vim or vimfiles and not in $HOME
 let s:vimfiles=fnamemodify(expand("$MYVIMRC"), ":p:h")
-if has('win32') || has('win64') || has('win32unix')
-    let s:vimfiles=s:vimfiles . '/vimfiles'
-else
-    let s:vimfiles=s:vimfiles . '/.vim'
-endif
 
 if has('persistent_undo') && !isdirectory(s:vimfiles . '/backups')
     if has('win32') || has('win64') || has('win32unix')
