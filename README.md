@@ -36,4 +36,4 @@ vim-conda resolves the vim-jedi issue and allows switching envs within Vim. Ther
 
 * Gutentags handles Vim integration nicely.
 * [universal-ctags](https://github.com/universal-ctags/ctags) provides
-  direction for obtaining pre-built ctags binary without needing source-forge.
+  direction for obtaining pre-built ctags [binary](binary) without needing source-forge.

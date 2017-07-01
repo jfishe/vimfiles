@@ -14,14 +14,15 @@ set nobackup
 " ================ Persistent Undo ==================
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
-if has('win32') || has('win64')
-    let s:vimfiles=$HOME . '/vimfiles'
+let s:vimfiles=fnamemodify(expand("$MYVIMRC"), ":p:h")
+if has('win32') || has('win64') || has('win32unix')
+    let s:vimfiles=s:vimfiles . '/vimfiles'
 else
-    let s:vimfiles=$HOME . '/.vim'
+    let s:vimfiles=s:vimfiles . '/.vim'
 endif
 
 if has('persistent_undo') && !isdirectory(s:vimfiles . '/backups')
-    if has('win32') || has('win64')
+    if has('win32') || has('win64') || has('win32unix')
         silent exe "!mkdir " . s:vimfiles . '\backups > NUL 2>&1'
     else
         silent exe "!mkdir " . s:vimfiles . '/backups > /dev/null 2>&1'
@@ -35,7 +36,7 @@ endif
 
 " Cache tags instead of polluting project directories
 if !isdirectory(s:vimfiles . '/backups/gutentags')
-    if has('win32') || has('win64')
+    if has('win32') || has('win64') || has('win32unix')
         silent exe "!mkdir " . s:vimfiles . '\backups\gutentags  > NUL 2>&1'
     else
         silent exe "!mkdir " . s:vimfiles . '/backups/gutentags  > /dev/null 2>&1'
