@@ -36,6 +36,9 @@ SET CONDA_SSL_VERIFY=
 
 The problem seems resolved in Anaconda3 v4.4, which may be due to pyopenssl v17.0, so caution may be in order for `conda update --all` because conda-forge is a higher-priority channel.
 
+### conda-forge
+.condarc includes conda-forge to support [Pyne](http://pyne.io)
+
 ### PYTHONPATH Considered Harmful
 
 The following works but can have surprising side-effects per [PYTHONPATH Considered Harmful](https://soundcloud.com/talkpython/22-pythonpath-considered-harmful).
