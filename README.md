@@ -14,11 +14,11 @@ git clone https://github.com/jfishe/vimfiles.git .vim
 git submodule update --init
 ```
 
-To install in Windows:
+To install in Windows(git-cmd version--otherwise use `cd ~`):
 
 ```
 cd %USERPROFILE%
-git clone https://github.com/jfishe/vimfiles.git .vim
+git clone https://github.com/jfishe/vimfiles.git vimfiles
 git submodule update --init
 ```
 
