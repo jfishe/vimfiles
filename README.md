@@ -32,7 +32,13 @@ conda update conda requests pyopenssl cryptography
 SET CONDA_SSL_VERIFY=
 ```
 
-The problem seems resolved in Anaconda3 v4.4, which may be due to pyopenssl v17.0, so caution may be in order for `conda update --all` because conda-forge is a higher-priority channel.
+The problem seems resolved in Anaconda3 v4.4, which may be due to pyopenssl
+v17.0, so caution may be in order for `conda update --all` because conda-forge
+is a higher-priority channel.
+
+The corporate firewall occasionally interferes with the certificate chain.
+Opening the URL for the failing website, in a browser resolves the issue--e.g.,
+[conda-forge](https://anaconda.org/conda-forge/repo?type=conda&label=main).
 
 ### conda-forge
 .condarc includes conda-forge to support [Pyne](http://pyne.io)
@@ -41,18 +47,25 @@ The problem seems resolved in Anaconda3 v4.4, which may be due to pyopenssl v17.
 
 The following works but can have surprising side-effects per [PYTHONPATH Considered Harmful](https://soundcloud.com/talkpython/22-pythonpath-considered-harmful).
 
-For vim-jedi to work with Anaconda, if you haven't compiled vim to know where site-package are, set PYTHONPATH. E.g., set PYTHONPATH=C:\Users\fishe\Anaconda3\Lib\site-packages. This will mess up activate/deactivate conda environments so adjust PYTHONPATH if you switch.
+For vim-jedi to work with Anaconda, if you haven't compiled vim to know where
+site-package are, set PYTHONPATH. E.g., set
+PYTHONPATH=C:\Users\fishe\Anaconda3\Lib\site-packages. This will mess up
+activate/deactivate conda environments so adjust PYTHONPATH if you switch.
 
 [Using conda-Managing environments](https://conda.io/docs/using/envs.html#saved-environment-variables) provides directions.
 
-In order for root to work without activate root before opening Vim, set user environment variable PYTHONPATH. In order for it to work after activate root follow the instructions in the link above, but the path is Anaconda3\etc\conda.
+In order for root to work without activate root before opening Vim, set user
+environment variable PYTHONPATH. In order for it to work after activate root
+follow the instructions in the link above, but the path is Anaconda3\etc\conda.
 
 ### vim-conda
 
-vim-conda resolves the vim-jedi issue and allows switching envs within Vim. There are several versions depending on python2, python3 or allowing both.
+vim-conda resolves the vim-jedi issue and allows switching envs within Vim.
+There are several versions depending on python2, python3 or allowing both.
 
 ## [Gutentags](https://github.com/ludovicchabant/vim-gutentags)
 
 * Gutentags handles Vim integration nicely.
 * [universal-ctags](https://github.com/universal-ctags/ctags) provides
-  direction for obtaining pre-built ctags [binary](binary) without needing source-forge.
+  direction for obtaining pre-built ctags [binary](binary) without needing
+  source-forge.
