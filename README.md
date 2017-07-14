@@ -41,7 +41,20 @@ Opening the URL for the failing website, in a browser resolves the issue--e.g.,
 [conda-forge](https://anaconda.org/conda-forge/repo?type=conda&label=main).
 
 ### conda-forge
+
 .condarc includes conda-forge to support [Pyne](http://pyne.io)
+
+### conda env
+
+[environment.yml](./environment.yml) lists the conda and pip packages I use.
+
+```
+conda env create --name <env> --file environment.yml
+```
+
+The default environment can be specified by replacing `<env>` with the path to
+the Anaconda3 installation directory or replacing the `name:` field in the YAML
+file.
 
 ### PYTHONPATH Considered Harmful
 

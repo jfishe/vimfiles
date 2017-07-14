@@ -1,0 +1,16 @@
+name: test
+channels:
+- conda-forge
+- defaults
+dependencies:
+- anaconda
+- click
+- cookiecutter
+- pandoc
+- virtualenv
+- anaconda
+- pip:
+  - editorconfig
+  - mypy
+prefix: C:\Users\fishe\Anaconda3
+
