@@ -67,5 +67,5 @@ There are several versions depending on python2, python3 or allowing both.
 
 * Gutentags handles Vim integration nicely.
 * [universal-ctags](https://github.com/universal-ctags/ctags) provides
-  direction for obtaining pre-built ctags [binary](binary) without needing
+  direction for obtaining pre-built ctags binary without needing
   source-forge.
