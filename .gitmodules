@@ -57,3 +57,6 @@
 [submodule "vimfiles/bundle/quick-scope"]
 	path = vimfiles/bundle/quick-scope
 	url = https://github.com/unblevable/quick-scope
+[submodule "vimfiles/bundle/editorconfig-vim"]
+	path = vimfiles/bundle/editorconfig-vim
+	url = https://github.com/editorconfig/editorconfig-vim.git
