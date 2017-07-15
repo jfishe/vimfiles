@@ -6,9 +6,9 @@ dependencies:
 - anaconda
 - click
 - cookiecutter
+- jupyter_contrib_nbextensions
 - pandoc
 - virtualenv
-- anaconda
 - pip:
   - editorconfig
   - mypy
