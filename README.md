@@ -12,7 +12,7 @@ git clone https://github.com/jfishe/vimfiles.git .vim
 git submodule update --init
 ```
 
-To install in Windows(git-cmd version--otherwise use `cd ~`):
+To install in Windows (git-cmd version--otherwise use `cd ~`):
 
 ```
 cd %USERPROFILE%
@@ -37,8 +37,21 @@ v17.0, so caution may be in order for `conda update --all` because conda-forge
 is a higher-priority channel.
 
 The corporate firewall occasionally interferes with the certificate chain.
-Opening the URL for the failing website, in a browser resolves the issue--e.g.,
-[conda-forge](https://anaconda.org/conda-forge/repo?type=conda&label=main).
+Opening the URL for the failing website, in a browser--e.g.,
+[conda-forge](https://anaconda.org/conda-forge/repo?type=conda&label=main)--resolves
+the issue for the current session. The work around is only a temporary
+fix. An example error message from `conda update conda`:
+
+```
+CondaHTTPError: HTTP None None for url <https://conda.anaconda.org/conda-forge/win-64/repodata.json>
+Elapsed: None
+
+An HTTP error occurred when trying to retrieve this URL.
+HTTP errors are often intermittent, and a simple retry will get you on your way.
+
+SSLError(SSLError(SSLError("bad handshake: Error([('SSL routines', 'ssl3_get_ser ver_certificate', 'certificate verify failed')],)",),),)
+```
+
 
 ### conda-forge
 
