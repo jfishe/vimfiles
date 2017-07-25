@@ -40,6 +40,16 @@ if !isdirectory(s:vimfiles . '/backups/gutentags')
 endif
 let g:gutentags_cache_dir=s:vimfiles . "/backups/gutentags"
 
+" Cache swapfile instead of polluting project directories
+if !isdirectory(s:vimfiles . '/backups/swp')
+    if has('win32') || has('win64') || has('win32unix')
+        silent exe "!mkdir " . s:vimfiles . '\backups\swp  > NUL 2>&1'
+    else
+        silent exe "!mkdir " . s:vimfiles . '/backups/swp  > /dev/null 2>&1'
+    endif
+endif
+let &directory=s:vimfiles . "/backups/swp//"
+
 "Load bundles
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
