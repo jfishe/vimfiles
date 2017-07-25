@@ -55,6 +55,7 @@ Temporary Items
 *.toc
 *.pdf
 *.out
+.ipynb_checkpoints/
 
 # VIM backups
 *~
