@@ -93,6 +93,15 @@ SSLError(SSLError(SSLError("bad handshake: Error([('SSL routines', 'ssl3_get_ser
 
 [environment.yml](./environment.yml) lists the conda and pip packages I use.
 
+Replace the `name:` and `prefix:` with the Anaconda3 installation path. `name:` could also be an env.
+
+To add packages to the default conda environment:
+
+```
+conda env update --file environment.yml
+```
+
+To create an environment:
 ```
 conda env create --name <env> --file environment.yml
 ```
