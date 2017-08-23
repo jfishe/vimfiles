@@ -4,20 +4,52 @@ Windows Vim 8 configuration files based on the recommendations of [Ruslan Osipov
 
 :help vimrc recommends moving vimrc and gvimrc to vimfiles to make the setup more portable.
 
+## Installation
+
 To install in Unix based systems:
 
 ```
+cd $TMP
+git clone https://github.com/jfishe/vimfiles.git
+mv vimfiles/vimfiles vimfiles/.vim
+cp -r vimfiles/. ~
 cd ~
-git clone https://github.com/jfishe/vimfiles.git .vim
 git submodule update --init
 ```
 
 To install in Windows (git-cmd version--otherwise use `cd ~`):
 
 ```
-cd %USERPROFILE%
+cd %TMP%
 git clone https://github.com/jfishe/vimfiles.git vimfiles
+xcopy vimfiles %USERPROFILE%
+cd %USERPROFILE%
 git submodule update --init
+```
+
+## Windows File Association
+
+To associate the `.c` extension with `gvim`, the following should be copied
+into a batch file and run.  From the command line `cmd.exe` only single `%` is
+needed. This creates one command for all extensions associated with
+`sourcecode`, whereas `Open With` context menu creates a different command for
+each, e.g. c_auto_file.  Additional details are available from
+[Vim Wikia](http://vim.wikia.com/wiki/Windows_file_associations).
+
+```
+reg add HKCU\SOFTWARE\Classes\.c /v "" /t REG_SZ /d "sourcecode" /f
+reg add HKCU\SOFTWARE\Classes\sourcecode\shell\open\command /v "" /t REG_SZ /d "\"%%USERPROFILE%%\vim80\gvim.exe\" --remote \"%%1\"" /f
+reg add HKCU\SOFTWARE\Classes\sourcecode\shell\edit\command /v "" /t REG_SZ /d "\"%%USERPROFILE%%\vim80\gvim.exe\" --remote \"%%1\"" /f
+```
+
+If you have adminstrative rights, the following could be entered in a batch file.  Note that it affects all users, so vim should be installed in the system path.
+
+```
+assoc .c=sourcecode
+assoc .h=sourcecode
+assoc .pl=sourcecode
+assoc .py=sourcecode
+ftype sourcecode="C:\Program Files\Vim\vim80\gvim.exe" --remote-silent "%%1"
 ```
 
 ## Anaconda
