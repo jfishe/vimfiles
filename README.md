@@ -14,7 +14,7 @@ git clone https://github.com/jfishe/vimfiles.git
 mv vimfiles/vimfiles vimfiles/.vim
 cp -r vimfiles/. ~
 cd ~
-git submodule update --init
+git submodule update --init --recursive
 ```
 
 To install in Windows (git-cmd version--otherwise use `cd ~`):
@@ -24,7 +24,7 @@ cd %TMP%
 git clone https://github.com/jfishe/vimfiles.git vimfiles
 xcopy vimfiles %USERPROFILE%
 cd %USERPROFILE%
-git submodule update --init
+git submodule update --init --recursive
 ```
 
 ## Windows File Association
