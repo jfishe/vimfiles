@@ -50,6 +50,9 @@ if !isdirectory(s:vimfiles . '/backups/swp')
 endif
 let &directory=s:vimfiles . "/backups/swp//"
 
+" LocalLeader
+let maplocalleader = ","
+
 "Load bundles
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
