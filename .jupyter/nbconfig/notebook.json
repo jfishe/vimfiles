@@ -1,0 +1,10 @@
+{
+  "load_extensions": {
+    "latex_envs/latex_envs": true,
+    "jupyter-js-widgets/extension": false,
+    "python-markdown/main": true,
+    "ruler/main": true,
+    "comment-uncomment/main": true
+  },
+  "comment_uncomment_keybinding": "alt-ctrl-c"
+}

@@ -147,3 +147,7 @@ There are several versions depending on python2, python3 or allowing both.
 pip install nbdime
 nbdime config-git --enable --global
 ```
+
+### Default Browser
+
+The default browser on Windows 7 and 10 needs to remain IE/Edge to avoid conflicts with various applications. ~/.jupyter/jupyter_notebook_config.py is modified to specify Chrome as the notebook and lab browser since IE is not compatible with notebook v. 5.
