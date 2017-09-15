@@ -13,10 +13,11 @@ if has("win32") || has("win64") || has('win32unix')
         let KEY_NAME = '"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders"'
         let VALUE_NAME = "Personal"
         let cmd = "REG QUERY " . KEY_NAME . " /v " . VALUE_NAME 
-        echo cmd
-        let my_docs = systemlist(cmd)
-        let my_docs = split(my_docs[2], "    ")[2][:-2]
-        echo my_docs
+        "echo cmd
+        let cmd = systemlist(cmd)
+        "echo cmd
+        let cmd = systemlist("echo " . split(cmd[2], "    ")[2][:-2])
+        let my_docs = cmd[0][:-3]
         return my_docs
     endfunction "}}}
     silent let my_docs = <SID>GetMyDocuments()
