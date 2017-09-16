@@ -55,8 +55,13 @@
 	path = vimfiles/bundle/vim-gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags.git
 [submodule "vimfiles/bundle/quick-scope"]
+    ignore = dirty
 	path = vimfiles/bundle/quick-scope
 	url = https://github.com/unblevable/quick-scope
 [submodule "vimfiles/bundle/editorconfig-vim"]
+    ignore = dirty
 	path = vimfiles/bundle/editorconfig-vim
 	url = https://github.com/editorconfig/editorconfig-vim.git
+[submodule "vimfiles/bundle/riv.vim"]
+	path = vimfiles/bundle/riv.vim
+	url = https://github.com/Rykka/riv.vim.git
