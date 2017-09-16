@@ -1,9 +1,14 @@
+--exclude=Downloads
+--exclude=Desktop
 --exclude=vimfiles
---exclude="Google Drive"
+--exclude=MathJax
+--exclude=Google Drive
+--exclude=.anaconda
 --exclude=Anaconda3
 --exclude=AnacondaProjects
 --exclude=OneDrive
 --exclude=Roaming
+--exclude=AppData
 --exclude=GitHub
 --exclude=Pictures
 --exclude=Intel
@@ -22,3 +27,4 @@
 --exclude=*$py.class
 --exclude=.mypy_cache
 --exclude=__pycache__
+--exclude=*.ini
