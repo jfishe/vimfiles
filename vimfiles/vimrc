@@ -17,13 +17,13 @@ set nobackup
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
 " Assumes vimrc is in .vim or vimfiles and not in $HOME
-let s:vimfiles=fnamemodify(expand("$MYVIMRC"), ":p:h")
+let s:vimfiles=fnamemodify(expand("$MYVIMRC"), ':p:h')
 
 if has('persistent_undo') && !isdirectory(s:vimfiles . '/backups')
     if has('win32') || has('win64') || has('win32unix')
-        silent exe "!mkdir " . s:vimfiles . '\backups > NUL 2>&1'
+        silent exe '!mkdir ' . s:vimfiles . '\backups > NUL 2>&1'
     else
-        silent exe "!mkdir " . s:vimfiles . '/backups > /dev/null 2>&1'
+        silent exe '!mkdir ' . s:vimfiles . '/backups > /dev/null 2>&1'
     endif
 endif
 
@@ -35,25 +35,25 @@ endif
 " Cache tags instead of polluting project directories
 if !isdirectory(s:vimfiles . '/backups/gutentags')
     if has('win32') || has('win64') || has('win32unix')
-        silent exe "!mkdir " . s:vimfiles . '\backups\gutentags  > NUL 2>&1'
+        silent exe '!mkdir ' . s:vimfiles . '\backups\gutentags  > NUL 2>&1'
     else
-        silent exe "!mkdir " . s:vimfiles . '/backups/gutentags  > /dev/null 2>&1'
+        silent exe '!mkdir ' . s:vimfiles . '/backups/gutentags  > /dev/null 2>&1'
     endif
 endif
-let g:gutentags_cache_dir=s:vimfiles . "/backups/gutentags"
+let g:gutentags_cache_dir=s:vimfiles . '/backups/gutentags'
 
 " Cache swapfile instead of polluting project directories
 if !isdirectory(s:vimfiles . '/backups/swp')
     if has('win32') || has('win64') || has('win32unix')
-        silent exe "!mkdir " . s:vimfiles . '\backups\swp  > NUL 2>&1'
+        silent exe '!mkdir ' . s:vimfiles . '\backups\swp  > NUL 2>&1'
     else
-        silent exe "!mkdir " . s:vimfiles . '/backups/swp  > /dev/null 2>&1'
+        silent exe '!mkdir ' . s:vimfiles . '/backups/swp  > /dev/null 2>&1'
     endif
 endif
-let &directory=s:vimfiles . "/backups/swp//"
+let &directory=s:vimfiles . '/backups/swp//'
 
 " LocalLeader
-let maplocalleader = ","
+let maplocalleader = ','
 
 "Load bundles
 runtime bundle/vim-pathogen/autoload/pathogen.vim
@@ -135,11 +135,3 @@ endfunction
 
 " diff current buffer and saved file
 " use DiffOrig
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
