@@ -63,5 +63,18 @@
 	path = vimfiles/bundle/editorconfig-vim
 	url = https://github.com/editorconfig/editorconfig-vim.git
 [submodule "vimfiles/bundle/riv.vim"]
+    ignore = dirty
 	path = vimfiles/bundle/riv.vim
 	url = https://github.com/Rykka/riv.vim.git
+[submodule "vimfiles/bundle/--init"]
+    ignore = dirty
+	path = vimfiles/bundle/--init
+	url = https://github.com/SirVer/ultisnips.git
+[submodule "vimfiles/bundle/ultisnips"]
+    ignore = dirty
+	path = vimfiles/bundle/ultisnips
+	url = https://github.com/SirVer/ultisnips.git
+[submodule "vimfiles/bundle/vim-snippets"]
+    ignore = dirty
+	path = vimfiles/bundle/vim-snippets
+	url = https://github.com/honza/vim-snippets.git
