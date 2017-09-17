@@ -66,10 +66,6 @@
     ignore = dirty
 	path = vimfiles/bundle/riv.vim
 	url = https://github.com/Rykka/riv.vim.git
-[submodule "vimfiles/bundle/--init"]
-    ignore = dirty
-	path = vimfiles/bundle/--init
-	url = https://github.com/SirVer/ultisnips.git
 [submodule "vimfiles/bundle/ultisnips"]
     ignore = dirty
 	path = vimfiles/bundle/ultisnips
