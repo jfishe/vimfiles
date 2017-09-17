@@ -13,5 +13,6 @@ dependencies:
   - editorconfig
   - nbdime
   - mypy
+  - vim-vint
 prefix: C:\Users\fishe\Anaconda3
 
