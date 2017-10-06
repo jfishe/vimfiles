@@ -1,76 +1,80 @@
 [submodule "vimfiles/bundle/vim-pathogen"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen.git
 [submodule "vimfiles/bundle/calendar-vim"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/calendar-vim
 	url = https://github.com/mattn/calendar-vim.git
 [submodule "vimfiles/bundle/jedi-vim"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
 [submodule "vimfiles/bundle/vim-fugitive"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule "vimfiles/bundle/vim-latex"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/vim-latex
 	url = https://github.com/vim-latex/vim-latex.git
 [submodule "vimfiles/bundle/vim-pandoc-syntax"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/vim-pandoc-syntax
 	url = https://github.com/vim-pandoc/vim-pandoc-syntax.git
 [submodule "vimfiles/bundle/vim-colors-solarized"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/vim-colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "vimfiles/bundle/vim-surround"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/vim-surround
 	url = https://github.com/tpope/vim-surround.git
 [submodule "vimfiles/bundle/vimwiki"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/vimwiki
 	url = https://github.com/vimwiki/vimwiki.git
 [submodule "vimfiles/bundle/vim-pandoc"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/vim-pandoc
 	url = https://github.com/vim-pandoc/vim-pandoc.git
 [submodule "vimfiles/bundle/ale"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/ale
 	url = https://github.com/w0rp/ale.git
 [submodule "vimfiles/bundle/vim-sensible"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/vim-sensible
 	url = https://github.com/tpope/vim-sensible.git
 [submodule "vimfiles/bundle/vim-conda"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/vim-conda
 	url = https://github.com/jfishe/vim-conda.git
 [submodule "vimfiles/bundle/vim-gutentags"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/vim-gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags.git
 [submodule "vimfiles/bundle/quick-scope"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/quick-scope
 	url = https://github.com/unblevable/quick-scope
 [submodule "vimfiles/bundle/editorconfig-vim"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/editorconfig-vim
 	url = https://github.com/editorconfig/editorconfig-vim.git
 [submodule "vimfiles/bundle/riv.vim"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/riv.vim
 	url = https://github.com/Rykka/riv.vim.git
 [submodule "vimfiles/bundle/ultisnips"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
 [submodule "vimfiles/bundle/vim-snippets"]
-    ignore = dirty
+  ignore = dirty
 	path = vimfiles/bundle/vim-snippets
 	url = https://github.com/honza/vim-snippets.git
+[submodule "vimfiles/bundle/vim-togglelist"]
+  ignore = dirty
+	path = vimfiles/bundle/vim-togglelist
+	url = https://github.com/milkypostman/vim-togglelist.git

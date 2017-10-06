@@ -1,14 +1,15 @@
 let g:pandoc#loaded = 1
-let g:riv_python_rst_hl = 1
+"let g:riv_python_rst_hl = 1
+let g:toggle_list_no_mappings = 1
 
 "set pythonthreedll='c:\users\fishe\anaconda3\envs\test'
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 
-set fileformat=unix		"LF EOL only
-"set fileformats-=dos		"Force LF EOL only on all; won't handle dos
+set fileformat=unix     "LF EOL only
+"set fileformats-=dos   "Force LF EOL only on all; won't handle dos
 "files gracefully
-set visualbell			"No sounds
+set visualbell          "No sounds
 
 "Turn off keep backup files unless write fails
 set writebackup
@@ -83,20 +84,26 @@ set hidden                     " Possibility to have more than one
                                " right of the screen.
 set switchbuf+=split
 set switchbuf+=useopen
-autocmd VimResized * wincmd =
+augroup mybuffers
+  autocmd!
+  autocmd VimResized * wincmd =
+augroup END
 set nofoldenable
 
 " Display tabs and trailing spaces visually
-if has("multi_byte")
-  if &termencoding == ""
+if has('multi_byte')
+  if &termencoding ==? ''
     let &termencoding = &encoding
   endif
   set encoding=utf-8
+  scriptencoding utf-8
   setglobal fileencoding=utf-8
   "setglobal bomb
   set fileencodings=ucs-bom,utf-8,latin1
+  set list listchars=tab:\ \ ,trail:»
+else
+  set list listchars=tab:\ \ ,trail:$
 endif
-"set list listchars=tab:\ \ ,trail:·
 
 " ================ Jump =============================
 set relativenumber
