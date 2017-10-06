@@ -52,9 +52,9 @@ assoc .py=sourcecode
 ftype sourcecode="C:\Program Files\Vim\vim80\gvim.exe" --remote-silent "%%1"
 ```
 
-## Anaconda
+# Anaconda
 
-### conda update
+## conda update
 
 If conda update fails due to ssl: certificate_verify_failed:
 
@@ -85,11 +85,11 @@ SSLError(SSLError(SSLError("bad handshake: Error([('SSL routines', 'ssl3_get_ser
 ```
 
 
-### conda-forge
+## conda-forge
 
 .condarc includes conda-forge to support [Pyne](http://pyne.io)
 
-### conda env
+## conda env
 
 [environment.yml](./environment.yml) lists the conda and pip packages I use.
 
@@ -110,7 +110,7 @@ The default environment can be specified by replacing `<env>` with the path to
 the Anaconda3 installation directory or replacing the `name:` field in the YAML
 file.
 
-### PYTHONPATH Considered Harmful
+## PYTHONPATH Considered Harmful
 
 The following works but can have surprising side-effects per [PYTHONPATH Considered Harmful](https://soundcloud.com/talkpython/22-pythonpath-considered-harmful).
 
@@ -125,7 +125,7 @@ In order for root to work without activate root before opening Vim, set user
 environment variable PYTHONPATH. In order for it to work after activate root
 follow the instructions in the link above, but the path is Anaconda3\etc\conda.
 
-### vim-conda
+## vim-conda
 
 vim-conda resolves the vim-jedi issue and allows switching envs within Vim.
 There are several versions depending on python2, python3 or allowing both.

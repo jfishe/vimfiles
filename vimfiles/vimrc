@@ -1,4 +1,5 @@
 let g:pandoc#loaded = 1
+let g:riv_python_rst_hl = 1
 
 "set pythonthreedll='c:\users\fishe\anaconda3\envs\test'
 source $VIMRUNTIME/vimrc_example.vim
@@ -17,7 +18,7 @@ set nobackup
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
 " Assumes vimrc is in .vim or vimfiles and not in $HOME
-let s:vimfiles=fnamemodify(expand("$MYVIMRC"), ':p:h')
+let s:vimfiles=fnamemodify(expand('$MYVIMRC'), ':p:h')
 
 if has('persistent_undo') && !isdirectory(s:vimfiles . '/backups')
     if has('win32') || has('win64') || has('win32unix')
@@ -53,7 +54,7 @@ endif
 let &directory=s:vimfiles . '/backups/swp//'
 
 " LocalLeader
-let maplocalleader = ','
+let g:maplocalleader = ','
 
 "Load bundles
 runtime bundle/vim-pathogen/autoload/pathogen.vim
