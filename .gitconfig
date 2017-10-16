@@ -4,11 +4,19 @@
 	required = true
 	clean = git-lfs clean -- %f
 [user]
-	name = jfishe
+	name = John D. Fisher
 [user]
 	email = jdfenw@gmail.com
 [core]
+	editor = vim
+	eol = lf
 	autocrlf = input
+[gui]
+	displayuntracked = false
+[push]
+	default = simple
+[log]
+	decorate = auto
 [diff "jupyternotebook"]
 	command = git-nbdiffdriver diff
 [merge "jupyternotebook"]
@@ -22,7 +30,3 @@
 	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
 [mergetool]
 	prompt = false
-[gui]
-	displayuntracked = false
-[push]
-	default = simple
