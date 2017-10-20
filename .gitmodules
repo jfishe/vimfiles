@@ -86,3 +86,6 @@
 	ignore = dirty
 	path = vimfiles/bundle/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
+[submodule "vimfiles/bundle/vim-pydocstring"]
+	path = vimfiles/bundle/vim-pydocstring
+	url = https://github.com/heavenshell/vim-pydocstring.git
