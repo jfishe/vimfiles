@@ -12,7 +12,7 @@ if has("win32") || has("win64") || has('win32unix')
     function! s:GetMyDocuments() "{{{
         let KEY_NAME = '"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders"'
         let VALUE_NAME = "Personal"
-        let cmd = "REG QUERY " . KEY_NAME . " /v " . VALUE_NAME 
+        let cmd = "REG QUERY " . KEY_NAME . " /v " . VALUE_NAME
         "echo cmd
         let cmd = systemlist(cmd)
         "echo cmd
@@ -43,6 +43,8 @@ let wiki_1.template_path = wiki_1.path_html . 'templates/'
 let wiki_1.template_default = 'default'
 let wiki_1.template_ext = '.tpl'
 let wiki_1.mathjax_folder = '../mathjax'
+let wiki_1.auto_tags = 1
+let wiki_1.list_margin = 0
 
 let g:vimwiki_list = [wiki_1] "}}}
 
