@@ -1,8 +1,9 @@
 function! s:TitleJournal()
     execute 'normal! ggOJournal '
     read! bash -c "date --iso-8601"
-    execute "normal! kJ"
+    execute 'normal! kJ'
     call vimwiki#base#AddHeaderLevel()
+    execute 'normal! j'
 endfunction
 nnoremap <buffer> <F3> :call <SID>TitleJournal()<CR>
 
