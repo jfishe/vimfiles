@@ -56,6 +56,12 @@ let &directory=s:vimfiles . '/backups/swp//'
 " LocalLeader
 let g:maplocalleader = ','
 
+" Thesaurus from http://www.gutenberg.org/files/3202/files.zip
+" Extract files from zip and put in the following location.
+if isdirectory(s:vimfiles . '/thesaurus')
+    let &thesaurus = s:vimfiles . '/thesaurus/mthesaur.txt'
+endif
+
 "Load bundles
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()

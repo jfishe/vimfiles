@@ -42,7 +42,9 @@ reg add HKCU\SOFTWARE\Classes\sourcecode\shell\open\command /v "" /t REG_SZ /d "
 reg add HKCU\SOFTWARE\Classes\sourcecode\shell\edit\command /v "" /t REG_SZ /d "\"%%USERPROFILE%%\vim80\gvim.exe\" --remote \"%%1\"" /f
 ```
 
-If you have adminstrative rights, the following could be entered in a batch file.  Note that it affects all users, so vim should be installed in the system path.
+If you have adminstrative rights, the following could be entered in a batch
+file.  Note that it affects all users, so vim should be installed in the system
+path.
 
 ```
 assoc .c=sourcecode
@@ -51,6 +53,9 @@ assoc .pl=sourcecode
 assoc .py=sourcecode
 ftype sourcecode="C:\Program Files\Vim\vim80\gvim.exe" --remote-silent "%%1"
 ```
+## Thesaurus
+Setup instructions are included in vimrc to install the
+[Moby Thesaurus List by Grady Ward](http://www.gutenberg.org/ebooks/3202) from Project Gutenberg.
 
 # Anaconda
 
