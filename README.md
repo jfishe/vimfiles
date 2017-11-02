@@ -57,6 +57,11 @@ ftype sourcecode="C:\Program Files\Vim\vim80\gvim.exe" --remote-silent "%%1"
 Setup instructions are included in vimrc to install the
 [Moby Thesaurus List by Grady Ward](http://www.gutenberg.org/ebooks/3202) from Project Gutenberg.
 
+## [Faster Grepping in Vim](https://robots.thoughtbot.com/faster-grepping-in-vim)
+The [the_silver_searcher](https://github.com/ggreer/the_silver_searcher) needs
+to be installed or default grep will be used. VWS speed is greatly improved by
+re-defining the command.
+
 # Anaconda
 
 ## conda update

@@ -89,3 +89,6 @@
 [submodule "vimfiles/bundle/vim-pydocstring"]
 	path = vimfiles/bundle/vim-pydocstring
 	url = https://github.com/heavenshell/vim-pydocstring.git
+[submodule "vimfiles/bundle/vim-abolish"]
+	path = vimfiles/bundle/vim-abolish
+	url = https://github.com/tpope/vim-abolish.git
