@@ -160,4 +160,14 @@ nbdime config-git --enable --global
 
 ### Default Browser
 
-The default browser on Windows 7 and 10 needs to remain IE/Edge to avoid conflicts with various applications. ~/.jupyter/jupyter_notebook_config.py is modified to specify Chrome as the notebook and lab browser since IE is not compatible with notebook v. 5.
+The default browser on Windows 7 and 10 needs to remain IE/Edge to avoid
+conflicts with various applications. ~/.jupyter/jupyter_notebook_config.py is
+modified to specify Chrome as the notebook and lab browser since IE is not
+compatible with notebook v. 5.
+
+# Windows Setup
+
+## Console
+* [Introducing the Windows Console Colortool](https://blogs.msdn.microsoft.com/commandline/2017/08/11/introducing-the-windows-console-colortool/)
+    * [ColorTool](https://github.com/Microsoft/Console/tree/master/tools/ColorTool).
+

@@ -110,6 +110,10 @@ else
   set list listchars=tab:\ \ ,trail:$
 endif
 
+" Color and background
+set background=dark
+colorscheme solarized
+
 " ================ Jump =============================
 set relativenumber
 
