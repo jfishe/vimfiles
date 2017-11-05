@@ -171,3 +171,26 @@ compatible with notebook v. 5.
 * [Introducing the Windows Console Colortool](https://blogs.msdn.microsoft.com/commandline/2017/08/11/introducing-the-windows-console-colortool/)
     * [ColorTool](https://github.com/Microsoft/Console/tree/master/tools/ColorTool).
 
+# Setup Python Project
+
+```
+cookiecutter cookiecutter-pypackage
+```
+
+Change to the pypackage directory you created and make initial commit to source
+control.
+
+```
+git init
+git add .
+git commit -m "Initial project scaffold"
+git status
+```
+
+```
+virtualenv env
+# Use env/bin/activate on Linux
+env\Scripts\activate
+pip install -e .
+```
+
