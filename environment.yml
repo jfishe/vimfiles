@@ -1,18 +1,18 @@
 name: C:\Users\jfishe\Anaconda3
 channels:
-- conda-forge
 - defaults
+- conda-forge
 dependencies:
 - anaconda
-- click
-- cookiecutter
-- jupyter_contrib_nbextensions
-- pandoc
-- virtualenv
 - pip:
+  - pandoc
+  - click
+  - cookiecutter
   - editorconfig
+  - jupyter_contrib_nbextensions
   - nbdime
   - mypy
   - vim-vint
+  - virtualenv
 prefix: C:\Users\fishe\Anaconda3
 
