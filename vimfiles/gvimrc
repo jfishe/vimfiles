@@ -3,3 +3,6 @@ set termencoding=utf-8
 set guifont=Consolas:h11:cANSI:qDRAFT
 set background=dark
 colorscheme solarized
+set guioptions-=L
+set guioptions-=r
+set guioptions-=T
