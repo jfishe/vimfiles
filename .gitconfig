@@ -42,3 +42,5 @@
 	prompt = false
 [color]
 	ui = true
+[diff "xlsxdiff"]
+	command = git-diff-wrapper.sh

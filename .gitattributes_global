@@ -1,0 +1,5 @@
+# http://timstaley.co.uk/posts/making-git-and-jupyter-notebooks-play-nice/
+*.ipynb filter=nbstrip_full
+# https://gist.github.com/hkuno9000/f9244d923ebf69de11d4
+*.xls	diff=xlsxdiff
+*.xlsx	diff=xlsxdiff
