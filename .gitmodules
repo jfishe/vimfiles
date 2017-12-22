@@ -92,3 +92,6 @@
 [submodule "vimfiles/bundle/vim-abolish"]
 	path = vimfiles/bundle/vim-abolish
 	url = https://github.com/tpope/vim-abolish.git
+[submodule "vimfiles/bundle/vim-ps1"]
+	path = vimfiles/bundle/vim-ps1
+	url = https://github.com/PProvost/vim-ps1.git
