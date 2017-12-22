@@ -1,0 +1,65 @@
+*myhelp.txt*	For Vim version 8	Last change: 2017 December 16
+*myhelp*
+
+Cheat sheet of Vim stuff often forgotten
+
+==============================================================================
+CONTENTS
+
+	1. Normal Mode.......................................|myhelp-normal|
+	2. Visual Mode.......................................|myhelp-visual|
+	3. Insert Mode.......................................|myhelp-insert|
+	4. Ex................................................|myhelp-ex|
+	5. ALE...............................................|myhelp-ale|
+	6. Jedi..............................................|myhelp-jedi|
+
+==============================================================================
+1. Normal Mode                                                 *myhelp-normal*
+
+- ~ Uppercase a letter (works on ranges)
+- z commands:
+  - z. : current line at the center
+  - z- : current line at the bottom
+- /<C-R><C-W>: Pull word into command line (or search)
+- :reg : list registers (and show what’s in them)
+
+==============================================================================
+2. Visual Mode                                                 *myhelp-visual*
+
+- J : Join the highlighted lines, removing unnecessary whitespace.
+- va' : select a single-quoted string (also works with " and `)
+- vi' : select the contents of a single-quoted string
+- vab : select a "block" (works differently in different langs)
+- vat : select a <tag> and its contents (use i instead of a for just
+           contents)
+
+==============================================================================
+3. Insert Mode                                                 *myhelp-insert*
+
+- <C-N>: Complete word
+- <C-N><C-P>: Complete word (?)
+- <C-X><C-L>: Complete line (!!)
+- Insert mode completion: |ins-completion|
+
+==============================================================================
+4. Ex                                                              *myhelp-ex*
+- :set relativenumber    |'relativenumber'| |'rnu'|
+
+==============================================================================
+5. ALE                                                            *myhelp-ale*
+
+- <localleader>?     ALEDetail
+- <C-k>              Previous error
+- <C-j>              Next error
+
+==============================================================================
+6. Jedi                                                          *myhelp-jedi*
+
+Default: <Ctrl-Space>                   Start completion
+Default: <leader>d                      Go to definition (or assignment)
+Default: <leader>g                      Go to assignment
+Default: <K>                            Show pydoc documentation
+Default: <leader>r                      Rename variables
+
+
+  vim:tw=78:ts=2:sts=2:sw=2:ft=help:norl:
