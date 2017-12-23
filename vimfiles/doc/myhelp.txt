@@ -40,6 +40,28 @@ CONTENTS
 - <C-N><C-P>: Complete word (?)
 - <C-X><C-L>: Complete line (!!)
 - Insert mode completion: |ins-completion|
+- Insert digraphs |i_CTRL-K|: |digraphs-use| |digraph-table|
+  - CTRL-K {char1} {char2}:
+- Insert unicode character: |i_CTRL-V_digit|
+  - CTRL-QU{hexidecimal}:
+
+char  digraph hex   dec   official name ~
+°     DG	    0xb0	176   DEGREE SIGN
+§	    SE	    0xa7	167   SECTION SIGN
+¶   	PI    	0xb6	182   PILCROW SIGN
+±	    +-	    0xb1	177   PLUS-MINUS SIGN
+–     -N      2013	8211	EN DASH `
+—     -M      2014	8212	EM DASH
+∴     .:      2234	8756	THEREFORE
+∵     :.      2235	8757	BECAUSE
+µ   	My    	0xb5	181   MICRO SIGN
+·     .M      0xb7	183   MIDDLE DOT
+×     *X      0xd7	215   MULTIPLICATION SIGN
+Δ     D*      0394	0916	GREEK CAPITAL LETTER DELTA
+θ     h*      03B8	0952	GREEK SMALL LETTER THETA
+λ     l*      03BB	0955	GREEK SMALL LETTER LAMDA
+φ     f*      03C6	0966	GREEK SMALL LETTER PHI
+τ     t*      03C4	0964	GREEK SMALL LETTER TAU
 
 ==============================================================================
 4. Ex                                                              *myhelp-ex*
