@@ -66,18 +66,6 @@ re-defining the command.
 
 ## conda update
 
-If conda update fails due to ssl: certificate_verify_failed:
-
-```DOS
-SET CONDA_SSL_VERIFY=false
-conda update conda requests pyopenssl cryptography
-SET CONDA_SSL_VERIFY=
-```
-
-The problem seems resolved in Anaconda3 v4.4, which may be due to pyopenssl
-v17.0, so caution may be in order for `conda update --all` because conda-forge
-is a higher-priority channel.
-
 The corporate firewall occasionally interferes with the certificate chain.
 Opening the URL for the failing website, in a browser--e.g.,
 [conda-forge](https://anaconda.org/conda-forge/repo?type=conda&label=main)--resolves
@@ -94,14 +82,13 @@ HTTP errors are often intermittent, and a simple retry will get you on your way.
 SSLError(SSLError(SSLError("bad handshake: Error([('SSL routines', 'ssl3_get_ser ver_certificate', 'certificate verify failed')],)",),),)
 ```
 
-
 ## conda-forge
 
 .condarc includes conda-forge to support [Pyne](http://pyne.io)
 
 ## conda env
 
-[environment.yml](./environment.yml) lists the conda and pip packages I use.
+[environment.yml](file://./environment.yml) lists the conda and pip packages I use.
 
 Replace the `name:` and `prefix:` with the Anaconda3 installation path. `name:` could also be an env.
 
