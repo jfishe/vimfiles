@@ -12,5 +12,5 @@ if executable('ag')
         \ escape('"^.*/*'.VimwikiGet('ext').'"', ' '). ' '.
         \ shellescape(VimwikiGet('path'), ' ')
     command! -buffer -nargs=* -complete=custom,vimwiki#tags#complete_tags
-        \ VWT VWS /:<args>:/
+        \ VWT VWS :<args>:
 endif
