@@ -14,5 +14,4 @@ dependencies:
   - mypy
   - vim-vint
   - virtualenv
-prefix: C:\Users\fishe\Anaconda3
-
+# prefix: C:\Users\fishe\Anaconda3
