@@ -3,3 +3,6 @@
 	email = jdfisher@energy-northwest.com
 [credential]
 	helper = manager
+[commit]
+	template = ~/.elateral/git-commit-template/.git-commit-message-template.txt
+	cleanup = strip

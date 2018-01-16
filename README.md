@@ -181,3 +181,6 @@ env\Scripts\activate
 pip install -e .
 ```
 
+# Git
+[ElateralLtd git commit template](https://github.com/ElateralLtd/git-commit-template)
+provides a template and installation script for standard git commit messages.
