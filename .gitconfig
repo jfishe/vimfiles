@@ -5,13 +5,16 @@
 	required = true
 [user]
 	name = John D. Fisher
-[user]
 	email = jdfenw@gmail.com
+[includeIf "gitdir:work/"]
+	path = ~/work/.gitconfig
+[includeIf "gitdir:personal/"]
+	path = ~/personal/.gitconfig
 [core]
 	editor = vim
 	eol = lf
 	autocrlf = input
-    attributesfile = ~/.gitattributes_global
+	attributesfile = ~/.gitattributes_global
 [gui]
 	displayuntracked = false
 [push]
