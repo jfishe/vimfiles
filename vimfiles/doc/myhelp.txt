@@ -66,6 +66,7 @@ char  digraph hex   dec   official name ~
 ==============================================================================
 4. Ex                                                              *myhelp-ex*
 - :set relativenumber    |'relativenumber'| |'rnu'|
+- :s/ <\p\{-}@\p\{-}>//cgi  Remove email addresses.
 
 ==============================================================================
 5. ALE                                                            *myhelp-ale*
