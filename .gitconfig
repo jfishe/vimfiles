@@ -6,10 +6,6 @@
 [user]
 	name = John D. Fisher
 	email = jdfenw@gmail.com
-[includeIf "gitdir:work/"]
-	path = ~/work/.gitconfig
-[includeIf "gitdir:personal/"]
-	path = ~/personal/.gitconfig
 [core]
 	editor = vim
 	eol = lf
@@ -47,5 +43,11 @@
 	ui = true
 [diff "xlsxdiff"]
 	command = git-diff-wrapper.sh
+# [credential]
+	# helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-wincred.exe
 [credential]
-	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-wincred.exe
+	helper = manager
+[include]
+	path = ~/work/.gitconfig
+# [includeIf "gitdir:personal/"]
+	# path = ~/personal/.gitconfig
