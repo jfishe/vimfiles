@@ -1,88 +1,99 @@
-*myhelp.txt*	For Vim version 8	Last change: 2017 December 16
-*myhelp*
+*myhelp.txt* Cheat sheet of Vim stuff often forgotten
 
-Cheat sheet of Vim stuff often forgotten
-
-==============================================================================
-CONTENTS
-
-	1. Normal Mode.......................................|myhelp-normal|
-	2. Visual Mode.......................................|myhelp-visual|
-	3. Insert Mode.......................................|myhelp-insert|
-	4. Ex................................................|myhelp-ex|
-	5. ALE...............................................|myhelp-ale|
-	6. Jedi..............................................|myhelp-jedi|
+Author: John D. Fisher <https://github.com/jfishe>
+License: Same terms as Vim itself (see |license|)
 
 ==============================================================================
-1. Normal Mode                                                 *myhelp-normal*
+CONTENTS                                         *myhelp*
 
-- ~ Uppercase a letter (works on ranges)
-- z commands:
-  - z. : current line at the center
-  - z- : current line at the bottom
-- /<C-R><C-W>: Pull word into command line (or search)
-- :reg : list registers (and show what’s in them)
-
-==============================================================================
-2. Visual Mode                                                 *myhelp-visual*
-
-- J : Join the highlighted lines, removing unnecessary whitespace.
-- va' : select a single-quoted string (also works with " and `)
-- vi' : select the contents of a single-quoted string
-- vab : select a "block" (works differently in different langs)
-- vat : select a <tag> and its contents (use i instead of a for just
-           contents)
+  1. Normal Mode.................................|myhelp-normal|
+  2. Visual Mode.................................|myhelp-visual|
+  3. Insert Mode.................................|myhelp-insert|
+  4. Ex..........................................|myhelp-ex|
+  5. ALE.........................................|myhelp-ale|
+  6. Jedi........................................|myhelp-jedi|
 
 ==============================================================================
-3. Insert Mode                                                 *myhelp-insert*
+1. Normal Mode                                   *myhelp-normal*
 
-- <C-N>: Complete word
-- <C-N><C-P>: Complete word (?)
-- <C-X><C-L>: Complete line (!!)
-- Insert mode completion: |ins-completion|
-- Insert digraphs |i_CTRL-K|: |digraphs-use| |digraph-table|
-  - CTRL-K {char1} {char2}:
-- Insert unicode character: |i_CTRL-V_digit|
-  - CTRL-QU{hexidecimal}:
+~             Uppercase a letter (works on ranges)
+z commands:
+  z.          current line at the center
+  z-          current line at the bottom
+/<C-R><C-W>   Pull word into command line (or search)
+:reg          list registers (and show what’s in them)
+gx            Open URL, etc. with default protocol. See |netrw-gx|
+              No spaces but ± and () are allowed.
+                sip:4179
+                sip:95095315444
+                sip:9+1(509)531-5444
+
+==============================================================================
+2. Visual Mode                                   *myhelp-visual*
+
+J   Join the highlighted lines, removing unnecessary whitespace.
+va' Select a single-quoted string (also works with " and `)
+vi' Select the contents of a single-quoted string
+vab Select a "block" (works differently in different langs)
+vat Select a <tag> and its contents (use i instead of a for just contents)
+
+==============================================================================
+3. Insert Mode                                   *myhelp-insert*
+
+Command                 Meaning ~
+<C-N>                   Complete word
+<C-N><C-P>              Complete word (?)
+<C-X><C-L>              Complete line (!!)
+                        |ins-completion|
+CTRL-K {char1} {char2}  Insert digraphs. |i_CTRL-K|
+                        |digraphs-use| |digraph-table|
+CTRL-QU{hexidecimal}    Insert unicode character. |i_CTRL-V_digit|
 
 char  digraph hex   dec   official name ~
-°     DG	    0xb0	176   DEGREE SIGN
-§	    SE	    0xa7	167   SECTION SIGN
-¶   	PI    	0xb6	182   PILCROW SIGN
-±	    +-	    0xb1	177   PLUS-MINUS SIGN
-–     -N      2013	8211	EN DASH `
-—     -M      2014	8212	EM DASH
-∴     .:      2234	8756	THEREFORE
-∵     :.      2235	8757	BECAUSE
-µ   	My    	0xb5	181   MICRO SIGN
-·     .M      0xb7	183   MIDDLE DOT
-×     *X      0xd7	215   MULTIPLICATION SIGN
-Δ     D*      0394	0916	GREEK CAPITAL LETTER DELTA
-θ     h*      03B8	0952	GREEK SMALL LETTER THETA
-λ     l*      03BB	0955	GREEK SMALL LETTER LAMDA
-φ     f*      03C6	0966	GREEK SMALL LETTER PHI
-τ     t*      03C4	0964	GREEK SMALL LETTER TAU
+°     DG      0xb0  176   DEGREE SIGN
+§     SE      0xa7  167   SECTION SIGN
+¶     PI      0xb6  182   PILCROW SIGN
+±     +-      0xb1  177   PLUS-MINUS SIGN
+–     -N      2013  8211  EN DASH `
+—     -M      2014  8212  EM DASH
+∴     .:      2234  8756  THEREFORE
+∵     :.      2235  8757  BECAUSE
+µ     My      0xb5  181   MICRO SIGN
+·     .M      0xb7  183   MIDDLE DOT
+×     *X      0xd7  215   MULTIPLICATION SIGN
+Δ     D*      0394  0916  GREEK CAPITAL LETTER DELTA
+θ     h*      03B8  0952  GREEK SMALL LETTER THETA
+λ     l*      03BB  0955  GREEK SMALL LETTER LAMDA
+φ     f*      03C6  0966  GREEK SMALL LETTER PHI
+τ     t*      03C4  0964  GREEK SMALL LETTER TAU
 
 ==============================================================================
-4. Ex                                                              *myhelp-ex*
-- :set relativenumber    |'relativenumber'| |'rnu'|
-- :s/ <\p\{-}@\p\{-}>//cgi  Remove email addresses.
+4. Ex                                            *myhelp-ex*
+
+Command                     Meaning ~
+:set relativenumber         |'relativenumber'| |'rnu'|
+:s/ <\p\{-}@\p\{-}>//cgi    Remove email addresses.
+:%s/\%VSEARCH/REPLACE/g     Replace all occurrences in selection but not
+                            line. \%V limits the search.
+:%s/\%V <\p\{-}@\p\{-}>//g  Remove all email address in line or selection.
 
 ==============================================================================
-5. ALE                                                            *myhelp-ale*
+5. ALE                                           *myhelp-ale*
 
-- <localleader>?     ALEDetail
-- <C-k>              Previous error
-- <C-j>              Next error
+Command         Meaning ~
+<localleader>?  ALEDetail
+<C-k>           Previous error
+<C-j>           Next error
 
 ==============================================================================
-6. Jedi                                                          *myhelp-jedi*
+6. Jedi                                          *myhelp-jedi*
 
-Default: <Ctrl-Space>                   Start completion
-Default: <leader>d                      Go to definition (or assignment)
-Default: <leader>g                      Go to assignment
-Default: <K>                            Show pydoc documentation
-Default: <leader>r                      Rename variables
+Command       Meaning ~
+<Ctrl-Space>  Start completion
+<leader>d     Go to definition (or assignment)
+<leader>g     Go to assignment
+<K>           Show pydoc documentation
+<leader>r     Rename variables
 
 
-  vim:tw=78:ts=2:sts=2:sw=2:ft=help:norl:
+ vim:tw=78:et:ft=help:norl:
