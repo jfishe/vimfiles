@@ -6,6 +6,16 @@
 [user]
 	name = John D. Fisher
 	email = jdfenw@gmail.com
+    ; Set these in ~/.bash_profile or ~/.bashrc to overide:
+    ; GIT_AUTHOR_NAME is the human-readable name in the “author” field.
+    ; GIT_AUTHOR_EMAIL is the email for the “author” field.
+    ; GIT_AUTHOR_DATE is the timestamp used for the “author” field.
+    ; GIT_COMMITTER_NAME sets the human name for the “committer” field.
+    ; GIT_COMMITTER_EMAIL is the email address for the “committer” field.
+    ; GIT_COMMITTER_DATE is used for the timestamp in the “committer” field.
+    ; EMAIL is the fallback email address in case the user.email configuration
+    ; value isn’t set. If this isn’t set, Git falls back to the system user and
+    ; host names.
 [core]
 	editor = vim
 	eol = lf
@@ -43,13 +53,10 @@
 	ui = true
 [diff "xlsxdiff"]
 	command = git-diff-wrapper.sh
-# [credential]
-	# helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-wincred.exe
-[credential]
-	helper = manager
-[include]
-	path = ~/work/.gitconfig
-# [includeIf "gitdir:personal/"]
-	# path = ~/personal/.gitconfig
+[commit]
+    template = ~/.gitmessage.txt
+    cleanup = strip
 [include]
 	path = ~/Git/dotfiles/gitconfig
+    ; [credential]
+    ; 	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-wincred.exe
