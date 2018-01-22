@@ -51,3 +51,5 @@
 	path = ~/work/.gitconfig
 # [includeIf "gitdir:personal/"]
 	# path = ~/personal/.gitconfig
+[include]
+	path = ~/Git/dotfiles/gitconfig
