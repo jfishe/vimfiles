@@ -10,3 +10,6 @@ alias la='ls -a --color=auto'
 
 alias gvim='/c/Windows/gvim.bat --remote-silent'
 
+# Anaconda: Setup conda
+# conda activate to enable
+. ~/Anaconda3/etc/profile.d/conda.sh
