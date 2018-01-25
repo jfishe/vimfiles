@@ -11,12 +11,10 @@ au BufRead,BufNewFile *.wiki set filetype=vimwiki
 if has('win32') || has('win64') || has('win32unix')
     function! s:GetMyDocuments() "{{{
         let l:KEY_NAME = '"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders"'
-        let l:VALUE_NAME = "Personal"
-        let l:cmd = "REG QUERY " . l:KEY_NAME . " /v " . l:VALUE_NAME
-        "echo l:cmd
+        let l:VALUE_NAME = 'Personal'
+        let l:cmd = 'REG QUERY ' . l:KEY_NAME . ' /v ' . l:VALUE_NAME
         let l:cmd = systemlist(l:cmd)
-        "echo l:cmd
-        let l:cmd = systemlist("echo " . split(l:cmd[2], "    ")[2][:-2])
+        let l:cmd = systemlist('echo ' . split(l:cmd[2], '    ')[2][:-2])
         let l:my_docs = l:cmd[0][:-3]
         return l:my_docs
     endfunction "}}}
