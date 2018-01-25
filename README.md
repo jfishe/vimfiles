@@ -57,7 +57,8 @@ ftype sourcecode="C:\Program Files\Vim\vim80\gvim.exe" --remote-silent "%%1"
 Setup instructions are included in vimrc to install the
 [Moby Thesaurus List by Grady Ward](http://www.gutenberg.org/ebooks/3202) from Project Gutenberg.
 
-## [Faster Grepping in Vim](https://robots.thoughtbot.com/faster-grepping-in-vim)
+## grepprg
+[Faster Grepping in Vim](https://robots.thoughtbot.com/faster-grepping-in-vim) recommends `ag`.
 [The silver searcher](https://github.com/ggreer/the_silver_searcher) needs
 to be installed or default grep will be used. VWS speed is greatly improved by
 re-defining the command.
@@ -127,8 +128,8 @@ follow the instructions in the link above, but the path is Anaconda3\etc\conda.
 vim-conda resolves the vim-jedi issue and allows switching envs within Vim.
 There are several versions depending on python2, python3 or allowing both.
 
-## [Gutentags](https://github.com/ludovicchabant/vim-gutentags)
-
+## Gutentags & Universal ctags
+* [Gutentags](https://github.com/ludovicchabant/vim-gutentags)
 * Gutentags handles Vim integration nicely.
 * [universal-ctags](https://github.com/universal-ctags/ctags) provides
   direction for obtaining pre-built ctags binary without needing
