@@ -112,7 +112,9 @@ endif
 
 " Color and background
 set background=dark
-colorscheme solarized
+"colorscheme solarized
+let g:solarized_extra_hi_groups=1
+colorscheme solarized8
 
 " ================ Jump =============================
 set relativenumber
