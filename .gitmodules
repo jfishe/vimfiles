@@ -98,3 +98,6 @@
 [submodule "vimfiles/pack/themes/opt/solarized8"]
 	path = vimfiles/pack/themes/opt/solarized8
 	url = https://github.com/lifepillar/vim-solarized8.git
+[submodule "vimfiles/bundle/vim-obsession"]
+	path = vimfiles/bundle/vim-obsession
+	url = https://github.com/tpope/vim-obsession.git
