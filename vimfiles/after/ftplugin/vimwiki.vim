@@ -17,30 +17,14 @@ if executable('ag')
 endif
 
 " Convert selected text in VimWikiLink
-
-" s:safesubstitute
-" function! s:safesubstitute(text, search, replace, mode) "{{{
-"   " Substitute regexp but do not interpret replace
-"   let escaped = escape(a:replace, '\&')
-"   return substitute(a:text, a:search, escaped, a:mode)
-" endfunction " }}}
-
-" templates for the creation of wiki links
-" [[URL]]
-" let g:vimwiki_WikiLinkTemplate1 = s:wikilink_prefix . '__LinkUrl__'.
-"       \ s:wikilink_suffix
-" " [[URL|DESCRIPTION]]
-" let g:vimwiki_WikiLinkTemplate2 = s:wikilink_prefix . '__LinkUrl__'.
-"       \ s:wikilink_separator . '__LinkDescription__' . s:wikilink_suffix
-
 function! Nnormalize_mail_v() " {{{
-  let sel_save = &selection
+  let l:sel_save = &selection
   let &selection = 'old'
-  let rv = @"
-  let rt = getregtype('"')
+  let l:rv = @"
+  let l:rt = getregtype('"')
 
-  " let regex_mail = '%s/\%V <\p\{-}@\p\{-}>//g'
-  let regex_mail = ' <\p\{-}@\p\{-}>'
+  " Regex to select e-mail addresses bounded by <...>
+  let l:regex_mail = ' <\p\{-}@\p\{-}>'
 
   try
       " Save selected text to register "
@@ -49,17 +33,26 @@ function! Nnormalize_mail_v() " {{{
       " Set substitution]]
       " let sub = s:safesubstitute(g:vimwiki_WikiLinkTemplate1,
       "       \ '__LinkUrl__', @", '')
-      let rxUrl = 'mailto:' . @"
-      let rxDesc = substitute(@", regex_mail, '', 'g')
-      let rxStyle = ''
-      let sub = vimwiki#base#apply_template(g:vimwiki_WikiLinkTemplate2,
-        \ rxUrl, rxDesc, rxStyle)
+      let l:rxUrl = 'mailto:' . @"
+
+      " Check whether e-mail address is Outlook format, i.e., contains ;
+      if match(l:rxUrl, ';') > -1
+        " Regex to select , and ; and normalize to mailto URI
+        " Todo: Works to find, except without trailing ;
+        let l:regex_outlook = '\(\(.*' . l:regex_mail . '\[;$].*\)\@!\),'
+        let l:rxUrl = substitute(l:rxUrl, l:regex_outlook, '', 'g')
+      endif
+
+      let l:rxDesc = substitute(@", l:regex_mail, '', 'g')
+      let l:rxStyle = ''
+      let l:sub = vimwiki#base#apply_template(g:vimwiki_WikiLinkTemplate2,
+        \ l:rxUrl, l:rxDesc, l:rxStyle)
 
       " Put substitution in register " and change text
-      call setreg('"', sub, 'v')
+      call setreg('"', l:sub, 'v')
       normal! `>""pgvd
   finally
-      call setreg('"', rv, rt)
-      let &selection = sel_save
+      call setreg('"', l:rv, l:rt)
+      let &selection = l:sel_save
   endtry
 endfunction " }}}
