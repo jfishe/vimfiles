@@ -16,8 +16,11 @@ if executable('ag')
       \ VWT VWS :<args>:
 endif
 
-" Convert selected text in VimWikiLink
-function! Nnormalize_mail_v() " {{{
+" Convert selected text to VimWikiLink
+" Todo: Limit the length of the URI to 2083 per
+"       https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers
+"       by splitting into multiple links.
+function! s:myvimwiki_normalize_mail_v() " {{{
   let l:sel_save = &selection
   let &selection = 'old'
   let l:rv = @"
@@ -30,15 +33,15 @@ function! Nnormalize_mail_v() " {{{
       " Save selected text to register "
       normal! gv""y
 
-      " Set substitution]]
-      " let sub = s:safesubstitute(g:vimwiki_WikiLinkTemplate1,
-      "       \ '__LinkUrl__', @", '')
+      " Set substitution
       let l:rxUrl = 'mailto:' . @"
 
       " Check whether e-mail address is Outlook format, i.e., contains ;
       if match(l:rxUrl, ';') > -1
-        " Regex to select , and ; and normalize to mailto URI
-        " Todo: Works to find, except without trailing ;
+        " Regex to select ; and normalize to mailto URI format. Gmail, e.g.
+        " does not allow commas in the address, since that is the address
+        " separator. Gmail doesn't care whether , or ; is used as the address
+        " separator.
         let l:regex_outlook = '\(\(.*' . l:regex_mail . '\[;$].*\)\@!\),'
         let l:rxUrl = substitute(l:rxUrl, l:regex_outlook, '', 'g')
       endif
@@ -56,3 +59,5 @@ function! Nnormalize_mail_v() " {{{
       let &selection = l:sel_save
   endtry
 endfunction " }}}
+vnoremap <silent><localleader>m
+  \ :call <SID>myvimwiki_normalize_mail_v()<CR>
