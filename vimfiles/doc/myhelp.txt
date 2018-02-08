@@ -99,9 +99,18 @@ Command       Meaning ~
 ==============================================================================
 7. VimWiki                                       *myhelp-vimwiki*
 
-Command       Meaning ~
-v$,m          Convert selected e-mail addresses in Visual selection into valid
-              URI in *vimwiki-syntax-links*. Addresses should be comma
-              separated or semi-colon separated, if they contain commas.
+Command                         Meaning ~
+v$,m                            Convert selected e-mail addresses in Visual
+                                selection into valid URI in
+                                |vimwiki-syntax-links|. Addresses should be
+                                comma separated or semi-colon separated, if
+                                they contain commas.
+%s/\[\[diary\//\[\[..\/diary\// |:VimwikiGenerateTags| diary path correction
+                                so that links work in |:Vimwiki2HTML| and
+                                |:VimwikiFollowLink| when the file does not
+                                start in the root directory.
+
+
+%s/\[\[diary\//\[\[..\/diary\//
 
  vim:tw=78:et:ft=help:norl:
