@@ -185,3 +185,7 @@ pip install -e .
 # Git
 [ElateralLtd git commit template](https://github.com/ElateralLtd/git-commit-template)
 provides a template and installation script for standard git commit messages.
+
+# KeePass2, KeeAgent and SSH
+[KeeAgent (for KeePass) on Bash on Windows / WSL](https://gist.github.com/strarsis/e533f4bca5ae158481bbe53185848d49) provides a howto. Git-bash only requires `export SSH_AUTH_SOCK=~/keeagent_msys.socket` in .bash_profile, depending on the KeeAgent settings in KeePass2.
+
