@@ -78,6 +78,7 @@ set shiftwidth=4
 set softtabstop=4
 set tabstop=4
 set expandtab
+set nowrap
 "set backspace=indent,eol,start " Proper backspace behavior.
 
 " ================ Buffers ======================
