@@ -30,10 +30,10 @@ git submodule update --init --recursive
 ## Windows File Association
 
 To associate the `.c` extension with `gvim`, the following should be copied
-into a batch file and run.  From the command line `cmd.exe` only single `%` is
+into a batch file and run. From the command line `cmd.exe` only single `%` is
 needed. This creates one command for all extensions associated with
 `sourcecode`, whereas `Open With` context menu creates a different command for
-each, e.g. c_auto_file.  Additional details are available from
+each, e.g. c_auto_file. Additional details are available from
 [Vim Wikia](http://vim.wikia.com/wiki/Windows_file_associations).
 
 ```DOS
@@ -43,7 +43,7 @@ reg add HKCU\SOFTWARE\Classes\sourcecode\shell\edit\command /v "" /t REG_SZ /d "
 ```
 
 If you have adminstrative rights, the following could be entered in a batch
-file.  Note that it affects all users, so vim should be installed in the system
+file. Note that it affects all users, so vim should be installed in the system
 path.
 
 ```DOS
