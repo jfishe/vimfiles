@@ -1,14 +1,20 @@
 " Create a title header for Journal with date. Add a second Contents header
 " for auto_TOC.
 function! s:TitleJournal()
-    execute 'normal! ggOJournal '
-    read! bash -c "date --iso-8601"
-    execute 'normal! kJ'
+    let l:bash = 'bash -c "date --iso-8601"'
+    if $COMPUTERNAME ==? '***REMOVED***'
+        let l:bash = $LOCALAPPDATA . '\Programs\Git\usr\bin\' . l:bash
+    endif
+    let l:bash = system(l:bash)[:-2]
+
+    let l:title = 'Journal ' . l:bash
+    let l:failed = append(0, l:title)
+    execute 'normal! 1G'
     call vimwiki#base#AddHeaderLevel()
-    execute 'normal! j'
-    execute 'normal! ggoContents'
+
+    let l:failed = append(1, 'Contents')
+    execute 'normal! 2G'
     call vimwiki#base#AddHeaderLevel()
-    execute 'normal! j'
 endfunction
 nnoremap <buffer> <F3> :call <SID>TitleJournal()<CR>
 
