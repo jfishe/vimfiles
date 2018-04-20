@@ -83,20 +83,26 @@
 	path = vimfiles/bundle/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
 [submodule "vimfiles/bundle/vim-pydocstring"]
+	ignore = dirty
 	path = vimfiles/bundle/vim-pydocstring
 	url = https://github.com/heavenshell/vim-pydocstring.git
 [submodule "vimfiles/bundle/vim-abolish"]
+	ignore = dirty
 	path = vimfiles/bundle/vim-abolish
 	url = https://github.com/tpope/vim-abolish.git
 [submodule "vimfiles/bundle/vim-ps1"]
+	ignore = dirty
 	path = vimfiles/bundle/vim-ps1
 	url = https://github.com/PProvost/vim-ps1.git
 [submodule "vimfiles/pack/themes/opt/solarized8"]
+	ignore = dirty
 	path = vimfiles/pack/themes/opt/solarized8
 	url = https://github.com/lifepillar/vim-solarized8.git
 [submodule "vimfiles/bundle/vim-obsession"]
+	ignore = dirty
 	path = vimfiles/bundle/vim-obsession
 	url = https://github.com/tpope/vim-obsession.git
 [submodule "vimfiles/bundle/vim-conda"]
+	ignore = dirty
 	path = vimfiles/bundle/vim-conda
 	url = https://github.com/cjrh/vim-conda.git
