@@ -46,10 +46,6 @@
 	ignore = dirty
 	path = vimfiles/bundle/vim-sensible
 	url = https://github.com/tpope/vim-sensible.git
-[submodule "vimfiles/bundle/vim-conda"]
-	ignore = dirty
-	path = vimfiles/bundle/vim-conda
-	url = https://github.com/cjrh/vim-conda.git
 [submodule "vimfiles/bundle/vim-gutentags"]
 	ignore = dirty
 	path = vimfiles/bundle/vim-gutentags
