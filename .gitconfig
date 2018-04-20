@@ -1,8 +1,3 @@
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
 [user]
 	name = John D. Fisher
 	email = jdfenw@gmail.com
@@ -60,3 +55,8 @@
 	path = ~/Git/dotfiles/gitconfig
     ; [credential]
     ; 	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-wincred.exe
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
