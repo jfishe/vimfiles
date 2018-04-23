@@ -2,7 +2,7 @@
 " for auto_TOC.
 function! s:TitleJournal()
     let l:bash = 'bash -c "date --iso-8601"'
-    if $COMPUTERNAME ==? '***REMOVED***'
+    if $USERDOMAIN ==? '***REMOVED***'
         let l:bash = $LOCALAPPDATA . '\Programs\Git\usr\bin\' . l:bash
     endif
     let l:bash = system(l:bash)[:-2]
@@ -15,6 +15,8 @@ function! s:TitleJournal()
     let l:failed = append(1, 'Contents')
     execute 'normal! 2G'
     call vimwiki#base#AddHeaderLevel()
+
+    execute 'normal! 3G'
 endfunction
 nnoremap <buffer> <F3> :call <SID>TitleJournal()<CR>
 
