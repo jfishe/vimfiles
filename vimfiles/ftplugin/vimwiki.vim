@@ -18,6 +18,6 @@ function! s:TitleJournal()
 
     execute 'normal! 3G'
 endfunction
-nnoremap <buffer> <F3> :call <SID>TitleJournal()<CR>
+nnoremap <silent><buffer> <F3> :call <SID>TitleJournal()<CR>
 
 setlocal spell spelllang=en_us
