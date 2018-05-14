@@ -49,3 +49,12 @@ let g:vimwiki_list = [s:wiki_1] "}}}
 
 " Folding {{{
 let g:vimwiki_folding='syntax'"}}}
+
+augroup wiki_setup
+    autocmd!
+     " Enable pandoc for all wiki files
+     autocmd BufNewFile,BufFilePre,BufRead *.wiki set filetype=wiki.pandoc.tex
+     " Latex-Suite enables automatically on file type setting.
+     " Now enable vimtex plugin to get vimtex keybindings and such
+     " autocmd BufNewFile,BufFilePre,BufRead *.wiki call vimtex#init()
+augroup END
