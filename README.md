@@ -6,6 +6,27 @@ Windows Vim 8 configuration files based on the recommendations of [Ruslan Osipov
 
 ## Installation
 
+
+Several applications are assumed to be in the `PATH`, install [git-scm](https://git-scm.com/) and select `User Git and optional Unix tools from the Windows Command Prompt`. See steps to add a local bin directory for the other applications referenced in the vim configuration files.
+
+On Windows systems `%HOMEDRIVE%%HOMEPATH%`, e.g., `U:\` may point to a
+different path than `%USERPROFILE%`, e.g., `C:\Users\<user name>`.
+`git-scm` defaults to `%HOMEDRIVE%%HOMEPATH%`. Defining `%HOME%`, overides this behavior.
+
+* Open `Control Panel`.
+* Search for `environment`.
+* Select `Edit environment variables for your account`
+* Select New.
+* Variable name: `HOME`
+* Variable value: `%USERPROFILE%`
+* Select OK.
+* Select `Path` and `Edit`.
+* Select `New` and enter `%USERPROFILE%\bin`.
+* Select OK, twice.
+* Open git-bash or git-cmd and confirm directory is `C:\Users\<user name>`.
+
+## vimfiles installation
+
 To install in Unix based systems:
 
 ```bash
