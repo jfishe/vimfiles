@@ -29,7 +29,7 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown',
        	\ '.wiki': 'media'}
 
 let s:wiki_1 = {}
-"let my_docs = 'U:/My Documents'
+" let s:my_docs = 'U:/My Documents'
 let s:wiki_1.path = s:my_docs . '/vimwiki/'
 let s:wiki_1.path_html = s:my_docs . '/vimwiki_html/'
 let s:wiki_1.index = 'main'

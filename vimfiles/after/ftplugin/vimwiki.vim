@@ -11,7 +11,7 @@ augroup END
 if executable('ag')
   exe 'command! -buffer -nargs=+ VWS silent lgrep! <args> -G '.
       \ escape('"^.*/*'.VimwikiGet('ext').'"', ' '). ' '.
-      \ shellescape(VimwikiGet('path'), ' ')
+      \ '"'.VimwikiGet('path')[:-2].'"'
   command! -buffer -nargs=* -complete=custom,vimwiki#tags#complete_tags
       \ VWT VWS :<args>:
 endif
