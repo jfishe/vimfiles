@@ -63,6 +63,11 @@ if isdirectory(s:vimfiles . '/thesaurus')
 endif
 
 "Load bundles
+" Disable plugins when python unavailable
+if !has('python3')
+    let g:loaded_EditorConfig = 1
+    let did_plugin_ultisnips = 1
+endif
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 execute pathogen#helptags()
