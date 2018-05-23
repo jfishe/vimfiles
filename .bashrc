@@ -21,4 +21,10 @@ gvim() {
 
 # Anaconda: Setup conda
 # conda activate to enable
-. ~/Anaconda3/etc/profile.d/conda.sh
+condaprofile="`cygpath ${LOCALAPPDATA}`/Continuum/anaconda3/etc/profile.d/conda.sh"
+if hash ${condaprofile}; then
+  echo ${condaprofile}
+  . ${condaprofile}
+elif hash ~/Anaconda3/etc/profile.d/conda.sh; then
+  . ~/Anaconda3/etc/profile.d/conda.sh
+fi
