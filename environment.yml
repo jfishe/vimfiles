@@ -5,7 +5,6 @@ channels:
 dependencies:
 - anaconda
 - pip:
-  - click
   - cookiecutter
   - editorconfig
   - jupyter_contrib_nbextensions
