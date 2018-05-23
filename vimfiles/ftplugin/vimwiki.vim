@@ -1,11 +1,15 @@
 " Create a title header for Journal with date. Add a second Contents header
 " for auto_TOC.
 function! s:TitleJournal()
+  if exists("*strftime")
+    let l:bash = strftime("%Y-%m-%d")
+  else
     let l:bash = 'bash -c "date --iso-8601"'
     if $USERDOMAIN ==? '***REMOVED***'
         let l:bash = $LOCALAPPDATA . '\Programs\Git\usr\bin\' . l:bash
     endif
     let l:bash = system(l:bash)[:-2]
+  endif
 
     let l:title = 'Journal ' . l:bash
     let l:failed = append(0, l:title)
