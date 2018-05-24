@@ -1,3 +1,4 @@
 channels:
   - defaults
 ssl_verify: true
+report_errors: true
