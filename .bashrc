@@ -23,7 +23,6 @@ gvim() {
 # conda activate to enable
 condaprofile="`cygpath ${LOCALAPPDATA}`/Continuum/anaconda3/etc/profile.d/conda.sh"
 if hash ${condaprofile}; then
-  echo ${condaprofile}
   . ${condaprofile}
 elif hash ~/Anaconda3/etc/profile.d/conda.sh; then
   . ~/Anaconda3/etc/profile.d/conda.sh
