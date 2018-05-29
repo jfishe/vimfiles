@@ -8,7 +8,8 @@ au BufRead,BufNewFile *.wiki set filetype=vimwiki
 " $HOMEDRIVE$HOMEPATH or $HOME.
 " Defaults to $HOME for non-windows.
 " Tested on Windows10 and Windows7
-if has('win32') || has('win64') || has('win32unix')
+" if has('win32') || has('win64') || has('win32unix')
+if has('win32') || has('win64')
     function! s:GetMyDocuments() "{{{
         let l:KEY_NAME = '"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders"'
         let l:VALUE_NAME = 'Personal'

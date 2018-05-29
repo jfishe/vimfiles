@@ -212,6 +212,17 @@ pip install -e .
 [ElateralLtd git commit template](https://github.com/ElateralLtd/git-commit-template)
 provides a template and installation script for standard git commit messages.
 
+The Vim that ships with Git-bash can use the same profile as Gvim. Using WSL bash is the easiest method to create soft-links. Git-bash won't and recommends using mklink, but mklink usually has complex ACL issues, especially in a corporate environment.
+
+The following assumes that git-bash has been configured to use `%USERPROFILE%` as home, which may be different than the default `%HOMEDRIVE%%HOMEPATH%`. Also, *Documents* could be *My Documents*. Adjust the path for actual location of `vimfiles` and `vimwiki`. The vim startup script assumes that for anything, except Windows `cmd.exe`, that these files are located in `$HOME`. Soft-links allow pointing to the actual location.
+
+
+``` bash
+cd /mnt/c/Users/fishe
+ln -s ./vimfiles/ .vim
+ln -s Documents/vimwiki vimwiki
+```
+
 ## KeePass2, KeeAgent and SSH
 
 [KeeAgent (for KeePass) on Bash on Windows / WSL](https://gist.github.com/strarsis/e533f4bca5ae158481bbe53185848d49) provides a howto. Git-bash only requires `export SSH_AUTH_SOCK=~/keeagent_msys.socket` in .bash_profile, depending on the KeeAgent settings in KeePass2.
