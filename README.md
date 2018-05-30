@@ -43,7 +43,7 @@ To install in Windows (git-cmd version--otherwise use `cd ~`):
 ```DOS
 cd %TMP%
 git clone https://github.com/jfishe/vimfiles.git vimfiles
-xcopy vimfiles %USERPROFILE%
+xcopy vimfiles %USERPROFILE% /s/h/k
 cd %USERPROFILE%
 git submodule update --init --recursive
 ```
@@ -63,7 +63,7 @@ reg add HKCU\SOFTWARE\Classes\sourcecode\shell\open\command /v "" /t REG_SZ /d "
 reg add HKCU\SOFTWARE\Classes\sourcecode\shell\edit\command /v "" /t REG_SZ /d "\"%%USERPROFILE%%\vim80\gvim.exe\" --remote \"%%1\"" /f
 ```
 
-If you have adminstrative rights, the following could be entered in a batch
+If you have administrative rights, the following could be entered in a batch
 file. Note that it affects all users, so vim should be installed in the system
 path.
 
@@ -78,7 +78,7 @@ ftype sourcecode="C:\Program Files\Vim\vim80\gvim.exe" --remote-silent "%%1"
 ## Thesaurus
 
 Setup instructions are included in vimrc to install the
-[Moby Thesaurus List by Grady Ward](http://www.gutenberg.org/ebooks/3202) from Project Gutenberg.
+[Moby Thesaurus List by Grady Ward](http://www.gutenberg.org/ebooks/3202) from Project Gutenberg. Use a browser; the site blocks scripted download.
 
 ## grepprg and grepformat
 

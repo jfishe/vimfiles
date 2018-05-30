@@ -77,6 +77,7 @@ Command                     Meaning ~
 :%s/\%VSEARCH/REPLACE/g     Replace all occurrences in selection but not
                             line. \%V limits the search.
 :%s/\%V <\p\{-}@\p\{-}>//g  Remove all email address in line or selection.
+:%s/[{;}]/&\r/g|norm! =gg   Format css from one-line to multi-line.
 
 ==============================================================================
 5. ALE                                           *myhelp-ale*
