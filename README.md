@@ -226,3 +226,11 @@ ln -s Documents/vimwiki vimwiki
 ## KeePass2, KeeAgent and SSH
 
 [KeeAgent (for KeePass) on Bash on Windows / WSL](https://gist.github.com/strarsis/e533f4bca5ae158481bbe53185848d49) provides a howto. Git-bash only requires `export SSH_AUTH_SOCK=~/keeagent_msys.socket` in .bash_profile, depending on the KeeAgent settings in KeePass2.
+
+## Map Caps Lock to Escape, or any key to any key
+
+* Download `uncap.exe` from a release of [susam uncap](https://github.com/susam/uncap). The repository contains additional instructions.
+* Place in `%USERPROFILE%\bin`.
+* Create a Shortcut.
+* Move the Shortcut to `Win-R shell:startup` (Win == Start Menu key).
+* See [Change which apps run automatically at startup in Windows 10](https://support.microsoft.com/en-us/help/4026268/windows-10-change-startup-apps) for more details.
