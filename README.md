@@ -105,10 +105,6 @@ fix. An example error message from `conda update conda`:
 
     SSLError(SSLError(SSLError("bad handshake: Error([('SSL routines', 'ssl3_get_ser ver_certificate', 'certificate verify failed')],)",),),)
 
-### conda-forge
-
-.condarc includes conda-forge to support [Pyne](http://pyne.io)
-
 ### conda env
 
 [environment.yml](file://./environment.yml) lists the conda and pip packages I use.
@@ -145,6 +141,30 @@ activate/deactivate conda environments so adjust PYTHONPATH if you switch.
 In order for root to work without activate root before opening Vim, set user
 environment variable PYTHONPATH. In order for it to work after activate root
 follow the instructions in the link above, but the path is Anaconda3\etc\conda.
+
+### Conda Support in PowerShell
+
+`environment.yml` includes `pscondaenvs`. To use, create a shortcut, similar to following:
+
+``` powershell
+Install-Module -Name PSShortcut -Scope CurrentUser
+$obj = New-Object -ComObject WScript.Shell
+[string]$from = "Anaconda Prompt.lnk"
+[string]$to = "Anaconda Powershell.lnk"
+
+$AnacondaPrompt = Get-Shortcut -Name "$from" -FolderPath "$env:APPDATA\Microsoft\Windows\Start Menu\Programs" |
+    Where-Object {$_.Name -eq "$from"} 
+
+$lnk = $obj.CreateShortcut($AnacondaPrompt)
+
+[string]$PSAnacondaPrompt = [string]$AnacondaPrompt.FullName.Replace($from.tostring(),$to.ToString())
+$link = $obj.CreateShortcut($PSAnacondaPrompt)
+$link.TargetPath = "$PSHOME\powershell.exe"
+$link.WorkingDirectory = $lnk.WorkingDirectory
+$link.Arguments = '-ExecutionPolicy Bypass -Noexit ' + """$env:CONDA_PREFIX\Scripts\activate.ps1""" + " $env:CONDA_DEFAULT_ENV"
+$link.Description = $to.Split(".")[0]
+$link.Save()
+```
 
 ## vim-conda
 
