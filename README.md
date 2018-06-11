@@ -47,33 +47,6 @@ cd %USERPROFILE%
 git submodule update --init --recursive
 ```
 
-## Windows File Association
-
-To associate the `.c` extension with `gvim`, the following should be copied
-into a batch file and run. From the command line `cmd.exe` only single `%` is
-needed. This creates one command for all extensions associated with
-`sourcecode`, whereas `Open With` context menu creates a different command for
-each, e.g. c_auto_file. Additional details are available from
-[Vim Wikia](http://vim.wikia.com/wiki/Windows_file_associations).
-
-```DOS
-reg add HKCU\SOFTWARE\Classes\.c /v "" /t REG_SZ /d "sourcecode" /f
-reg add HKCU\SOFTWARE\Classes\sourcecode\shell\open\command /v "" /t REG_SZ /d "\"%%USERPROFILE%%\vim80\gvim.exe\" --remote \"%%1\"" /f
-reg add HKCU\SOFTWARE\Classes\sourcecode\shell\edit\command /v "" /t REG_SZ /d "\"%%USERPROFILE%%\vim80\gvim.exe\" --remote \"%%1\"" /f
-```
-
-If you have administrative rights, the following could be entered in a batch
-file. Note that it affects all users, so vim should be installed in the system
-path.
-
-```DOS
-assoc .c=sourcecode
-assoc .h=sourcecode
-assoc .pl=sourcecode
-assoc .py=sourcecode
-ftype sourcecode="C:\Program Files\Vim\vim80\gvim.exe" --remote-silent "%%1"
-```
-
 ## Thesaurus
 
 Setup instructions are included in vimrc to install the
@@ -145,7 +118,7 @@ follow the instructions in the link above, but the path is Anaconda3\etc\conda.
 
 `environment.yml` includes `pscondaenvs`. To use, create a shortcut, similar to following:
 
-``` powershell
+```powershell
 Install-Module -Name PSShortcut -Scope CurrentUser
 $obj = New-Object -ComObject WScript.Shell
 [string]$from = "Anaconda Prompt.lnk"
@@ -184,7 +157,7 @@ There are several versions depending on python2, python3 or allowing both.
 
 [nbdime]( http://nbdime.readthedocs.io/en/latest/ ) is configured by:
 
-```DOS
+```bash
 pip install nbdime
 nbdime config-git --enable --global
 ```
@@ -205,21 +178,21 @@ compatible with notebook v. 5.
 
 ## Setup Python Project
 
-```DOS
+```bash
 cookiecutter cookiecutter-pypackage
 ```
 
 Change to the pypackage directory you created and make initial commit to source
 control.
 
-```DOS
+```bash
 git init
 git add .
 git commit -m "Initial project scaffold"
 git status
 ```
 
-```DOS
+```bash
 virtualenv env
 # Use env/bin/activate on Linux
 env\Scripts\activate
@@ -236,7 +209,7 @@ The Vim that ships with Git-bash can use the same profile as Gvim. Using WSL bas
 The following assumes that git-bash has been configured to use `%USERPROFILE%` as home, which may be different than the default `%HOMEDRIVE%%HOMEPATH%`. Also, *Documents* could be *My Documents*. Adjust the path for actual location of `vimfiles` and `vimwiki`. The vim startup script assumes that for anything, except Windows `cmd.exe`, that these files are located in `$HOME`. Soft-links allow pointing to the actual location.
 
 
-``` bash
+```bash
 cd /mnt/c/Users/fishe
 ln -s ./vimfiles/ .vim
 ln -s Documents/vimwiki vimwiki
