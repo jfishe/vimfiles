@@ -25,9 +25,10 @@ else
 endif "}}}
 
 " Define g:vimwiki_list {{{
-let g:vimwiki_ext2syntax = {'.md': 'markdown',
-	\ '.mkd': 'markdown',
-       	\ '.wiki': 'media'}
+" let g:vimwiki_ext2syntax = {
+"   \ '.md': 'markdown',
+" 	\ '.mkd': 'markdown',
+"   \ '.wiki': 'media'}
 
 let s:wiki_1 = {}
 " let s:my_docs = 'U:/My Documents'
@@ -55,7 +56,7 @@ augroup wiki_setup
     autocmd!
      " Enable pandoc for all wiki files
      " autocmd BufNewFile,BufFilePre,BufRead *.wiki set filetype=wiki.pandoc.tex
-     autocmd BufNewFile,BufFilePre,BufRead *.wiki set filetype=wiki.pandoc
+     autocmd BufNewFile,BufFilePre,BufRead *.wiki set filetype=vimwiki.pandoc
      " Latex-Suite enables automatically on file type setting.
      " Now enable vimtex plugin to get vimtex keybindings and such
      " autocmd BufNewFile,BufFilePre,BufRead *.wiki call vimtex#init()
