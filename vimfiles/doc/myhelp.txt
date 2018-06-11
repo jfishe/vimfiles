@@ -37,6 +37,7 @@ va' Select a single-quoted string (also works with " and `)
 vi' Select the contents of a single-quoted string
 vab Select a "block" (works differently in different langs)
 vat Select a <tag> and its contents (use i instead of a for just contents)
+date` Insert today's date.
 
 ==============================================================================
 3. Insert Mode                                   *myhelp-insert*

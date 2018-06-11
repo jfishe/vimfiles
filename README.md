@@ -6,10 +6,9 @@ Windows Vim 8 configuration files based on the recommendations of [Ruslan Osipov
 
 ## Installation
 
-
 Several applications are assumed to be in the `PATH`, install [git-scm](https://git-scm.com/) and select `User Git and optional Unix tools from the Windows Command Prompt`. See steps to add a local bin directory for the other applications referenced in the vim configuration files.
 
-On Windows systems `%HOMEDRIVE%%HOMEPATH%`, e.g., `U:\` may point to a
+On Windows systems `%HOMEDRIVE%%HOMEPATH%`, e.g., `U:\ `may point to a
 different path than `%USERPROFILE%`, e.g., `C:\Users\<user name>`.
 `git-scm` defaults to `%HOMEDRIVE%%HOMEPATH%`. Defining `%HOME%`, overides this behavior.
 
@@ -153,7 +152,7 @@ $obj = New-Object -ComObject WScript.Shell
 [string]$to = "Anaconda Powershell.lnk"
 
 $AnacondaPrompt = Get-Shortcut -Name "$from" -FolderPath "$env:APPDATA\Microsoft\Windows\Start Menu\Programs" |
-    Where-Object {$_.Name -eq "$from"} 
+    Where-Object {$_.Name -eq "$from"}
 
 $lnk = $obj.CreateShortcut($AnacondaPrompt)
 
