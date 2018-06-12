@@ -36,9 +36,9 @@ let s:wiki_1.path = s:my_docs . '/vimwiki/'
 let s:wiki_1.path_html = s:my_docs . '/vimwiki_html/'
 let s:wiki_1.index = 'main'
 let s:wiki_1.diary_sort = 'asc'
-"let wiki_1.syntax = 'markdown'
-"let wiki_1.ext = '.md'
-let s:wiki_1.nested_syntaxes = {'python': 'python', 'bash': 'sh', 'DOS': 'dosbatch', 'Powershell': 'ps1'}
+" let s:wiki_1.syntax = 'markdown'
+" let s:wiki_1.ext = '.md'
+let s:wiki_1.nested_syntaxes = {'python': 'python', 'bash': 'sh', 'DOS': 'dosbatch', 'powershell': 'ps1'}
 let s:wiki_1.template_path = s:wiki_1.path_html . 'templates/'
 let s:wiki_1.template_default = 'default'
 let s:wiki_1.template_ext = '.tpl'
@@ -52,12 +52,13 @@ let g:vimwiki_list = [s:wiki_1] "}}}
 " Folding {{{
 let g:vimwiki_folding='syntax'"}}}
 
-augroup wiki_setup
-    autocmd!
-     " Enable pandoc for all wiki files
-     " autocmd BufNewFile,BufFilePre,BufRead *.wiki set filetype=wiki.pandoc.tex
-     autocmd BufNewFile,BufFilePre,BufRead *.wiki set filetype=vimwiki.pandoc
-     " Latex-Suite enables automatically on file type setting.
-     " Now enable vimtex plugin to get vimtex keybindings and such
-     " autocmd BufNewFile,BufFilePre,BufRead *.wiki call vimtex#init()
-augroup END
+" augroup wiki_setup
+"     autocmd!
+"      " Enable pandoc for all wiki files
+"      " autocmd BufNewFile,BufFilePre,BufRead *.wiki set filetype=wiki.pandoc.tex
+"      autocmd BufNewFile,BufFilePre,BufRead *.wiki set filetype=vimwiki.pandoc
+"      autocmd BufNewFile,BufFilePre,BufRead *.md set filetype=vimwiki.pandoc
+"      " Latex-Suite enables automatically on file type setting.
+"      " Now enable vimtex plugin to get vimtex keybindings and such
+"      " autocmd BufNewFile,BufFilePre,BufRead *.wiki call vimtex#init()
+" augroup END
