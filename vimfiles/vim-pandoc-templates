@@ -1,0 +1,3 @@
+tango|html --template=GitHub.html5 --highlight-style=breezedark --toc
+defaulthtml5|--to html --standalone --template=pandoc.html5 --highlight-style=breezedark --toc --css=pandoc.css
+taskbar.html|--no-highlight --template=default.html5
