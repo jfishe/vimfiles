@@ -20,6 +20,7 @@ if has('win32') || has('win64')
         return l:my_docs
     endfunction "}}}
     silent let s:my_docs = <SID>GetMyDocuments()
+    let s:my_docs = $USERPROFILE . '/Documents'
 else
     let s:my_docs = $HOME
 endif "}}}
@@ -33,13 +34,13 @@ endif "}}}
 let s:wiki_1 = {}
 " let s:my_docs = 'U:/My Documents'
 let s:wiki_1.path = s:my_docs . '/vimwiki/'
-let s:wiki_1.path_html = s:my_docs . '/vimwiki_html/'
+let s:wiki_1.path_html = s:my_docs . '/vimwiki_html/html'
 let s:wiki_1.index = 'main'
 let s:wiki_1.diary_sort = 'asc'
 " let s:wiki_1.syntax = 'markdown'
 " let s:wiki_1.ext = '.md'
 let s:wiki_1.nested_syntaxes = {'python': 'python', 'bash': 'sh', 'DOS': 'dosbatch', 'powershell': 'ps1'}
-let s:wiki_1.template_path = s:wiki_1.path_html . 'templates/'
+let s:wiki_1.template_path = s:wiki_1.path . 'vimwiki_html/templates/'
 let s:wiki_1.template_default = 'default'
 let s:wiki_1.template_ext = '.tpl'
 let s:wiki_1.mathjax_folder = '../mathjax'
