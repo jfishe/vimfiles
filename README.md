@@ -47,6 +47,33 @@ cd %USERPROFILE%
 git submodule update --init --recursive
 ```
 
+``` {contenteditable="true" spellcheck="false" caption="powershell" .powershell}
+Set-Location -Path "$env:LOCALAPPDATA"
+git clone https://github.com/jfishe/vimfiles.git vimfiles
+Set-Location -Path .\vimfiles
+git submodule update --init --recursive
+
+$vimfiles = "$env:LOCALAPPDATA\vimfiles"
+$dotfiles = Get-ChildItem -Path "$vimfiles\.*"
+
+Set-Location -Path "~"
+mkdir .\old
+$dotfiles | ForEach-Object {
+    $item = $_.name
+    Move-Item -Path .\$($item) -Destination .\old
+}
+
+$dotfiles | ForEach-Object {
+    $item = $_.name
+    if ($_.PSIsContainer) {
+      cmd /c "mklink /D .\$item $_"
+    } else {
+      cmd /c "mklink .\$item $_"
+    }
+}
+```
+
+
 ## Thesaurus
 
 Setup instructions are included in vimrc to install the
