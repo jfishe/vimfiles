@@ -48,6 +48,7 @@ git submodule update --init --recursive
 ```
 
 ``` {contenteditable="true" spellcheck="false" caption="powershell" .powershell}
+# Clone vimfiles into LOCALAPPDATA
 Set-Location -Path "$env:LOCALAPPDATA"
 git clone https://github.com/jfishe/vimfiles.git vimfiles
 Set-Location -Path .\vimfiles
@@ -56,13 +57,19 @@ git submodule update --init --recursive
 $vimfiles = "$env:LOCALAPPDATA\vimfiles"
 $dotfiles = Get-ChildItem -Path "$vimfiles\.*"
 
+
+# Backup old configuration, if needed. Mklink will fail if Target exists.
 Set-Location -Path "~"
 mkdir .\old
+Move-Item -Path .\vimfiles -Destination .\old
 $dotfiles | ForEach-Object {
     $item = $_.name
-    Move-Item -Path .\$($item) -Destination .\old
+    Move-Item -Path .\$($item) -Destination .\old -ErrorAction SilentlyContinue
 }
 
+# Link vimfiles and dotfiles to USERPROFILE
+Set-Location -Path "~"
+cmd /c "mklink /D .\vimfiles $vimfiles\vimfiles"
 $dotfiles | ForEach-Object {
     $item = $_.name
     if ($_.PSIsContainer) {
