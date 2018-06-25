@@ -47,6 +47,40 @@ cd %USERPROFILE%
 git submodule update --init --recursive
 ```
 
+``` {contenteditable="true" spellcheck="false" caption="powershell" .powershell}
+# Clone vimfiles into LOCALAPPDATA
+Set-Location -Path "$env:LOCALAPPDATA"
+git clone https://github.com/jfishe/vimfiles.git vimfiles
+Set-Location -Path .\vimfiles
+git submodule update --init --recursive
+
+$vimfiles = "$env:LOCALAPPDATA\vimfiles"
+$dotfiles = Get-ChildItem -Path "$vimfiles\.*"
+
+
+# Backup old configuration, if needed. Mklink will fail if Target exists.
+Set-Location -Path "~"
+mkdir .\old
+Move-Item -Path .\vimfiles -Destination .\old
+$dotfiles | ForEach-Object {
+    $item = $_.name
+    Move-Item -Path .\$($item) -Destination .\old -ErrorAction SilentlyContinue
+}
+
+# Link vimfiles and dotfiles to USERPROFILE
+Set-Location -Path "~"
+cmd /c "mklink /D .\vimfiles $vimfiles\vimfiles"
+$dotfiles | ForEach-Object {
+    $item = $_.name
+    if ($_.PSIsContainer) {
+      cmd /c "mklink /D .\$item $_"
+    } else {
+      cmd /c "mklink .\$item $_"
+    }
+}
+```
+
+
 ## Thesaurus
 
 Setup instructions are included in vimrc to install the
@@ -118,7 +152,7 @@ follow the instructions in the link above, but the path is Anaconda3\etc\conda.
 
 `environment.yml` includes `pscondaenvs`. To use, create a shortcut, similar to following:
 
-```powershell
+``` {contenteditable="true" spellcheck="false" caption="powershell" .powershell}
 Install-Module -Name PSShortcut -Scope CurrentUser
 $obj = New-Object -ComObject WScript.Shell
 [string]$from = "Anaconda Prompt.lnk"
@@ -150,6 +184,27 @@ There are several versions depending on python2, python3 or allowing both.
 * [universal-ctags](https://github.com/universal-ctags/ctags) provides
   direction for obtaining pre-built ctags binary without needing
   source-forge.
+
+## Asynchronous Lint Engine (ALE)
+
+The [Asynchronous Lint Engine](https://github.com/w0rp/ale) supports Markdown
+linting through [Node.js](https://nodejs.org/en/download/current/), which
+provides an installer for `Node.js`. The Chocolatey package is `nodejs`.
+
+### MarkdownLint Command Line Interface
+
+The [MarkdownLint Command Line Interface](https://github.com/igorshubovych/markdownlint-cli.git) can be
+installed using `npm` from `Node.js`.
+
+``` {contenteditable="true" spellcheck="false" caption="powershell" .powershell}
+npm install -g markdownlint-cli
+```
+
+`ALE` detects `markdownlint` if `filetype=pandoc.markdown`.
+`plugins\pandoc.vim` contains an `augroup` that sets `filetype` based on
+`*.md`, overriding the vim-pandoc-syntax default `filetype=pandoc`. It also
+sets `g:pandoc#filetypes#handled` and `g:pandoc#filetypes#pandoc_markdown` to
+enable `vim-pandoc` features.
 
 ## Jupyter Notebook
 
