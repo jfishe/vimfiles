@@ -41,7 +41,6 @@ SNE
 BOC
 OLMCPR
 MFLCPR
-SETPOINT
 ODCM
 SRLR
 GNF2
@@ -49,7 +48,7 @@ verifier
 fluence
 Jupyter
 LCS
-demineralizers
+demineralizer
 ppb
 EPRI
 influent
@@ -59,21 +58,20 @@ oxalate
 MSIV
 PBDA
 MCPR
-pertubations
+pertubation
 NUREG
-Calculational
+calculational
 PeopleSoft
 Praetorious
 unanalyzed
 setpoint
 inverter
-Subcompartment
+subcompartment
 HELB
 Chocolatey
 et al.
 HEAD
 deliverables
-pre
 Richland
 purlin
 amperage
@@ -91,7 +89,7 @@ RWE
 BWROG
 NSR
 EOP
-applicaiton
+application
 PSGallery
 ISFSI
 ATWS
@@ -115,6 +113,6 @@ PowerShell
 OPRM
 AOO
 RCIC
-purlin
-Pandoc's
 pandoc
+walkdown
+CentralStore
