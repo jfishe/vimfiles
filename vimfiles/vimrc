@@ -5,6 +5,13 @@ let g:toggle_list_no_mappings = 1
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 
+" if has('win64')
+"     set shell=powershell
+"     set shellcmdflag=-command
+"     set shellquote=\"
+"     set shellxquote=
+" endif
+
 set fileformat=unix     "LF EOL only
 "set fileformats-=dos   "Force LF EOL only on all; won't handle dos
 "files gracefully
