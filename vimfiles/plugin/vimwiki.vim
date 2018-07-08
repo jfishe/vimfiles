@@ -19,7 +19,7 @@ if has('win32') || has('win64')
         let l:my_docs = l:cmd[0][:-3]
         return l:my_docs
     endfunction "}}}
-    silent let s:my_docs = <SID>GetMyDocuments()
+    " silent let s:my_docs = <SID>GetMyDocuments()
     let s:my_docs = $USERPROFILE . '/Documents'
 else
     let s:my_docs = $HOME
