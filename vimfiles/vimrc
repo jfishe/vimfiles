@@ -9,7 +9,7 @@ source $VIMRUNTIME/mswin.vim
 "     set shell=powershell
 "     set shellcmdflag=-command
 "     set shellquote=\"
-"     set shellxquote=
+"     set shellxquote= 
 " endif
 
 set fileformat=unix     "LF EOL only
