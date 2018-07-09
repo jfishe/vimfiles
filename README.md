@@ -44,7 +44,7 @@ cd %TMP%
 git clone https://github.com/jfishe/vimfiles.git vimfiles
 xcopy vimfiles %USERPROFILE% /s/h/k
 cd %USERPROFILE%
-git submodule update --init --recursive
+git submodule update --init --recursive --remote
 ```
 
 ``` {contenteditable="true" spellcheck="false" caption="powershell" .powershell}
