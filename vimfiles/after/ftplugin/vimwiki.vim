@@ -1,10 +1,11 @@
 " vim:tabstop=2:shiftwidth=2:expandtab:foldmethod=marker:textwidth=79
-" Use lgrep so that ag peforms search
 augroup myvimwiki
   autocmd!
   autocmd QuickFixCmdPost [^l]* cwindow
   autocmd QuickFixCmdPost l*    lwindow
 augroup END
+
+" Use lgrep so that ag peforms search
 " The Silver Searcher
 " See plugin/tex.vim.
 " set grepprg=ag\ --nogroup\ --nocolor\ $*
