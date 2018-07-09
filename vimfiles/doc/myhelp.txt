@@ -56,6 +56,7 @@ char  digraph hex   dec   official name ~
 §     SE      0xa7  167   SECTION SIGN
 ¶     PI      0xb6  182   PILCROW SIGN
 ±     +-      0xb1  177   PLUS-MINUS SIGN
+…     ,.      2026  8230  HORIZONTAL ELLIPSIS
 –     -N      2013  8211  EN DASH `
 —     -M      2014  8212  EM DASH
 ∴     .:      2234  8756  THEREFORE

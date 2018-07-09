@@ -10,8 +10,8 @@ augroup END
 " set grepprg=ag\ --nogroup\ --nocolor\ $*
 if executable('ag')
   exe 'command! -buffer -nargs=+ VWS silent lgrep! <args> -G '.
-      \ escape('"^.*/*'.VimwikiGet('ext').'"', ' '). ' '.
-      \ '"'.VimwikiGet('path')[:-2].'"'
+      \ escape('"^.*/*'.vimwiki#vars#get_wikilocal('ext').'"', ' '). ' '.
+      \ '"'.vimwiki#vars#get_wikilocal('path')[:-2].'"'
   command! -buffer -nargs=* -complete=custom,vimwiki#tags#complete_tags
       \ VWT VWS :<args>:
 endif
