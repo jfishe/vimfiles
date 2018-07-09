@@ -17,7 +17,7 @@ Several applications are assumed to be in the `PATH`, install
 See steps to add a local bin directory for
 the other applications referenced in the vim configuration files.
 
-On Windows systems `%HOMEDRIVE%%HOMEPATH%`, e.g., `U:\ ` may point to a
+On Windows systems `%HOMEDRIVE%%HOMEPATH%`, e.g., `U:\.` may point to a
 different path than `%USERPROFILE%`, e.g., `C:\Users\<user name>`.
 `git-scm` defaults to `%HOMEDRIVE%%HOMEPATH%`. Defining `%HOME%`, overides this behavior.
 
@@ -172,7 +172,8 @@ $obj = New-Object -ComObject WScript.Shell
 [string]$from = "Anaconda Prompt.lnk"
 [string]$to = "Anaconda Powershell.lnk"
 
-$AnacondaPrompt = Get-Shortcut -Name "$from" -FolderPath "$env:APPDATA\Microsoft\Windows\Start Menu\Programs" |
+$AnacondaPrompt = Get-Shortcut -Name "$from" `
+    -FolderPath "$env:APPDATA\Microsoft\Windows\Start Menu\Programs" |
     Where-Object {$_.Name -eq "$from"}
 
 $lnk = $obj.CreateShortcut($AnacondaPrompt)
@@ -181,7 +182,8 @@ $lnk = $obj.CreateShortcut($AnacondaPrompt)
 $link = $obj.CreateShortcut($PSAnacondaPrompt)
 $link.TargetPath = "$PSHOME\powershell.exe"
 $link.WorkingDirectory = $lnk.WorkingDirectory
-$link.Arguments = '-ExecutionPolicy Bypass -Noexit ' + """$env:CONDA_PREFIX\Scripts\activate.ps1""" + " $env:CONDA_DEFAULT_ENV"
+$link.Arguments = '-ExecutionPolicy Bypass -Noexit ' + `
+    """$env:CONDA_PREFIX\Scripts\activate.ps1""" + " $env:CONDA_DEFAULT_ENV"
 $link.Description = $to.Split(".")[0]
 $link.Save()
 ```
@@ -202,8 +204,11 @@ There are several versions depending on python2, python3 or allowing both.
 ## Asynchronous Lint Engine (ALE)
 
 The [Asynchronous Lint Engine](https://github.com/w0rp/ale) supports Markdown
-linting through [Node.js](https://nodejs.org/en/download/current/), which
-provides an installer for `Node.js`. The Chocolatey package is `nodejs`.
+linting Node.js, which is available from:
+
+* [Node.js](https://nodejs.org/)
+* The Chocolatey package is `nodejs`.
+* The Anaconda package is `nodejs`.
 
 ### MarkdownLint Command Line Interface
 
