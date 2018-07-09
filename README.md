@@ -1,14 +1,23 @@
 # vimfiles
 
-Windows Vim 8 configuration files based on the recommendations of [Ruslan Osipov](http://www.rosipov.com/blog/vim-pathogen-and-git-submodules/), [Keep Your vimrc file clean](http://vim.wikia.com/wiki/Keep_your_vimrc_file_clean) and [The musings of bluz71](https://bluz71.github.io/2017/05/15/vim-tips-tricks.html).
+Windows Vim 8 configuration files based on the recommendations of
+[Ruslan Osipov](http://www.rosipov.com/blog/vim-pathogen-and-git-submodules/),
+[Keep Your vimrc file clean](http://vim.wikia.com/wiki/Keep_your_vimrc_file_clean)
+and
+[The musings of bluz71](https://bluz71.github.io/2017/05/15/vim-tips-tricks.html).
 
-:help vimrc recommends moving vimrc and gvimrc to vimfiles to make the setup more portable.
+:help vimrc recommends moving vimrc and gvimrc to vimfiles to make the setup
+more portable.
 
 ## Installation
 
-Several applications are assumed to be in the `PATH`, install [git-scm](https://git-scm.com/) and select `User Git and optional Unix tools from the Windows Command Prompt`. See steps to add a local bin directory for the other applications referenced in the vim configuration files.
+Several applications are assumed to be in the `PATH`, install
+[git-scm](https://git-scm.com/) and select
+`User Git and optional Unix tools from the Windows Command Prompt`.
+See steps to add a local bin directory for
+the other applications referenced in the vim configuration files.
 
-On Windows systems `%HOMEDRIVE%%HOMEPATH%`, e.g., `U:\ `may point to a
+On Windows systems `%HOMEDRIVE%%HOMEPATH%`, e.g., `U:\ ` may point to a
 different path than `%USERPROFILE%`, e.g., `C:\Users\<user name>`.
 `git-scm` defaults to `%HOMEDRIVE%%HOMEPATH%`. Defining `%HOME%`, overides this behavior.
 
@@ -80,18 +89,20 @@ $dotfiles | ForEach-Object {
 }
 ```
 
-
 ## Thesaurus
 
 Setup instructions are included in vimrc to install the
-[Moby Thesaurus List by Grady Ward](http://www.gutenberg.org/ebooks/3202) from Project Gutenberg. Use a browser; the site blocks scripted download.
+[Moby Thesaurus List by Grady Ward](http://www.gutenberg.org/ebooks/3202) from
+Project Gutenberg. Use a browser; the site blocks scripted download.
 
 ## grepprg and grepformat
 
-[Faster Grepping in Vim](https://robots.thoughtbot.com/faster-grepping-in-vim) recommends `ag`.
+[Faster Grepping in Vim](https://robots.thoughtbot.com/faster-grepping-in-vim)
+recommends `ag`.
 [The silver searcher](https://github.com/ggreer/the_silver_searcher) needs
 to be installed or default grep will be used. VWS speed is greatly improved by
-re-defining the command. Grepprg and grepformat need to be set per [ag.1.md](https://github.com/ggreer/the_silver_searcher/blob/master/doc/ag.1.md).
+re-defining the command. Grepprg and grepformat need to be set per
+[ag.1.md](https://github.com/ggreer/the_silver_searcher/blob/master/doc/ag.1.md).
 
 ## Anaconda
 
@@ -115,7 +126,8 @@ fix. An example error message from `conda update conda`:
 
 [environment.yml](file://./environment.yml) lists the conda and pip packages I use.
 
-Replace the `name:` and `prefix:` with the Anaconda3 installation path. `name:` could also be an env.
+Replace the `name:` and `prefix:` with the Anaconda3 installation path. `name:`
+could also be an env.
 
 To add packages to the default conda environment:
 
@@ -135,14 +147,16 @@ file.
 
 ### PYTHONPATH Considered Harmful
 
-The following works but can have surprising side-effects per [PYTHONPATH Considered Harmful](https://soundcloud.com/talkpython/22-pythonpath-considered-harmful).
+The following works but can have surprising side-effects per
+[PYTHONPATH Considered Harmful](https://soundcloud.com/talkpython/22-pythonpath-considered-harmful).
 
 For vim-jedi to work with Anaconda, if you haven't compiled vim to know where
 site-package are, set PYTHONPATH. E.g., set
 PYTHONPATH=C:\Users\fishe\Anaconda3\Lib\site-packages. This will mess up
 activate/deactivate conda environments so adjust PYTHONPATH if you switch.
 
-[Using conda-Managing environments](https://conda.io/docs/using/envs.html#saved-environment-variables) provides directions.
+[Using conda-Managing environments](https://conda.io/docs/using/envs.html#saved-environment-variables)
+provides directions.
 
 In order for root to work without activate root before opening Vim, set user
 environment variable PYTHONPATH. In order for it to work after activate root
@@ -193,16 +207,18 @@ provides an installer for `Node.js`. The Chocolatey package is `nodejs`.
 
 ### MarkdownLint Command Line Interface
 
-The [MarkdownLint Command Line Interface](https://github.com/igorshubovych/markdownlint-cli.git) can be
-installed using `npm` from `Node.js`.
+The
+[MarkdownLint](https://github.com/igorshubovych/markdownlint-cli.git) can be
+installed using `npm` from `Node.js`, which is available from Anaconda as
+`nodejs`.
 
 ``` {contenteditable="true" spellcheck="false" caption="powershell" .powershell}
 npm install -g markdownlint-cli
 ```
 
 `ALE` detects `markdownlint` if `filetype=pandoc.markdown`.
-`plugins\pandoc.vim` contains an `augroup` that sets `filetype` based on
-`*.md`, overriding the vim-pandoc-syntax default `filetype=pandoc`. It also
+`after/plugins/pandoc.vim` contains an `augroup` that sets `filetype` based on
+`*.md`, overriding the vim-pandoc-syntax default `filetype=pandoc`. `plugins/pandoc.vim`
 sets `g:pandoc#filetypes#handled` and `g:pandoc#filetypes#pandoc_markdown` to
 enable `vim-pandoc` features.
 
@@ -259,12 +275,19 @@ pip install -e .
 [ElateralLtd git commit template](https://github.com/ElateralLtd/git-commit-template)
 provides a template and installation script for standard git commit messages.
 
-The Vim that ships with Git-bash can use the same profile as Gvim. Using WSL bash is the easiest method to create soft-links. Git-bash won't and recommends using mklink, but mklink usually has complex ACL issues, especially in a corporate environment.
+The Vim that ships with Git-bash can use the same profile as Gvim. Using WSL
+bash is the easiest method to create soft-links. Git-bash won't and recommends
+using mklink, but mklink usually has complex ACL issues, especially in
+a corporate environment.
 
-The following assumes that git-bash has been configured to use `%USERPROFILE%` as home, which may be different than the default `%HOMEDRIVE%%HOMEPATH%`. Also, *Documents* could be *My Documents*. Adjust the path for actual location of `vimfiles` and `vimwiki`. The vim startup script assumes that for anything, except Windows `cmd.exe`, that these files are located in `$HOME`. Soft-links allow pointing to the actual location.
+The following assumes that git-bash has been configured to use `%USERPROFILE%`
+as home, which may be different than the default `%HOMEDRIVE%%HOMEPATH%`. Also,
+*Documents* could be *My Documents*. Adjust the path for actual location of
+`vimfiles` and `vimwiki`. The vim startup script assumes that for anything,
+except Windows `cmd.exe`, that these files are located in `$HOME`. Soft-links
+allow pointing to the actual location.
 
-
-```bash
+``` bash
 cd /mnt/c/Users/fishe
 ln -s ./vimfiles/ .vim
 ln -s Documents/vimwiki vimwiki
@@ -272,12 +295,19 @@ ln -s Documents/vimwiki vimwiki
 
 ## KeePass2, KeeAgent and SSH
 
-[KeeAgent (for KeePass) on Bash on Windows / WSL](https://gist.github.com/strarsis/e533f4bca5ae158481bbe53185848d49) provides a howto. Git-bash only requires `export SSH_AUTH_SOCK=~/keeagent_msys.socket` in .bash_profile, depending on the KeeAgent settings in KeePass2.
+[KeeAgent](https://gist.github.com/strarsis/e533f4bca5ae158481bbe53185848d49)
+(for KeePass) on Bash on Windows / WSL provides a howto. Git-bash only requires
+`export SSH_AUTH_SOCK=~/keeagent_msys.socket` in .bash_profile, depending on
+the KeeAgent settings in KeePass2.
 
 ## Map Caps Lock to Escape, or any key to any key
 
-* Download `uncap.exe` from a release of [susam uncap](https://github.com/susam/uncap). The repository contains additional instructions.
+* Download `uncap.exe` from a release of
+  [susam uncap](https://github.com/susam/uncap). The repository contains
+  additional instructions.
 * Place in `%USERPROFILE%\bin`.
 * Create a Shortcut.
 * Move the Shortcut to `Win-R shell:startup` (Win == Start Menu key).
-* See [Change which apps run automatically at startup in Windows 10](https://support.microsoft.com/en-us/help/4026268/windows-10-change-startup-apps) for more details.
+* See
+  [Change which apps run automatically at startup in Windows 10](https://support.microsoft.com/en-us/help/4026268/windows-10-change-startup-apps)
+  for more details.
