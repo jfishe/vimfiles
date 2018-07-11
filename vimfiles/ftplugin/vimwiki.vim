@@ -1,6 +1,7 @@
+" vim:fdm=marker:
 " Create a title header for Journal with date. Add a second Contents header
 " for auto_TOC.
-function! s:TitleJournal() "{{{
+function! s:TitleJournal() "{{{1
   if exists('*strftime')
     let l:bash = strftime('%Y-%m-%d')
   else
@@ -25,10 +26,3 @@ endfunction "}}}
 nnoremap <silent><buffer> <F3> :call <SID>TitleJournal()<CR>
 
 setlocal spell spelllang=en_us
-
-setlocal expandtab
-setlocal shiftwidth=2
-setlocal nolisp
-setlocal autoindent
-setlocal softtabstop=2
-setlocal tabstop=2
