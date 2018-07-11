@@ -1,7 +1,4 @@
-"let g:pandoc#loaded = 1
-let g:toggle_list_no_mappings = 1
-
-"set pythonthreedll='c:\users\fishe\anaconda3\envs\test'
+" ================ Windows & Defaults ================== {{{
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 
@@ -13,6 +10,7 @@ source $VIMRUNTIME/mswin.vim
 " endif
 
 set fileformat=unix     "LF EOL only
+set isfname+=32         "so gf treats spaces as part of valid file name.
 "set fileformats-=dos   "Force LF EOL only on all; won't handle dos
 "files gracefully
 set visualbell          "No sounds
@@ -21,7 +19,10 @@ set visualbell          "No sounds
 set writebackup
 set nobackup
 
-" ================ Persistent Undo ==================
+" LocalLeader
+let g:maplocalleader = ','
+" }}}
+" ================ Persistent Undo ================== {{{
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
 " Assumes vimrc is in .vim or vimfiles and not in $HOME
@@ -39,8 +40,8 @@ if has('persistent_undo')
   let &undodir=s:vimfiles . '/backups'
   set undofile
 endif
-
-" Cache tags instead of polluting project directories
+" }}}
+" Cache tags instead of polluting project directories {{{
 if !isdirectory(s:vimfiles . '/backups/gutentags')
     if has('win32') || has('win64') || has('win32unix')
         silent exe '!mkdir ' . s:vimfiles . '\backups\gutentags  > NUL 2>&1'
@@ -60,16 +61,13 @@ if !isdirectory(s:vimfiles . '/backups/swp')
 endif
 let &directory=s:vimfiles . '/backups/swp//'
 
-" LocalLeader
-let g:maplocalleader = ','
-
 " Thesaurus from http://www.gutenberg.org/files/3202/files.zip
 " Extract files from zip and put in the following location.
 if isdirectory(s:vimfiles . '/thesaurus')
     let &thesaurus = s:vimfiles . '/thesaurus/mthesaur.txt'
 endif
-
-"Load bundles
+" }}}
+"Load bundles {{{
 " Disable plugins when python unavailable
 if !has('python3')
     let g:loaded_EditorConfig = 1
@@ -78,8 +76,8 @@ endif
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 execute pathogen#helptags()
-
-" ================ Indentation ======================
+" }}}
+" ================ Indentation ====================== {{{
 " Commented lines relocated to sensible.vim
 
 "set autoindent
@@ -92,8 +90,8 @@ set tabstop=4
 set expandtab
 set nowrap
 "set backspace=indent,eol,start " Proper backspace behavior.
-
-" ================ Buffers ======================
+" }}}
+" ================ Buffers ====================== {{{
 " Commented lines relocated to sensible.vim
 
 set hidden                     " Possibility to have more than one
@@ -107,8 +105,8 @@ augroup mybuffers
   autocmd VimResized * wincmd =
 augroup END
 set nofoldenable
-
-" Display tabs and trailing spaces visually
+" }}}
+" Display tabs and trailing spaces visually {{{
 if has('multi_byte')
   if &termencoding ==? ''
     let &termencoding = &encoding
@@ -122,20 +120,19 @@ if has('multi_byte')
 else
   set list listchars=tab:\ \ ,trail:$
 endif
-
-" Color and background
+" }}}
+" Color and background {{{
 set background=dark
 "colorscheme solarized
 " let g:solarized_extra_hi_groups=1
 " let g:solarized_use16=1
 set termguicolors
 colorscheme solarized8
-
-" ================ Jump =============================
+" }}}
+" ================ Jump ============================= {{{
 set relativenumber
-
-" ================ Completion =======================
-
+" }}}
+" ================ Completion ======================= {{{
 set wildmode=list:longest
 set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
@@ -145,23 +142,20 @@ set wildignore+=*DS_Store*
 set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=*.png,*.jpg,*.gif
-
-"
-" ================ Scrolling ========================
-
+" }}}
+" ================ Scrolling ======================== {{{
 set scrolloff=8         "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
-
-" ================ Search ===========================
+" }}}
+" ================ Search =========================== {{{
 " Commented lines relocated to sensible.vim
-
 "set incsearch       " Find the next match as we type the search
 set hlsearch        " Highlight searches by default
 set ignorecase      " Ignore case when searching...
 set infercase       " Smarter completions
 set smartcase       " ...unless we type a capital
-
+" }}}
 "Get listing of map assignments
 function MyMaps()
     redir @" | silent map | redir END | new | put!
