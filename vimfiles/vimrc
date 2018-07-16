@@ -10,7 +10,6 @@ source $VIMRUNTIME/mswin.vim
 " endif
 
 set fileformat=unix     "LF EOL only
-set isfname+=32         "so gf treats spaces as part of valid file name.
 "set fileformats-=dos   "Force LF EOL only on all; won't handle dos
 "files gracefully
 set visualbell          "No sounds
