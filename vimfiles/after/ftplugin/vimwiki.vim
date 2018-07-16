@@ -55,7 +55,8 @@ function! s:myvimwiki_normalize_mail_v() " {{{
 
     let l:rxDesc = substitute(l:rxDesc, l:regex_mail, '', 'g')
     let l:rxStyle = ''
-    let l:sub = vimwiki#base#apply_template(g:vimwiki_WikiLinkTemplate2,
+    let l:sub = vimwiki#base#apply_template(
+          \ vimwiki#vars#get_global('WikiLinkTemplate2'),
           \ l:rxUrl, l:rxDesc, l:rxStyle)
 
     " Put substitution in register " and change text
@@ -68,3 +69,5 @@ function! s:myvimwiki_normalize_mail_v() " {{{
 endfunction " }}}
 vnoremap <silent><localleader>m
   \ :call <SID>myvimwiki_normalize_mail_v()<CR>
+
+setlocal isfname+=32         "so gf treats spaces as part of valid file name.
