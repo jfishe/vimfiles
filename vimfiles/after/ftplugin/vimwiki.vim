@@ -71,3 +71,4 @@ vnoremap <silent><localleader>m
   \ :call <SID>myvimwiki_normalize_mail_v()<CR>
 
 setlocal isfname+=32         "so gf treats spaces as part of valid file name.
+let g:ale_enabled=0
