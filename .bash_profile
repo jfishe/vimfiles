@@ -1,4 +1,4 @@
-if [ $USERDOMAIN == '***REMOVED***' ]
+if [ "$USERDOMAIN" == '***REMOVED***' ]
 then
     # Set these in ~/.bash_profile or ~/.bashrc to overide ~/.gitconfig:
     # GIT_AUTHOR_NAME is the human-readable name in the “author” field.
