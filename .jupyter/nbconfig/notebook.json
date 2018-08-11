@@ -7,7 +7,8 @@
     "python-markdown/main": true,
     "ruler/main": true,
     "comment-uncomment/main": true,
-    "spellchecker/main": true
+    "spellchecker/main": true,
+    "toc2/main": true
   },
   "comment_uncomment_keybinding": "alt-ctrl-c",
   "Cell": {
