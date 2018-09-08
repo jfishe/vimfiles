@@ -19,7 +19,7 @@ the other applications referenced in the vim configuration files.
 
 On Windows systems `%HOMEDRIVE%%HOMEPATH%`, e.g., `U:\.` may point to a
 different path than `%USERPROFILE%`, e.g., `C:\Users\<user name>`.
-`git-scm` defaults to `%HOMEDRIVE%%HOMEPATH%`. Defining `%HOME%`, overides this behavior.
+`git-scm` defaults to `%HOMEDRIVE%%HOMEPATH%`. Defining `%HOME%`, overrides this behavior.
 
 * Open `Control Panel`.
 * Search for `environment`.
