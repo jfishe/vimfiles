@@ -55,10 +55,5 @@
 	path = ~/Git/dotfiles/gitconfig
     ; [credential]
     ; 	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-wincred.exe
-[filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
 [status]
 	showUntrackedFiles = no
