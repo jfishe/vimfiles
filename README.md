@@ -19,7 +19,8 @@ the other applications referenced in the vim configuration files.
 
 On Windows systems `%HOMEDRIVE%%HOMEPATH%`, e.g., `U:\.` may point to a
 different path than `%USERPROFILE%`, e.g., `C:\Users\<user name>`.
-`git-scm` defaults to `%HOMEDRIVE%%HOMEPATH%`. Defining `%HOME%`, overrides this behavior.
+`git-scm` defaults to `%HOMEDRIVE%%HOMEPATH%`. Defining `%HOME%`, overrides
+this behavior.
 
 * Open `Control Panel`.
 * Search for `environment`.
@@ -114,6 +115,7 @@ Opening the URL for the failing website, in a browser--e.g.,
 the issue for the current session. The work around is only a temporary
 fix. An example error message from `conda update conda`:
 
+<!-- markdownlint-disable MD013 -->
     CondaHTTPError: HTTP None None for url <https://conda.anaconda.org/conda-forge/win-64/repodata.json>
     Elapsed: None
 
@@ -121,6 +123,7 @@ fix. An example error message from `conda update conda`:
     HTTP errors are often intermittent, and a simple retry will get you on your way.
 
     SSLError(SSLError(SSLError("bad handshake: Error([('SSL routines', 'ssl3_get_ser ver_certificate', 'certificate verify failed')],)",),),)
+<!-- markdownlint-enable MD013 -->
 
 ### conda env
 
@@ -132,12 +135,14 @@ could also be an env.
 To add packages to the default conda environment:
 
 ```DOS
+conda update conda
 conda env update --file environment.yml
 ```
 
 To create an environment:
 
 ```DOS
+conda update conda
 conda env create --name <env> --file environment.yml
 ```
 
@@ -208,24 +213,34 @@ linting Node.js, which is available from:
 
 * [Node.js](https://nodejs.org/)
 * The Chocolatey package is `nodejs`.
-* The Anaconda package is `nodejs`.
+* The Anaconda package is `nodejs`. This is the easiest option and keeps the
+  global configuration within the Anaconda installation path.
+
+### Node.js Packages for ALE
+
+Activate the Node.js environment and install the following for use by ALE,
+adjusting the path separator for your CLI.
+
+``` {contenteditable="true" spellcheck="false" caption="powershell" .powershell}
+npm install --global nodejs/package.json
+npm outdated --global
+```
+
+If any of the packages are outdated run `npm --global update <package list>`.
+Then `npm ls --global > nodejs/package.json` will update the package list for
+future re-use.
 
 ### MarkdownLint Command Line Interface
 
-The
-[MarkdownLint](https://github.com/igorshubovych/markdownlint-cli.git) can be
-installed using `npm` from `Node.js`, which is available from Anaconda as
+The [MarkdownLint](https://github.com/igorshubovych/markdownlint-cli.git) can
+be installed using `npm` from `Node.js`, which is available from Anaconda as
 `nodejs`.
 
-``` {contenteditable="true" spellcheck="false" caption="powershell" .powershell}
-npm install -g markdownlint-cli
-```
-
 `ALE` detects `markdownlint` if `filetype=pandoc.markdown`.
-`after/plugins/pandoc.vim` contains an `augroup` that sets `filetype` based on
-`*.md`, overriding the vim-pandoc-syntax default `filetype=pandoc`. `plugins/pandoc.vim`
-sets `g:pandoc#filetypes#handled` and `g:pandoc#filetypes#pandoc_markdown` to
-enable `vim-pandoc` features.
+`vimfiles/after/plugin/pandoc.vim` contains an `augroup` that sets `filetype`
+based on `*.md`, overriding the vim-pandoc-syntax default `filetype=pandoc`.
+
+The parent project lists the rules under [`docs/Rules.md`](https://github.com/markdownlint/markdownlint/blob/master/docs/RULES.md).
 
 ## Jupyter Notebook
 
