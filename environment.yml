@@ -17,4 +17,6 @@ dependencies:
   - mypy
   - vim-vint
   - virtualenv
+  - shortcutter
+  - panflute
 # prefix: C:\Users\fishe\Anaconda3
