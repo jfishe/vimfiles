@@ -76,6 +76,8 @@ char  digraph hex   dec   official name ~
 4. Ex                                            *myhelp-ex*
 
 Command                     Meaning ~
+:Vterm                      Default vertical terminal. Append bash to specify.
+:Vposh                      PowerShell vertical terminal
 :set relativenumber         |'relativenumber'| |'rnu'|
 :s/ <\p\{-}@\p\{-}>//cgi    Remove email addresses.
 :%s/\%VSEARCH/REPLACE/g     Replace all occurrences in selection but not

@@ -155,10 +155,17 @@ set ignorecase      " Ignore case when searching...
 set infercase       " Smarter completions
 set smartcase       " ...unless we type a capital
 " }}}
+" ================ Terminal =========================== {{{
+" Settings for Vim 8.1 terminal command
+" Append bash to select terminal.
+command Vterm vertical terminal
+command Vposh vertical terminal powershell -ExecutionPolicy Bypass
+" }}}
+" ================ Map =========================== {{{
 "Get listing of map assignments
 function MyMaps()
     redir @" | silent map | redir END | new | put!
 endfunction
-
+" }}}
 " diff current buffer and saved file
 " use DiffOrig
