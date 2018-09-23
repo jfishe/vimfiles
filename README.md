@@ -193,6 +193,28 @@ $link.Description = $to.Split(".")[0]
 $link.Save()
 ```
 
+### Windows Vim-Tux
+
+Recent versions of [vim-tux](https://tuxproject.de/projects/vim/ "Vim-Builds")
+compiled with `+python3/dyn` need the `PYTHONHOME` environment variable set.
+Otherwise vim will crash in Anaconda environments:
+
+    C:\>vim
+    Fatal Python error: initfsencoding: unable to load the file system codec
+    ModuleNotFoundError: No module named 'encodings'
+
+    Current thread 0x00003a54 (most recent call first):
+
+Environment variables can be set when an Anaconda environment is activated.
+Instructions are provided in the
+[Conda User Guide](https://conda.io/docs/user-guide/tasks/manage-environments.html#windows)
+for creating `env_vars.bat` files.
+
+In each of the `conda` environments, do the following:
+
+* Add `set PYTHONHOME=%CONDA_PREFIX%` to `activate.d\env_vars.bat`.
+* Add `set PYTHONHOME=` to `deactivate.d\env_vars.bat`.
+
 ## vim-conda
 
 vim-conda resolves the vim-jedi issue and allows switching envs within Vim.
