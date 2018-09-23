@@ -22,17 +22,17 @@ different path than `%USERPROFILE%`, e.g., `C:\Users\<user name>`.
 `git-scm` defaults to `%HOMEDRIVE%%HOMEPATH%`. Defining `%HOME%`, overrides
 this behavior.
 
-* Open `Control Panel`.
-* Search for `environment`.
-* Select `Edit environment variables for your account`
-* Select New.
-* Variable name: `HOME`
-* Variable value: `%USERPROFILE%`
-* Select OK.
-* Select `Path` and `Edit`.
-* Select `New` and enter `%USERPROFILE%\bin`.
-* Select OK, twice.
-* Open git-bash or git-cmd and confirm directory is `C:\Users\<user name>`.
+- Open `Control Panel`.
+- Search for `environment`.
+- Select `Edit environment variables for your account`
+- Select New.
+- Variable name: `HOME`
+- Variable value: `%USERPROFILE%`
+- Select OK.
+- Select `Path` and `Edit`.
+- Select `New` and enter `%USERPROFILE%\bin`.
+- Select OK, twice.
+- Open git-bash or git-cmd and confirm directory is `C:\Users\<user name>`.
 
 ## vimfiles installation
 
@@ -57,7 +57,7 @@ cd %USERPROFILE%
 git submodule update --init --recursive --remote
 ```
 
-``` {contenteditable="true" spellcheck="false" caption="powershell" .powershell}
+```{contenteditable="true" spellcheck="false" caption="powershell" .powershell}
 # Clone vimfiles into LOCALAPPDATA
 Set-Location -Path "$env:LOCALAPPDATA"
 git clone https://github.com/jfishe/vimfiles.git vimfiles
@@ -116,6 +116,7 @@ the issue for the current session. The work around is only a temporary
 fix. An example error message from `conda update conda`:
 
 <!-- markdownlint-disable MD013 -->
+
     CondaHTTPError: HTTP None None for url <https://conda.anaconda.org/conda-forge/win-64/repodata.json>
     Elapsed: None
 
@@ -123,6 +124,7 @@ fix. An example error message from `conda update conda`:
     HTTP errors are often intermittent, and a simple retry will get you on your way.
 
     SSLError(SSLError(SSLError("bad handshake: Error([('SSL routines', 'ssl3_get_ser ver_certificate', 'certificate verify failed')],)",),),)
+
 <!-- markdownlint-enable MD013 -->
 
 ### conda env
@@ -171,7 +173,7 @@ follow the instructions in the link above, but the path is Anaconda3\etc\conda.
 
 `environment.yml` includes `pscondaenvs`. To use, create a shortcut, similar to following:
 
-``` {contenteditable="true" spellcheck="false" caption="powershell" .powershell}
+```{contenteditable="true" spellcheck="false" caption="powershell" .powershell}
 Install-Module -Name PSShortcut -Scope CurrentUser
 $obj = New-Object -ComObject WScript.Shell
 [string]$from = "Anaconda Prompt.lnk"
@@ -212,8 +214,8 @@ for creating `env_vars.bat` files.
 
 In each of the `conda` environments, do the following:
 
-* Add `set PYTHONHOME=%CONDA_PREFIX%` to `activate.d\env_vars.bat`.
-* Add `set PYTHONHOME=` to `deactivate.d\env_vars.bat`.
+- Add `set PYTHONHOME=%CONDA_PREFIX%` to `activate.d\env_vars.bat`.
+- Add `set PYTHONHOME=` to `deactivate.d\env_vars.bat`.
 
 ## vim-conda
 
@@ -222,9 +224,9 @@ There are several versions depending on python2, python3 or allowing both.
 
 ## Gutentags & Universal ctags
 
-* [Gutentags](https://github.com/ludovicchabant/vim-gutentags)
-* Gutentags handles Vim integration nicely.
-* [universal-ctags](https://github.com/universal-ctags/ctags) provides
+- [Gutentags](https://github.com/ludovicchabant/vim-gutentags)
+- Gutentags handles Vim integration nicely.
+- [universal-ctags](https://github.com/universal-ctags/ctags) provides
   direction for obtaining pre-built ctags binary without needing
   source-forge.
 
@@ -233,9 +235,9 @@ There are several versions depending on python2, python3 or allowing both.
 The [Asynchronous Lint Engine](https://github.com/w0rp/ale) supports Markdown
 linting Node.js, which is available from:
 
-* [Node.js](https://nodejs.org/)
-* The Chocolatey package is `nodejs`.
-* The Anaconda package is `nodejs`. This is the easiest option and keeps the
+- [Node.js](https://nodejs.org/)
+- The Chocolatey package is `nodejs`.
+- The Anaconda package is `nodejs`. This is the easiest option and keeps the
   global configuration within the Anaconda installation path.
 
 ### Node.js Packages for ALE
@@ -243,7 +245,7 @@ linting Node.js, which is available from:
 Activate the Node.js environment and install the following for use by ALE,
 adjusting the path separator for your CLI.
 
-``` {contenteditable="true" spellcheck="false" caption="powershell" .powershell}
+```{contenteditable="true" spellcheck="false" caption="powershell" .powershell}
 npm install --global nodejs/package.json
 npm outdated --global
 ```
@@ -268,7 +270,7 @@ The parent project lists the rules under [`docs/Rules.md`](https://github.com/ma
 
 ### git configuration
 
-[nbdime]( http://nbdime.readthedocs.io/en/latest/ ) is configured by:
+[nbdime](http://nbdime.readthedocs.io/en/latest/) is configured by:
 
 ```bash
 pip install nbdime
@@ -286,8 +288,8 @@ compatible with notebook v. 5.
 
 ### Console
 
-* [Introducing the Windows Console Colortool](https://blogs.msdn.microsoft.com/commandline/2017/08/11/introducing-the-windows-console-colortool/)
-* [ColorTool](https://github.com/Microsoft/Console/tree/master/tools/ColorTool).
+- [Introducing the Windows Console Colortool](https://blogs.msdn.microsoft.com/commandline/2017/08/11/introducing-the-windows-console-colortool/)
+- [ColorTool](https://github.com/Microsoft/Console/tree/master/tools/ColorTool).
 
 ## Setup Python Project
 
@@ -324,12 +326,12 @@ a corporate environment.
 
 The following assumes that git-bash has been configured to use `%USERPROFILE%`
 as home, which may be different than the default `%HOMEDRIVE%%HOMEPATH%`. Also,
-*Documents* could be *My Documents*. Adjust the path for actual location of
+_Documents_ could be _My Documents_. Adjust the path for actual location of
 `vimfiles` and `vimwiki`. The vim startup script assumes that for anything,
 except Windows `cmd.exe`, that these files are located in `$HOME`. Soft-links
 allow pointing to the actual location.
 
-``` bash
+```bash
 cd /mnt/c/Users/fishe
 ln -s ./vimfiles/ .vim
 ln -s Documents/vimwiki vimwiki
@@ -344,12 +346,12 @@ the KeeAgent settings in KeePass2.
 
 ## Map Caps Lock to Escape, or any key to any key
 
-* Download `uncap.exe` from a release of
+- Download `uncap.exe` from a release of
   [susam uncap](https://github.com/susam/uncap). The repository contains
   additional instructions.
-* Place in `%USERPROFILE%\bin`.
-* Create a Shortcut.
-* Move the Shortcut to `Win-R shell:startup` (Win == Start Menu key).
-* See
+- Place in `%USERPROFILE%\bin`.
+- Create a Shortcut.
+- Move the Shortcut to `Win-R shell:startup` (Win == Start Menu key).
+- See
   [Change which apps run automatically at startup in Windows 10](https://support.microsoft.com/en-us/help/4026268/windows-10-change-startup-apps)
   for more details.

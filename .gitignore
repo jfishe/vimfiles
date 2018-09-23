@@ -101,6 +101,7 @@ Temporary Items
 *.pdf
 *.out
 .ipynb_checkpoints/
+.jupyter/migrated
 
 # VIM backups
 *~
@@ -110,3 +111,4 @@ _viminfo
 backups/
 tags*
 .netrwhist
+*.add.spl
