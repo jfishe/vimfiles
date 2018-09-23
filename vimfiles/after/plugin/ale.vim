@@ -7,6 +7,9 @@ let g:ale_fixers = {
 \       'prettier',
 \       'markdownlint'
 \   ],
+\   'python': [
+\       'black'
+\   ],
 \}
 " ALE refreshes the loclist after vimwiki search, losing the seach results.
 " let g:ale_pattern_options = {'\.wiki$': {'ale_enabled': 0}}

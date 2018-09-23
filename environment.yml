@@ -10,13 +10,14 @@ dependencies:
 - pscondaenvs
 - nodejs
 - pip:
+  - black
   - cookiecutter
   - editorconfig
   - jupyter_contrib_nbextensions
-  - nbdime
   - mypy
+  - nbdime
+  - panflute
+  - shortcutter
   - vim-vint
   - virtualenv
-  - shortcutter
-  - panflute
 # prefix: C:\Users\fishe\Anaconda3
