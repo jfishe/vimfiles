@@ -93,6 +93,11 @@ Command         Meaning ~
 <C-k>           Previous error
 <C-j>           Next error
 
+Disable all rules: <!-- markdownlint-disable -->
+Enable all rules: <!-- markdownlint-enable -->
+Disable one or more rules: <!-- markdownlint-disable MD001 MD002 -->
+Enable one or more rules: <!-- markdownlint-enable MD001 MD002 -->
+
 ==============================================================================
 6. Jedi                                          *myhelp-jedi*
 
