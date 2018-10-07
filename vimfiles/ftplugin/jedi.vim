@@ -1,2 +1,2 @@
 "jedi.vim settings
-let g:jedi#use_splits_not_buffers = "winwidth"
+let g:jedi#use_splits_not_buffers = 'winwidth'
