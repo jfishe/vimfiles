@@ -247,12 +247,10 @@ adjusting the path separator for your CLI.
 
 ```{contenteditable="true" spellcheck="false" caption="powershell" .powershell}
 npm install --global nodejs/package.json
-npm outdated --global
+npm outdated --global # list outdated packages
+npm update --global # update all
+npm list --global --depth=0 --json > nodejs/package.json # save top level modules
 ```
-
-If any of the packages are outdated run `npm --global update <package list>`.
-Then `npm ls --global > nodejs/package.json` will update the package list for
-future re-use.
 
 ### MarkdownLint Command Line Interface
 
