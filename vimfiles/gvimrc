@@ -3,7 +3,7 @@ set termencoding=utf-8
 set guifont=Consolas:h11:cANSI:qDRAFT
 " set background=dark
 let g:solarized_use16=0
-colorscheme solarized8_dark
+" colorscheme solarized8
 "syntax reset
 set guioptions-=L
 set guioptions-=r
