@@ -71,6 +71,9 @@ char  digraph hex   dec   official name ~
 λ     l*      03BB  0955  GREEK SMALL LETTER LAMDA
 φ     f*      03C6  0966  GREEK SMALL LETTER PHI
 τ     t*      03C4  0964  GREEK SMALL LETTER TAU
+💲                  1F4B2 Heavy Dollar Sign
+＄                  FF04  Fullwidth Dollar Sign
+﹩                  FE69  Small Dollar Sign
 
 ==============================================================================
 4. Ex                                            *myhelp-ex*
