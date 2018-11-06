@@ -64,6 +64,7 @@ char  digraph hex   dec   official name ~
 ∴     .:      2234  8756  THEREFORE
 ∵     :.      2235  8757  BECAUSE
 µ     My      0xb5  181   MICRO SIGN
+≈     ?2      2248  8776  ALMOST EQUAL TO
 ·     .M      0xb7  183   MIDDLE DOT
 ×     *X      0xd7  215   MULTIPLICATION SIGN
 Δ     D*      0394  0916  GREEK CAPITAL LETTER DELTA
