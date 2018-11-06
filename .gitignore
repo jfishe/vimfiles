@@ -112,3 +112,4 @@ backups/
 tags*
 .netrwhist
 *.add.spl
+view/
