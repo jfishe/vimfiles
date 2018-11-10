@@ -88,6 +88,18 @@ Command                     Meaning ~
 :%s/\%V <\p\{-}@\p\{-}>//g  Remove all email address in line or selection.
 :%s/[{;}]/&\r/g|norm! =gg   Format css from one-line to multi-line.
 
+                                                *myhelp-ex-pack*
+Vim does not generate help tags for pack/foo/opt/doc because opt/doc is not in
+the runtime path, nor does include existing tags that are not in the runtime
+path.
+
+Command                      Meaning ~
+:packadd! foo                Add opt/foo to runtime path.
+                             :help foo will work if tags exist.
+:! bash -c 'find 
+:Helptags                    Pathogen provides this function to generate tags.
+:helptags <path>/foo/opt/doc Manually generate help tags.
+
 ==============================================================================
 5. ALE                                           *myhelp-ale*
 
