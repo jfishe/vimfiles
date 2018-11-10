@@ -1,4 +1,4 @@
-" Invoke :helptags on all non-$VIM doc directories in runtimepath.
+" Invoke :helptags on all non-$VIM doc directories in pack/*/opt.
 function! myhelptags#helptags() abort
   let sep = pathogen#slash()
   let l:vimfiles = fnamemodify(expand('$MYVIMRC'), ':p:h') . sep . 'pack' .sep
