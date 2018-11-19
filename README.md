@@ -252,6 +252,19 @@ npm update --global # update all
 npm list --global --depth=0 --json > nodejs/package.json # save top level modules
 ```
 
+<!-- markdownlint-disable MD013 -->
+
+``` {contenteditable="true" spellcheck="false" caption="bash" .bash}
+# Export
+npm list --global --parseable --depth=0 | sed '1d' | awk '{gsub(/\/.*\//,"",$1); print}' > path/to/npmfile
+
+# Import
+xargs npm install --global < path/to/npmfile
+```
+
+<!-- markdownlint-enable MD013 -->
+npm list --global --parseable --depth=0 | sed '1d' | awk '{gsub(/\/.*\//,"",$1); print}' > npmfile
+
 ### MarkdownLint Command Line Interface
 
 The [MarkdownLint](https://github.com/igorshubovych/markdownlint-cli.git) can
