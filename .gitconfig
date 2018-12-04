@@ -53,6 +53,7 @@
     cleanup = strip
 [include]
 	path = ~/Git/dotfiles/gitconfig
+    ; gitconfig is installation specific. Put the actual path in the file when cloning dotfiles.
     ; [credential]
     ; 	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-wincred.exe
 [status]
