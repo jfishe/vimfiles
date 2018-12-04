@@ -1,2 +1,2 @@
 defaulthtml5|--to html --standalone --template=pandoc.html5 --highlight-style=breezedark --toc --css=pandoc.css
-printable_links|pdf --variable fontsize=12pt --variable geometry=''top=0.5in,bottom=0.5in,left=0.5in,right=0.5in'' --variable papersize=letter --variable links-as-notes --variable colorlinks --table-of-contents --number-sections  --pdf-engine=xelatex
+printable_links|pdf --lua-filter task-list.lua --lua-filter task-orderedlist.lua --variable fontsize=12pt --variable geometry=''top=0.5in,bottom=0.5in,left=0.5in,right=0.5in'' --variable papersize=letter --variable links-as-notes --variable colorlinks --table-of-contents --number-sections  --pdf-engine=xelatex --template pandoc.tex --variable documentclass=scrartcl

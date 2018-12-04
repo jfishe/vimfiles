@@ -252,6 +252,22 @@ npm update --global # update all
 npm list --global --depth=0 --json > nodejs/package.json # save top level modules
 ```
 
+<!-- markdownlint-disable MD013 -->
+
+``` {contenteditable="true" spellcheck="false" caption="bash" .bash}
+# Export
+npm list --global --parseable --depth=0 | sed '1d' | awk '{gsub(/\/.*\//,"",$1); print}' > path/to/npmfile
+
+# Import
+xargs npm install --global < path/to/npmfile
+```
+
+``` {contenteditable="true" spellcheck="false" caption="bash" .bash}
+npm list --global --parseable --depth=0 | sed '1d' | awk '{gsub(/\/.*\//,"",$1); print}' > npmfile
+```
+
+<!-- markdownlint-enable MD013 -->
+
 ### MarkdownLint Command Line Interface
 
 The [MarkdownLint](https://github.com/igorshubovych/markdownlint-cli.git) can
@@ -285,6 +301,14 @@ compatible with notebook v. 5.
 ## Windows Setup
 
 ### Console
+
+Download the latest release of ColorTool and extract into the PATH, e.g.,
+`~/bin`. Include the schemes directory and add any additional schemes, as
+desired. Create a hard-link `mklink /h` from `~/bin/schemes` to each of the
+`.itermcolors` files in `$env:PROFILE` directory.
+
+New schemes may be tested and exported to `iTerm2` format with
+[terminal.sexy](https://terminal.sexy/).
 
 - [Introducing the Windows Console Colortool](https://blogs.msdn.microsoft.com/commandline/2017/08/11/introducing-the-windows-console-colortool/)
 - [ColorTool](https://github.com/Microsoft/Console/tree/master/tools/ColorTool).
