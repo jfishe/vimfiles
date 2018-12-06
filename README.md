@@ -344,7 +344,7 @@ provides a template and installation script for standard git commit messages.
 The Vim that ships with Git-bash can use the same profile as Gvim. Using WSL
 bash is the easiest method to create soft-links. Git-bash won't and recommends
 using mklink, but mklink usually has complex ACL issues, especially in
-a corporate environment.
+a corporate environment. PowerShell and CMD do not recognize soft-linked directories so use `mklink /J LINK TARGET`.
 
 The following assumes that git-bash has been configured to use `%USERPROFILE%`
 as home, which may be different than the default `%HOMEDRIVE%%HOMEPATH%`. Also,
@@ -357,6 +357,22 @@ allow pointing to the actual location.
 cd /mnt/c/Users/fishe
 ln -s ./vimfiles/ .vim
 ln -s Documents/vimwiki vimwiki
+```
+
+### Git Hooks
+
+Tim Pope's [Effortless Ctags with Git](https://tbaggery.com/2011/08/08/effortless-ctags-with-git.html)
+shows how to rebuild Ctags with git hooks. Note they do not work under
+PowerShell or CMD but do not seem to cause problems either. To work under WSL:
+
+``` {contenteditable="true" spellcheck="false" caption="bash" .bash}
+ln -s /mnt/c/Users/fishe/AppData/Local/vimfiles/.git_template ~/.git_template
+```
+
+To make hooks available from Windows, if you have any .bat or .ps1 hooks:
+
+``` {contenteditable="true" spellcheck="false" caption="DOS" .dos}
+mklink /J %USERPROFILE%\.git_template %LOCALAPPDATA%\vimfiles\.git_template
 ```
 
 ## KeePass2, KeeAgent and SSH

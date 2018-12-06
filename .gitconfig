@@ -58,3 +58,5 @@
     ; 	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-wincred.exe
 [status]
 	showUntrackedFiles = no
+[init]
+    templatedir = ~/.git_template
