@@ -1,4 +1,6 @@
 " ================ Windows & Defaults ================== {{{
+" Get the defaults that most users want.
+source $VIMRUNTIME/defaults.vim
 source $VIMRUNTIME/mswin.vim
 
 " if has('win64')
@@ -159,7 +161,7 @@ set sidescroll=1
 " ================ Search =========================== {{{
 " Commented lines relocated to sensible.vim
 "set incsearch       " Find the next match as we type the search
-if &t_Co > 2 || has("gui_running")
+if &t_Co > 2 || has('gui_running')
   " Switch on highlighting the last used search pattern.
   set hlsearch
 endif
