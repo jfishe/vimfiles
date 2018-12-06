@@ -1,5 +1,4 @@
 " ================ Windows & Defaults ================== {{{
-source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 
 " if has('win64')
@@ -66,6 +65,16 @@ if isdirectory(s:vimfiles . '/thesaurus')
     let &thesaurus = s:vimfiles . '/thesaurus/mthesaur.txt'
 endif
 " }}}
+
+" The matchit plugin {{{
+" makes the % command work better, but it is not backwards
+" compatible.
+" The ! means the package won't be loaded right away but when plugins are
+" loaded during initialization.
+if has('syntax') && has('eval')
+  packadd! matchit
+endif
+
 "Load bundles {{{
 " Disable plugins when python unavailable
 if !has('python3')
@@ -150,7 +159,10 @@ set sidescroll=1
 " ================ Search =========================== {{{
 " Commented lines relocated to sensible.vim
 "set incsearch       " Find the next match as we type the search
-set hlsearch        " Highlight searches by default
+if &t_Co > 2 || has("gui_running")
+  " Switch on highlighting the last used search pattern.
+  set hlsearch
+endif
 set ignorecase      " Ignore case when searching...
 set infercase       " Smarter completions
 set smartcase       " ...unless we type a capital
