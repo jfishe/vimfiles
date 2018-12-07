@@ -81,26 +81,40 @@
 [init]
     templatedir = ~/.git_template
 [alias]
-	# list files which have changed since review_base
-	files = !git diff --name-only $(git merge-base HEAD \"${review_base:-master}\")
-	# Same as above, but with a diff stat instead of just names (better for interactive use)
-	stat = !git diff --stat $(git merge-base HEAD \"${review_base:-master}\")
-	# split-diff style review using vim-fugitive Gvdiff
-	review = !$EDITOR -p $(git files) +\"tabdo Gvdiff ${review_base:-master}\" +\"let g:gitgutter_diff_base = '${review_base:-master}'\"
-	reviewone = !$EDITOR -p +\"tabdo Gvdiff ${review_base:-master}\" +\"let g:gitgutter_diff_base = '${review_base:-master}'\"
-	; reviewf = !$EDITOR -p $(git files | fzf -m --reverse --height 40%) +\"tabdo Gvdiff ${review_base:-master}\" +\"let g:gitgutter_diff_base = '${review_base:-master}'\"
-	# For when the diff is too big to review with :Gvdiff
-	diff-review = !git diff $(git merge-base --fork-point \"${review_base:-master}\")
-	# Review by commit
-	by-commit = !git log -p --reverse $(git merge-base --fork-point \"${review_base:-master}\")..HEAD
-	# split-diff, using icdiff
-	icdiff = --paginate difftool --tool icdiff
-	# show the before, changes, and after for one tracked image
-	diff-img = difftool --tool imgdiff
-	# Show just the subject and body of a particular commit (default: HEAD)
-	message = log -n1 --format=\"%s%n%n%b\"
-	# Show a markdown-formatted summary of commits from {review_base:-master} until HEAD
-	pr-summary = !git log --reverse --format=\"- **%s** (%h)%n%n%w(74,2,2)%b\" \"${review_base:-master}\"..HEAD
-	# Get last commit authored by me
-	my-last = log -n1 --format=\"%H\" --author=\"\\([jJ]ohn\\)\\|\\([jJ]ohn D.\\) [fF]isher\"
-	root = rev-parse --show-toplevel
+    ; list files which have changed since review_base
+    files = !git diff --name-only $(git merge-base HEAD \"${review_base:-master}\")
+
+    ; Same as above, but with a diff stat instead of just names (better for interactive use)
+    stat = !git diff --stat $(git merge-base HEAD \"${review_base:-master}\")
+
+    ; split-diff style review using vim-fugitive Gvdiff
+    review = !$EDITOR -p $(git files) +\"tabdo Gvdiff ${review_base:-master}\" +\"let g:gitgutter_diff_base = '${review_base:-master}'\"
+    reviewone = !$EDITOR -p +\"tabdo Gvdiff ${review_base:-master}\" +\"let g:gitgutter_diff_base = '${review_base:-master}'\"
+
+    ; reviewf = !$EDITOR -p $(git files | fzf -m --reverse --height 40%) +\"tabdo Gvdiff ${review_base:-master}\" +\"let g:gitgutter_diff_base = '${review_base:-master}'\"
+    ; For when the diff is too big to review with :Gvdiff
+    diff-review = !git diff $(git merge-base --fork-point \"${review_base:-master}\")
+
+    ; Review by commit
+    by-commit = !git log -p --reverse $(git merge-base --fork-point \"${review_base:-master}\")..HEAD
+
+    ; split-diff, using icdiff
+    icdiff = --paginate difftool --tool icdiff
+
+    ; show the before, changes, and after for one tracked image
+    diff-img = difftool --tool imgdiff
+
+    ; Show just the subject and body of a particular commit (default: HEAD)
+    message = log -n1 --format=\"%s%n%n%b\"
+
+    ; Show a markdown-formatted summary of commits from {review_base:-master} until HEAD
+    pr-summary = !git log --reverse --format=\"- **%s** (%h)%n%n%w(74,2,2)%b\" \"${review_base:-master}\"..HEAD
+
+    ; Get last commit authored by me
+    ; my-last = log -n1 --format=\"%H\" --author=\"\\(\\([jJ]ohn\\( [dD]\\.{0,1}\\){0,1}\\)\\) [fF]isher\"
+    my-last = log -n1 --format=\"%H\" --author=\"John D. Fisher\"
+    ; my-last = log -n1 --format=\"%H\" --author=\"John D. Fisher\"
+
+    root = rev-parse --show-toplevel
+	alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+	lasts = log -n1 --format=\"%H\" --author=\"[jJ]ohn [dD]\\. [fF]isher\"
