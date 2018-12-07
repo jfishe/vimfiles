@@ -31,6 +31,8 @@
                 '"
     smudge = cat
     required = true
+[diff "xlsxdiff"]
+	command = git-diff-wrapper.sh
 [diff "jupyternotebook"]
 	command = git-nbdiffdriver diff
 [merge "jupyternotebook"]
@@ -38,19 +40,33 @@
 	name = jupyter notebook merge driver
 [difftool "nbdime"]
 	cmd = git-nbdifftool diff \"$LOCAL\" \"$REMOTE\"
-[difftool]
-	prompt = false
 [mergetool "nbdime"]
 	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[difftool "vimdiff"]
+    cmd = vim -d \"$LOCAL\" \"$REMOTE\"
+[mergetool "vimdiff"]
+    trustExitCode = true
+    cmd = vim -d \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '$wincmd w' -c 'wincmd J'
+[difftool "fugitive"]
+    cmd = vim -c \"Gdiff\" \"$REMOTE\" -c '$wincmd w' -c 'wincmd J'
+[mergetool "fugitive"]
+    cmd = vim -c \"Gmerge\" \"$MERGED\"
+[diff]
+    tool = fugitive
+[difftool]
+    trustExitCode = true
+    ; https://vimways.org/2018/vim-and-git/
+    prompt = false
+[merge]
+    tool = fugitive
 [mergetool]
 	prompt = false
 [color]
 	ui = true
-[diff "xlsxdiff"]
-	command = git-diff-wrapper.sh
 [commit]
     template = ~/.gitmessage.txt
     cleanup = strip
+    verbose = true
 [include]
 	path = ~/Git/dotfiles/gitconfig
     ; gitconfig is installation specific. Put the actual path in the file when cloning dotfiles.
