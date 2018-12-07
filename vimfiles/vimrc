@@ -22,6 +22,9 @@ set nobackup
 " LocalLeader
 let g:maplocalleader = ','
 " }}}
+" ================ Statusline ================== {{{
+set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
+" }}}
 " ================ Persistent Undo ================== {{{
 " Keep undo history across sessions, by storing in file.
 " Only works all the time.
