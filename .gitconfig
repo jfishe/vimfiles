@@ -42,22 +42,26 @@
 	cmd = git-nbdifftool diff \"$LOCAL\" \"$REMOTE\"
 [mergetool "nbdime"]
 	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
-[difftool "vimdiff"]
-    cmd = vim -d \"$LOCAL\" \"$REMOTE\"
-[mergetool "vimdiff"]
-    trustExitCode = true
-    cmd = vim -d \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '$wincmd w' -c 'wincmd J'
+; [difftool "vimdiff"]
+;     trustExitCode = true
+;     cmd = vim -d \"$LOCAL\" \"$REMOTE\"
+; [mergetool "vimdiff"]
+;     trustExitCode = true
+;     cmd = vim -d \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '$wincmd w' -c 'wincmd J'
 [difftool "fugitive"]
-    cmd = vim -c \"Gdiff\" \"$REMOTE\" -c '$wincmd w' -c 'wincmd J'
+    cmd = vim -c \"Gvdiff\" \"$REMOTE\"
 [mergetool "fugitive"]
-    cmd = vim -c \"Gmerge\" \"$MERGED\"
+    ; cmd = vim -c \"Gmerge\" \"$MERGED\"
+    cmd = vim -c \"Gmerge\" \"$REMOTE\"
 [diff]
+    ; tool = vimdiff3
     tool = fugitive
 [difftool]
     trustExitCode = true
     ; https://vimways.org/2018/vim-and-git/
     prompt = false
 [merge]
+    ; tool = vimdiff3
     tool = fugitive
 [mergetool]
 	prompt = false
