@@ -49,7 +49,7 @@
 ;     trustExitCode = true
 ;     cmd = vim -d \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '$wincmd w' -c 'wincmd J'
 [difftool "fugitive"]
-    cmd = vim -c \"Gvdiff\" \"$REMOTE\"
+    cmd = vim -c \"Gdiff\" \"$REMOTE\"
 [mergetool "fugitive"]
     ; cmd = vim -c \"Gmerge\" \"$MERGED\"
     cmd = vim -c \"Gmerge\" \"$REMOTE\"
@@ -87,12 +87,12 @@
     ; Same as above, but with a diff stat instead of just names (better for interactive use)
     stat = !git diff --stat $(git merge-base HEAD \"${review_base:-master}\")
 
-    ; split-diff style review using vim-fugitive Gvdiff
-    review = !$EDITOR -p $(git files) +\"tabdo Gvdiff ${review_base:-master}\" +\"let g:gitgutter_diff_base = '${review_base:-master}'\"
-    reviewone = !$EDITOR -p +\"tabdo Gvdiff ${review_base:-master}\" +\"let g:gitgutter_diff_base = '${review_base:-master}'\"
+    ; split-diff style review using vim-fugitive Gdiff
+    review = !$EDITOR -p $(git files) +\"tabdo Gdiff ${review_base:-master}\" +\"let g:gitgutter_diff_base = '${review_base:-master}'\"
+    reviewone = !$EDITOR -p +\"tabdo Gdiff ${review_base:-master}\" +\"let g:gitgutter_diff_base = '${review_base:-master}'\"
 
-    ; reviewf = !$EDITOR -p $(git files | fzf -m --reverse --height 40%) +\"tabdo Gvdiff ${review_base:-master}\" +\"let g:gitgutter_diff_base = '${review_base:-master}'\"
-    ; For when the diff is too big to review with :Gvdiff
+    ; reviewf = !$EDITOR -p $(git files | fzf -m --reverse --height 40%) +\"tabdo Gdiff ${review_base:-master}\" +\"let g:gitgutter_diff_base = '${review_base:-master}'\"
+    ; For when the diff is too big to review with :Gdiff
     diff-review = !git diff $(git merge-base --fork-point \"${review_base:-master}\")
 
     ; Review by commit
