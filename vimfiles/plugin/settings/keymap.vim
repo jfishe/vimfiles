@@ -18,8 +18,9 @@ if has('gui_running')
   unmap <C-F>
 endif
 
-"Vim_pushing_built-in_features_beyond_their_limits.markdown
-"https://gist.github.com/Konfekt/d8ce5626a48f4e56ecab31a89449f1f0#file-vim_pushing_built-in_features_beyond_their_limits-markdown
+" Vim_pushing_built-in_features_beyond_their_limits.markdown
+" https://gist.github.com/Konfekt/d8ce5626a48f4e56ecab31a89449f1f0#file-vim_pushing_built-in_features_beyond_their_limits-markdown
+" Prompt for selection after showing list items.
 function! <sid>CCR()
     if getcmdtype() isnot# ':'
       return "\<CR>"
