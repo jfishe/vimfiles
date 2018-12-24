@@ -5,10 +5,14 @@ nnoremap <Right> <C-W><C-L>
 nnoremap <Left> <C-W><C-H>
 
 "navigate within wrapped line
-nnoremap <expr> j v:count ? 'j' : 'gj'
-nnoremap <expr> k v:count ? 'k' : 'gk'
-vnoremap <expr> j v:count ? 'j' : 'gj'
-vnoremap <expr> k v:count ? 'k' : 'gk'
+" nnoremap <expr> j v:count ? 'j' : 'gj'
+" nnoremap <expr> k v:count ? 'k' : 'gk'
+" vnoremap <expr> j v:count ? 'j' : 'gj'
+" vnoremap <expr> k v:count ? 'k' : 'gk'
+nnoremap <expr> j (v:count > 4 ? "m'" . v:count . 'j' : 'gj')
+nnoremap <expr> k (v:count > 4 ? "m'" . v:count . 'k' : 'gk')
+vnoremap <expr> j (v:count > 4 ? "m'" . v:count . 'j' : 'gj')
+vnoremap <expr> k (v:count > 4 ? "m'" . v:count . 'k' : 'gk')
 
 " Enable folding with the spacebar
 nnoremap <space> za
