@@ -184,5 +184,6 @@ function MyMaps()
     redir @" | silent map | redir END | new | put!
 endfunction
 " }}}
-" diff current buffer and saved file
-" use DiffOrig
+" diff options {{{
+set diffopt+=vertical
+" }}}
