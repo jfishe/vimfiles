@@ -21,10 +21,11 @@ gvim() {
 
 # Anaconda: Setup conda
 # conda activate to enable
-condaprofile="`cygpath ${LOCALAPPDATA}`/Continuum/anaconda3/etc/profile.d/conda.sh"
-homecondaprofile=~/Anaconda3/etc/profile.d/conda.sh
+# condaprofile="`cygpath ${LOCALAPPDATA}`/Continuum/anaconda3/etc/profile.d/conda.sh"
+condaprofile="`cygpath ${LOCALAPPDATA}`/Continuum/anaconda3/Scripts/conda.exe"
+homecondaprofile=~/Anaconda3/Scripts/conda.exe
 if [ -f ${condaprofile} ]; then
-  . ${condaprofile}
+    eval "$($condaprofile shell.bash hook)"
 elif [ -f ${homecondaprofile} ]; then
-  . ${homecondaprofile}
+    eval "$($homecondaprofile shell.bash hook)"
 fi
