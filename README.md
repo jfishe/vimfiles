@@ -79,11 +79,11 @@ $dotfiles | ForEach-Object {
 
 # Link vimfiles and dotfiles to USERPROFILE
 Set-Location -Path "~"
-cmd /c "mklink /D .\vimfiles $vimfiles\vimfiles"
+cmd /c "mklink /J .\vimfiles $vimfiles\vimfiles"
 $dotfiles | ForEach-Object {
     $item = $_.name
     if ($_.PSIsContainer) {
-      cmd /c "mklink /D .\$item $_"
+      cmd /c "mklink /J .\$item $_"
     } else {
       cmd /c "mklink .\$item $_"
     }
@@ -353,10 +353,11 @@ _Documents_ could be _My Documents_. Adjust the path for actual location of
 except Windows `cmd.exe`, that these files are located in `$HOME`. Soft-links
 allow pointing to the actual location.
 
-```bash
-cd /mnt/c/Users/fishe
-ln -s ./vimfiles/ .vim
-ln -s Documents/vimwiki vimwiki
+``` {contenteditable="true" spellcheck="false" caption="powershell" .powershell}
+New-Item -ItemType Directory -Path $env:USERPROFILE\.config
+cmd /c "mklink /J %USERPROFILE%\.vim %LOCALAPPDATA%\vimfiles\vimfiles"
+cmd /c "mklink /J %USERPROFILE%\.config\mintty %LOCALAPPDATA%\vimfiles\mintty"
+cmd /c "mklink /J %USERPROFILE%\vimwiki %USERPROFILE%\Documents\vimwiki"
 ```
 
 ### Git Hooks
