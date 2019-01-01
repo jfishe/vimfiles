@@ -2,7 +2,9 @@ name: base
 channels:
 - defaults
 - conda-forge
+- conda-canary
 dependencies:
+- conda>=4.6
 - anaconda
 - pandoc>=2.2
 - nodejs
