@@ -2,11 +2,9 @@ name: base
 channels:
 - defaults
 - conda-forge
-- pscondaenvs
 dependencies:
 - anaconda
 - pandoc>=2.2
-- pscondaenvs
 - nodejs
 - pip:
   - black
