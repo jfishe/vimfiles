@@ -19,13 +19,13 @@ gvim() {
     cyg-wrapper2.sh "gvim.bat" --binary-opt=-c,--cmd,-T,-t,--servername,--remote-send,--remote-expr --cyg-verbose --fork=1 $opt "$@"
 }
 
-# Anaconda: Setup conda
-# conda activate to enable
-# condaprofile="`cygpath ${LOCALAPPDATA}`/Continuum/anaconda3/etc/profile.d/conda.sh"
-condaprofile="`cygpath ${LOCALAPPDATA}`/Continuum/anaconda3/Scripts/conda.exe"
-homecondaprofile=~/Anaconda3/Scripts/conda.exe
-if [ -f ${condaprofile} ]; then
-    eval "$($condaprofile shell.bash hook)"
-elif [ -f ${homecondaprofile} ]; then
-    eval "$($homecondaprofile shell.bash hook)"
-fi
+# Initialze conda
+declare -a arr=(
+        "`cygpath ${LOCALAPPDATA}`/Continuum/anaconda3/Scripts"
+        "$HOME/Anaconda3/Scripts"
+        "$HOME/Miniconda3/Scripts"
+        )
+for i in "${arr[@]}"; do
+    [[ -x "$i/conda.exe" ]] && eval "$($i/conda.exe shell.bash hook)"
+done
+unset arr i
