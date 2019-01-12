@@ -1,6 +1,6 @@
 channels:
-  - conda-canary
   - conda-forge
   - defaults
+  - conda-canary
 ssl_verify: true
 report_errors: true
