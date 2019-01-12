@@ -1,20 +1,18 @@
 name: base
 channels:
-- defaults
 - conda-forge
+- defaults
 - conda-canary
 dependencies:
-- conda>=4.6
-- anaconda
 - pandoc>=2.2
 - nodejs
+- mypy
+- black
+- cookiecutter
 - pip:
-  - black
-  - cookiecutter
   - editorconfig
-  - jupyter_contrib_nbextensions
+  # - jupyter_contrib_nbextensions
   - MarkdownPP
-  - mypy
-  - nbdime
+  # - nbdime
   - panflute
   - vim-vint
