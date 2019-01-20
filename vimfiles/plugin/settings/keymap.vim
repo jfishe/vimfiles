@@ -1,10 +1,11 @@
-"split navigations
+" split navigations {{{
 nnoremap <Down> <C-W><C-J>
 nnoremap <Up> <C-W><C-K>
 nnoremap <Right> <C-W><C-L>
 nnoremap <Left> <C-W><C-H>
+" }}}
 
-"navigate within wrapped line
+" navigate within wrapped line {{{
 " nnoremap <expr> j v:count ? 'j' : 'gj'
 " nnoremap <expr> k v:count ? 'k' : 'gk'
 " vnoremap <expr> j v:count ? 'j' : 'gj'
@@ -13,16 +14,19 @@ nnoremap <expr> j (v:count > 4 ? "m'" . v:count . 'j' : 'gj')
 nnoremap <expr> k (v:count > 4 ? "m'" . v:count . 'k' : 'gk')
 vnoremap <expr> j (v:count > 4 ? "m'" . v:count . 'j' : 'gj')
 vnoremap <expr> k (v:count > 4 ? "m'" . v:count . 'k' : 'gk')
+" }}}
 
-" Enable folding with the spacebar
+" Enable folding with the spacebar {{{
 nnoremap <space> za
+" }}}
 
-"Undo some mswin keymapping
+" Undo some mswin keymapping {{{
 if has('gui_running')
-  unmap <C-F>
+  silent! unmap <C-F>
 endif
+" }}}
 
-" Vim_pushing_built-in_features_beyond_their_limits.markdown
+" Vim_pushing_built-in_features_beyond_their_limits.markdown {{{
 " https://gist.github.com/Konfekt/d8ce5626a48f4e56ecab31a89449f1f0#file-vim_pushing_built-in_features_beyond_their_limits-markdown
 " Prompt for selection after showing list items.
 function! <sid>CCR()
@@ -65,3 +69,24 @@ function! <sid>CCR()
     endif
 endfunction
 cnoremap <expr> <CR> <sid>CCR()
+" }}}
+
+" Change local directory {{{
+nnoremap <silent> <localleader>cd :lcd %:p:h<CR>:pwd<CR>
+" Always add the current file's directory to the path and tags list {{{
+" if not already there. Add it to the beginning to speed up searches.
+" Use :find rather than :edit.
+augroup localdirectory
+    autocmd!
+
+    let s:default_path = escape(&path, '\ ') " store default value of 'path'
+
+    autocmd BufRead *
+      \ let s:tempPath=escape(escape(expand("%:p:h"), ' '), '\ ') |
+      \ exec "set path-=".s:tempPath |
+      \ exec "set path-=".s:default_path |
+      \ exec "set path^=".s:tempPath |
+      \ exec "set path^=".s:default_path
+    " }}}
+augroup END
+" }}}
