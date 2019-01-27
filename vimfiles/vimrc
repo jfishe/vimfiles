@@ -81,6 +81,10 @@ if has('syntax') && has('eval')
 endif
 
 "Load bundles {{{
+if !empty($CONDA_PREFIX)
+    " set pythonthreedll=$CONDA_PREFIX/python37.dll
+    set pythonthreehome=$CONDA_PREFIX
+endif
 " Disable plugins when python unavailable
 if !has('python3')
     let g:loaded_EditorConfig = 1
