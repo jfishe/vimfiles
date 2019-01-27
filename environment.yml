@@ -4,6 +4,7 @@ channels:
 - defaults
 - conda-canary
 dependencies:
+- python>=3.7
 - pandoc>=2.2
 - nodejs
 - mypy
