@@ -40,8 +40,8 @@ if has('persistent_undo') && !isdirectory(s:vimfiles . '/backups')
 endif
 
 if has('persistent_undo')
-  let &undodir=s:vimfiles . '/backups'
-  set undofile
+    let &undodir=s:vimfiles . '/backups'
+    set undofile
 endif
 " }}}
 " Cache tags instead of polluting project directories {{{
@@ -77,7 +77,7 @@ endif
 " The ! means the package won't be loaded right away but when plugins are
 " loaded during initialization.
 if has('syntax') && has('eval')
-  packadd! matchit
+    packadd! matchit
 endif
 " ================ Python 3 ====================== {{{
 " if !empty($CONDA_PREFIX) && (has('win32') || has('win64'))
@@ -115,30 +115,30 @@ set nowrap
 " Commented lines relocated to sensible.vim
 
 set hidden                     " Possibility to have more than one
-                               " unsaved buffers.
+" unsaved buffers.
 "set ruler                      " Shows the current line number at the bottom.
-                               " right of the screen.
+" right of the screen.
 set switchbuf+=split
 set switchbuf+=useopen
 augroup mybuffers
-  autocmd!
-  autocmd VimResized * wincmd =
+    autocmd!
+    autocmd VimResized * wincmd =
 augroup END
 set nofoldenable
 " }}}
 " Display tabs and trailing spaces visually {{{
 if has('multi_byte')
-  if &termencoding ==? ''
-    let &termencoding = &encoding
-  endif
-  set encoding=utf-8
-  scriptencoding utf-8
-  setglobal fileencoding=utf-8
-  "setglobal bomb
-  set fileencodings=ucs-bom,utf-8,latin1
-  set list listchars=tab:\ \ ,trail:»
+    if &termencoding ==? ''
+        let &termencoding = &encoding
+    endif
+    set encoding=utf-8
+    scriptencoding utf-8
+    setglobal fileencoding=utf-8
+    "setglobal bomb
+    set fileencodings=ucs-bom,utf-8,latin1
+    set list listchars=tab:\ \ ,trail:»
 else
-  set list listchars=tab:\ \ ,trail:$
+    set list listchars=tab:\ \ ,trail:$
 endif
 " }}}
 " Color and background {{{
@@ -172,8 +172,8 @@ set sidescroll=1
 " Commented lines relocated to sensible.vim
 "set incsearch       " Find the next match as we type the search
 if &t_Co > 2 || has('gui_running')
-  " Switch on highlighting the last used search pattern.
-  set hlsearch
+    " Switch on highlighting the last used search pattern.
+    set hlsearch
 endif
 set ignorecase      " Ignore case when searching...
 set infercase       " Smarter completions
