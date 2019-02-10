@@ -232,47 +232,16 @@ There are several versions depending on python2, python3 or allowing both.
 
 ## Asynchronous Lint Engine (ALE)
 
-The [Asynchronous Lint Engine](https://github.com/w0rp/ale) supports Markdown
-linting Node.js, which is available from:
-
-- [Node.js](https://nodejs.org/)
-- The Chocolatey package is `nodejs`.
-- The Anaconda package is `nodejs`. This is the easiest option and keeps the
-  global configuration within the Anaconda installation path.
-
-### Node.js Packages for ALE
-
-Activate the Node.js environment and install the following for use by ALE,
-adjusting the path separator for your CLI.
-
-```{contenteditable="true" spellcheck="false" caption="powershell" .powershell}
-npm install --global nodejs/package.json
-npm outdated --global # list outdated packages
-npm update --global # update all
-npm list --global --depth=0 --json > nodejs/package.json # save top level modules
-```
-
-<!-- markdownlint-disable MD013 -->
-
-``` {contenteditable="true" spellcheck="false" caption="bash" .bash}
-# Export
-npm list --global --parseable --depth=0 | sed '1d' | awk '{gsub(/\/.*\//,"",$1); print}' > path/to/npmfile
-
-# Import
-xargs npm install --global < path/to/npmfile
-```
-
-``` {contenteditable="true" spellcheck="false" caption="bash" .bash}
-npm list --global --parseable --depth=0 | sed '1d' | awk '{gsub(/\/.*\//,"",$1); print}' > npmfile
-```
-
-<!-- markdownlint-enable MD013 -->
+The [Asynchronous Lint Engine](https://github.com/w0rp/ale) supports various
+linting (ALELint) and formatting (ALEFix) tools. Many of these are Node.js
+packages. See [jfishe/ALE_Nodejs](https://github.com/jfishe/ALE_Nodejs) for
+a list and installation instructions. Others, such as `black` can be installed
+by `conda` or `pip`. See `environment.yml` for a list.
 
 ### MarkdownLint Command Line Interface
 
-The [MarkdownLint](https://github.com/igorshubovych/markdownlint-cli.git) can
-be installed using `npm` from `Node.js`, which is available from Anaconda as
-`nodejs`.
+[MarkdownLint](https://github.com/igorshubovych/markdownlint-cli.git) can
+be used with ALE.
 
 `ALE` detects `markdownlint` if `filetype=pandoc.markdown`.
 `vimfiles/after/plugin/pandoc.vim` contains an `augroup` that sets `filetype`
@@ -344,7 +313,8 @@ provides a template and installation script for standard git commit messages.
 The Vim that ships with Git-bash can use the same profile as Gvim. Using WSL
 bash is the easiest method to create soft-links. Git-bash won't and recommends
 using mklink, but mklink usually has complex ACL issues, especially in
-a corporate environment. PowerShell and CMD do not recognize soft-linked directories so use `mklink /J LINK TARGET`.
+a corporate environment. PowerShell and CMD do not recognize soft-linked
+directories so use `mklink /J LINK TARGET`.
 
 The following assumes that git-bash has been configured to use `%USERPROFILE%`
 as home, which may be different than the default `%HOMEDRIVE%%HOMEPATH%`. Also,
