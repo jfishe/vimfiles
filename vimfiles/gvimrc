@@ -1,6 +1,7 @@
 set termencoding=utf-8
 "set guifont=Fixedsys:h11
 set guifont=Consolas:h11:cANSI:qDRAFT
+set guifont=DejaVu\ Sans\ Mono\ 10,UnifontMono:h12:cANSI:qDRAFT,Consolas:h11:cANSI:qDRAFT
 " set background=dark
 let g:solarized_use16=0
 " colorscheme solarized8
