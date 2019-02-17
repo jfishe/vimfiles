@@ -107,5 +107,5 @@
 	path = vimfiles/bundle/vim-conda
 	url = https://github.com/cjrh/vim-conda.git
 [submodule "vimfiles/pack/elm/start/elm-vim"]
-	path = vimfiles/pack/elm/start/elm-vim
+	path = vimfiles/pack/elm/opt/elm-vim
 	url = https://github.com/ElmCast/elm-vim.git
