@@ -21,9 +21,7 @@ nnoremap <space> za
 " }}}
 
 " Undo some mswin keymapping {{{
-if has('gui_running')
-  silent! unmap <C-F>
-endif
+silent! unmap <C-F>
 " }}}
 
 " Vim_pushing_built-in_features_beyond_their_limits.markdown {{{
