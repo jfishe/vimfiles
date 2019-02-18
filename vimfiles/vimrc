@@ -142,7 +142,7 @@ else
 endif
 " }}}
 " Color and background {{{
-set background=dark
+set background=light
 "colorscheme solarized
 " let g:solarized_extra_hi_groups=1
 " let g:solarized_use16=1

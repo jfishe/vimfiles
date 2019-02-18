@@ -1,5 +1,5 @@
 Term=xterm-256color
-ThemeFile=solarized_dark
+ThemeFile=solarized_light
 Font=Consolas
 FontHeight=12
 Locale=en_US
