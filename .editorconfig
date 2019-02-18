@@ -14,7 +14,10 @@ insert_final_newline = true
 [*.{js,py,html,html5}]
 charset = utf-8
 
-[*.{md,mdpp,diff}]
+[*.{md,mdpp,diff,vim}]
+trim_trailing_whitespace = false
+
+[{vimrc,gvimrc}]
 trim_trailing_whitespace = false
 
 [*.py]
