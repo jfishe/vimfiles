@@ -11,6 +11,4 @@ function! myhelptags#helptags() abort
   endfor
 endfunction
 
-command! -bar Myhelptags :call myhelptags#helptags()
-
 " vim:set et sw=2 foldmethod=expr foldexpr=getline(v\:lnum)=~'^\"\ Section\:'?'>1'\:getline(v\:lnum)=~#'^fu'?'a1'\:getline(v\:lnum)=~#'^endf'?'s1'\:'=':

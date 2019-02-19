@@ -185,11 +185,15 @@ set smartcase       " ...unless we type a capital
 command Vterm vertical terminal
 command Vposh vertical terminal powershell -ExecutionPolicy Bypass
 " }}}
-" ================ Map =========================== {{{
+" ================ My Functions & Commands ============ {{{
 "Get listing of map assignments
 function MyMaps()
     redir @" | silent map | redir END | new | put!
 endfunction
+
+" Invoke :helptags on all non-$VIM doc directories in pack/*/opt.
+command! -bar Myhelptags :call myhelptags#helptags()
+
 " }}}
 " diff options {{{
 set diffopt+=vertical
