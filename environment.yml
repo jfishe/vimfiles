@@ -5,12 +5,17 @@ channels:
 - conda-canary
 dependencies:
 - python>=3.7
-- pandoc>=2.2
-- nodejs
-- mypy
-- black
+# - black
 - cookiecutter
+# - jedi
+# - mypy
+- nodejs
+- pandoc>=2.2
+# - pydocstyle
+# - python-language-server
+# - vulture
 - pip:
+  # - bandit
   - editorconfig
   # - jupyter_contrib_nbextensions
   - MarkdownPP
