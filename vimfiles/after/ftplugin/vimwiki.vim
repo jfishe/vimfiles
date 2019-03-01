@@ -70,7 +70,7 @@ endfunction " }}}
 vnoremap <silent><localleader>m
   \ :call <SID>myvimwiki_normalize_mail_v()<CR>
 
-setlocal isfname+=32         "so gf treats spaces as part of valid file name.
+" setlocal isfname+=32         "so gf treats spaces as part of valid file name.
 let g:ale_enabled=0
 
 " Create a title header for Journal with date. Add a second Contents header
