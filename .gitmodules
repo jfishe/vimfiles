@@ -112,3 +112,6 @@
 [submodule "vimfiles/pack/tpope/opt/scriptease"]
 	path = vimfiles/pack/tpope/opt/scriptease
 	url = https://tpope.io/vim/scriptease.git
+[submodule "vimfiles/pack/undotree/opt/undotree"]
+	path = vimfiles/pack/undotree/opt/undotree
+	url = https://github.com/mbbill/undotree.git
