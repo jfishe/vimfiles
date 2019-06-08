@@ -111,7 +111,7 @@
 	url = https://github.com/ElmCast/elm-vim.git
 [submodule "vimfiles/pack/tpope/opt/scriptease"]
 	path = vimfiles/pack/tpope/opt/scriptease
-	url = https://tpope.io/vim/scriptease.git
+	url = https://github.com/tpope/vim-scriptease.git
 [submodule "vimfiles/pack/undotree/opt/undotree"]
 	path = vimfiles/pack/undotree/opt/undotree
 	url = https://github.com/mbbill/undotree.git
