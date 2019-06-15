@@ -28,7 +28,7 @@
 	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "vimfiles/bundle/vim-surround"]
 	ignore = dirty
-	path = vimfiles/pack/python/opt/vim-surround
+	path = vimfiles/pack/tpope/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
 [submodule "vimfiles/bundle/vimwiki"]
 	ignore = dirty
