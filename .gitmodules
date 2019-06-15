@@ -8,7 +8,7 @@
 	url = https://github.com/mattn/calendar-vim.git
 [submodule "vimfiles/bundle/jedi-vim"]
 	ignore = dirty
-	path = vimfiles/bundle/jedi-vim
+	path = vimfiles/pack/python/opt/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
 [submodule "vimfiles/bundle/vim-fugitive"]
 	ignore = dirty
@@ -20,7 +20,7 @@
 	url = https://github.com/vim-latex/vim-latex.git
 [submodule "vimfiles/bundle/vim-pandoc-syntax"]
 	ignore = dirty
-	path = vimfiles/bundle/vim-pandoc-syntax
+	path = vimfiles/pack/python/start/vim-pandoc-syntax
 	url = https://github.com/vim-pandoc/vim-pandoc-syntax.git
 [submodule "vimfiles/bundle/vim-colors-solarized"]
 	ignore = dirty
@@ -28,7 +28,7 @@
 	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule "vimfiles/bundle/vim-surround"]
 	ignore = dirty
-	path = vimfiles/bundle/vim-surround
+	path = vimfiles/pack/python/opt/vim-surround
 	url = https://github.com/tpope/vim-surround.git
 [submodule "vimfiles/bundle/vimwiki"]
 	ignore = dirty
@@ -36,7 +36,7 @@
 	url = https://github.com/vimwiki/vimwiki.git
 [submodule "vimfiles/bundle/vim-pandoc"]
 	ignore = dirty
-	path = vimfiles/bundle/vim-pandoc
+	path = vimfiles/pack/python/start/vim-pandoc
 	url = https://github.com/vim-pandoc/vim-pandoc.git
 [submodule "vimfiles/bundle/ale"]
 	ignore = dirty
@@ -60,11 +60,11 @@
 	url = https://github.com/editorconfig/editorconfig-vim.git
 [submodule "vimfiles/bundle/ultisnips"]
 	ignore = dirty
-	path = vimfiles/bundle/ultisnips
+	path = vimfiles/pack/python/opt/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
 [submodule "vimfiles/bundle/vim-snippets"]
 	ignore = dirty
-	path = vimfiles/bundle/vim-snippets
+	path = vimfiles/pack/python/opt/vim-snippets
 	url = https://github.com/honza/vim-snippets.git
 [submodule "vimfiles/bundle/vim-togglelist"]
 	ignore = dirty
@@ -84,7 +84,7 @@
 	url = https://github.com/tpope/vim-commentary.git
 [submodule "vimfiles/bundle/vim-pydocstring"]
 	ignore = dirty
-	path = vimfiles/bundle/vim-pydocstring
+	path = vimfiles/pack/python/opt/vim-pydocstring
 	url = https://github.com/heavenshell/vim-pydocstring.git
 [submodule "vimfiles/bundle/vim-abolish"]
 	ignore = dirty
