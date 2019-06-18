@@ -90,6 +90,14 @@ $dotfiles | ForEach-Object {
 }
 ```
 
+## vimfiles Update 
+
+```{contenteditable="true" spellcheck="false" caption="powershell" .powershell}
+git fetch
+git rebase --interactive --rebase-merges origin/master
+git submodule update --init --recursive
+```
+
 ## Thesaurus
 
 Setup instructions are included in vimrc to install the
