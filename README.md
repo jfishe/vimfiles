@@ -94,7 +94,7 @@ $dotfiles | ForEach-Object {
 
 ```{contenteditable="true" spellcheck="false" caption="powershell" .powershell}
 git fetch
-git rebase --interactive --rebase-merges origin/master
+git rebase --interactive --autostash --rebase-merges origin/master
 git submodule update --init --recursive
 ```
 

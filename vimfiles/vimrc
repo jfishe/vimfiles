@@ -84,10 +84,14 @@ endif
 if !empty($CONDA_PREFIX) && has('python3_dynamic')
     " set pythonthreedll=$CONDA_PREFIX/python37.dll
     set pythonthreehome=$CONDA_PREFIX
+    packadd! jedi-vim
+    packadd! ultisnips
+    packadd! vim-pydocstring
+    packadd! vim-snippets
 endif
 " Disable plugins when python unavailable
 if !has('python3')
-    let g:loaded_EditorConfig = 1
+    " let g:loaded_EditorConfig = 1
     let g:did_plugin_ultisnips = 1
 endif
 " }}}
