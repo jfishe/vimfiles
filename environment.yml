@@ -16,7 +16,7 @@ dependencies:
 # - vulture
 - pip:
   # - bandit
-  - editorconfig
+  # - editorconfig editorconfig-vim no longer requires.
   # - jupyter_contrib_nbextensions
   - MarkdownPP
   # - nbdime
