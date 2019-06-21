@@ -4,7 +4,7 @@
 	url = https://github.com/tpope/vim-pathogen.git
 [submodule "vimfiles/bundle/calendar-vim"]
 	ignore = dirty
-	path = vimfiles/bundle/calendar-vim
+	path = vimfiles/pack/vimwiki/start/calendar-vim
 	url = https://github.com/mattn/calendar-vim.git
 [submodule "vimfiles/bundle/jedi-vim"]
 	ignore = dirty
@@ -12,11 +12,11 @@
 	url = https://github.com/davidhalter/jedi-vim.git
 [submodule "vimfiles/bundle/vim-fugitive"]
 	ignore = dirty
-	path = vimfiles/bundle/vim-fugitive
+	path = vimfiles/pack/tpope/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule "vimfiles/bundle/vim-latex"]
 	ignore = dirty
-	path = vimfiles/bundle/vim-latex
+	path = vimfiles/pack/dev/start/vim-latex
 	url = https://github.com/vim-latex/vim-latex.git
 [submodule "vimfiles/bundle/vim-pandoc-syntax"]
 	ignore = dirty
@@ -32,7 +32,7 @@
 	url = https://github.com/tpope/vim-surround.git
 [submodule "vimfiles/bundle/vimwiki"]
 	ignore = dirty
-	path = vimfiles/bundle/vimwiki
+	path = vimfiles/pack/vimwiki/start/vimwiki
 	url = https://github.com/vimwiki/vimwiki.git
 [submodule "vimfiles/bundle/vim-pandoc"]
 	ignore = dirty
@@ -40,23 +40,23 @@
 	url = https://github.com/vim-pandoc/vim-pandoc.git
 [submodule "vimfiles/bundle/ale"]
 	ignore = dirty
-	path = vimfiles/bundle/ale
+	path = vimfiles/pack/dev/start/ale
 	url = https://github.com/w0rp/ale.git
 [submodule "vimfiles/bundle/vim-sensible"]
 	ignore = dirty
-	path = vimfiles/bundle/vim-sensible
+	path = vimfiles/pack/tpope/start/vim-sensible
 	url = https://github.com/tpope/vim-sensible.git
 [submodule "vimfiles/bundle/vim-gutentags"]
 	ignore = dirty
-	path = vimfiles/bundle/vim-gutentags
+	path = vimfiles/pack/dev/start/vim-gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags.git
 [submodule "vimfiles/bundle/quick-scope"]
 	ignore = dirty
-	path = vimfiles/bundle/quick-scope
+	path = vimfiles/pack/dev/start/quick-scope
 	url = https://github.com/unblevable/quick-scope
 [submodule "vimfiles/bundle/editorconfig-vim"]
 	ignore = dirty
-	path = vimfiles/bundle/editorconfig-vim
+	path = vimfiles/pack/dev/start/editorconfig-vim
 	url = https://github.com/editorconfig/editorconfig-vim.git
 [submodule "vimfiles/bundle/ultisnips"]
 	ignore = dirty
@@ -72,15 +72,15 @@
 	url = https://github.com/milkypostman/vim-togglelist.git
 [submodule "vimfiles/bundle/vim-unimpaired"]
 	ignore = dirty
-	path = vimfiles/bundle/vim-unimpaired
+	path = vimfiles/pack/tpope/start/vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
 [submodule "vimfiles/bundle/vim-repeat"]
 	ignore = dirty
-	path = vimfiles/bundle/vim-repeat
+	path = vimfiles/pack/tpope/start/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
 [submodule "vimfiles/bundle/vim-commentary"]
 	ignore = dirty
-	path = vimfiles/bundle/vim-commentary
+	path = vimfiles/pack/tpope/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
 [submodule "vimfiles/bundle/vim-pydocstring"]
 	ignore = dirty
@@ -88,11 +88,11 @@
 	url = https://github.com/heavenshell/vim-pydocstring.git
 [submodule "vimfiles/bundle/vim-abolish"]
 	ignore = dirty
-	path = vimfiles/bundle/vim-abolish
+	path = vimfiles/pack/tpope/start/vim-abolish
 	url = https://github.com/tpope/vim-abolish.git
 [submodule "vimfiles/bundle/vim-ps1"]
 	ignore = dirty
-	path = vimfiles/bundle/vim-ps1
+	path = vimfiles/pack/dev/start/vim-ps1
 	url = https://github.com/PProvost/vim-ps1.git
 [submodule "vimfiles/pack/themes/opt/solarized8"]
 	ignore = dirty
@@ -100,11 +100,11 @@
 	url = https://github.com/lifepillar/vim-solarized8.git
 [submodule "vimfiles/bundle/vim-obsession"]
 	ignore = dirty
-	path = vimfiles/bundle/vim-obsession
+	path = vimfiles/pack/tpope/start/vim-obsession
 	url = https://github.com/tpope/vim-obsession.git
 [submodule "vimfiles/bundle/vim-conda"]
 	ignore = dirty
-	path = vimfiles/bundle/vim-conda
+	path = vimfiles/pack/python/start/vim-conda
 	url = https://github.com/cjrh/vim-conda.git
 [submodule "vimfiles/pack/elm/start/elm-vim"]
 	path = vimfiles/pack/elm/opt/elm-vim
