@@ -84,6 +84,7 @@ endif
 if !empty($CONDA_PREFIX) && has('python3_dynamic')
     " set pythonthreedll=$CONDA_PREFIX/python37.dll
     set pythonthreehome=$CONDA_PREFIX
+    packadd! vim-conda
     packadd! jedi-vim
     packadd! ultisnips
     packadd! vim-pydocstring
