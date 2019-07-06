@@ -90,7 +90,7 @@ $dotfiles | ForEach-Object {
 }
 ```
 
-## vimfiles Update 
+## vimfiles Update
 
 ```{contenteditable="true" spellcheck="false" caption="powershell" .powershell}
 git fetch
@@ -123,7 +123,7 @@ Opening the URL for the failing website, in a browser--e.g.,
 the issue for the current session. The work around is only a temporary
 fix. An example error message from `conda update conda`:
 
-<!-- markdownlint-disable MD013 -->
+``` powershell
 
     CondaHTTPError: HTTP None None for url <https://conda.anaconda.org/conda-forge/win-64/repodata.json>
     Elapsed: None
@@ -131,9 +131,10 @@ fix. An example error message from `conda update conda`:
     An HTTP error occurred when trying to retrieve this URL.
     HTTP errors are often intermittent, and a simple retry will get you on your way.
 
-    SSLError(SSLError(SSLError("bad handshake: Error([('SSL routines', 'ssl3_get_ser ver_certificate', 'certificate verify failed')],)",),),)
+    SSLError(SSLError(SSLError("bad handshake: Error([('SSL routines',
+    'ssl3_get_ser ver_certificate', 'certificate verify failed')],)",),),)
 
-<!-- markdownlint-enable MD013 -->
+```
 
 ### conda env
 
@@ -209,11 +210,13 @@ Recent versions of [vim-tux](https://tuxproject.de/projects/vim/ "Vim-Builds")
 compiled with `+python3/dyn` need the `PYTHONHOME` environment variable set.
 Otherwise vim will crash in Anaconda environments:
 
+``` powershell
     C:\>vim
     Fatal Python error: initfsencoding: unable to load the file system codec
     ModuleNotFoundError: No module named 'encodings'
 
     Current thread 0x00003a54 (most recent call first):
+```
 
 Environment variables can be set when an Anaconda environment is activated.
 Instructions are provided in the
