@@ -31,38 +31,39 @@ set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 " Assumes vimrc is in .vim or vimfiles and not in $HOME
 let s:vimfiles=fnamemodify(expand('$MYVIMRC'), ':p:h')
 
-if has('persistent_undo') && !isdirectory(s:vimfiles . '/backups')
+" Based on https://begriffs.com/posts/2019-07-19-history-use-vim.html
+if has('persistent_undo') && !isdirectory(s:vimfiles . '/undo')
     if has('win32') || has('win64') || has('win32unix')
-        silent exe '!mkdir ' . s:vimfiles . '\backups > NUL 2>&1'
+        silent exe '!mkdir ' . s:vimfiles . '\undo > NUL 2>&1'
     else
-        silent exe '!mkdir ' . s:vimfiles . '/backups > /dev/null 2>&1'
+        silent exe '!mkdir ' . s:vimfiles . '/undo > /dev/null 2>&1'
     endif
 endif
 
 if has('persistent_undo')
-    let &undodir=s:vimfiles . '/backups'
+    let &undodir=s:vimfiles . '/undo//,' . &undodir
     set undofile
 endif
 " }}}
 " Cache tags instead of polluting project directories {{{
-if !isdirectory(s:vimfiles . '/backups/gutentags')
+if !isdirectory(s:vimfiles . '/gutentags')
     if has('win32') || has('win64') || has('win32unix')
-        silent exe '!mkdir ' . s:vimfiles . '\backups\gutentags  > NUL 2>&1'
+        silent exe '!mkdir ' . s:vimfiles . '\gutentags  > NUL 2>&1'
     else
-        silent exe '!mkdir ' . s:vimfiles . '/backups/gutentags  > /dev/null 2>&1'
+        silent exe '!mkdir ' . s:vimfiles . '/gutentags  > /dev/null 2>&1'
     endif
 endif
-let g:gutentags_cache_dir=s:vimfiles . '/backups/gutentags'
+let g:gutentags_cache_dir=s:vimfiles . '/gutentags'
 
 " Cache swapfile instead of polluting project directories
-if !isdirectory(s:vimfiles . '/backups/swp')
+if !isdirectory(s:vimfiles . '/swap')
     if has('win32') || has('win64') || has('win32unix')
-        silent exe '!mkdir ' . s:vimfiles . '\backups\swp  > NUL 2>&1'
+        silent exe '!mkdir ' . s:vimfiles . '\swap  > NUL 2>&1'
     else
-        silent exe '!mkdir ' . s:vimfiles . '/backups/swp  > /dev/null 2>&1'
+        silent exe '!mkdir ' . s:vimfiles . '/swap  > /dev/null 2>&1'
     endif
 endif
-let &directory=s:vimfiles . '/backups/swp//'
+let &directory=s:vimfiles . '/swap//,' . &directory
 
 " Thesaurus from http://www.gutenberg.org/files/3202/files.zip
 " Extract files from zip and put in the following location.
