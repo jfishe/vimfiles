@@ -18,6 +18,7 @@ dependencies:
   # - bandit
   # - editorconfig editorconfig-vim no longer requires.
   # - jupyter_contrib_nbextensions
+  # - dovpanda
   - MarkdownPP
   # - nbdime
   - panflute
