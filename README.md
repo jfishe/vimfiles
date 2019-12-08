@@ -357,6 +357,22 @@ To make hooks available from Windows, if you have any .bat or .ps1 hooks:
 mklink /J %USERPROFILE%\.git_template %LOCALAPPDATA%\vimfiles\.git_template
 ```
 
+### The Case for Pull Rebase
+
+[The Case for Pull Rebase](https://megakemp.com/2019/03/20/the-case-for-pull-rebase/)
+recommends avoiding merge commits, except when they're useful, such as for Pull
+Request merges.
+
+``` bash
+git pull --rebase|-r # Normal to avoid merge commits.
+git pull --rebase=preserve # When local merge commit preserved, like Pull Request.
+git config --global pull.rebase preserve
+
+# if you're on Git 2.18 or later
+git pull --rebase=merges
+git config --global pull.rebase merges
+```
+
 ## KeePass2, KeeAgent and SSH
 
 [KeeAgent](https://gist.github.com/strarsis/e533f4bca5ae158481bbe53185848d49)
