@@ -1,7 +1,11 @@
 set termencoding=utf-8
 "set guifont=Fixedsys:h11
 " set guifont=Consolas:h11:cANSI:qDRAFT
-set guifont=DejaVu\ Sans\ Mono\ 12,UnifontMono:h12:cANSI:qDRAFT,Consolas:h11:cANSI:qDRAFT
+set guifont=Source_Code_Variable_Medium:h12:W500:cANSI:qDRAFT
+set guifont+=Cascadia_Code:h12:cANSI:qDRAFT
+set guifont+=SauceCodePro\ NF\ 12,DejaVu\ Sans\ Mono\ 12
+set guifont+=UnifontMono:h12:cANSI:qDRAFT
+set guifont+=Consolas:h11:cANSI:qDRAFT
 " set background=dark
 let g:solarized_use16=0
 " colorscheme solarized8
