@@ -55,6 +55,8 @@ if !isdirectory(s:vimfiles . '/gutentags')
 endif
 let g:gutentags_cache_dir=s:vimfiles . '/gutentags'
 
+set tags^=./.git/tags;
+
 " Cache swapfile instead of polluting project directories
 if !isdirectory(s:vimfiles . '/swap')
     if has('win32') || has('win64') || has('win32unix')
