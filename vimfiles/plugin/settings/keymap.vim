@@ -1,11 +1,11 @@
-" split navigations {{{
+" Split navigations {{{
 nnoremap <Down> <C-W><C-J>
 nnoremap <Up> <C-W><C-K>
 nnoremap <Right> <C-W><C-L>
 nnoremap <Left> <C-W><C-H>
 " }}}
 
-" navigate within wrapped line {{{
+" Navigate within wrapped line {{{
 " nnoremap <expr> j v:count ? 'j' : 'gj'
 " nnoremap <expr> k v:count ? 'k' : 'gk'
 " vnoremap <expr> j v:count ? 'j' : 'gj'
@@ -24,9 +24,10 @@ nnoremap <space> za
 silent! unmap <C-F>
 " }}}
 
-" Vim_pushing_built-in_features_beyond_their_limits.markdown {{{
+" Prompt for selection after showing list items. {{{
+" Vim_pushing_built-in_features_beyond_their_limits.markdown
 " https://gist.github.com/Konfekt/d8ce5626a48f4e56ecab31a89449f1f0#file-vim_pushing_built-in_features_beyond_their_limits-markdown
-" Prompt for selection after showing list items.
+" https://gist.github.com/romainl/047aca21e338df7ccf771f96858edb86
 function! <sid>CCR()
     if getcmdtype() isnot# ':'
       return "\<CR>"
@@ -46,16 +47,16 @@ function! <sid>CCR()
         return "\<CR>:sil " . repeat(cmdline[0], 2) . "\<Space>"
     elseif cmdline =~# '\v^\s*ol%[dfiles]\s*$'
         " like :oldfiles but prompts for an old file to edit
-        set nomore
-        return "\<CR>:sil se more|e #<"
+        " set nomore
+        return "\<CR>:silent set more|e #<"
     elseif cmdline =~# '^\s*changes\s*$'
         " like :changes but prompts for a change to jump to
-        set nomore
-        return "\<CR>:sil se more|norm! g;\<S-Left>"
+        " set nomore
+        return "\<CR>:silent set more|norm! g;\<S-Left>"
     elseif cmdline =~# '\v^\s*ju%[mps]'
         " like :jumps but prompts for a position to jump to
-        set nomore
-        return "\<CR>:sil se more|norm! \<C-o>\<S-Left>"
+        " set nomore
+        return "\<CR>:silent set more|norm! \<C-o>\<S-Left>"
     elseif cmdline =~ '\v^\s*marks\s*(\s\w+)?$'
         " like :marks but prompts for a mark to jump to
         return "\<CR>:norm! `"
@@ -71,7 +72,7 @@ cnoremap <expr> <CR> <sid>CCR()
 
 " Change local directory {{{
 nnoremap <silent> <localleader>cd :lcd %:p:h<CR>:pwd<CR>
-" Always add the current file's directory to the path and tags list {{{
+" Always add the current file's directory to the path and tags list
 " if not already there. Add it to the beginning to speed up searches.
 " Use :find rather than :edit.
 augroup localdirectory
@@ -85,6 +86,5 @@ augroup localdirectory
       \ exec "set path-=".s:default_path |
       \ exec "set path^=".s:tempPath |
       \ exec "set path^=".s:default_path
-    " }}}
 augroup END
 " }}}
