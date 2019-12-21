@@ -89,6 +89,24 @@ Command                     Meaning ~
 :%s/\%V <\p\{-}@\p\{-}>//g  Remove all email address in line or selection.
 :%s/[{;}]/&\r/g|norm! =gg   Format css from one-line to multi-line.
 
+                                                *myhelp-ex-list*
+Prompt for selection after showing list items.
+
+Command                     Meaning ~
+:changes                    Print the change list. |:changes|
+:cl[ist]                    List all errors that are valid |quickfix-valid|.
+                            |:cl| |:clist|
+:g[lobal]/pattern/#         Search 'pattern' and number report line number
+                            for in preview window. |:g| |:global|
+:ju[mps]                    Print the jump list. |:ju| |:jumps|
+:lli[st]                    List all the entries in the location list for the
+                            current window.|:lli| |:llist|
+:ls[!] [flags]              Show all buffers. *:files* :buffers* *:ls*
+:marks                      List all the current marks. |:marks|
+:old[files]                 List previously open files. |:oldfiles|
+:undol[ist]                 List the leafs in the tree of changes.
+                            |:undol| |:undolist|
+
                                                 *myhelp-ex-pack*
 Vim does not generate help tags for pack/foo/opt/doc because opt/doc is not in
 the runtime path, nor does include existing tags that are not in the runtime
@@ -97,7 +115,7 @@ path.
 Command                     Meaning ~
 :packadd! foo               Add opt/foo to runtime path.
                             :help foo will work if tags exist.
-:Myhelptags                 Create/update helptags under opt. 
+:Myhelptags                 Create/update helptags under opt.
 
 ==============================================================================
 5. ALE                                           *myhelp-ale*
