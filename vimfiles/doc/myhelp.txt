@@ -104,6 +104,7 @@ Command                     Meaning ~
 :ls[!] [flags]              Show all buffers. *:files* :buffers* *:ls*
 :marks                      List all the current marks. |:marks|
 :old[files]                 List previously open files. |:oldfiles|
+:registers                  List registers and paste from selected register.
 :undol[ist]                 List the leafs in the tree of changes.
                             |:undol| |:undolist|
 
