@@ -63,6 +63,9 @@ function! <sid>CCR()
     elseif cmdline =~# '\v^\s*undol%[ist]'
         " like :undolist but prompts for a change to undo
         return "\<CR>:u "
+    elseif cmdline =~ '\C^reg'
+        " like :registers but prompts for a register to paste
+      return "\<CR>:norm! \"p\<Left>"
     else
         return "\<c-]>\<CR>"
     endif
