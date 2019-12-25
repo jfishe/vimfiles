@@ -1,7 +1,6 @@
 channels:
   - conda-forge
   - defaults
-  - conda-canary
 ssl_verify: true
 report_errors: true
 pip_interop_enabled: true
