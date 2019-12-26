@@ -22,6 +22,10 @@ nnoremap <space> za
 
 " Undo some mswin keymapping {{{
 silent! unmap <C-F>
+
+" Delete inner line
+nmap dil ^d$
+nmap yil ^y$
 " }}}
 
 " Prompt for selection after showing list items. {{{

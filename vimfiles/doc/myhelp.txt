@@ -18,11 +18,8 @@ CONTENTS                                         *myhelp*
 1. Normal Mode                                   *myhelp-normal*
 
 ~             Uppercase a letter (works on ranges)
-z commands:
-  z.          current line at the center
-  z-          current line at the bottom
 /<C-R><C-W>   Pull word into command line (or search)
-:reg          list registers (and show what’s in them)
+dil           Delete inner line.
 gx            Open URL, etc. with default protocol. See |netrw-gx|
               No spaces but ± and () are allowed.
                 sip:4179
@@ -30,6 +27,9 @@ gx            Open URL, etc. with default protocol. See |netrw-gx|
                 sip:9+1(509)531-5444
 gf            Open file under cursor in Vim. Visually select to open file with
               spaces in name.
+z commands:
+  z.          current line at the center
+  z-          current line at the bottom
 
 ==============================================================================
 2. Visual Mode                                   *myhelp-visual*
@@ -104,7 +104,7 @@ Command                     Meaning ~
 :ls[!] [flags]              Show all buffers. *:files* :buffers* *:ls*
 :marks                      List all the current marks. |:marks|
 :old[files]                 List previously open files. |:oldfiles|
-:registers                  List registers and paste from selected register.
+:reg[isters]                List registers and paste from selected register.
 :undol[ist]                 List the leafs in the tree of changes.
                             |:undol| |:undolist|
 
