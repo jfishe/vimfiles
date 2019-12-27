@@ -114,3 +114,6 @@
 [submodule "vimfiles/pack/tpope/start/vim-vinegar"]
 	path = vimfiles/pack/tpope/start/vim-vinegar
 	url = https://github.com/tpope/vim-vinegar.git
+[submodule "vimfiles/pack/dev/start/ale"]
+	path = vimfiles/pack/dev/start/ale
+	url = https://github.com/dense-analysis/ale.git
