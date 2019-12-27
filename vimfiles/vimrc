@@ -132,6 +132,8 @@ augroup mybuffers
     autocmd VimResized * wincmd =
 augroup END
 set nofoldenable
+set foldcolumn=1
+set mouse=n
 " }}}
 " Display tabs and trailing spaces visually {{{
 if has('multi_byte')
@@ -196,6 +198,7 @@ command Vposh vertical terminal powershell -ExecutionPolicy Bypass
 "Get listing of map assignments
 function MyMaps()
     redir @" | silent map! | redir END | new | put!
+    set nomodified
 endfunction
 
 " Invoke :helptags on all non-$VIM doc directories in pack/*/opt.
@@ -204,4 +207,5 @@ command! -bar Myhelptags :call myhelptags#helptags()
 " }}}
 " diff options {{{
 set diffopt+=vertical
+set diffopt+=algorithm:patience
 " }}}
