@@ -103,17 +103,22 @@
 	path = vimfiles/pack/python/opt/vim-conda
 	url = https://github.com/cjrh/vim-conda.git
 [submodule "vimfiles/pack/elm/start/elm-vim"]
+	ignore = dirty
 	path = vimfiles/pack/elm/opt/elm-vim
 	url = https://github.com/ElmCast/elm-vim.git
 [submodule "vimfiles/pack/undotree/opt/undotree"]
+	ignore = dirty
 	path = vimfiles/pack/undotree/opt/undotree
 	url = https://github.com/mbbill/undotree.git
 [submodule "vimfiles/pack/tpope/opt/vim-scriptease"]
+	ignore = dirty
 	path = vimfiles/pack/tpope/opt/vim-scriptease
 	url = https://github.com/tpope/vim-scriptease.git
 [submodule "vimfiles/pack/tpope/start/vim-vinegar"]
+	ignore = dirty
 	path = vimfiles/pack/tpope/start/vim-vinegar
 	url = https://github.com/tpope/vim-vinegar.git
 [submodule "vimfiles/pack/dev/start/ale"]
+	ignore = dirty
 	path = vimfiles/pack/dev/start/ale
 	url = https://github.com/dense-analysis/ale.git
