@@ -1,3 +1,3 @@
 setlocal shellslash
-set sw=2
+set shiftwidth=2
 set iskeyword+=:
