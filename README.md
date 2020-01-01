@@ -123,7 +123,7 @@ Opening the URL for the failing website, in a browser--e.g.,
 the issue for the current session. The work around is only a temporary
 fix. An example error message from `conda update conda`:
 
-``` powershell
+```powershell
 
     CondaHTTPError: HTTP None None for url <https://conda.anaconda.org/conda-forge/win-64/repodata.json>
     Elapsed: None
@@ -210,7 +210,7 @@ Recent versions of [vim-tux](https://tuxproject.de/projects/vim/ "Vim-Builds")
 compiled with `+python3/dyn` need the `PYTHONHOME` environment variable set.
 Otherwise vim will crash in Anaconda environments:
 
-``` powershell
+```powershell
     C:\>vim
     Fatal Python error: initfsencoding: unable to load the file system codec
     ModuleNotFoundError: No module named 'encodings'
@@ -243,7 +243,7 @@ There are several versions depending on python2, python3 or allowing both.
 
 ## Asynchronous Lint Engine (ALE)
 
-The [Asynchronous Lint Engine](https://github.com/w0rp/ale) supports various
+The [Asynchronous Lint Engine](https://github.com/dense-analysis/ale) supports various
 linting (ALELint) and formatting (ALEFix) tools. Many of these are Node.js
 packages. See [jfishe/ALE_Nodejs](https://github.com/jfishe/ALE_Nodejs) for
 a list and installation instructions. Others, such as `black` can be installed
@@ -334,7 +334,7 @@ _Documents_ could be _My Documents_. Adjust the path for actual location of
 except Windows `cmd.exe`, that these files are located in `$HOME`. Soft-links
 allow pointing to the actual location.
 
-``` {contenteditable="true" spellcheck="false" caption="powershell" .powershell}
+```{contenteditable="true" spellcheck="false" caption="powershell" .powershell}
 New-Item -ItemType Directory -Path $env:USERPROFILE\.config
 cmd /c "mklink /J %USERPROFILE%\.vim %LOCALAPPDATA%\vimfiles\vimfiles"
 cmd /c "mklink /J %USERPROFILE%\.config\mintty %LOCALAPPDATA%\vimfiles\mintty"
@@ -347,13 +347,13 @@ Tim Pope's [Effortless Ctags with Git](https://tbaggery.com/2011/08/08/effortles
 shows how to rebuild Ctags with git hooks. Note they do not work under
 PowerShell or CMD but do not seem to cause problems either. To work under WSL:
 
-``` {contenteditable="true" spellcheck="false" caption="bash" .bash}
+```{contenteditable="true" spellcheck="false" caption="bash" .bash}
 ln -s /mnt/c/Users/fishe/AppData/Local/vimfiles/.git_template ~/.git_template
 ```
 
 To make hooks available from Windows, if you have any .bat or .ps1 hooks:
 
-``` {contenteditable="true" spellcheck="false" caption="DOS" .dos}
+```{contenteditable="true" spellcheck="false" caption="DOS" .dos}
 mklink /J %USERPROFILE%\.git_template %LOCALAPPDATA%\vimfiles\.git_template
 ```
 
@@ -363,7 +363,7 @@ mklink /J %USERPROFILE%\.git_template %LOCALAPPDATA%\vimfiles\.git_template
 recommends avoiding merge commits, except when they're useful, such as for Pull
 Request merges.
 
-``` bash
+```bash
 git pull --rebase|-r # Normal to avoid merge commits.
 git pull --rebase=preserve # When local merge commit preserved, like Pull Request.
 git config --global pull.rebase preserve
