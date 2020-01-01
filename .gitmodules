@@ -94,10 +94,6 @@
 	ignore = dirty
 	path = vimfiles/pack/tpope/start/vim-obsession
 	url = https://github.com/tpope/vim-obsession.git
-[submodule "vimfiles/bundle/vim-conda"]
-	ignore = dirty
-	path = vimfiles/pack/python/opt/vim-conda
-	url = https://github.com/cjrh/vim-conda.git
 [submodule "vimfiles/pack/elm/start/elm-vim"]
 	ignore = dirty
 	path = vimfiles/pack/elm/opt/elm-vim
