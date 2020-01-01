@@ -6,10 +6,6 @@
 	ignore = dirty
 	path = vimfiles/pack/vimwiki/start/calendar-vim
 	url = https://github.com/mattn/calendar-vim.git
-[submodule "vimfiles/bundle/jedi-vim"]
-	ignore = dirty
-	path = vimfiles/pack/python/opt/jedi-vim
-	url = https://github.com/davidhalter/jedi-vim.git
 [submodule "vimfiles/bundle/vim-fugitive"]
 	ignore = dirty
 	path = vimfiles/pack/tpope/start/vim-fugitive
