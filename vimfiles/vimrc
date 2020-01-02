@@ -97,12 +97,6 @@ if has('python3')
     packadd! vim-snippets
 endif
 " }}}
-" ================ Pathogen ====================== {{{
-" Load bundles
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-execute pathogen#helptags()
-" }}}
 " ================ Indentation ====================== {{{
 " Commented lines relocated to sensible.vim
 
