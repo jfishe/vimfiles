@@ -58,10 +58,6 @@
 	ignore = dirty
 	path = vimfiles/pack/python/opt/vim-snippets
 	url = https://github.com/honza/vim-snippets.git
-[submodule "vimfiles/bundle/vim-togglelist"]
-	ignore = dirty
-	path = vimfiles/bundle/vim-togglelist
-	url = https://github.com/milkypostman/vim-togglelist.git
 [submodule "vimfiles/bundle/vim-unimpaired"]
 	ignore = dirty
 	path = vimfiles/pack/tpope/start/vim-unimpaired
@@ -82,10 +78,6 @@
 	ignore = dirty
 	path = vimfiles/pack/tpope/start/vim-abolish
 	url = https://github.com/tpope/vim-abolish.git
-[submodule "vimfiles/bundle/vim-ps1"]
-	ignore = dirty
-	path = vimfiles/pack/dev/start/vim-ps1
-	url = https://github.com/PProvost/vim-ps1.git
 [submodule "vimfiles/pack/themes/opt/solarized8"]
 	ignore = dirty
 	path = vimfiles/pack/themes/opt/solarized8
