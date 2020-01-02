@@ -92,7 +92,6 @@ if !empty($CONDA_PREFIX) && has('python3_dynamic')
     packadd! vim-conda
 endif
 if has('python3')
-    packadd! jedi-vim
     packadd! ultisnips
     packadd! vim-pydocstring
     packadd! vim-snippets
