@@ -5,12 +5,13 @@ channels:
 # - conda-canary
 dependencies:
 # - black
-- cookiecutter
+# - cookiecutter
 # - jedi
 # - mypy
 - nodejs
 - pandoc
 - panflute
+- pip
 # - pydocstyle
 # - python-language-server
 # - vulture
@@ -21,4 +22,4 @@ dependencies:
   # - dovpanda
   - MarkdownPP
   # - nbdime
-  - vim-vint
+  # - vim-vint
