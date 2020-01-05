@@ -1,3 +1,11 @@
+if !exists('g:did_coc_loaded')
+  finish
+endif
+if exists('g:did_coc_loaded_user_after') || v:version < 800
+  finish
+endif
+let g:did_coc_loaded_user_after = 1
+
 let g:coc_global_extensions = [ 'coc-python', 'coc-json', 'coc-snippets',
   \ 'coc-vimlsp', 'coc-markdownlint', 'coc-powershell' ]
 
@@ -5,8 +13,8 @@ let g:coc_global_extensions = [ 'coc-python', 'coc-json', 'coc-snippets',
 set hidden
 
 " Some servers have issues with backup files, see #649
-set nobackup
-set nowritebackup
+" set nobackup
+" set nowritebackup
 
 " Better display for messages
 set cmdheight=2
@@ -38,9 +46,9 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -64,7 +72,10 @@ function! s:show_documentation()
 endfunction
 
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+augroup mycoc1
+  autocmd!
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+augroup end
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
@@ -73,15 +84,18 @@ nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 
-augroup mygroup
+augroup mycoc2
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd FileType typescript,json
+        \ setlocal formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+  autocmd User CocJumpPlaceholder
+        \ call CocActionAsync('showSignatureHelp')
 augroup end
 
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+" Remap for do codeAction of selected region,
+" ex: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
 
@@ -90,13 +104,15 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 
-" Create mappings for function text object, requires document symbols feature of languageserver.
+" Create mappings for function text object, requires document symbols feature
+" of languageserver.
 xmap if <Plug>(coc-funcobj-i)
 xmap af <Plug>(coc-funcobj-a)
 omap if <Plug>(coc-funcobj-i)
 omap af <Plug>(coc-funcobj-a)
 
-" Use <TAB> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+" Use <TAB> for select selections ranges, needs server support, like:
+" coc-tsserver, coc-python
 nmap <silent> <TAB> <Plug>(coc-range-select)
 xmap <silent> <TAB> <Plug>(coc-range-select)
 
