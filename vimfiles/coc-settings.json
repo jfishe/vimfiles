@@ -2,14 +2,5 @@
   "python.jediEnabled": false,
   "python.linting.pydocstyleEnabled": true,
   "python.linting.mypyEnabled": true,
-  "python.formatting.provider": "black",
-
-  "languageserver": {
-    "bash": {
-      "command": "bash-language-server",
-      "args": ["start"],
-      "filetypes": ["sh"],
-      "ignoredRootPaths": ["~"]
-    }
-  }
+  "python.formatting.provider": "black"
 }
