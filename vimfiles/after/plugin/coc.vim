@@ -7,7 +7,7 @@ endif
 let g:did_coc_loaded_user_after = 1
 
 let g:coc_global_extensions = [ 'coc-python', 'coc-json', 'coc-snippets',
-  \ 'coc-vimlsp', 'coc-markdownlint', 'coc-powershell' ]
+  \ 'coc-vimlsp', 'coc-markdownlint', 'coc-powershell', 'coc-yaml', 'coc-sh' ]
 
 " if hidden is not set, TextEdit might fail.
 " set hidden

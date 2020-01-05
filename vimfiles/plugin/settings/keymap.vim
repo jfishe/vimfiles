@@ -22,6 +22,7 @@ nnoremap <space> za
 
 " Undo some mswin keymapping {{{
 silent! unmap! <C-F>
+" }}}
 
 " Delete inner line
 nmap dil ^d$
