@@ -84,12 +84,11 @@ endif
 if has('syntax') && has('eval')
     packadd! matchit
 endif
+" }}}
 " ================ Python 3 ====================== {{{
 " if !empty($CONDA_PREFIX) && (has('win32') || has('win64'))
 if !empty($CONDA_PREFIX) && has('python3_dynamic')
-    " set pythonthreedll=$CONDA_PREFIX/python37.dll
     set pythonthreehome=$CONDA_PREFIX
-    packadd! vim-conda
 endif
 if has('python3')
     packadd! ultisnips
