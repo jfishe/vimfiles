@@ -10,7 +10,7 @@ let g:coc_global_extensions = [ 'coc-python', 'coc-json', 'coc-snippets',
   \ 'coc-vimlsp', 'coc-markdownlint', 'coc-powershell' ]
 
 " if hidden is not set, TextEdit might fail.
-set hidden
+" set hidden
 
 " Some servers have issues with backup files, see #649
 " set nobackup
