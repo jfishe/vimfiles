@@ -4,3 +4,6 @@ channels:
 ssl_verify: true
 report_errors: true
 pip_interop_enabled: true
+remote_connect_timeout_secs: 30.15
+remote_read_timeout_secs: 120.0
+auto_activate_base: true
