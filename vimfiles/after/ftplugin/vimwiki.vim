@@ -93,7 +93,7 @@ function! s:TitleJournal() "{{{1
 
     let l:failed = append(1, 'Contents')
     execute 'normal! 2G'
-    call vimwiki#base#AddHeaderLevel()
+    " call vimwiki#base#AddHeaderLevel()
 
     execute 'normal! 3G'
 endfunction "}}}
