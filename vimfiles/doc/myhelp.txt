@@ -11,8 +11,7 @@ CONTENTS                                         *myhelp*
   3. Insert Mode.................................|myhelp-insert|
   4. Ex..........................................|myhelp-ex|
   5. ALE.........................................|myhelp-ale|
-  6. Jedi........................................|myhelp-jedi|
-  7. VimWiki.....................................|myhelp-vimwiki|
+  6. VimWiki.....................................|myhelp-vimwiki|
 
 ==============================================================================
 1. Normal Mode                                   *myhelp-normal*
@@ -110,13 +109,15 @@ Command                     Meaning ~
 
                                                 *myhelp-ex-pack*
 Vim does not generate help tags for pack/foo/opt/doc because opt/doc is not in
-the runtime path, nor does include existing tags that are not in the runtime
+the runtime path, nor does it include existing tags that are not in the runtime
 path.
 
 Command                     Meaning ~
-:packadd! foo               Add opt/foo to runtime path.
+:packloadall                Add pack/*/opt to runtime path.
                             :help foo will work if tags exist.
-:Myhelptags                 Create/update helptags under opt.
+:helptags ALL               Create/update helptags under opt.
+
+:packadd foo                Add foo/opt to runtime path, making :help foo work.
 
 ==============================================================================
 5. ALE                                           *myhelp-ale*
@@ -132,17 +133,7 @@ Disable one or more rules: <!-- markdownlint-disable MD001 MD002 -->
 Enable one or more rules: <!-- markdownlint-enable MD001 MD002 -->
 
 ==============================================================================
-6. Jedi                                          *myhelp-jedi*
-
-Command       Meaning ~
-<Ctrl-Space>  Start completion
-<leader>d     Go to definition (or assignment)
-<leader>g     Go to assignment
-<K>           Show pydoc documentation
-<leader>r     Rename variables
-
-==============================================================================
-7. VimWiki                                       *myhelp-vimwiki*
+6. VimWiki                                       *myhelp-vimwiki*
 
 Command                         Meaning ~
 v$,m                            Convert selected e-mail addresses in Visual
