@@ -21,6 +21,7 @@ nnoremap <space> za
 " }}}
 
 " Undo some mswin keymapping {{{
+silent! unmap <C-F>
 silent! unmap! <C-F>
 " }}}
 
