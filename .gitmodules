@@ -1,76 +1,72 @@
-[submodule "vimfiles/bundle/calendar-vim"]
+[submodule "vimfiles/pack/vimwiki/start/calendar-vim"]
 	ignore = dirty
 	path = vimfiles/pack/vimwiki/start/calendar-vim
 	url = https://github.com/mattn/calendar-vim.git
-[submodule "vimfiles/bundle/vim-fugitive"]
+[submodule "vimfiles/pack/tpope/start/vim-fugitive"]
 	ignore = dirty
 	path = vimfiles/pack/tpope/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
-[submodule "vimfiles/bundle/vim-latex"]
+[submodule "vimfiles/pack/dev/start/vim-latex"]
 	ignore = dirty
 	path = vimfiles/pack/dev/start/vim-latex
 	url = https://github.com/vim-latex/vim-latex.git
-[submodule "vimfiles/bundle/vim-pandoc-syntax"]
+[submodule "vimfiles/pack/python/start/vim-pandoc-syntax"]
 	ignore = dirty
 	path = vimfiles/pack/python/start/vim-pandoc-syntax
 	url = https://github.com/vim-pandoc/vim-pandoc-syntax.git
-[submodule "vimfiles/bundle/vim-colors-solarized"]
-	ignore = dirty
-	path = vimfiles/bundle/vim-colors-solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
-[submodule "vimfiles/bundle/vim-surround"]
+[submodule "vimfiles/pack/tpope/start/vim-surround"]
 	ignore = dirty
 	path = vimfiles/pack/tpope/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-[submodule "vimfiles/bundle/vimwiki"]
+[submodule "vimfiles/pack/vimwiki/start/vimwiki"]
 	ignore = dirty
 	path = vimfiles/pack/vimwiki/start/vimwiki
 	url = https://github.com/vimwiki/vimwiki.git
-[submodule "vimfiles/bundle/vim-pandoc"]
+[submodule "vimfiles/pack/python/start/vim-pandoc"]
 	ignore = dirty
 	path = vimfiles/pack/python/start/vim-pandoc
 	url = https://github.com/vim-pandoc/vim-pandoc.git
-[submodule "vimfiles/bundle/vim-sensible"]
+[submodule "vimfiles/pack/tpope/start/vim-sensible"]
 	ignore = dirty
 	path = vimfiles/pack/tpope/start/vim-sensible
 	url = https://github.com/tpope/vim-sensible.git
-[submodule "vimfiles/bundle/vim-gutentags"]
+[submodule "vimfiles/pack/dev/start/vim-gutentags"]
 	ignore = dirty
 	path = vimfiles/pack/dev/start/vim-gutentags
 	url = https://github.com/ludovicchabant/vim-gutentags.git
-[submodule "vimfiles/bundle/quick-scope"]
+[submodule "vimfiles/pack/dev/start/quick-scope"]
 	ignore = dirty
 	path = vimfiles/pack/dev/start/quick-scope
 	url = https://github.com/unblevable/quick-scope
-[submodule "vimfiles/bundle/editorconfig-vim"]
+[submodule "vimfiles/pack/dev/start/editorconfig-vim"]
 	ignore = dirty
 	path = vimfiles/pack/dev/start/editorconfig-vim
 	url = https://github.com/editorconfig/editorconfig-vim.git
-[submodule "vimfiles/bundle/ultisnips"]
+[submodule "vimfiles/pack/python/opt/ultisnips"]
 	ignore = dirty
 	path = vimfiles/pack/python/opt/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
-[submodule "vimfiles/bundle/vim-snippets"]
+[submodule "vimfiles/pack/python/opt/vim-snippets"]
 	ignore = dirty
 	path = vimfiles/pack/python/opt/vim-snippets
 	url = https://github.com/honza/vim-snippets.git
-[submodule "vimfiles/bundle/vim-unimpaired"]
+[submodule "vimfiles/pack/tpope/start/vim-unimpaired"]
 	ignore = dirty
 	path = vimfiles/pack/tpope/start/vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
-[submodule "vimfiles/bundle/vim-repeat"]
+[submodule "vimfiles/pack/tpope/start/vim-repeat"]
 	ignore = dirty
 	path = vimfiles/pack/tpope/start/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
-[submodule "vimfiles/bundle/vim-commentary"]
+[submodule "vimfiles/pack/tpope/start/vim-commentary"]
 	ignore = dirty
 	path = vimfiles/pack/tpope/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
-[submodule "vimfiles/bundle/vim-pydocstring"]
+[submodule "vimfiles/pack/python/opt/vim-pydocstring"]
 	ignore = dirty
 	path = vimfiles/pack/python/opt/vim-pydocstring
 	url = https://github.com/heavenshell/vim-pydocstring.git
-[submodule "vimfiles/bundle/vim-abolish"]
+[submodule "vimfiles/pack/tpope/start/vim-abolish"]
 	ignore = dirty
 	path = vimfiles/pack/tpope/start/vim-abolish
 	url = https://github.com/tpope/vim-abolish.git
@@ -78,14 +74,10 @@
 	ignore = dirty
 	path = vimfiles/pack/themes/opt/solarized8
 	url = https://github.com/lifepillar/vim-solarized8.git
-[submodule "vimfiles/bundle/vim-obsession"]
+[submodule "vimfiles/pack/tpope/start/vim-obsession"]
 	ignore = dirty
 	path = vimfiles/pack/tpope/start/vim-obsession
 	url = https://github.com/tpope/vim-obsession.git
-[submodule "vimfiles/pack/elm/start/elm-vim"]
-	ignore = dirty
-	path = vimfiles/pack/elm/opt/elm-vim
-	url = https://github.com/ElmCast/elm-vim.git
 [submodule "vimfiles/pack/undotree/opt/undotree"]
 	ignore = dirty
 	path = vimfiles/pack/undotree/opt/undotree
