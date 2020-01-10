@@ -3,10 +3,10 @@ set termencoding=utf-8
 " :help gui-font
 " :help setting-guifont
 if has("gui_gtk3") || has("gui_gtk2")
-  set guifont+=Cascadia\ Code\ PL\ 12
-  set guifont+=SauceCodePro\ NF\ 12
-  set guifont+=DejaVu\ Sans\ Mono\ 12
-  set guifont+=Consolas\ 12
+  set guifont+=Cascadia\ Code\ PL\ 13
+  set guifont+=SauceCodePro\ NF\ 13
+  set guifont+=DejaVu\ Sans\ Mono\ 13
+  set guifont+=Consolas\ 13
 elseif has("gui_win32")
   set guifont+=Cascadia_Code_PL:h12:cDEFAULT:qDEFAULT
   set guifont+=Source_Code_Variable:h12:cDEFAULT:qDEFAULT
