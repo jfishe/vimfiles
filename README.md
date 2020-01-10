@@ -115,27 +115,6 @@ re-defining the command. Grepprg and grepformat need to be set per
 
 ## Anaconda
 
-### conda update
-
-The corporate firewall occasionally interferes with the certificate chain.
-Opening the URL for the failing website, in a browser--e.g.,
-[conda-forge](https://anaconda.org/conda-forge/repo?type=conda&label=main)--resolves
-the issue for the current session. The work around is only a temporary
-fix. An example error message from `conda update conda`:
-
-```powershell
-
-    CondaHTTPError: HTTP None None for url <https://conda.anaconda.org/conda-forge/win-64/repodata.json>
-    Elapsed: None
-
-    An HTTP error occurred when trying to retrieve this URL.
-    HTTP errors are often intermittent, and a simple retry will get you on your way.
-
-    SSLError(SSLError(SSLError("bad handshake: Error([('SSL routines',
-    'ssl3_get_ser ver_certificate', 'certificate verify failed')],)",),),)
-
-```
-
 ### conda env
 
 [environment.yml](file://./environment.yml) lists the conda and pip packages I use.
@@ -161,78 +140,6 @@ The default environment can be specified by replacing `<env>` with the path to
 the Anaconda3 installation directory or replacing the `name:` field in the YAML
 file.
 
-### PYTHONPATH Considered Harmful
-
-The following works but can have surprising side-effects per
-[PYTHONPATH Considered Harmful](https://soundcloud.com/talkpython/22-pythonpath-considered-harmful).
-
-For vim-jedi to work with Anaconda, if you haven't compiled vim to know where
-site-package are, set PYTHONPATH. E.g., set
-PYTHONPATH=C:\Users\fishe\Anaconda3\Lib\site-packages. This will mess up
-activate/deactivate conda environments so adjust PYTHONPATH if you switch.
-
-[Using conda-Managing environments](https://conda.io/docs/using/envs.html#saved-environment-variables)
-provides directions.
-
-In order for root to work without activate root before opening Vim, set user
-environment variable PYTHONPATH. In order for it to work after activate root
-follow the instructions in the link above, but the path is Anaconda3\etc\conda.
-
-### Conda Support in PowerShell
-
-`environment.yml` includes `pscondaenvs`. To use, create a shortcut, similar to following:
-
-```{contenteditable="true" spellcheck="false" caption="powershell" .powershell}
-Install-Module -Name PSShortcut -Scope CurrentUser
-$obj = New-Object -ComObject WScript.Shell
-[string]$from = "Anaconda Prompt.lnk"
-[string]$to = "Anaconda Powershell.lnk"
-
-$AnacondaPrompt = Get-Shortcut -Name "$from" `
-    -FolderPath "$env:APPDATA\Microsoft\Windows\Start Menu\Programs" |
-    Where-Object {$_.Name -eq "$from"}
-
-$lnk = $obj.CreateShortcut($AnacondaPrompt)
-
-[string]$PSAnacondaPrompt = [string]$AnacondaPrompt.FullName.Replace($from.tostring(),$to.ToString())
-$link = $obj.CreateShortcut($PSAnacondaPrompt)
-$link.TargetPath = "$PSHOME\powershell.exe"
-$link.WorkingDirectory = $lnk.WorkingDirectory
-$link.Arguments = '-ExecutionPolicy Bypass -Noexit ' + `
-    """$env:CONDA_PREFIX\Scripts\activate.ps1""" + " $env:CONDA_DEFAULT_ENV"
-$link.Description = $to.Split(".")[0]
-$link.Save()
-```
-
-### Windows Vim-Tux
-
-Recent versions of [vim-tux](https://tuxproject.de/projects/vim/ "Vim-Builds")
-compiled with `+python3/dyn` need the `PYTHONHOME` environment variable set.
-Otherwise vim will crash in Anaconda environments:
-
-```powershell
-    C:\>vim
-    Fatal Python error: initfsencoding: unable to load the file system codec
-    ModuleNotFoundError: No module named 'encodings'
-
-    Current thread 0x00003a54 (most recent call first):
-```
-
-Environment variables can be set when an Anaconda environment is activated.
-Instructions are provided in the
-[Conda User Guide](https://conda.io/docs/user-guide/tasks/manage-environments.html#windows)
-for creating `env_vars.bat` files.
-
-In each of the `conda` environments, do the following:
-
-- Add `set PYTHONHOME=%CONDA_PREFIX%` to `activate.d\env_vars.bat`.
-- Add `set PYTHONHOME=` to `deactivate.d\env_vars.bat`.
-
-## vim-conda
-
-vim-conda resolves the vim-jedi issue and allows switching envs within Vim.
-There are several versions depending on python2, python3 or allowing both.
-
 ## Gutentags & Universal ctags
 
 - [Gutentags](https://github.com/ludovicchabant/vim-gutentags)
@@ -243,22 +150,11 @@ There are several versions depending on python2, python3 or allowing both.
 
 ## Asynchronous Lint Engine (ALE)
 
-The [Asynchronous Lint Engine](https://github.com/dense-analysis/ale) supports various
-linting (ALELint) and formatting (ALEFix) tools. Many of these are Node.js
-packages. See [jfishe/ALE_Nodejs](https://github.com/jfishe/ALE_Nodejs) for
-a list and installation instructions. Others, such as `black` can be installed
-by `conda` or `pip`. See `environment.yml` for a list.
-
-### MarkdownLint Command Line Interface
-
-[MarkdownLint](https://github.com/igorshubovych/markdownlint-cli.git) can
-be used with ALE.
-
-`ALE` detects `markdownlint` if `filetype=pandoc.markdown`.
-`vimfiles/after/plugin/pandoc.vim` contains an `augroup` that sets `filetype`
-based on `*.md`, overriding the vim-pandoc-syntax default `filetype=pandoc`.
-
-The parent project lists the rules under [`docs/Rules.md`](https://github.com/markdownlint/markdownlint/blob/master/docs/RULES.md).
+The [Asynchronous Lint Engine](https://github.com/dense-analysis/ale) supports
+various linting (ALELint) and formatting (ALEFix) tools. Many of these are
+Node.js packages. See [jfishe/ALE_Nodejs](https://github.com/jfishe/ALE_Nodejs)
+for a list and installation instructions. Others, such as `black` can be
+installed by `conda` or `pip`. See `environment.yml` for a list.
 
 ## Jupyter Notebook
 
