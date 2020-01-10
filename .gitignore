@@ -113,3 +113,7 @@ tags*
 .netrwhist
 *.add.spl
 view/
+vimfiles/undo/
+vimfiles/gutentags/
+vimfiles/pack/
+vimfiles/thesaurus/
