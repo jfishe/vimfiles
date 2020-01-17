@@ -193,9 +193,6 @@ function MyMaps()
     set nomodified
 endfunction
 
-" Invoke :helptags on all non-$VIM doc directories in pack/*/opt.
-command! -bar Myhelptags :call myhelptags#helptags()
-
 " }}}
 " diff options {{{
 set diffopt+=vertical
