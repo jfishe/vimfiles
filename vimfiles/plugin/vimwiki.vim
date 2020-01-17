@@ -31,6 +31,7 @@ endif "}}}
 " 	\ '.mkd': 'markdown',
 "   \ '.wiki': 'media'}
 
+" Work vimwiki {{{
 let s:wiki_1 = {}
 " let s:my_docs = 'U:/My Documents'
 let s:wiki_1.path = s:my_docs . '/vimwiki/'
@@ -48,8 +49,15 @@ let s:wiki_1.css_name = '../css/style.css'
 let s:wiki_1.auto_tags = 1
 let s:wiki_1.list_margin = 0
 let s:wiki_1.auto_toc = 1
-
-let g:vimwiki_list = [s:wiki_1] "}}}
+" }}}
+" Home vimwiki {{{
+let s:wiki_2 = s:wiki_1
+let s:wiki_2.path = s:my_docs . '/vimwiki_home/'
+let s:wiki_2.path_html = s:my_docs . '/vimwiki_home_html/html'
+let s:wiki_2.template_path = s:my_docs . '/vimwiki_home_html/templates/'
+" }}}
+let g:vimwiki_list = [ s:wiki_1, s:wiki_2 ]
+"}}}
 
 " Folding {{{
 let g:vimwiki_folding='syntax'"}}}
@@ -66,7 +74,7 @@ let g:vimwiki_folding='syntax'"}}}
 " augroup END
 
 
-function! VimwikiLinkHandler(link)
+function! VimwikiLinkHandler(link) "{{{
   " Use Vim to open external files with the 'vfile:' scheme.  E.g.:
   "   1) [[vfile:~/Code/PythonProject/abc123.py]]
   "   2) [[vfile:./|Wiki Home]]
@@ -84,4 +92,4 @@ function! VimwikiLinkHandler(link)
     exe 'edit ' . fnameescape(link_infos.filename)
     return 1
   endif
-endfunction
+endfunction "}}}
