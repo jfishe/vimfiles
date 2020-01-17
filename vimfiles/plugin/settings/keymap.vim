@@ -21,8 +21,16 @@ nnoremap <space> za
 " }}}
 
 " Undo some mswin keymapping {{{
-silent! unmap <C-F>
-silent! unmap! <C-F>
+silent! nunmap <C-F>
+silent! iunmap <C-F>
+silent! cunmap <C-F>
+silent! nunmap <C-H>
+silent! iunmap <C-H>
+silent! cunmap <C-H>
+silent! vunmap <C-X>
+silent! nunmap <C-S>
+silent! vunmap <C-S>
+silent! iunmap <C-S>
 " }}}
 
 " Delete inner line
@@ -79,6 +87,7 @@ function! <sid>CCR()
     return "\<c-]>\<CR>"
   endif
 endfunction
+
 cnoremap <expr> <CR> <sid>CCR()
 " }}}
 
