@@ -18,7 +18,9 @@
 --exclude=Videos
 --exclude=.git
 --exclude=.pylint.d
+--exclude=.env
 --exclude=env
+--exclude=.venv
 --exclude=venv
 --exclude=.pyc
 --exclude=.pyo
@@ -28,3 +30,7 @@
 --exclude=.mypy_cache
 --exclude=__pycache__
 --exclude=*.ini
+--exclude=.vscode
+--exclude=.vscode-insiders
+--exclude=tags
+--exclude=.tags
