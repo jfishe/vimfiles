@@ -1,6 +1,11 @@
-" vim:tabstop=2:shiftwidth=2:expandtab:foldmethod=marker:textwidth=79
+if exists("b:did_ftplugin_user_after")
+  finish
+endif
+let b:did_ftplugin_user_after = 1  " Don't load another plugin for this buffer
+
 augroup myvimwiki
   autocmd!
+  " autocmd BufRead,BufNewFile *.wiki set filetype=vimwiki
   autocmd QuickFixCmdPost [^l]* cwindow
   autocmd QuickFixCmdPost l*    lwindow
 augroup END
@@ -100,3 +105,4 @@ endfunction "}}}
 nnoremap <silent><buffer> <F3> :call <SID>TitleJournal()<CR>
 
 setlocal spell spelllang=en_us
+" vim:tabstop=2:shiftwidth=2:expandtab:foldmethod=marker:textwidth=79
