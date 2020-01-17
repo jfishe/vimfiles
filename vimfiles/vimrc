@@ -183,13 +183,17 @@ set smartcase       " ...unless we type a capital
 " ================ Terminal =========================== {{{
 " Settings for Vim 8.1 terminal command
 " Append bash to select terminal.
-command Vterm vertical terminal
-command Vposh vertical terminal powershell -ExecutionPolicy Bypass
+command! Vterm vertical terminal
+command! Vposh vertical terminal powershell -ExecutionPolicy Bypass
 " }}}
 " ================ My Functions & Commands ============ {{{
 "Get listing of map assignments
-function MyMaps()
-    redir @" | silent map! | redir END | new | put!
+function! MyMaps()
+    redir @"
+    silent verbose map!
+    redir END
+    new
+    put!
     set nomodified
 endfunction
 
