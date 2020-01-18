@@ -1,4 +1,4 @@
-if exists("b:did_ftplugin_user_after")
+if exists('b:did_ftplugin_user_after')
   finish
 endif
 let b:did_ftplugin_user_after = 1  " Don't load another plugin for this buffer
@@ -43,10 +43,10 @@ function! s:myvimwiki_normalize_mail_v() " {{{
     let l:rxUrl = @"
 
     " Strip single quoted e-mail address in Description for style.
-    let l:rxDesc = substitute(l:rxUrl, "'", "", "g")
+    let l:rxDesc = substitute(l:rxUrl, "'", '', 'g')
     " Escape single quoted e-mail address in URI, so that URI parses correctly
     " when opened. Double-quotes get stripped when URI is parsed anyway.
-    let l:rxUrl = 'mailto:' . substitute(l:rxUrl, "'", "''", "g")
+    let l:rxUrl = 'mailto:' . substitute(l:rxUrl, "'", "''", 'g')
 
     " Check whether e-mail address is Outlook format, i.e., contains ;
     if match(l:rxUrl, ';') > -1

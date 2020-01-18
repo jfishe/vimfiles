@@ -1,4 +1,4 @@
-let g:pandoc#command#templates_file = split(&runtimepath, ",")[0]."/vim-pandoc-templates"
+let g:pandoc#command#templates_file = split(&runtimepath, ',')[0].'/vim-pandoc-templates'
 
 let g:coc_filetype_map = {
   \ 'pandoc.markdown': 'markdown',

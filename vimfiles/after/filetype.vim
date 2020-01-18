@@ -1,4 +1,4 @@
-if exists("did_load_filetypes_userafter")
+if exists('did_load_filetypes_userafter')
   finish
 endif
 augroup html5_setup
