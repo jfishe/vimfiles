@@ -34,6 +34,25 @@ this behavior.
 - Select OK, twice.
 - Open git-bash or git-cmd and confirm directory is `C:\Users\<user name>`.
 
+On Windows `python3/dyn` may point to a later version of python than `conda`
+supports in the base environment. Copy or update `gvim.bat`. The usual
+locations are:
+
+- `%LOCALAPPDATA%\Microsoft\WindowsApps\gvim.bat`
+- `%WINDIR%\gvim.bat`
+
+Adding a call to `conda` and creating a Start-Menu shortcut can resolve the
+issue, e.g:
+
+```DOS
+:ntaction
+rem Activate conda env compatible with +python3/dyn
+call conda activate python38
+rem for WinNT we can use %*
+if .%VIMNOFORK%==.1 goto noforknt
+start "dummy" /b "%VIM_EXE_DIR%\gvim.exe"  %*
+```
+
 ## vimfiles installation
 
 To install in Unix based systems:
