@@ -168,6 +168,24 @@ file.
   direction for obtaining pre-built ctags binary without needing
   source-forge.
 
+## Conquer of Completion (CoC)
+
+[Conquer of Completion](https://github.com/neoclide/coc.nvim) does not depend
+on the python compiled with Vim. It supports Node.js modules that perform the
+linting functions of [ALE](#asynchronous-lint-engine-ale).
+
+`after/plugin/coc.vim` installs extensions using `g:coc_global_extensions`.
+Install CoC under `opt` instead of `start` to allow disabling when `node.js` is
+unavailable.
+
+```bash
+# for vim8
+mkdir -p ~/.vim/pack/coc/opt
+cd ~/.vim/pack/coc/opt
+curl --fail -L \
+  https://github.com/neoclide/coc.nvim/archive/release.tar.gz | tar xzfv -
+```
+
 ## Asynchronous Lint Engine (ALE)
 
 The [Asynchronous Lint Engine](https://github.com/dense-analysis/ale) supports
