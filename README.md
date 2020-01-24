@@ -47,7 +47,8 @@ issue, e.g:
 ```DOS
 :ntaction
 rem Activate conda env compatible with +python3/dyn
-call conda activate python38
+if not "%CONDA_DEFAULT_ENV%" == "python38" call conda activate python38
+
 rem for WinNT we can use %*
 if .%VIMNOFORK%==.1 goto noforknt
 start "dummy" /b "%VIM_EXE_DIR%\gvim.exe"  %*
