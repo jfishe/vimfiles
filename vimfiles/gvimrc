@@ -3,13 +3,16 @@ set termencoding=utf-8
 " :help gui-font
 " :help setting-guifont
 if has('gui_gtk3') || has('gui_gtk2')
-  set guifont+=JetBrains\ Mono\ 13
   set guifont+=Cascadia\ Code\ PL\ 13
+  set guifont+=JetBrains\ Mono\ 13
   set guifont+=DejaVu\ Sans\ Mono\ 13
   set guifont+=Consolas\ 13
 elseif has('gui_win32')
-  set guifont+=JetBrains_Mono:h12:cDEFAULT:qDEFAULT
+  if has('directx')
+    set renderoptions=type:directx
+  endif
   set guifont+=Cascadia_Code_PL:h12:cDEFAULT:qDEFAULT
+  set guifont+=JetBrains_Mono:h12:cDEFAULT:qDEFAULT
   set guifont+=Consolas:h12:cDEFAULT:qDEFAULT
 endif
 
