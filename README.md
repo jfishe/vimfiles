@@ -54,6 +54,22 @@ if .%VIMNOFORK%==.1 goto noforknt
 start "dummy" /b "%VIM_EXE_DIR%\gvim.exe"  %*
 ```
 
+### Windows Registry
+
+Vim's `install.exe` tries to add right-click menus to `explorer`, but usually
+fails, even when installing with administrator rights.
+`~\vim\vim82\GvimExt64\GvimExt.reg` provides an example but assumes the `dll`
+and executable are in the `PATH`. `GvimExt.reg` provides a working version,
+assuming vim is installed in `%USERPROFILE%`.
+
+The following will request administrator permission and add the contents of
+`GvimExt.reg` to the Window Registry. Validate the file against the version
+included with Vim.
+
+```DOS
+regedit /S GvimExt.reg
+```
+
 ## vimfiles installation
 
 To install in Unix based systems:
