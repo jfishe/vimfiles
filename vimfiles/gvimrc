@@ -11,9 +11,9 @@ elseif has('gui_win32')
   if has('directx')
     set renderoptions=type:directx
   endif
-  set guifont+=Cascadia_Code_PL:h12:cDEFAULT:qDEFAULT
-  set guifont+=JetBrains_Mono:h12:cDEFAULT:qDEFAULT
-  set guifont+=Consolas:h12:cDEFAULT:qDEFAULT
+  set guifont+=Cascadia_Code_PL:h10:cDEFAULT:qDEFAULT
+  set guifont+=JetBrains_Mono:h10:cDEFAULT:qDEFAULT
+  set guifont+=Consolas:h10:cDEFAULT:qDEFAULT
 endif
 
 " set background=dark
