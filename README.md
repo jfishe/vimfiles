@@ -323,6 +323,23 @@ git pull --rebase=merges
 git config --global pull.rebase merges
 ```
 
+## Git diff for Excel Files
+
+Xltrail suggested
+[3 steps to make Spreadsheet Compare work with git diff](https://www.xltrail.com/blog/git-diff-spreadsheetcompare).
+The proposed DOS batch script does not work with Microsoft Office 2016 because
+`spreadsheetcompare` is not an installed application. Install a modified version,
+which uses `AppVLP.exe`, as follows:
+
+``` {contenteditable="true" spellcheck="false" caption="powershell" .powershell}
+cmd /c "mklink %USERPROFILE%\bin\xldiff.bat %LOCALAPPDATA%\vimfiles\vimfiles\xldiff.bat"
+```
+
+`.gitconfig` defines `[diff "excel"]` and `.gitattributes_global` sets
+`diff=excel` for all Excel file extensions. The batch script pauses git so that
+it does not delete any temporary files it creates. Press `<Enter>` in the shell
+after exiting `spreadsheetcompare`.
+
 ## KeePass2, KeeAgent and SSH
 
 [KeeAgent](https://gist.github.com/strarsis/e533f4bca5ae158481bbe53185848d49)

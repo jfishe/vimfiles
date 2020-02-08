@@ -31,8 +31,8 @@
                 '"
     smudge = cat
     required = true
-[diff "xlsxdiff"]
-	command = git-diff-wrapper.sh
+[diff "excel"]
+	command = xldiff.bat
 [diff "jupyternotebook"]
 	command = git-nbdiffdriver diff
 [merge "jupyternotebook"]
