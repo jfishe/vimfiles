@@ -92,7 +92,7 @@ cnoremap <expr> <CR> <sid>CCR()
 " }}}
 
 " Change local directory {{{
-nnoremap <silent> <localleader>cd :lcd %:p:h<CR>:pwd<CR>
+nnoremap <silent> <leader>cd :lcd %:p:h<CR>:pwd<CR>
 " Always add the current file's directory to the path and tags list
 " if not already there. Add it to the beginning to speed up searches.
 " Use :find rather than :edit.
