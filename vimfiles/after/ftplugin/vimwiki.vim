@@ -1,28 +1,35 @@
+" VimWiki ftplugin {{{
 if exists('b:did_ftplugin_user_after')
   finish
 endif
 let b:did_ftplugin_user_after = 1  " Don't load another plugin for this buffer
 
-augroup myvimwiki
+augroup myvimwiki "{{{
   autocmd!
   " autocmd BufRead,BufNewFile *.wiki set filetype=vimwiki
   autocmd QuickFixCmdPost [^l]* cwindow
   autocmd QuickFixCmdPost l*    lwindow
-augroup END
+augroup END "}}}
 
-" Use lgrep so that ag peforms search
+" Use lgrep so that ag or rg peforms search {{{
 " The Silver Searcher
 " See plugin/tex.vim.
 " set grepprg=ag\ --nogroup\ --nocolor\ $*
-if executable('ag')
+if executable('rg')
+  exe 'command! -buffer -nargs=+ VWS silent lgrep! <args> --glob '.
+      \ escape('"*'.vimwiki#vars#get_wikilocal('ext').'"', ' '). ' '.
+      \ '"'.vimwiki#vars#get_wikilocal('path')[:-2].'"'
+  command! -buffer -nargs=* -complete=custom,vimwiki#tags#complete_tags
+      \ VWT VWS :<args>:
+elseif executable('ag')
   exe 'command! -buffer -nargs=+ VWS silent lgrep! <args> -G '.
       \ escape('"^.*/*'.vimwiki#vars#get_wikilocal('ext').'"', ' '). ' '.
       \ '"'.vimwiki#vars#get_wikilocal('path')[:-2].'"'
   command! -buffer -nargs=* -complete=custom,vimwiki#tags#complete_tags
       \ VWT VWS :<args>:
-endif
+endif "}}}
 
-" Convert selected text to VimWikiLink
+" Convert selected text to VimWikiLink {{{
 " Todo: Limit the length of the URI to 2083 per
 "       https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers
 "       by splitting into multiple links.
@@ -74,13 +81,14 @@ function! s:myvimwiki_normalize_mail_v() " {{{
 endfunction " }}}
 vnoremap <silent><localleader>m
   \ :call <SID>myvimwiki_normalize_mail_v()<CR>
+"}}}
 
 " setlocal isfname+=32         "so gf treats spaces as part of valid file name.
 let g:ale_enabled=0
 
-" Create a title header for Journal with date. Add a second Contents header
+" Create a title header for Journal with date. Add a second Contents header {{{
 " for auto_TOC.
-function! s:TitleJournal() "{{{1
+function! s:TitleJournal() "{{{
   if exists('*strftime')
     let l:bash = strftime('%Y-%m-%d')
   else
@@ -103,6 +111,8 @@ function! s:TitleJournal() "{{{1
     execute 'normal! 3G'
 endfunction "}}}
 nnoremap <silent><buffer> <F3> :call <SID>TitleJournal()<CR>
+"}}}
 
 setlocal spell spelllang=en_us
 " vim:tabstop=2:shiftwidth=2:expandtab:foldmethod=marker:textwidth=79
+" }}}

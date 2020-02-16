@@ -3,7 +3,9 @@
 let g:tex_flavor='latex'
 
 " The Silver Searcher
-if executable('ag')
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+elseif executable('ag')
     set grepprg=ag\ --vimgrep\ $*
     set grepformat=%f:%l:%c:%m
 
