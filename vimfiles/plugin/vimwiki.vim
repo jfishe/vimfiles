@@ -70,24 +70,23 @@ let g:vimwiki_folding='syntax'"}}}
 "      " autocmd BufNewFile,BufFilePre,BufRead *.wiki call vimtex#init()
 " augroup END "}}}
 
-function! VimwikiLinkHandler(link) "{{{
-  " Use Vim to open external files with the 'vfile:' scheme.  E.g.:
-  "   1) [[vfile:~/Code/PythonProject/abc123.py]]
-  "   2) [[vfile:./|Wiki Home]]
-  let link = a:link
-  if link =~# '^vfile:'
-    let link = link[1:]
-  else
-    return 0
-  endif
-  let link_infos = vimwiki#base#resolve_link(link)
-  if link_infos.filename ==# ''
-    echomsg 'Vimwiki Error: Unable to resolve link!'
-    return 0
-  else
-    exe 'edit ' . fnameescape(link_infos.filename)
-    return 1
-  endif
-endfunction "}}}
+function! VimwikiLinkHandler(link) abort
+    let link = a:link
+    let islink = 0
+    if link =~ '^local:.*'
+        let islink = 1
+        let local_dir = matchstr(link, '^local:\zs.*')
+        let abs_dir = expand('%:p:h').'/'.local_dir
+    elseif link =~ '^file:.*'
+        let islink = 1
+        let abs_dir = matchstr(link, '^file:\zs.*')
+    endif
+    if islink == 1
+        exe "!start " . substitute(abs_dir,"/","\\\\",'g')
+        return 1
+    else
+        return 0
+    endif
+endfunction
 
 " vim:tabstop=2:shiftwidth=2:expandtab:foldmethod=marker:textwidth=79
