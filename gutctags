@@ -6,6 +6,7 @@
 --exclude=.anaconda
 --exclude=Anaconda3
 --exclude=AnacondaProjects
+--exclude=Miniconda3
 --exclude=OneDrive
 --exclude=Roaming
 --exclude=AppData
