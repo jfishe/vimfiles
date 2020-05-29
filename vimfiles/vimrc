@@ -44,6 +44,8 @@ if has('persistent_undo')
     let &undodir=s:vimfiles . '/undo//,' . &undodir
     set undofile
 endif
+
+set undolevels=500
 " }}}
 " Cache tags instead of polluting project directories {{{
 if !isdirectory(s:vimfiles . '/gutentags')
