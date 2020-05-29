@@ -349,9 +349,19 @@ the KeeAgent settings in KeePass2.
 
 ## Map Caps Lock to Escape, or any key to any key
 
-- Download `uncap.exe` from a release of
+Install PowerToys or Uncap.
+
+### Install PowerToys
+
+- `choco install powertoys`
+- Open PowerToys Settings application.
+- In Keyboard Manager, map `Caps Lock` to `Esc`.
+
+### Install Uncap
+
   [susam uncap](https://github.com/susam/uncap). The repository contains
   additional instructions.
+
 - Place in `%USERPROFILE%\bin`.
 - Create a Shortcut.
 - Move the Shortcut to `Win-R shell:startup` (Win == Start Menu key).
