@@ -21,3 +21,5 @@
 *.xltm merge=excel
 *.xltx diff=excel
 *.xltx merge=excel
+*.doc? diff=msword
+*.dot? diff=msword

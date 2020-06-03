@@ -31,6 +31,9 @@
                 '"
     smudge = cat
     required = true
+[diff "msword"]
+  textconv = astextplain
+  wordRegex = "\\w+"
 [diff "excel"]
 	command = xldiff.bat
 [diff "jupyternotebook"]
@@ -119,5 +122,6 @@
 	alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
 	lasts = log -n1 --format=\"%H\" --author=\"[jJ]ohn [dD]\\. [fF]isher\"
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  wdiff = diff --word-diff
 [pull]
 	rebase = merges
