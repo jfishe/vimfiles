@@ -35,3 +35,10 @@
 --exclude=.vscode-insiders
 --exclude=tags
 --exclude=.tags
+--exclude=$RECYCLE.BIN
+--exclude=RECYCLER
+--exclude=.matplotlib
+--exclude=vim??
+--exclude=Documentum
+--exclude=Modules
+--exclude=Scripts
