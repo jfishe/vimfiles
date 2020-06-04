@@ -31,6 +31,8 @@ silent! vunmap <C-X>
 silent! nunmap <C-S>
 silent! vunmap <C-S>
 silent! iunmap <C-S>
+silent! iunmap <C-A>
+silent! cunmap <C-A>
 " }}}
 
 " Delete inner line
