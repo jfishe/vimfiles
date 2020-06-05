@@ -5,8 +5,8 @@ if exists("b:did_ftplugin_userafter") | finish | endif
 let b:did_ftplugin_userafter = 1
 
 set foldmethod=syntax
-let b:ale_enabled=0
 
+let b:ale_enabled=0
 " let g:ale_linter_aliases = {'ps1': 'powershell'}
 " let g:ale_powershell_powershell_executable = 'powershell.exe'
 " let g:ale_powershell_psscriptanalyzer_executable = 'powershell.exe'
