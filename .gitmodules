@@ -98,3 +98,6 @@
 	ignore = dirty
 	path = vimfiles/pack/dev/start/vim-polyglot
 	url = https://github.com/sheerun/vim-polyglot
+[submodule "vimfiles/pack/dev/start/vim-powershell"]
+	path = vimfiles/pack/dev/start/vim-powershell
+	url = https://github.com/zigford/vim-powershell.git
