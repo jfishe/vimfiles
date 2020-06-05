@@ -9,9 +9,19 @@ CONTENTS                                         *myhelp*
   1. Normal Mode.................................|myhelp-normal|
   2. Visual Mode.................................|myhelp-visual|
   3. Insert Mode.................................|myhelp-insert|
-  4. Ex..........................................|myhelp-ex|
+  4. Ex Mode.....................................|myhelp-ex|
+                                                 |myhelp-ex-list|
+                                                 |myhelp-ex-pack|
   5. ALE.........................................|myhelp-ale|
   6. VimWiki.....................................|myhelp-vimwiki|
+  7. Conquer of Completion.......................|myhelp-coc|
+                                                 |myhelp-coc-diagnostic|
+                                                 |myhelp-coc-documentation|
+                                                 |myhelp-coc-object|
+                                                 |myhelp-coc-format|
+                                                 |myhelp-coc-fix|
+                                                 |myhelp-coc-refactor|
+                                                 |myhelp-coc-list|
 
 ==============================================================================
 1. Normal Mode                                   *myhelp-normal*
@@ -76,7 +86,7 @@ char  digraph hex   dec   official name ~
 ﹩                  FE69  Small Dollar Sign
 
 ==============================================================================
-4. Ex                                            *myhelp-ex*
+4. Ex Mode                                       *myhelp-ex*
 
 Command                     Meaning ~
 :Vterm                      Default vertical terminal. Append bash to specify.
@@ -88,7 +98,7 @@ Command                     Meaning ~
 :%s/\%V <\p\{-}@\p\{-}>//g  Remove all email address in line or selection.
 :%s/[{;}]/&\r/g|norm! =gg   Format css from one-line to multi-line.
 
-                                                *myhelp-ex-list*
+                                                 *myhelp-ex-list*
 Prompt for selection after showing list items.
 
 Command                     Meaning ~
@@ -107,7 +117,7 @@ Command                     Meaning ~
 :undol[ist]                 List the leafs in the tree of changes.
                             |:undol| |:undolist|
 
-                                                *myhelp-ex-pack*
+                                                 *myhelp-ex-pack*
 Vim does not generate help tags for pack/foo/opt/doc because opt/doc is not in
 the runtime path, nor does it include existing tags that are not in the runtime
 path.
@@ -149,4 +159,80 @@ v$,m                            Convert selected e-mail addresses in Visual
 
 %s/\[\[diary\//\[\[..\/diary\//
 
- vim:tw=78:et:ft=help:norl:
+==============================================================================
+7. Conquer of Completion                         *myhelp-coc*
+
+Command                         Meaning ~
+<TAB>                           Trigger completion.
+                               |n_coc-range-select| |v_coc-range-select|
+			Select next selection range.
+
+<cr>                            Confirm completion.
+
+                                                 *myhelp-coc-diagnostic*
+[g                              |n_coc-diagnostic-prev|
+]g                              |n_coc-diagnostic-next|
+
+                                                 *myhelp-coc-documentation*
+gd                              |n_coc-definition|
+gy                              |coc-type-definition|
+gi                              |coc-implementation|
+gr                              |coc-references|
+K                               |coc-action-doHover|
+                        Show documentation of the current word in a preview
+                        window.
+
+                                                 *myhelp-coc-object*
+if                               |n_coc-funcobj-i| |v_coc-funcobj-i|
+af                               |n_coc-funcobj-a| |v_coc-funcobj-a|
+                        Select inside/around function.
+
+                                                 *myhelp-coc-format*
+<leader>f                       |n_coc-format-selected|
+                                |v_coc-format-selected|
+                        Format selected range, would work in both visual mode
+                        and normal mode, when used in normal mode, the
+                        selection works on the motion object.
+
+:Format                          |n_coc-format|
+			Format the whole buffer 
+
+                                                 *myhelp-coc-fix*
+<leader>qf                       |n_coc-fix-current|
+                        Try to run quickfix action for diagnostics on the
+                        current line.
+
+                                                 *myhelp-coc-refactor*
+<leader>rn                      |n_coc-rename|
+                        Rename symbol under cursor to a new word.
+
+<leader>a                        |n_coc-codeaction-selected|
+                                 |v_coc-codeaction-selected|
+                        Get and run code action(s) with the selected
+                        region.
+
+<leader>ac                       |n_coc-codeaction|
+                        Get and run code action(s) for current line.
+
+                                                 *myhelp-coc-list*
+<Tab>                   Select action. |coc-list-mappings|
+<space>a                         |coc-list-diagnostics|
+	                All diagnostics for the workspace.
+<space>e                         |coc-list-extensions|
+                        Manage coc extensions.
+<space>c                         |coc-list-commands|
+                	Workspace commands.
+<space>o                         |coc-list-outline|
+	                Symbols in the current document.
+<space>s                         |coc-list-symbols|
+	                Search workspace symbols.
+<space>j                         |:CocNext|
+                        Invoke the default action for the next item in the last
+                        list.
+<space>k                         |:CocPrev|
+                        Invoke default action for the previous item in the last
+                        list.
+<space>p                         |:CocListResume|
+		        Reopen last opened list
+
+         vim:tw=78:et:ft=help:norl:
