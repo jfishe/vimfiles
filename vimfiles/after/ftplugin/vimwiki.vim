@@ -102,7 +102,7 @@ function! s:TitleJournal() "{{{
     let l:title = 'Journal ' . l:bash
     let l:failed = append(0, l:title)
     execute 'normal! 1G'
-    call vimwiki#base#AddHeaderLevel()
+    execute "normal \<Plug>VimwikiAddHeaderLevel"
 
     let l:failed = append(1, 'Contents')
     execute 'normal! 2G'
