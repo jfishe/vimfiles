@@ -33,10 +33,10 @@ let s:vimfiles=fnamemodify(expand('$MYVIMRC'), ':p:h')
 
 " Based on https://begriffs.com/posts/2019-07-19-history-use-vim.html
 if has('persistent_undo') && !isdirectory(s:vimfiles . '/undo')
-    if has('win32') || has('win64') || has('win32unix')
-        silent exe '!mkdir ' . s:vimfiles . '\undo > NUL 2>&1'
+    if has('win32') || has('win64') 
+        silent exe '!mkdir ' . s:vimfiles . '\undo'
     else
-        silent exe '!mkdir ' . s:vimfiles . '/undo > /dev/null 2>&1'
+        silent exe '!mkdir ' . s:vimfiles . '/undo'
     endif
 endif
 
@@ -49,10 +49,10 @@ set undolevels=500
 " }}}
 " Cache tags instead of polluting project directories {{{
 if !isdirectory(s:vimfiles . '/gutentags')
-    if has('win32') || has('win64') || has('win32unix')
-        silent exe '!mkdir ' . s:vimfiles . '\gutentags  > NUL 2>&1'
+    if has('win32') || has('win64') 
+        silent exe '!mkdir ' . s:vimfiles . '\gutentags'
     else
-        silent exe '!mkdir ' . s:vimfiles . '/gutentags  > /dev/null 2>&1'
+        silent exe '!mkdir ' . s:vimfiles . '/gutentags'
     endif
 endif
 let g:gutentags_cache_dir=s:vimfiles . '/gutentags'
@@ -63,10 +63,10 @@ set tags^=./.git/tags;
 
 " Cache swapfile instead of polluting project directories
 if !isdirectory(s:vimfiles . '/swap')
-    if has('win32') || has('win64') || has('win32unix')
-        silent exe '!mkdir ' . s:vimfiles . '\swap  > NUL 2>&1'
+    if has('win32') || has('win64') 
+        silent exe '!mkdir ' . s:vimfiles . '\swap'
     else
-        silent exe '!mkdir ' . s:vimfiles . '/swap  > /dev/null 2>&1'
+        silent exe '!mkdir ' . s:vimfiles . '/swap'
     endif
 endif
 let &directory=s:vimfiles . '/swap//,' . &directory
