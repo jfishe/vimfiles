@@ -27,6 +27,12 @@ endif "}}}
 "   \ '.md': 'markdown',
 " 	\ '.mkd': 'markdown',
 "   \ '.wiki': 'media'}
+" Disable default function
+  " let g:vimwiki_ext2syntax =
+      " \ {'.md': 'markdown', '.mkdn': 'markdown',
+      " \  '.mdwn': 'markdown', '.mdown': 'markdown',
+      " \  '.markdown': 'markdown', '.mw': 'media'}},
+let g:vimwiki_ext2syntax = {}
 
 " Work vimwiki {{{
 let s:wiki_1 = {}
