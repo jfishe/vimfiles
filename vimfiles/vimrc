@@ -70,11 +70,21 @@ if !isdirectory(s:vimfiles . '/swap')
     endif
 endif
 let &directory=s:vimfiles . '/swap//,' . &directory
+" }}}
 
+" Thesaurus and Dictionary {{{
 " Thesaurus from http://www.gutenberg.org/files/3202/files.zip
 " Extract files from zip and put in the following location.
 if isdirectory(s:vimfiles . '/thesaurus')
     let &thesaurus = s:vimfiles . '/thesaurus/mthesaur.txt'
+endif
+
+if isdirectory(s:vimfiles . '/dictionary')
+    let &dictionary = s:vimfiles . '/dictionary/words,' . &dictionary
+endif
+" sudo apt-get install wamerican-huge
+if filereadable('/usr/share/dict/words')
+    let &dictionary = '/usr/share/dict/words,' . &dictionary
 endif
 " }}}
 
