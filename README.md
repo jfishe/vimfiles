@@ -44,14 +44,19 @@ locations are:
 Adding a call to `conda` and creating a Start-Menu shortcut can resolve the
 issue, e.g:
 
-```DOS
-:ntaction
-rem Activate conda env compatible with +python3/dyn
-if not "%CONDA_DEFAULT_ENV%" == "python38" call conda activate python38
+``` powershell
+$userappdir = Get-Item $env:LOCALAPPDATA\Microsoft\WindowsApps
+$globalappdir = Get-Item $env:WINDIR
 
-rem for WinNT we can use %*
-if .%VIMNOFORK%==.1 goto noforknt
-start "dummy" /b "%VIM_EXE_DIR%\gvim.exe"  %*
+$uservimcmd = Join-Path $userappdir '*vim*' | Get-ChildItem
+$globalvimcmd = Join-Path $globalappdir '*vim*' | Get-ChildItem
+
+if (-not $uservimcmd -and $globalvimcmd) {
+  foreach ($item in $globalvimcmd) {
+    Copy-Item $_ $userappdir
+  }
+
+vim -c 'call condaactivate#AddConda2Vim() | :qa'
 ```
 
 ### Windows Registry
