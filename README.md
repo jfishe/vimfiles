@@ -6,76 +6,31 @@ Windows Vim 8 configuration files based on the recommendations of
 and
 [The musings of bluz71](https://bluz71.github.io/2017/05/15/vim-tips-tricks.html).
 
-:help vimrc recommends moving vimrc and gvimrc to vimfiles to make the setup
+`:help vimrc` recommends moving vimrc and gvimrc to vimfiles to make the setup
 more portable.
 
 ## Installation
 
 Several applications are assumed to be in the `PATH`, install
 [git-scm](https://git-scm.com/) and select
-`User Git and optional Unix tools from the Windows Command Prompt`.
+*User Git and optional Unix tools from the Windows Command Prompt*.
 See steps to add a local bin directory for
 the other applications referenced in the vim configuration files.
 
-On Windows systems `%HOMEDRIVE%%HOMEPATH%`, e.g., `U:\.` may point to a
-different path than `%USERPROFILE%`, e.g., `C:\Users\<user name>`.
-`git-scm` defaults to `%HOMEDRIVE%%HOMEPATH%`. Defining `%HOME%`, overrides
-this behavior.
+### Install Vim on Linux
 
-- Open `Control Panel`.
-- Search for `environment`.
-- Select `Edit environment variables for your account`
-- Select New.
-- Variable name: `HOME`
-- Variable value: `%USERPROFILE%`
-- Select OK.
-- Select `Path` and `Edit`.
-- Select `New` and enter `%USERPROFILE%\bin`.
-- Select OK, twice.
-- Open git-bash or git-cmd and confirm directory is `C:\Users\<user name>`.
+On Debian derivatives, like Ubuntu, the
+[dotfiles](https://github.com/jfishe/dotfiles)
+repository provides an installation script for a compatible version of Vim with
+GTK3.
 
-On Windows `python3/dyn` may point to a later version of python than `conda`
-supports in the base environment. Copy or update `gvim.bat`. The usual
-locations are:
+### Install Vim on Windows
 
-- `%LOCALAPPDATA%\Microsoft\WindowsApps\gvim.bat`
-- `%WINDIR%\gvim.bat`
+[Vim-win32-installer](https://github.com/vim/vim-win32-installer/releases)
+includes `python3/dyn` currently linked to `Python 3.8`. Download and install
+or use `chocolatey`: `choco install vim`.
 
-Adding a call to `conda` and creating a Start-Menu shortcut can resolve the
-issue, e.g:
-
-``` powershell
-$userappdir = Get-Item $env:LOCALAPPDATA\Microsoft\WindowsApps
-$globalappdir = Get-Item $env:WINDIR
-
-$uservimcmd = Join-Path $userappdir '*vim*' | Get-ChildItem
-$globalvimcmd = Join-Path $globalappdir '*vim*' | Get-ChildItem
-
-if (-not $uservimcmd -and $globalvimcmd) {
-  foreach ($item in $globalvimcmd) {
-    Copy-Item $_ $userappdir
-  }
-
-vim -c 'call condaactivate#AddConda2Vim() | :qa'
-```
-
-### Windows Registry
-
-Vim's `install.exe` tries to add right-click menus to `explorer`, but usually
-fails, even when installing with administrator rights.
-`~\vim\vim82\GvimExt64\GvimExt.reg` provides an example but assumes the `dll`
-and executable are in the `PATH`. `GvimExt.reg` provides a working version,
-assuming vim is installed in `%USERPROFILE%`.
-
-The following will request administrator permission and add the contents of
-`GvimExt.reg` to the Window Registry. Validate the file against the version
-included with Vim.
-
-```DOS
-regedit /S GvimExt.reg
-```
-
-## vimfiles installation
+### `vimfiles` installation
 
 To install in Unix based systems:
 
@@ -98,7 +53,7 @@ cd %USERPROFILE%
 git submodule update --init --recursive --remote
 ```
 
-```{contenteditable="true" spellcheck="false" caption="powershell" .powershell}
+```powershell
 # Clone vimfiles into LOCALAPPDATA
 Set-Location -Path "$env:LOCALAPPDATA"
 git clone https://github.com/jfishe/vimfiles.git vimfiles
@@ -107,7 +62,6 @@ git submodule update --init --recursive
 
 $vimfiles = "$env:LOCALAPPDATA\vimfiles"
 $dotfiles = Get-ChildItem -Path "$vimfiles\.*"
-
 
 # Backup old configuration, if needed. Mklink will fail if Target exists.
 Set-Location -Path "~"
@@ -131,12 +85,107 @@ $dotfiles | ForEach-Object {
 }
 ```
 
-## vimfiles Update
+## Windows Environment
 
-```{contenteditable="true" spellcheck="false" caption="powershell" .powershell}
-git fetch
-git rebase --interactive --autostash --rebase-merges origin/master
-git submodule update --init --recursive
+On Windows systems `%HOMEDRIVE%%HOMEPATH%`, e.g., `U:\.` may point to a
+different path than `%USERPROFILE%`—i.e., `C:\Users\<user name>`.
+`git-scm` defaults to `%HOMEDRIVE%%HOMEPATH%`. Defining `%HOME%`, overrides
+this behavior.
+
+1. Open `Control Panel`.
+2. Search for `environment`.
+3. Select `Edit environment variables for your account`
+4. Select New.
+5. Variable name: `HOME`
+6. Variable value: `%USERPROFILE%`
+7. Select OK.
+8. Select `Path` and `Edit`.
+9. Select `New` and enter `%USERPROFILE%\bin`.
+10. Select OK, twice.
+11. Open git-bash or git-cmd and confirm directory is `C:\Users\<user name>`.
+
+## Windows Python Version
+
+On Windows `python3/dyn` may point to a later version of python than `conda`
+supports in the base environment. Copy or update `gvim.bat`. The usual
+locations are:
+
+- `%LOCALAPPDATA%\Microsoft\WindowsApps\gvim.bat`
+- `%WINDIR%\gvim.bat`
+
+Adding a call to `conda` and creating a Start-Menu shortcut can resolve the
+issue, e.g:
+
+Installing with `chocolatey` will clobber the Vim batch files because it
+replaces any it finds in `$env:WINDIR` and
+`$env:LOCALAPPDATA\Microsoft\WindowsApps`. The following snippet ensures the
+batch files are in `$env:LOCALAPPDATA\Microsoft\WindowsApps` and calls a Vim
+function to activate a compatible conda envirionment.
+See [Anaconda and Miniconda](#anaconda-and-miniconda) for installation
+instructions.
+
+```powershell
+# Create python38 environment if it does not exist.
+Set-Location "$env:LOCALAPPDATA\vimfiles"
+Get-Item .\environment.yml -ErrorAction Stop
+
+if (-not (conda env list | Select-String -Pattern 'python38' -CaseSensitive)) {
+  conda env create --file environment.yml
+}
+```
+
+```powershell
+$userappdir = Get-Item $env:LOCALAPPDATA\Microsoft\WindowsApps
+$globalappdir = Get-Item $env:WINDIR
+
+
+$uservimcmd = Join-Path $userappdir '*vim*' | Get-ChildItem
+$globalvimcmd = Join-Path $globalappdir '*vim*' | Get-ChildItem
+
+if (-not $uservimcmd -and $globalvimcmd) {
+  foreach ($item in $globalvimcmd) {
+    Copy-Item $_ $userappdir
+  }
+
+& vim -c 'call condaactivate#AddConda2Vim() | :qa'
+```
+
+### Anaconda and Miniconda
+
+Install Miniconda or Anaconda per the directions in the
+[Anaconda Documentation](https://docs.anaconda.com/anaconda/install/).
+
+[environment.yml](file://./environment.yml) lists the conda and pip packages
+needed for the Vim configuration.
+
+To add packages to the conda environment for use by Vim:
+
+```powershell
+conda update conda
+conda env update --file environment.yml
+```
+
+`--name <env>` is not needed and defaults to the current version of python required by Windows Vim. To create an environment:
+
+```powershell
+conda update conda
+conda env create --name <env> --file environment.yml
+```
+
+### Windows Registry
+
+Vim's `install.exe` tries to add right-click menus to `explorer`, but usually
+fails, even when installing with administrator rights.
+`~\vim\vim82\GvimExt64\GvimExt.reg` provides an example but assumes the `dll`
+and executable are in the `PATH`. `GvimExt.reg` provides a working version,
+assuming vim is installed in `%USERPROFILE%`.
+
+The following will request administrator permission and add the contents of
+`GvimExt.reg` to the Window Registry. Validate the file against the version
+included with Vim.
+
+```DOS
+regedit /S GvimExt.reg
 ```
 
 ## Thesaurus
@@ -154,37 +203,9 @@ to be installed or default grep will be used. VWS speed is greatly improved by
 re-defining the command. Grepprg and grepformat need to be set per
 [ag.1.md](https://github.com/ggreer/the_silver_searcher/blob/master/doc/ag.1.md).
 
-## Anaconda
-
-### conda env
-
-[environment.yml](file://./environment.yml) lists the conda and pip packages I use.
-
-Replace the `name:` and `prefix:` with the Anaconda3 installation path. `name:`
-could also be an env.
-
-To add packages to the default conda environment:
-
-```DOS
-conda update conda
-conda env update --file environment.yml
-```
-
-To create an environment:
-
-```DOS
-conda update conda
-conda env create --name <env> --file environment.yml
-```
-
-The default environment can be specified by replacing `<env>` with the path to
-the Anaconda3 installation directory or replacing the `name:` field in the YAML
-file.
-
 ## Gutentags & Universal ctags
 
 - [Gutentags](https://github.com/ludovicchabant/vim-gutentags)
-- Gutentags handles Vim integration nicely.
 - [universal-ctags](https://github.com/universal-ctags/ctags) provides
   direction for obtaining pre-built ctags binary without needing
   source-forge.
@@ -195,9 +216,9 @@ file.
 on the python compiled with Vim. It supports Node.js modules that perform the
 linting functions of [ALE](#asynchronous-lint-engine-ale).
 
-`after/plugin/coc.vim` installs extensions using `g:coc_global_extensions`.
-Install CoC under `opt` instead of `start` to allow disabling when `node.js` is
-unavailable.
+The script `after/plugin/coc.vim` installs extensions using
+`g:coc_global_extensions`. Install CoC under `opt` instead of `start` to allow
+disabling when `node.js` is unavailable.
 
 ```bash
 # for vim8
@@ -289,7 +310,7 @@ _Documents_ could be _My Documents_. Adjust the path for actual location of
 except Windows `cmd.exe`, that these files are located in `$HOME`. Soft-links
 allow pointing to the actual location.
 
-```{contenteditable="true" spellcheck="false" caption="powershell" .powershell}
+```powershell
 New-Item -ItemType Directory -Path $env:USERPROFILE\.config
 cmd /c "mklink /J %USERPROFILE%\.vim %LOCALAPPDATA%\vimfiles\vimfiles"
 cmd /c "mklink /J %USERPROFILE%\.config\mintty %LOCALAPPDATA%\vimfiles\mintty"
@@ -328,7 +349,7 @@ git pull --rebase=merges
 git config --global pull.rebase merges
 ```
 
-## Git diff for Excel Files
+### Git diff for Excel Files
 
 Xltrail suggested
 [3 steps to make Spreadsheet Compare work with git diff](https://www.xltrail.com/blog/git-diff-spreadsheetcompare).
@@ -336,7 +357,7 @@ The proposed DOS batch script does not work with Microsoft Office 2016 because
 `spreadsheetcompare` is not an installed application. Install a modified version,
 which uses `AppVLP.exe`, as follows:
 
-``` {contenteditable="true" spellcheck="false" caption="powershell" .powershell}
+```powershell
 cmd /c "mklink %USERPROFILE%\bin\xldiff.bat %LOCALAPPDATA%\vimfiles\vimfiles\xldiff.bat"
 ```
 
@@ -354,7 +375,7 @@ the KeeAgent settings in KeePass2.
 
 ## Map Caps Lock to Escape, or any key to any key
 
-Install PowerToys or Uncap.
+On Windows install PowerToys or Uncap.
 
 ### Install PowerToys
 
@@ -373,3 +394,12 @@ Install PowerToys or Uncap.
 - See
   [Change which apps run automatically at startup in Windows 10](https://support.microsoft.com/en-us/help/4026268/windows-10-change-startup-apps)
   for more details.
+
+## `vimfiles` Update
+
+```powershell
+git fetch
+git rebase --interactive --autostash --rebase-merges origin/master
+git submodule update --init --recursive
+```
+
