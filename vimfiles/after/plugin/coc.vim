@@ -12,7 +12,9 @@ let g:coc_global_extensions = [ 'coc-python', 'coc-json', 'coc-snippets',
 " Highlight with coc-vimlsp
 let g:markdown_fenced_languages = [
       \ 'vim',
-      \ 'help'
+      \ 'help',
+      \ 'powershell',
+      \ 'bash'
       \]
 
 " if hidden is not set, TextEdit might fail.
