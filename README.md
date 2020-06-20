@@ -43,15 +43,7 @@ cd ~
 git submodule update --init --recursive --remote
 ```
 
-To install in Windows (git-cmd version--otherwise use `cd ~`):
-
-```DOS
-cd %TMP%
-git clone https://github.com/jfishe/vimfiles.git vimfiles
-xcopy vimfiles %USERPROFILE% /s/h/k
-cd %USERPROFILE%
-git submodule update --init --recursive --remote
-```
+To install in Windows:
 
 ```powershell
 # Clone vimfiles into LOCALAPPDATA
@@ -184,7 +176,7 @@ The following will request administrator permission and add the contents of
 `GvimExt.reg` to the Window Registry. Validate the file against the version
 included with Vim.
 
-```DOS
+```powershell
 regedit /S GvimExt.reg
 ```
 
@@ -323,14 +315,14 @@ Tim Pope's [Effortless Ctags with Git](https://tbaggery.com/2011/08/08/effortles
 shows how to rebuild Ctags with git hooks. Note they do not work under
 PowerShell or CMD but do not seem to cause problems either. To work under WSL:
 
-```{contenteditable="true" spellcheck="false" caption="bash" .bash}
+```bash
 ln -s /mnt/c/Users/fishe/AppData/Local/vimfiles/.git_template ~/.git_template
 ```
 
 To make hooks available from Windows, if you have any .bat or .ps1 hooks:
 
-```{contenteditable="true" spellcheck="false" caption="DOS" .dos}
-mklink /J %USERPROFILE%\.git_template %LOCALAPPDATA%\vimfiles\.git_template
+```powershell
+cmd /c "mklink /J $env:USERPROFILE\.git_template $env:LOCALAPPDATA\vimfiles\.git_template"
 ```
 
 ### The Case for Pull Rebase
@@ -358,7 +350,7 @@ The proposed DOS batch script does not work with Microsoft Office 2016 because
 which uses `AppVLP.exe`, as follows:
 
 ```powershell
-cmd /c "mklink %USERPROFILE%\bin\xldiff.bat %LOCALAPPDATA%\vimfiles\vimfiles\xldiff.bat"
+cmd /c "mklink $env:USERPROFILE\bin\xldiff.bat $env:LOCALAPPDATA\vimfiles\vimfiles\xldiff.bat"
 ```
 
 `.gitconfig` defines `[diff "excel"]` and `.gitattributes_global` sets
