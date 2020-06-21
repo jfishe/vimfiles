@@ -3,5 +3,7 @@
   "python.linting.pydocstyleEnabled": true,
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
-  "powershell.integratedConsole.showOnStartup": false
+  "powershell.integratedConsole.showOnStartup": false,
+  "powershell.codeFormatting.preset":"OTBS"
 }
+
