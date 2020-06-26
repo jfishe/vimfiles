@@ -16,6 +16,7 @@
 	eol = lf
 	autocrlf = input
 	attributesfile = ~/.gitattributes_global
+	excludesfile = ~/.gitignore_global
 [gui]
 	displayuntracked = false
 [push]
