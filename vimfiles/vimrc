@@ -79,12 +79,14 @@ if isdirectory(s:vimfiles . '/thesaurus')
     let &thesaurus = s:vimfiles . '/thesaurus/mthesaur.txt'
 endif
 
-if isdirectory(s:vimfiles . '/dictionary')
-    let &dictionary = s:vimfiles . '/dictionary/words,' . &dictionary
-endif
-" sudo apt-get install wamerican-huge
-if filereadable('/usr/share/dict/words')
-    let &dictionary = '/usr/share/dict/words,' . &dictionary
+if has('win32') || has('win64')
+  let s:dictionary = s:vimfiles . '/dictionary/words'
+  if filereadable(s:dictionary)
+    let &dictionary = s:dictionary . ',' . &dictionary
+  endif
+elseif filereadable('/usr/share/dict/words')
+  " sudo apt-get install wamerican-huge
+  let &dictionary = '/usr/share/dict/words,' . &dictionary
 endif
 " }}}
 
