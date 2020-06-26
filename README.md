@@ -157,7 +157,8 @@ conda update conda
 conda env update --file environment.yml
 ```
 
-`--name <env>` is not needed and defaults to the current version of python required by Windows Vim. To create an environment:
+`--name <env>` is not needed and defaults to the current version of python
+required by Windows Vim. To create an environment:
 
 ```powershell
 conda update conda
@@ -185,6 +186,32 @@ regedit /S GvimExt.reg
 Setup instructions are included in vimrc to install the
 [Moby Thesaurus List by Grady Ward](http://www.gutenberg.org/ebooks/3202) from
 Project Gutenberg. Use a browser; the site blocks scripted download.
+
+## Dictionary
+
+Refer to `:help dictionary` and downlaod or symlink
+[dictionary/words](dictionary/words). See below for symlink instrucitons.
+
+On Windows 10, you can symlink to a dictionary in a WSL 1 Distro. It may work
+with WSL 2.
+
+1. If needed, use the default WSL to install the dictionary. It should symlink
+   to `/usr/share/dict/words`, which [vimfiles/vimrc](vimfiles/vimrc) assumes
+   for non-Windows platforms.
+2. Adjust the path below, as needed. Windows does resolve nested symlinks, so
+   use the resolved path to the dictionary.
+3. Replace `<distro_name>` with the default WSL distro, e.g., `WLinux`,
+   `Ubuntu`, etc.
+
+```powershell
+# Assume default WSL is a Debian derivative
+bash -c "sudo apt-get update"
+bash -c "sudo apt-get install wamerican-huge"
+
+# Assume dictionary path matches Debian.
+# Not needed if using Linux Vim
+cmd /c 'mklink words "\\wsl$\<distro_name>\usr\share\dict\american-english"'
+```
 
 ## grepprg and grepformat
 
