@@ -389,9 +389,19 @@ On Windows install PowerToys or Uncap.
 
 ## `vimfiles` Update
 
+Install the plugins in the Git repository.
+
 ```powershell
-git fetch
-git rebase --interactive --autostash --rebase-merges origin/master
+git pull
 git submodule update --init --recursive
+vim -c 'packloadall | helptags ALL | qa'
 ```
 
+Update to the latest versions and commit the changes, if any.
+
+```powershell
+git submodule update --init --recursive --remote
+vim -c 'packloadall | helptags ALL | qa'
+git commit -am "chore: update submodules"
+git push
+```
