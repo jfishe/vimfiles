@@ -4,6 +4,9 @@ vimfiles/swap/
 vimfiles/undo/
 vimfiles/thesaurus/
 vimfiles/dictionary/
+*.spl
+.netrwhist
+tags
 
 # coc.nvim
 vimfiles/pack/coc/
