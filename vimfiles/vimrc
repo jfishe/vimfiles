@@ -176,6 +176,7 @@ set wildignore+=*sass-cache*
 set wildignore+=*DS_Store*
 set wildignore+=log/**
 set wildignore+=tmp/**
+set wildignore+=Temp/**
 set wildignore+=*.png,*.jpg,*.gif
 " }}}
 " ================ Scrolling ======================== {{{

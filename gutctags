@@ -37,7 +37,6 @@
 --exclude=RECYCLER
 --exclude=Roaming
 --exclude=Scripts
---exclude=Scripts
 --exclude=Videos
 --exclude=__pycache__
 --exclude=env
@@ -45,6 +44,7 @@
 --exclude=pack
 --exclude=tags
 --exclude=temp
+--exclude=Temp
 --exclude=tmp
 --exclude=venv
 --exclude=vim??
