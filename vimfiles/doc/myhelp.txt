@@ -84,6 +84,7 @@ char  digraph hex   dec   official name ~
 💲                  1F4B2 Heavy Dollar Sign
 ＄                  FF04  Fullwidth Dollar Sign
 ﹩                  FE69  Small Dollar Sign
+℔                   2114  LB BAR SYMBOL
 
 ==============================================================================
 4. Ex Mode                                       *myhelp-ex*
@@ -195,7 +196,7 @@ af                               |n_coc-funcobj-a| |v_coc-funcobj-a|
                         selection works on the motion object.
 
 :Format                          |n_coc-format|
-			Format the whole buffer 
+			Format the whole buffer
 
                                                  *myhelp-coc-fix*
 <leader>qf                       |n_coc-fix-current|
