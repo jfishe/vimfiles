@@ -22,6 +22,7 @@ CONTENTS                                         *myhelp*
                                                  |myhelp-coc-fix|
                                                  |myhelp-coc-refactor|
                                                  |myhelp-coc-list|
+  8. Miscellaneous Functions                     |myhelp-misc|
 
 ==============================================================================
 1. Normal Mode                                   *myhelp-normal*
@@ -235,5 +236,15 @@ af                               |n_coc-funcobj-a| |v_coc-funcobj-a|
                         list.
 <space>p                         |:CocListResume|
 		        Reopen last opened list
+
+==============================================================================
+8. Miscellaneous Functions                      *myhelp-misc*
+
+Command                         Meaning ~
+call condaactivate#AddConda2Vim()
+                  Update Windows Batch files to activate python38 environment
+                  prior to starting Vim.
+
+call MyMaps()     Get listing of map assignments. :silent verbose map!
 
          vim:tw=78:et:ft=help:norl:
