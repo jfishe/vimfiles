@@ -16,9 +16,6 @@ vnoremap <expr> j (v:count > 4 ? "m'" . v:count . 'j' : 'gj')
 vnoremap <expr> k (v:count > 4 ? "m'" . v:count . 'k' : 'gk')
 " }}}
 
-" Enable folding with the spacebar {{{
-nnoremap <space> za
-" }}}
 
 " Undo some mswin keymapping {{{
 silent! nunmap <C-F>
