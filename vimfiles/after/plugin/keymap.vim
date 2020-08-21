@@ -1,4 +1,5 @@
 " Insert current date
+" rmal|:nohlsearch
 " Insert current date
 if exists('*strftime')
     " 06/11/18 12:08:07
@@ -10,3 +11,16 @@ if exists('*strftime')
     " 2018-06-11T12:08:32-0700
     call IMAP ('date`', "\<c-r>=strftime('%FT%T%z')\<cr>", '')
 endif
+
+
+" Override <C-L> from vim-sensible to clear popup artifact from [LS].
+function s:Redraw() abort
+  if has('diff')
+    diffupdate
+  endif
+  if has('popupwin')
+    call popup_clear()
+  endif
+endfunction
+nnoremap <C-L> :nohlsearch <Bar> call <SID>Redraw()<CR>
+
