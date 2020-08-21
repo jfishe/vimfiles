@@ -21,6 +21,7 @@ function s:Redraw() abort
   if has('popupwin')
     call popup_clear()
   endif
+  redraw!
 endfunction
 nnoremap <C-L> :nohlsearch <Bar> call <SID>Redraw()<CR>
 
