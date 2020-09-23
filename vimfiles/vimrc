@@ -108,6 +108,7 @@ if has('python3')
     packadd! ultisnips
     packadd! vim-pydocstring
     packadd! vim-snippets
+    packadd! vimtex
 endif
 " }}}
 " ================ Indentation ====================== {{{
