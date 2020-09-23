@@ -102,3 +102,7 @@
 	ignore = dirty
 	path = vimfiles/pack/dev/start/vim-table-mode
 	url = https://github.com/dhruvasagar/vim-table-mode.git
+[submodule "vimfiles/pack/python/opt/vimtex"]
+	url = https://github.com/lervag/vimtex.git
+	active = true
+	path = vimfiles/pack/python/opt/vimtex
