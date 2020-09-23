@@ -6,10 +6,6 @@
 	ignore = dirty
 	path = vimfiles/pack/tpope/start/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive.git
-[submodule "vimfiles/pack/dev/start/vim-latex"]
-	ignore = dirty
-	path = vimfiles/pack/dev/start/vim-latex
-	url = https://github.com/vim-latex/vim-latex.git
 [submodule "vimfiles/pack/python/start/vim-pandoc-syntax"]
 	ignore = dirty
 	path = vimfiles/pack/python/start/vim-pandoc-syntax
