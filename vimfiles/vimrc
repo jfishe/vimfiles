@@ -55,7 +55,7 @@ if !isdirectory(s:vimfiles . '/gutentags')
         silent exe '!mkdir ' . s:vimfiles . '/gutentags'
     endif
 endif
-let g:gutentags_cache_dir=s:vimfiles . '/gutentags'
+" let g:gutentags_cache_dir=s:vimfiles . '/gutentags'
 
 " Required by vim-fugitive
 " Fugitive .git/tags support removed in favor of `:set tags^=./.git/tags;`
