@@ -106,3 +106,6 @@
 	url = https://github.com/lervag/vimtex.git
 	active = true
 	path = vimfiles/pack/python/opt/vimtex
+[submodule "vimfiles/pack/dev/start/vim-ripgrep"]
+	path = vimfiles/pack/dev/start/vim-ripgrep
+	url = https://github.com/jremmen/vim-ripgrep.git
