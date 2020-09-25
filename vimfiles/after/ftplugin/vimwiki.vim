@@ -15,19 +15,22 @@ augroup END "}}}
 " The Silver Searcher
 " See plugin/tex.vim.
 " set grepprg=ag\ --nogroup\ --nocolor\ $*
-if executable('rg')
-  exe 'command! -buffer -nargs=+ VWS silent lgrep! <args> --glob '.
-      \ escape('"*'.vimwiki#vars#get_wikilocal('ext').'"', ' '). ' '.
-      \ '"'.vimwiki#vars#get_wikilocal('path')[:-2].'"'
-  command! -buffer -nargs=* -complete=custom,vimwiki#tags#complete_tags
-      \ VWT VWS :<args>:
-elseif executable('ag')
-  exe 'command! -buffer -nargs=+ VWS silent lgrep! <args> -G '.
-      \ escape('"^.*/*'.vimwiki#vars#get_wikilocal('ext').'"', ' '). ' '.
-      \ '"'.vimwiki#vars#get_wikilocal('path')[:-2].'"'
-  command! -buffer -nargs=* -complete=custom,vimwiki#tags#complete_tags
-      \ VWT VWS :<args>:
-endif "}}}
+command! -buffer -nargs=* VWS call vimwiki#searchRg(<q-args>)
+command! -buffer -nargs=* -complete=custom,vimwiki#tags#complete_tags
+      \ VWT VWS /:<args>:/
+" if executable('rg')
+"   exe 'command! -buffer -nargs=+ VWS silent lgrep! <args> --glob '.
+"       \ escape('"*'.vimwiki#vars#get_wikilocal('ext').'"', ' '). ' '.
+"       \ '"'.vimwiki#vars#get_wikilocal('path')[:-2].'"'
+"   command! -buffer -nargs=* -complete=custom,vimwiki#tags#complete_tags
+"       \ VWT VWS :<args>:
+" elseif executable('ag')
+"   exe 'command! -buffer -nargs=+ VWS silent lgrep! <args> -G '.
+"       \ escape('"^.*/*'.vimwiki#vars#get_wikilocal('ext').'"', ' '). ' '.
+"       \ '"'.vimwiki#vars#get_wikilocal('path')[:-2].'"'
+  " command! -buffer -nargs=* -complete=custom,vimwiki#tags#complete_tags
+  "     \ VWT VWS :<args>:
+" endif "}}}
 
 " Convert selected text to VimWikiLink {{{
 " Todo: Limit the length of the URI to 2083 per
