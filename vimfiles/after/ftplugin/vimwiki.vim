@@ -11,26 +11,11 @@ augroup myvimwiki "{{{
   autocmd QuickFixCmdPost l*    lwindow
 augroup END "}}}
 
-" Use lgrep so that ag or rg peforms search {{{
-" The Silver Searcher
-" See plugin/tex.vim.
-" set grepprg=ag\ --nogroup\ --nocolor\ $*
+" Use vim-ripgrep for VimwikiSearch {{{
 command! -buffer -nargs=* VWS call vimwiki#searchRg(<q-args>)
 command! -buffer -nargs=* -complete=custom,vimwiki#tags#complete_tags
       \ VWT VWS /:<args>:/
-" if executable('rg')
-"   exe 'command! -buffer -nargs=+ VWS silent lgrep! <args> --glob '.
-"       \ escape('"*'.vimwiki#vars#get_wikilocal('ext').'"', ' '). ' '.
-"       \ '"'.vimwiki#vars#get_wikilocal('path')[:-2].'"'
-"   command! -buffer -nargs=* -complete=custom,vimwiki#tags#complete_tags
-"       \ VWT VWS :<args>:
-" elseif executable('ag')
-"   exe 'command! -buffer -nargs=+ VWS silent lgrep! <args> -G '.
-"       \ escape('"^.*/*'.vimwiki#vars#get_wikilocal('ext').'"', ' '). ' '.
-"       \ '"'.vimwiki#vars#get_wikilocal('path')[:-2].'"'
-  " command! -buffer -nargs=* -complete=custom,vimwiki#tags#complete_tags
-  "     \ VWT VWS :<args>:
-" endif "}}}
+" }}}
 
 " Convert selected text to VimWikiLink {{{
 " Todo: Limit the length of the URI to 2083 per
@@ -107,11 +92,7 @@ function! s:TitleJournal() "{{{
     execute 'normal! 1G'
     execute "normal \<Plug>VimwikiAddHeaderLevel"
 
-    let l:failed = append(1, 'Contents')
     execute 'normal! 2G'
-    " call vimwiki#base#AddHeaderLevel()
-
-    execute 'normal! 3G'
 endfunction "}}}
 nnoremap <silent><buffer> <F3> :call <SID>TitleJournal()<CR>
 "}}}

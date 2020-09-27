@@ -23,7 +23,7 @@ set nobackup
 let g:maplocalleader = ','
 " }}}
 " ================ Statusline ================== {{{
-set statusline=%<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
+set statusline=\ %<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 " }}}
 " ================ Persistent Undo ================== {{{
 " Keep undo history across sessions, by storing in file.
@@ -33,41 +33,32 @@ let s:vimfiles=fnamemodify(expand('$MYVIMRC'), ':p:h')
 
 " Based on https://begriffs.com/posts/2019-07-19-history-use-vim.html
 if has('persistent_undo') && !isdirectory(s:vimfiles . '/undo')
-    if has('win32') || has('win64') 
-        silent exe '!mkdir ' . s:vimfiles . '\undo'
-    else
-        silent exe '!mkdir ' . s:vimfiles . '/undo'
-    endif
+  if has('win32') || has('win64') 
+    silent exe '!mkdir ' . s:vimfiles . '\undo'
+  else
+    silent exe '!mkdir ' . s:vimfiles . '/undo'
+  endif
 endif
 
 if has('persistent_undo')
-    let &undodir=s:vimfiles . '/undo//,' . &undodir
-    set undofile
+  let &undodir=s:vimfiles . '/undo//,' . &undodir
+  set undofile
 endif
 
 set undolevels=500
 " }}}
-" Cache tags instead of polluting project directories {{{
-if !isdirectory(s:vimfiles . '/gutentags')
-    if has('win32') || has('win64') 
-        silent exe '!mkdir ' . s:vimfiles . '\gutentags'
-    else
-        silent exe '!mkdir ' . s:vimfiles . '/gutentags'
-    endif
-endif
-" let g:gutentags_cache_dir=s:vimfiles . '/gutentags'
 
 " Required by vim-fugitive
 " Fugitive .git/tags support removed in favor of `:set tags^=./.git/tags;`
 set tags^=./.git/tags;
 
-" Cache swapfile instead of polluting project directories
+" Cache swapfile instead of polluting project directories {{{
 if !isdirectory(s:vimfiles . '/swap')
-    if has('win32') || has('win64') 
-        silent exe '!mkdir ' . s:vimfiles . '\swap'
-    else
-        silent exe '!mkdir ' . s:vimfiles . '/swap'
-    endif
+  if has('win32') || has('win64') 
+    silent exe '!mkdir ' . s:vimfiles . '\swap'
+  else
+    silent exe '!mkdir ' . s:vimfiles . '/swap'
+  endif
 endif
 let &directory=s:vimfiles . '/swap//,' . &directory
 " }}}
@@ -76,7 +67,7 @@ let &directory=s:vimfiles . '/swap//,' . &directory
 " Thesaurus from http://www.gutenberg.org/files/3202/files.zip
 " Extract files from zip and put in the following location.
 if isdirectory(s:vimfiles . '/thesaurus')
-    let &thesaurus = s:vimfiles . '/thesaurus/mthesaur.txt'
+  let &thesaurus = s:vimfiles . '/thesaurus/mthesaur.txt'
 endif
 
 if has('win32') || has('win64')
@@ -96,19 +87,19 @@ endif
 " The ! means the package won't be loaded right away but when plugins are
 " loaded during initialization.
 if has('syntax') && has('eval')
-    packadd! matchit
+  packadd! matchit
 endif
 " }}}
 " ================ Python 3 ====================== {{{
 " if !empty($CONDA_PREFIX) && (has('win32') || has('win64'))
 if !empty($CONDA_PREFIX) && has('python3_dynamic')
-    set pythonthreehome=$CONDA_PREFIX
+  set pythonthreehome=$CONDA_PREFIX
 endif
 if has('python3')
-    packadd! ultisnips
-    packadd! vim-pydocstring
-    packadd! vim-snippets
-    packadd! vimtex
+  packadd! ultisnips
+  packadd! vim-pydocstring
+  packadd! vim-snippets
+  packadd! vimtex
 endif
 " }}}
 " ================ Indentation ====================== {{{
@@ -127,16 +118,13 @@ set nowrap
 " }}}
 " ================ Buffers ====================== {{{
 " Commented lines relocated to sensible.vim
-
-set hidden                     " Possibility to have more than one
-" unsaved buffers.
-"set ruler                      " Shows the current line number at the bottom.
-" right of the screen.
+set hidden  " Possibility to have more than one unsaved buffers.
+"set ruler  " Shows the current line number at the bottom right of the screen.
 set switchbuf+=split
 set switchbuf+=useopen
 augroup mybuffers
-    autocmd!
-    autocmd VimResized * wincmd =
+  autocmd!
+  autocmd VimResized * wincmd =
 augroup END
 set nofoldenable
 set foldcolumn=1
@@ -144,17 +132,17 @@ set mouse=n
 " }}}
 " Display tabs and trailing spaces visually {{{
 if has('multi_byte')
-    if &termencoding ==? ''
-        let &termencoding = &encoding
-    endif
-    set encoding=utf-8
-    scriptencoding utf-8
-    setglobal fileencoding=utf-8
-    "setglobal bomb
-    set fileencodings=ucs-bom,utf-8,latin1
-    set list listchars=tab:\ \ ,trail:»
+  if &termencoding ==? ''
+    let &termencoding = &encoding
+  endif
+  set encoding=utf-8
+  scriptencoding utf-8
+  setglobal fileencoding=utf-8
+  "setglobal bomb
+  set fileencodings=ucs-bom,utf-8,latin1
+  set list listchars=tab:\ \ ,trail:»
 else
-    set list listchars=tab:\ \ ,trail:$
+  set list listchars=tab:\ \ ,trail:$
 endif
 " }}}
 " Color and background {{{
@@ -191,8 +179,8 @@ set sidescroll=1
 " Commented lines relocated to sensible.vim
 "set incsearch       " Find the next match as we type the search
 if &t_Co > 2 || has('gui_running')
-    " Switch on highlighting the last used search pattern.
-    set hlsearch
+  " Switch on highlighting the last used search pattern.
+  set hlsearch
 endif
 set ignorecase      " Ignore case when searching...
 set infercase       " Smarter completions
@@ -201,18 +189,25 @@ set smartcase       " ...unless we type a capital
 " ================ Terminal =========================== {{{
 " Settings for Vim 8.1 terminal command
 " Append bash to select terminal.
-command! Vterm vertical terminal
-command! Vposh vertical terminal powershell -ExecutionPolicy Bypass
+if has('terminal')
+  command! Vterm vertical terminal
+  if executable('pwsh')
+    command! Vpwsh vertical terminal pwsh -ExecutionPolicy Bypass
+  endif
+  if executable('powershell')
+    command! Vposh vertical terminal powershell -ExecutionPolicy Bypass
+  endif
+endif
 " }}}
 " ================ My Functions & Commands ============ {{{
 "Get listing of map assignments
 function! MyMaps()
-    redir @"
-    silent verbose map!
-    redir END
-    new
-    put!
-    set nomodified
+  redir @"
+  silent verbose map!
+  redir END
+  new
+  put!
+  set nomodified
 endfunction
 
 " }}}
