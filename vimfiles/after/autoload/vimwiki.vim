@@ -21,7 +21,8 @@ function! vimwiki#searchRg(search_pattern) abort
     let pattern = shellescape(pattern)
   endif
 
-  let path = fnameescape(vimwiki#vars#get_wikilocal('path'))
+  " let path = fnameescape(vimwiki#vars#get_wikilocal('path'))
+  let path = shellescape(vimwiki#vars#get_wikilocal('path'))
   let ext  = vimwiki#vars#get_wikilocal('ext')
 
   let cmd  = 'Rg '.pattern.' '.path.' --glob '.shellescape('**/*'.ext)
