@@ -1,0 +1,9 @@
+--exclude=swap
+--exclude=gutentags
+--exclude=dictionary
+--exclude=spell
+--exclude=thesaurus
+--exclude=undo
+--exclude=pack
+--exclude=.mypy_cache
+
