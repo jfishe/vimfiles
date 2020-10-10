@@ -157,9 +157,10 @@ v$,m                            Convert selected e-mail addresses in Visual
                                 so that links work in |:Vimwiki2HTML| and
                                 |:VimwikiFollowLink| when the file does not
                                 start in the root directory.
-
-
-%s/\[\[diary\//\[\[..\/diary\//
+<F3>                            Create today's Journal with
+                                |vimwiki_<Leader>w<Leader>w|. Then use <F3> to create
+                                Journal title, copy previous day's Journal and
+                                diff against today's.
 
 ==============================================================================
 7. Conquer of Completion                         *myhelp-coc*

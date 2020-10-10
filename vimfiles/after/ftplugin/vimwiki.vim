@@ -25,8 +25,7 @@ vnoremap <silent><localleader>m
 " setlocal isfname+=32         "so gf treats spaces as part of valid file name.
 let g:ale_enabled=0
 
-" Create a title header for Journal with date. Add a second Contents header {{{
-" for auto_TOC.
+" Create today's Journal and compare to previous day. {{{
 nnoremap <silent><buffer> <F3> :call vimwiki#TitleJournal()<CR>
 "}}}
 

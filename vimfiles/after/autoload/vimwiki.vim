@@ -75,31 +75,49 @@ function! vimwiki#myvimwiki_normalize_mail_v() " {{{
     call setreg('"', l:sub, 'v')
     normal! `>""pgvd
   finally
-      call setreg('"', l:rv, l:rt)
-      let &selection = l:sel_save
+    call setreg('"', l:rv, l:rt)
+    let &selection = l:sel_save
   endtry
 endfunction " }}}
 " }}}
 
-" Create a title header for Journal with date. Add a second Contents header {{{
-" for auto_TOC.
+" Create today's Journal and compare to previous day. {{{
+" Create a title header for Journal with date.
+" Copy previous diary day Todo header through EOF.
+" Diff today and previous day.
 function! vimwiki#TitleJournal() "{{{
+  if search('^= Journal.* =$', 'w', 0, 500)
+    return
+  endif
+
   if exists('*strftime')
     let l:bash = strftime('%Y-%m-%d')
   else
     let l:bash = 'bash -c "date --iso-8601"'
     if $USERDOMAIN ==? '***REMOVED***'
-        let l:bash = $LOCALAPPDATA . '\Programs\Git\usr\bin\' . l:bash
+      let l:bash = $LOCALAPPDATA . '\Programs\Git\usr\bin\' . l:bash
     endif
     let l:bash = system(l:bash)[:-2]
   endif
 
-    let l:title = 'Journal ' . l:bash
-    let l:failed = append(0, l:title)
-    execute 'normal! 1G'
-    execute "normal \<Plug>VimwikiAddHeaderLevel"
+  let l:title = 'Journal ' . l:bash
+  let l:failed = append(0, l:title)
+  execute 'normal! 1G'
+  execute "normal \<Plug>VimwikiAddHeaderLevel"
 
+  execute 'normal! 2G'
+
+  execute "normal \<Plug>VimwikiDiaryPrevDay"
+  let l:previousday = bufname(bufnr())
+  let l:todoheader = search('^== Todo ==$','w', 0, 500 )
+  if l:todoheader
+    silent ,$yank m
+    execute "normal \<Plug>VimwikiGoBackLink"
+    silent put m
     execute 'normal! 2G'
+    execute 'diffsplit ' . l:previousday
+  endif
+
 endfunction "}}}
 " }}}
 
