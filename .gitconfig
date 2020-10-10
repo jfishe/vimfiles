@@ -124,5 +124,6 @@
 	lasts = log -n1 --format=\"%H\" --author=\"[jJ]ohn [dD]\\. [fF]isher\"
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   wdiff = diff --word-diff
+	ctags = !.git/hooks/ctags
 [pull]
 	rebase = merges
