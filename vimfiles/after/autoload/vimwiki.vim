@@ -116,6 +116,7 @@ function! vimwiki#TitleJournal() "{{{
     silent put m
     execute 'normal! 2G'
     execute 'diffsplit ' . l:previousday
+    set foldmethod=syntax
   endif
 
 endfunction "}}}
