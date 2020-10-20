@@ -94,9 +94,6 @@ function! vimwiki#TitleJournal() "{{{
     let l:bash = strftime('%Y-%m-%d')
   else
     let l:bash = 'bash -c "date --iso-8601"'
-    if $USERDOMAIN ==? '***REMOVED***'
-      let l:bash = $LOCALAPPDATA . '\Programs\Git\usr\bin\' . l:bash
-    endif
     let l:bash = system(l:bash)[:-2]
   endif
 
