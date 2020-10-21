@@ -105,17 +105,16 @@ function! vimwiki#TitleJournal() "{{{
   execute 'normal! 2G'
 
   execute "normal \<Plug>VimwikiDiaryPrevDay"
-  let l:previousday = bufname(bufnr())
+  let l:previousday = bufnr()
+
   let l:todoheader = search('^== Todo ==$','w', 0, 500 )
   if l:todoheader
     silent ,$yank m
     execute "normal \<Plug>VimwikiGoBackLink"
     silent put m
-    execute 'normal! 2G'
-    execute 'diffsplit ' . l:previousday
-    set foldmethod=syntax
   endif
 
+  execute 'diffsplit ' . fnameescape(bufname(l:previousday))
 endfunction "}}}
 " }}}
 
