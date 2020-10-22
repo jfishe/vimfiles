@@ -85,7 +85,7 @@ endfunction " }}}
 " Create a title header for Journal with date.
 " Copy previous diary day Todo header through EOF.
 " Diff today and previous day.
-function! vimwiki#TitleJournal() "{{{
+function! vimwiki#TitleJournal() abort "{{{
   if search('^= Journal.* =$', 'w', 0, 500)
     return
   endif
@@ -114,7 +114,10 @@ function! vimwiki#TitleJournal() "{{{
     silent put m
   endif
 
+  only
   execute 'diffsplit ' . fnameescape(bufname(l:previousday))
+  wincmd W
+  wincmd W
 endfunction "}}}
 augroup VimwikiTitleJournal
   autocmd!
