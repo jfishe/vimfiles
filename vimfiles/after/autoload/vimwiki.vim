@@ -116,6 +116,11 @@ function! vimwiki#TitleJournal() "{{{
 
   execute 'diffsplit ' . fnameescape(bufname(l:previousday))
 endfunction "}}}
+augroup VimwikiTitleJournal
+  autocmd!
+  autocmd BufEnter,BufNew *.wiki if &diff | set foldmethod=syntax |
+        \ execute 'normal! zR' | endif
+augroup END
 " }}}
 
 " vim:tabstop=2:shiftwidth=2:expandtab:foldmethod=marker:textwidth=79
