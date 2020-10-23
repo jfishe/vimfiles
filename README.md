@@ -17,12 +17,13 @@ Several applications are assumed to be in the `PATH`, install
 See steps to add a local bin directory for
 the other applications referenced in the vim configuration files.
 
-### Install Vim on Linux
+### Install Vim on Windows Subsystem for Linux
 
 On Debian derivatives, like Ubuntu, the
 [dotfiles](https://github.com/jfishe/dotfiles)
 repository provides an installation script for a compatible version of Vim with
-GTK3.
+GTK3. It also links `~/.vim/` to Windows `$USERPROFILE/vimfiles/` to share
+configuration across environments.
 
 ### Install Vim on Windows
 
@@ -32,15 +33,14 @@ or use `chocolatey`: `choco install vim`.
 
 ### `vimfiles` installation
 
-To install in Unix based systems:
+If you are not using WSL, to install in Unix based systems:
 
 ```bash
-cd $TMP
-git clone https://github.com/jfishe/vimfiles.git
-mv vimfiles/vimfiles vimfiles/.vim
-cp -r vimfiles/. ~
-cd ~
-git submodule update --init --recursive --remote
+# Clone will fail if .local/ does not exist.
+git clone https://github.com/jfishe/vimfiles.git $HOME/.local/vimfiles
+ln -s $HOME/.local/vimfiles/vimfiles $HOME/.vim
+cd $HOME/.local/vimfiles
+git submodule update --init --recursive
 ```
 
 To install in Windows:
