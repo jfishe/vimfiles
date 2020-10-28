@@ -72,6 +72,8 @@ $dotfiles | ForEach-Object {
     if ($_.PSIsContainer) {
       cmd /c "mklink /J .\$item $_"
     } else {
+      # Use hardlink if symlink does not work.
+      # cmd /c "mklink /H .\$item $_"
       cmd /c "mklink .\$item $_"
     }
 }
@@ -147,22 +149,30 @@ if (-not $uservimcmd -and $globalvimcmd) {
 Install Miniconda or Anaconda per the directions in the
 [Anaconda Documentation](https://docs.anaconda.com/anaconda/install/).
 
-[environment.yml](file://./environment.yml) lists the conda and pip packages
+Windows 10 includes a python executable in
+`$env:LOCALAPPDATA/Microsoft/WindowsApps/`, which interferes with
+[Conquer of Completion (CoC)]. Remove `python.exe` and `python3.exe` or run one
+of them to install Python 3 from the Microsoft Store.
+
+[environment.yml](environment.yml) lists the conda and pip packages
 needed for the Vim configuration.
 
 To add packages to the conda environment for use by Vim:
 
 ```powershell
-conda update conda
-conda env update --file environment.yml
-```
+# Update conda. The installer is typically out of date.
+conda update -n base -c defaults conda
 
-`--name <env>` is not needed and defaults to the current version of python
-required by Windows Vim. To create an environment:
+# Initialize conda for the various shells on the computer
+conda init
 
-```powershell
-conda update conda
-conda env create --name <env> --file environment.yml
+# Create a python38 environment compatible with the installed version of Vim.
+$File = $env:LOCALAPPDATA\vimfiles\environment.yml
+conda env create --file $File
+
+# Periodically update the base and python38 environments.
+conda update -n base -c defaults conda
+conda update -n python38 --all
 ```
 
 ### Windows Registry
@@ -170,8 +180,8 @@ conda env create --name <env> --file environment.yml
 Vim's `install.exe` tries to add right-click menus to `explorer`, but usually
 fails, even when installing with administrator rights.
 `~\vim\vim82\GvimExt64\GvimExt.reg` provides an example but assumes the `dll`
-and executable are in the `PATH`. `GvimExt.reg` provides a working version,
-assuming vim is installed in `%USERPROFILE%`.
+and executable are in the `PATH`. [`GvimExt.reg`](GvimExt.reg) provides a
+working version, assuming vim is installed in `%USERPROFILE%`.
 
 The following will request administrator permission and add the contents of
 `GvimExt.reg` to the Window Registry. Validate the file against the version
@@ -189,7 +199,7 @@ Project Gutenberg. Use a browser; the site blocks scripted download.
 
 ## Dictionary
 
-Refer to `:help dictionary` and downlaod or symlink
+Refer to `:help dictionary` and download or symlink
 [dictionary/words](dictionary/words). See below for symlink instrucitons.
 
 On Windows 10, you can symlink to a dictionary in a WSL 1 Distro. It may work
@@ -215,12 +225,15 @@ cmd /c 'mklink words "\\wsl$\<distro_name>\usr\share\dict\american-english"'
 
 ## grepprg and grepformat
 
-[Faster Grepping in Vim](https://robots.thoughtbot.com/faster-grepping-in-vim)
-recommends `ag`.
-[The silver searcher](https://github.com/ggreer/the_silver_searcher) needs
-to be installed or default grep will be used. VWS speed is greatly improved by
-re-defining the command. Grepprg and grepformat need to be set per
-[ag.1.md](https://github.com/ggreer/the_silver_searcher/blob/master/doc/ag.1.md).
+[`ripgrep`](https://github.com/BurntSushi/ripgrep) should be installed with
+`chocolatey` or `conda`.
+
+```powershell
+choco install ripgrep
+
+conda activate python38
+conda install ripgrep
+```
 
 ## Gutentags & Universal ctags
 
@@ -377,7 +390,7 @@ The proposed DOS batch script does not work with Microsoft Office 2016 because
 which uses `AppVLP.exe`, as follows:
 
 ```powershell
-cmd /c "mklink $env:USERPROFILE\bin\xldiff.bat $env:LOCALAPPDATA\vimfiles\vimfiles\xldiff.bat"
+cmd /c "mklink $env:USERPROFILE\bin\xldiff.bat $env:LOCALAPPDATA\vimfiles\xldiff.bat"
 ```
 
 `.gitconfig` defines `[diff "excel"]` and `.gitattributes_global` sets
