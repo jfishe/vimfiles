@@ -1,3 +1,9 @@
+" Vimwiki User Autoload {{{
+if exists('g:loaded_vimwiki_user_after_auto') || &compatible
+  finish
+endif
+let g:loaded_vimwiki_user_after_auto = 1
+
 " For commands VimwikiSearch and VWS {{{
 " Use Rg and QuickFixWindow instead of lvimgrep in VWS and VWT.
 function! vimwiki#searchRg(search_pattern) abort
@@ -87,43 +93,41 @@ endfunction " }}}
 " Diff today and previous day.
 function! vimwiki#TitleJournal() abort "{{{
   if search('^= Journal.* =$', 'w', 0, 500)
-    return
+    finish
   endif
 
-  if exists('*strftime')
-    let l:bash = strftime('%Y-%m-%d')
-  else
-    let l:bash = 'bash -c "date --iso-8601"'
-    let l:bash = system(l:bash)[:-2]
-  endif
+  set filetype=vimwiki
 
-  let l:title = 'Journal ' . l:bash
+  let l:title = 'Journal ' . expand('%:t:r')
   let l:failed = append(0, l:title)
-  execute 'normal! 1G'
-  execute "normal \<Plug>VimwikiAddHeaderLevel"
+  execute 'normal! gg'
+  call vimwiki#base#AddHeaderLevel(1)
 
   execute 'normal! 2G'
 
-  execute "normal \<Plug>VimwikiDiaryPrevDay"
-  let l:previousday = bufnr()
+  " Creates a diary entry for today if calendar.vim started from future date.
+  call vimwiki#diary#goto_prev_day()
 
-  let l:todoheader = search('^== Todo ==$','w', 0, 500 )
+  let l:todoheader = search('^== Todo ==$\|^## Todo$','w', 0, 500 )
   if l:todoheader
     silent ,$yank m
-    execute "normal \<Plug>VimwikiGoBackLink"
+    VimwikiGoBackLink
     silent put m
+  else
+    VimwikiGoBackLink
   endif
 
   only
-  execute 'diffsplit ' . fnameescape(bufname(l:previousday))
-  wincmd W
-  wincmd W
+  vsplit
+  call vimwiki#diary#goto_prev_day()
+  diffthis
+  set foldmethod=syntax
+  execute 'normal! zR'
+  wincmd p
+  diffthis
+  execute 'normal! gg'
 endfunction "}}}
-augroup VimwikiTitleJournal
-  autocmd!
-  autocmd BufEnter,BufNew *.wiki if &diff | set foldmethod=syntax |
-        \ execute 'normal! zR' | endif
-augroup END
+" }}}
 " }}}
 
 " vim:tabstop=2:shiftwidth=2:expandtab:foldmethod=marker:textwidth=79

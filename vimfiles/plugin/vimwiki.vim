@@ -1,4 +1,8 @@
-" Vimwiki plugin file
+" Vimwiki user plugin file
+if exists('g:loaded_vimwiki_user') || &compatible
+  finish
+endif
+let g:loaded_vimwiki_user = 1
 
 " Locate Documents folder or user home directory {{{
 " Finds My Documents or Documents folder even if it's not located in
@@ -44,7 +48,8 @@ let s:wiki_1.diary_sort = 'asc'
 " let s:wiki_1.syntax = 'markdown'
 " let s:wiki_1.ext = '.md'
 let s:wiki_1.automatic_nested_syntaxes = 1
-let s:wiki_1.nested_syntaxes = {'python': 'python', 'bash': 'sh', 'DOS': 'dosbatch', 'powershell': 'ps1'}
+let s:wiki_1.nested_syntaxes = {'python': 'python', 'bash': 'sh',
+      \ 'DOS': 'dosbatch', 'powershell': 'ps1'}
 let s:wiki_1.template_path = s:my_docs . '/vimwiki_html/templates/'
 let s:wiki_1.template_default = 'default'
 let s:wiki_1.template_ext = '.tpl'
@@ -75,6 +80,15 @@ let g:vimwiki_folding='syntax'"}}}
 "      " Now enable vimtex plugin to get vimtex keybindings and such
 "      " autocmd BufNewFile,BufFilePre,BufRead *.wiki call vimtex#init()
 " augroup END "}}}
+
+augroup VimwikiTitleJournal "{{{
+  autocmd!
+  " Create today's Journal and compare to previous day.
+  autocmd BufNew */diary/[0-9]\\\{-4\}*.wiki call vimwiki#TitleJournal()
+  " Use Vimwiki foldmethod when &diff.
+  autocmd BufEnter,BufNew *.wiki if &diff | set foldmethod=syntax |
+        \ execute 'normal! zR' | endif
+augroup END "}}}
 
 function! VimwikiLinkHandler(link) abort
     let link = a:link

@@ -30,5 +30,6 @@ nnoremap <silent><buffer> <F3> :call vimwiki#TitleJournal()<CR>
 "}}}
 
 setlocal spell spelllang=en_us
+
 " vim:tabstop=2:shiftwidth=2:expandtab:foldmethod=marker:textwidth=79
 " }}}
