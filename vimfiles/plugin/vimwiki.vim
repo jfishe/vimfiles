@@ -84,7 +84,7 @@ let g:vimwiki_folding='syntax'"}}}
 augroup VimwikiTitleJournal "{{{
   autocmd!
   " Create today's Journal and compare to previous day.
-  autocmd BufNew */diary/[0-9]\\\{-4\}*.wiki call vimwiki#TitleJournal()
+  autocmd BufNewFile */diary/[0-9]\\\{-4\}*.wiki call vimwiki#TitleJournal()
   " Use Vimwiki foldmethod when &diff.
   autocmd BufEnter,BufNew *.wiki if &diff | set foldmethod=syntax |
         \ execute 'normal! zR' | endif

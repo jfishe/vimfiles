@@ -93,7 +93,7 @@ endfunction " }}}
 " Diff today and previous day.
 function! vimwiki#TitleJournal() abort "{{{
   if search('^= Journal.* =$', 'w', 0, 500)
-    finish
+    return
   endif
 
   set filetype=vimwiki
