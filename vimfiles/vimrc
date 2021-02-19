@@ -1,5 +1,39 @@
+" ================ packadd! ====================== {{{
+" defaults.vim invokes `filetype plugin indent on` after packadd! lines.
+
+" The matchit plugin {{{
+" makes the % command work better, but it is not backwards
+" compatible.
+" The ! means the package won't be loaded right away but when plugins are
+" loaded during initialization.
+if has('syntax') && has('eval')
+  packadd! matchit
+endif
+" }}}
+" ================ Python 3 ====================== {{{
+if !empty($CONDA_PREFIX) && has('python3_dynamic')
+  set pythonthreehome=$CONDA_PREFIX
+endif
+if has('python3')
+  packadd! ultisnips
+  packadd! vim-pydocstring
+  packadd! vim-snippets
+  packadd! vimtex
+endif
+" }}}
+" ================ Taskwarrior ====================== {{{
+if executable('task')
+  packadd! tagbar
+  packadd! taskwiki
+  packadd! vim-plugin-AnsiEsc
+  packadd! vim-taskwarrior
+endif
+" }}}
+" }}}
+
 " ================ Windows & Defaults ================== {{{
 " Get the defaults that most users want.
+" defaults.vim invokes `filetype plugin indent on` after packadd! lines.
 source $VIMRUNTIME/defaults.vim
 source $VIMRUNTIME/mswin.vim
 
@@ -81,27 +115,6 @@ elseif filereadable('/usr/share/dict/words')
 endif
 " }}}
 
-" The matchit plugin {{{
-" makes the % command work better, but it is not backwards
-" compatible.
-" The ! means the package won't be loaded right away but when plugins are
-" loaded during initialization.
-if has('syntax') && has('eval')
-  packadd! matchit
-endif
-" }}}
-" ================ Python 3 ====================== {{{
-" if !empty($CONDA_PREFIX) && (has('win32') || has('win64'))
-if !empty($CONDA_PREFIX) && has('python3_dynamic')
-  set pythonthreehome=$CONDA_PREFIX
-endif
-if has('python3')
-  packadd! ultisnips
-  packadd! vim-pydocstring
-  packadd! vim-snippets
-  packadd! vimtex
-endif
-" }}}
 " ================ Indentation ====================== {{{
 " Commented lines relocated to sensible.vim
 
