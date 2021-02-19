@@ -1,67 +1,75 @@
-*myhelp.txt* Cheat sheet of Vim stuff often forgotten
+*myhelp.txt*	For Vim version 8.2	Last change: 2021 Feb 19
+
+Cheat sheet of Vim stuff often forgotten
 
 Author: John D. Fisher <https://github.com/jfishe>
 License: Same terms as Vim itself (see |license|)
 
 ==============================================================================
-CONTENTS                                         *myhelp*
+CONTENTS							      *myhelp*
 
-  1. Normal Mode.................................|myhelp-normal|
-  2. Visual Mode.................................|myhelp-visual|
-  3. Insert Mode.................................|myhelp-insert|
-  4. Ex Mode.....................................|myhelp-ex|
-                                                 |myhelp-ex-list|
-                                                 |myhelp-ex-pack|
-  5. ALE.........................................|myhelp-ale|
-  6. VimWiki.....................................|myhelp-vimwiki|
-  7. Conquer of Completion.......................|myhelp-coc|
-                                                 |myhelp-coc-diagnostic|
-                                                 |myhelp-coc-documentation|
-                                                 |myhelp-coc-object|
-                                                 |myhelp-coc-format|
-                                                 |myhelp-coc-fix|
-                                                 |myhelp-coc-refactor|
-                                                 |myhelp-coc-list|
-  8. Miscellaneous Functions                     |myhelp-misc|
-
-==============================================================================
-1. Normal Mode                                   *myhelp-normal*
-
-~             Uppercase a letter (works on ranges)
-/<C-R><C-W>   Pull word into command line (or search)
-dil           Delete inner line.
-gx            Open URL, etc. with default protocol. See |netrw-gx|
-              No spaces but ± and () are allowed.
-                sip:4179
-                sip:95095315444
-                sip:9+1(509)531-5444
-gf            Open file under cursor in Vim. Visually select to open file with
-              spaces in name.
-z commands:
-  z.          current line at the center
-  z-          current line at the bottom
+  1. Normal Mode					       |myhelp-normal|
+  2. Visual Mode					       |myhelp-visual|
+  3. Insert Mode					       |myhelp-insert|
+  4. Ex Mode							   |myhelp-ex|
+							      |myhelp-ex-list|
+							      |myhelp-ex-pack|
+  5. ALE							  |myhelp-ale|
+  6. VimWiki						      |myhelp-vimwiki|
+  7. Conquer of Completion					  |myhelp-coc|
+						       |myhelp-coc-diagnostic|
+						    |myhelp-coc-documentation|
+							   |myhelp-coc-object|
+							   |myhelp-coc-format|
+							      |myhelp-coc-fix|
+							 |myhelp-coc-refactor|
+							     |myhelp-coc-list|
+  8. Miscellaneous Functions					 |myhelp-misc|
 
 ==============================================================================
-2. Visual Mode                                   *myhelp-visual*
+1. Normal Mode						       *myhelp-normal*
 
-J   Join the highlighted lines, removing unnecessary whitespace.
-va' Select a single-quoted string (also works with " and `)
-vi' Select the contents of a single-quoted string
-vab Select a "block" (works differently in different langs)
-vat Select a <tag> and its contents (use i instead of a for just contents)
-date` Insert today's date.
+Command		Meaning ~
+------------------------------------------------------------------------------
+~		Uppercase a letter (works on ranges)
+/<C-R><C-W>	Pull word into command line (or search)
+dil		Delete inner line.
+gx		Open URL, etc. with default protocol. See |netrw-gx|
+		No spaces but ± and () are allowed. >
+		sip:4179
+		sip:95095315444
+		sip:9+1(509)531-5444
+gf		Open file under cursor in Vim. Visually select to open file
+		with spaces in name.
+|z| commands:
+z.		current line at the center
+z-		current line at the bottom
 
 ==============================================================================
-3. Insert Mode                                   *myhelp-insert*
+2. Visual Mode						       *myhelp-visual*
 
-Command                 Meaning ~
-<C-N>                   Complete word
-<C-N><C-P>              Complete word (?)
-<C-X><C-L>              Complete line (!!)
-                        |ins-completion|
-CTRL-K {char1} {char2}  Insert digraphs. |i_CTRL-K|
-                        |digraphs-use| |digraph-table|
-CTRL-QU{hexidecimal}    Insert unicode character. |i_CTRL-V_digit|
+Command		Meaning ~
+------------------------------------------------------------------------------
+J		Join the highlighted lines, removing unnecessary whitespace.
+va'		Select a single-quoted string (also works with " and `)
+vi'		Select the contents of a single-quoted string
+vab		Select a "block" (works differently in different langs)
+vat		Select a <tag> and its contents (use i instead of a for just
+		contents)
+date`		Insert today's date.
+
+==============================================================================
+3. Insert Mode						       *myhelp-insert*
+
+Command		Meaning ~
+------------------------------------------------------------------------------
+<C-N>		Complete word
+<C-N><C-P>	Complete word (?)
+<C-X><C-L>	Complete line (!!) |ins-completion|
+CTRL-K {char1} {char2}
+		Insert digraphs. |i_CTRL-K| |digraphs-use| |digraph-table|
+CTRL-QU{hexidecimal}
+		Insert unicode character. |i_CTRL-V_digit|
 
 char  digraph hex   dec   official name ~
 °     DG      0xb0  176   DEGREE SIGN
@@ -82,62 +90,71 @@ char  digraph hex   dec   official name ~
 λ     l*      03BB  0955  GREEK SMALL LETTER LAMDA
 φ     f*      03C6  0966  GREEK SMALL LETTER PHI
 τ     t*      03C4  0964  GREEK SMALL LETTER TAU
-💲                  1F4B2 Heavy Dollar Sign
-＄                  FF04  Fullwidth Dollar Sign
-﹩                  FE69  Small Dollar Sign
-℔                   2114  LB BAR SYMBOL
+💲		    1F4B2 Heavy Dollar Sign
+＄		    FF04  Fullwidth Dollar Sign
+﹩		    FE69  Small Dollar Sign
+℔		    2114  LB BAR SYMBOL
 
 ==============================================================================
-4. Ex Mode                                       *myhelp-ex*
+4. Ex Mode							   *myhelp-ex*
 
-Command                     Meaning ~
-:Vterm                      Default vertical terminal. Append bash to specify.
-:Vposh                      PowerShell vertical terminal
-:set relativenumber         |'relativenumber'| |'rnu'|
-:s/ <\p\{-}@\p\{-}>//cgi    Remove email addresses.
-:%s/\%VSEARCH/REPLACE/g     Replace all occurrences in selection but not
-                            line. \%V limits the search.
-:%s/\%V <\p\{-}@\p\{-}>//g  Remove all email address in line or selection.
-:%s/[{;}]/&\r/g|norm! =gg   Format css from one-line to multi-line.
+Command		Meaning ~
+------------------------------------------------------------------------------
+`:Vterm`	Default vertical terminal. Append bash to specify.
+`:Vposh`	PowerShell vertical terminal
+`:set relativenumber`
+		|'relativenumber'| |'rnu'|
+`:s/ <\p\{-}@\p\{-}>//cgi`
+		Remove email addresses.
+`:%s/\%VSEARCH/REPLACE/g`
+		Replace all occurrences in selection but not line. |/\%V|
+		limits the search.
+:%s/\%V <\p\{-}@\p\{-}>//g
+		Remove all email address in line or selection.
+`:%s/[{;}]/&\r/g | norm! =gg`
+		Format css from one-line to multi-line.
 
-                                                 *myhelp-ex-list*
+							      *myhelp-ex-list*
 Prompt for selection after showing list items.
 
-Command                     Meaning ~
-:changes                    Print the change list. |:changes|
-:cl[ist]                    List all errors that are valid |quickfix-valid|.
-                            |:cl| |:clist|
-:g[lobal]/pattern/#         Search 'pattern' and number report line number
-                            for in preview window. |:g| |:global|
-:ju[mps]                    Print the jump list. |:ju| |:jumps|
-:lli[st]                    List all the entries in the location list for the
-                            current window.|:lli| |:llist|
-:ls[!] [flags]              Show all buffers. *:files* :buffers* *:ls*
-:marks                      List all the current marks. |:marks|
-:old[files]                 List previously open files. |:oldfiles|
-:reg[isters]                List registers and paste from selected register.
-:undol[ist]                 List the leafs in the tree of changes.
-                            |:undol| |:undolist|
+Command		Meaning ~
+------------------------------------------------------------------------------
+`:changes`	Print the change list. |:changes|
+`:cl[ist]`	List all errors that are valid |quickfix-valid|.
+		|:cl| |:clist|
+`:g[lobal]/pattern/#`
+		Search 'pattern' and number report line number for in preview
+		window. |:g| |:global|
+`:ju[mps]`	Print the jump list. |:ju| |:jumps|
+`:lli[st]`	List all the entries in the location list for the
+		current window.|:lli| |:llist|
+`:ls[!] [flags]`Show all buffers. `:files` `:buffers` `:ls`
+`:marks`	List all the current marks. |:marks|
+`:old[files]`		List previously open files. |:oldfiles|
+`:reg[isters]`	List registers and paste from selected register.
+`:undol[ist]`	List the leafs in the tree of changes.
+		|:undol| |:undolist|
 
-                                                 *myhelp-ex-pack*
+							      *myhelp-ex-pack*
 Vim does not generate help tags for pack/foo/opt/doc because opt/doc is not in
-the runtime path, nor does it include existing tags that are not in the runtime
-path.
+the runtime path, nor does it include existing tags that are not in the
+runtime path.
 
-Command                     Meaning ~
-:packloadall                Add pack/*/opt to runtime path.
-                            :help foo will work if tags exist.
-:helptags ALL               Create/update helptags under opt.
-
-:packadd foo                Add foo/opt to runtime path, making :help foo work.
+Command		Meaning ~
+------------------------------------------------------------------------------
+`:packloadall`	Add pack/*/opt to runtime path. `:help foo` will work if tags
+		exist.
+`:helptags ALL`	Create/update helptags under opt.
+`:packadd foo`	Add foo/opt to runtime path, making `:help foo` work.
 
 ==============================================================================
-5. ALE                                           *myhelp-ale*
+5. ALE								  *myhelp-ale*
 
-Command         Meaning ~
-<localleader>?  ALEDetail
-<C-k>           Previous error
-<C-j>           Next error
+Command		Meaning ~
+------------------------------------------------------------------------------
+<localleader>?	ALEDetail
+<C-k>		Previous error
+<C-j>		Next error
 
 Disable all rules: <!-- markdownlint-disable -->
 Enable all rules: <!-- markdownlint-enable -->
@@ -145,107 +162,97 @@ Disable one or more rules: <!-- markdownlint-disable MD001 MD002 -->
 Enable one or more rules: <!-- markdownlint-enable MD001 MD002 -->
 
 ==============================================================================
-6. VimWiki                                       *myhelp-vimwiki*
+6. VimWiki						      *myhelp-vimwiki*
 
-Command                         Meaning ~
-v$,m                            Convert selected e-mail addresses in Visual
-                                selection into valid URI in
-                                |vimwiki-syntax-links|. Addresses should be
-                                comma separated or semi-colon separated, if
-                                they contain commas.
-%s/\[\[diary\//\[\[..\/diary\// |:VimwikiGenerateTags| diary path correction
-                                so that links work in |:Vimwiki2HTML| and
-                                |:VimwikiFollowLink| when the file does not
-                                start in the root directory.
-<F3>                            Create today's Journal with
-                                |vimwiki_<Leader>w<Leader>w|. Then use <F3> to create
-                                Journal title, copy previous day's Journal and
-                                diff against today's.
-
-==============================================================================
-7. Conquer of Completion                         *myhelp-coc*
-
-Command                         Meaning ~
-<TAB>                           Trigger completion.
-                               |n_coc-range-select| |v_coc-range-select|
-			Select next selection range.
-
-<cr>                            Confirm completion.
-
-                                                 *myhelp-coc-diagnostic*
-[g                              |n_coc-diagnostic-prev|
-]g                              |n_coc-diagnostic-next|
-
-                                                 *myhelp-coc-documentation*
-gd                              |n_coc-definition|
-gy                              |coc-type-definition|
-gi                              |coc-implementation|
-gr                              |coc-references|
-K                               |coc-action-doHover|
-                        Show documentation of the current word in a preview
-                        window.
-
-                                                 *myhelp-coc-object*
-if                               |n_coc-funcobj-i| |v_coc-funcobj-i|
-af                               |n_coc-funcobj-a| |v_coc-funcobj-a|
-                        Select inside/around function.
-
-                                                 *myhelp-coc-format*
-<leader>f                       |n_coc-format-selected|
-                                |v_coc-format-selected|
-                        Format selected range, would work in both visual mode
-                        and normal mode, when used in normal mode, the
-                        selection works on the motion object.
-
-:Format                          |n_coc-format|
-			Format the whole buffer
-
-                                                 *myhelp-coc-fix*
-<leader>qf                       |n_coc-fix-current|
-                        Try to run quickfix action for diagnostics on the
-                        current line.
-
-                                                 *myhelp-coc-refactor*
-<leader>rn                      |n_coc-rename|
-                        Rename symbol under cursor to a new word.
-
-<leader>a                        |n_coc-codeaction-selected|
-                                 |v_coc-codeaction-selected|
-                        Get and run code action(s) with the selected
-                        region.
-
-<leader>ac                       |n_coc-codeaction|
-                        Get and run code action(s) for current line.
-
-                                                 *myhelp-coc-list*
-<Tab>                   Select action. |coc-list-mappings|
-<space>a                         |coc-list-diagnostics|
-	                All diagnostics for the workspace.
-<space>e                         |coc-list-extensions|
-                        Manage coc extensions.
-<space>c                         |coc-list-commands|
-                	Workspace commands.
-<space>o                         |coc-list-outline|
-	                Symbols in the current document.
-<space>s                         |coc-list-symbols|
-	                Search workspace symbols.
-<space>j                         |:CocNext|
-                        Invoke the default action for the next item in the last
-                        list.
-<space>k                         |:CocPrev|
-                        Invoke default action for the previous item in the last
-                        list.
-<space>p                         |:CocListResume|
-		        Reopen last opened list
+Command		Meaning ~
+------------------------------------------------------------------------------
+v$,m		Convert selected e-mail addresses in Visual
+		selection into valid URI in |vimwiki-syntax-links|. Addresses
+		should be comma separated or semi-colon separated, if they
+		contain commas.
+%s/\[\[diary\//\[\[..\/diary\//
+		|:VimwikiGenerateTags| diary path correction so that links
+		work in |:Vimwiki2HTML| and |:VimwikiFollowLink| when the
+		file does not start in the root directory.
+<F3>		Create today's Journal with |vimwiki_<Leader>w<Leader>w|. Then
+		use <F3> to create Journal title, copy previous day's Journal
+		and diff against today's.
 
 ==============================================================================
-8. Miscellaneous Functions                      *myhelp-misc*
+7. Conquer of Completion					  *myhelp-coc*
 
-Command                         Meaning ~
+Command		Meaning ~
+------------------------------------------------------------------------------
+<TAB>		Trigger completion.  |n_coc-range-select| |v_coc-range-select|
+		Select next selection range.
+<cr>		Confirm completion.
+
+						       *myhelp-coc-diagnostic*
+[g		|n_coc-diagnostic-prev|
+]g		|n_coc-diagnostic-next|
+
+						    *myhelp-coc-documentation*
+gd		|n_coc-definition|
+gy		|coc-type-definition|
+gi		|coc-implementation|
+gr		|coc-references|
+K		|coc-action-doHover| Show documentation of the current word in
+		a preview window.
+
+							   *myhelp-coc-object*
+if		|n_coc-funcobj-i| |v_coc-funcobj-i|
+af		|n_coc-funcobj-a| |v_coc-funcobj-a|
+		Select inside/around function.
+
+							   *myhelp-coc-format*
+<leader>f	|n_coc-format-selected| |v_coc-format-selected|
+		Format selected range, would work in both visual mode and
+		normal mode, when used in normal mode, the selection works on
+		the motion object.
+:Format		|n_coc-format| Format the whole buffer
+
+							      *myhelp-coc-fix*
+<leader>qf	|n_coc-fix-current| Try to run quickfix action for diagnostics
+		on the current line.
+
+							 *myhelp-coc-refactor*
+<leader>rn	|n_coc-rename| Rename symbol under cursor to a new word.
+<leader>a	|n_coc-codeaction-selected| |v_coc-codeaction-selected|
+		Get and run code action(s) with the selected region.
+<leader>ac	|n_coc-codeaction| Get and run code action(s) for current
+		line.
+
+							     *myhelp-coc-list*
+<Tab>		Select action. |coc-list-mappings|
+<space>a		 |coc-list-diagnostics|
+		All diagnostics for the workspace.
+<space>e		 |coc-list-extensions|
+		Manage coc extensions.
+<space>c		 |coc-list-commands|
+		Workspace commands.
+<space>o		 |coc-list-outline|
+		Symbols in the current document.
+<space>s		 |coc-list-symbols|
+		Search workspace symbols.
+<space>j		 |:CocNext|
+		Invoke the default action for the next item in the last
+		list.
+<space>k		 |:CocPrev|
+		Invoke default action for the previous item in the last
+		list.
+<space>p		 |:CocListResume|
+		Reopen last opened list
+
+==============================================================================
+8. Miscellaneous Functions					 *myhelp-misc*
+
+Command		Meaning ~
+------------------------------------------------------------------------------
 call condaactivate#AddConda2Vim()
-                  Update Windows Batch files to activate python38 environment
-                  prior to starting Vim.
+		Update Windows Batch files to activate python38 environment
+		prior to starting Vim.
 
-call MyMaps()     Get listing of map assignments. :silent verbose map!
-
-         vim:tw=78:et:ft=help:norl:
+call MyMaps()	Get listing of map assignments: >
+		:silent verbose map!
+<
+ vim:tw=78:isk=!-~,^*,^\|,^\":ts=8:noet:ft=help:norl:
