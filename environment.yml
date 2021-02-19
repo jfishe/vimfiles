@@ -1,15 +1,18 @@
-name: python38
+name: vim_python
 channels:
 - conda-forge
 - defaults
 dependencies:
-- python=3.8
+- python=3.9
 - black
 - isort
+- mypy
 - nodejs
 - pandoc
 - panflute
 - pip
 - pydocstyle
+- pylint
 - pip:
   - MarkdownPP
+  - vim-vint

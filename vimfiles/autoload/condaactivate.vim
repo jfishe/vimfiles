@@ -2,7 +2,7 @@
 function! condaactivate#AddConda2Vim() abort
   let l:apppath = "$LOCALAPPDATA/Microsoft/WindowsApps/*vim*"
   echomsg 'Searching: ' . l:apppath
-  let l:python = 'call conda activate python38'
+  let l:python = 'call conda activate vim_python'
   execute 'vimgrep /rem -- Run Vim --/j ' . l:apppath
   let l:bufflist = map(getqflist(), 'v:val.bufnr')
 
