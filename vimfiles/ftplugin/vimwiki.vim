@@ -8,12 +8,15 @@ set cpo&vim
 
 let b:undo_taskwiki_taskrc_location = get(g:, 'taskwiki_taskrc_location', '')
 let b:undo_taskwiki_data_location  = get(g:, 'taskwiki_data_location', '')
-let g:taskwiki_taskrc_location = vimwiki#path#join_path(
+
+let g:taskwiki_taskrc_location = vimwiki#path#path_norm(
+  \ vimwiki#path#join_path(
   \ vimwiki#vars#get_wikilocal('path'), '.taskrc'
-  \ )
-let g:taskwiki_data_location = vimwiki#path#join_path(
+  \ ))
+let g:taskwiki_data_location = vimwiki#path#path_norm(
+  \ vimwiki#path#join_path(
   \ vimwiki#vars#get_wikilocal('path'), '.task'
-  \ )
+  \ ))
 
 function s:undo_set_var_taskwiki() abort " {{{
   if !empty(b:undo_taskwiki_taskrc_location)
