@@ -33,7 +33,7 @@ let s:wiki_1.diary_sort = 'asc'
 " let s:wiki_1.ext = '.md'
 let s:wiki_1.automatic_nested_syntaxes = 1
 let s:wiki_1.nested_syntaxes = {'python': 'python', 'bash': 'sh',
-      \ 'DOS': 'dosbatch', 'powershell': 'ps1'}
+      \ 'DOS': 'dosbatch', 'powershell': 'ps1', 'snippets': 'snippets'}
 let s:wiki_1.template_path = s:my_docs . '/vimwiki_html/templates/'
 let s:wiki_1.template_default = 'default'
 let s:wiki_1.template_ext = '.tpl'
