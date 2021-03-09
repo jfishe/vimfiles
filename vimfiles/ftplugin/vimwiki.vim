@@ -29,13 +29,14 @@ function s:undo_set_var_taskwiki() abort " {{{
   else
     unlet g:taskwiki_data_location
   endif
+  unlet b:undo_taskwiki_taskrc_location b:undo_taskwiki_data_location
 endfunction " }}}
 
 let b:undo_ftplugin = get(b:, 'undo_ftplugin', '')
 if !empty('b:undo_ftplugin')
   let b:undo_ftplugin ..= " | "
 endif
-let b:undo_ftplugin ..= "call <SID>undo_set_var_taskwiki()"
+let b:undo_ftplugin ..= 'call '..string(function('<SID>undo_set_var_taskwiki'))..'()'
       \ .. " | unlet b:did_ftplugin_user"
 
 let &cpo = s:save_cpo

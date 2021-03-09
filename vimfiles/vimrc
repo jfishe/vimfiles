@@ -15,6 +15,7 @@ if !empty($CONDA_PREFIX) && has('python3_dynamic')
   set pythonthreehome=$CONDA_PREFIX
 endif
 if has('python3')
+  packadd vimwiki_docx
   packadd! ultisnips
   packadd! vim-pydocstring
   packadd! vim-snippets
