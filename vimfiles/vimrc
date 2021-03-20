@@ -15,7 +15,7 @@ if !empty($CONDA_PREFIX) && has('python3_dynamic')
   set pythonthreehome=$CONDA_PREFIX
 endif
 if has('python3')
-  packadd vimwiki_docx
+  packadd! vimwiki_docx
   packadd! ultisnips
   packadd! vim-pydocstring
   packadd! vim-snippets
@@ -54,8 +54,6 @@ set visualbell          "No sounds
 set writebackup
 set nobackup
 
-" LocalLeader
-let g:maplocalleader = ','
 " }}}
 " ================ Statusline ================== {{{
 set statusline=\ %<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P

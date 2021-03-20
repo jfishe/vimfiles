@@ -10,4 +10,5 @@ let g:taskwiki_dont_preserve_folds = 1
 
 let g:taskwiki_disable_concealcursor = 1
 
+let g:taskwiki_maplocalleader = ',t'
 " vim:tabstop=2:shiftwidth=2:expandtab:foldmethod=marker:textwidth=79

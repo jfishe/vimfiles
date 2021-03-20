@@ -21,6 +21,7 @@ command! -buffer -nargs=* -complete=custom,vimwiki#tags#complete_tags
 " }}}
 
 " Convert selected text to VimWikiLink {{{
+let g:maplocalleader = ','
 vnoremap <silent><localleader>m
   \ :call vimwiki#myvimwiki_normalize_mail_v()<CR>
 "}}}
