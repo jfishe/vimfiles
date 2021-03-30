@@ -15,25 +15,27 @@ function! condaactivate#AddConda2Vim() abort
   " vim.bat
   " vimdiff.bat
   " vimtutor.bat
-  echomsg 'Searching: '..l:apppath
+  echo 'Searching:' expand(l:apppath, )
 
-  execute 'vimgrep /rem -- Run Vim --/j '..l:apppath
+  silent execute 'vimgrep /rem -- Run Vim --/j ' l:apppath
   let l:bufflist = map(getqflist(), 'v:val.bufnr')
 
   let l:python = 'call conda activate '..l:conda_prefix
 
   for l:buffer in l:bufflist
-    execute 'buffer ' . l:buffer
+    silent execute 'buffer' l:buffer
     let l:searchresult = search(escape(l:python, '\'), 'w')
     if l:searchresult == 0
-      echomsg 'Add '..l:python..' to '..bufname(l:buffer + 0)
+      echohl  WarningMsg
+      echomsg 'Add' l:python 'to' bufname(l:buffer + 0)
+      echohl  None
       call append(1, l:python)
-      update
+      silent update
     else
-      echomsg 'Already added '..l:python..' to '..bufname(l:buffer + 0)
+      echo 'Already added' l:python 'to' bufname(l:buffer + 0)
     endif
 
-    bdelete
+    silent bdelete
 
   endfor
 endfunction
