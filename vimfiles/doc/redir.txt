@@ -1,0 +1,51 @@
+*Redir.txt*	For Vim version 8.2	Last change: 2021 APR 2
+
+Redirect the output of a Vim or external command into a scratch buffer
+
+Author: Romain Lafourcade  <https://gist.github.com/romainl/eae0a260ab9c135390c30cd370c20cd7>
+
+==============================================================================
+*Redir*
+Redirect the output of a Vim or external command into a scratch buffer
+
+Usage (any shell)
+
+Show full output of command `:hi` in scratch window:
+
+`:Redir hi`
+
+Show full output of command `:!ls -al` in scratch window:
+
+`:Redir !ls -al`
+
+==============================================================================
+Additional usage (depends on non-standard shell features so YMMV)
+
+Evaluate current line with `node` and show full output in scratch window:
+
+" current line
+console.log(Math.random());
+
+" Ex command
+`:.Redir !node`
+
+" scratch window
+0.03987581000754448
+
+Evaluate visual selection + positional parameters with `bash` and show full output in scratch window:
+
+" content of buffer
+echo ${1}
+echo ${2}
+
+" Ex command
+:%Redir !bash -s foo bar
+
+" scratch window
+foo
+bar
+
+---
+
+[My Vim-related gists](https://gist.github.com/romainl/4b9f139d2a8694612b924322de1025ce).
+ vim:tw=78:isk=!-~,^*,^\|,^\":ts=8:noet:ft=help:norl:

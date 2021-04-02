@@ -211,18 +211,6 @@ if has('terminal')
   endif
 endif
 " }}}
-" ================ My Functions & Commands ============ {{{
-"Get listing of map assignments
-function! MyMaps()
-  redir @"
-  silent verbose map!
-  redir END
-  new
-  put!
-  set nomodified
-endfunction
-
-" }}}
 " diff options {{{
 set diffopt+=vertical
 set diffopt+=algorithm:patience

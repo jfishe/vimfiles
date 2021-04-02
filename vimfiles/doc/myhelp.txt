@@ -252,7 +252,7 @@ call condaactivate#AddConda2Vim()
 		Update Windows Batch files to activate python38 environment
 		prior to starting Vim.
 
-call MyMaps()	Get listing of map assignments: >
+`:Redir verbose map!`	Get listing of map assignments |Redir|: >
 		:silent verbose map!
 <
  vim:tw=78:isk=!-~,^*,^\|,^\":ts=8:noet:ft=help:norl:
