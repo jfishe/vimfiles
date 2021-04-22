@@ -96,6 +96,11 @@ function! vimwiki#TitleJournal() abort "{{{
     return
   endif
 
+  " help taskwiki_disable
+  let l:undo_taskwiki_disable = get(g:, 'taskwiki_disable', '')
+  if empty('l:taskwiki_disable')
+    let g:taskwiki_disable = 'disable'
+  endif
   set filetype=vimwiki
 
   let l:title = 'Journal ' . expand('%:t:r')
@@ -126,6 +131,11 @@ function! vimwiki#TitleJournal() abort "{{{
   wincmd p
   diffthis
   execute 'normal! gg'
+
+  if empty('l:taskwiki_disable')
+    unlet g:taskwiki_disable
+  endif
+
 endfunction "}}}
 " }}}
 " }}}
