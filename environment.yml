@@ -13,6 +13,7 @@ dependencies:
 - pip
 - pydocstyle
 - pylint
+- ripgrep
 - pip:
   - MarkdownPP
   - vim-vint
