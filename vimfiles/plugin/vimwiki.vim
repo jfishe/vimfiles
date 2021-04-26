@@ -48,6 +48,9 @@ let s:wiki_2.path = s:my_docs . '/vimwiki_home/'
 let s:wiki_2.path_html = s:my_docs . '/vimwiki_home_html/html'
 let s:wiki_2.template_path = s:my_docs . '/vimwiki_home_html/templates/'
 " }}}
+" Work & Home vimwiki {{{
+let s:wiki_1.name = 'work'
+let s:wiki_2.name = 'home'
 let g:vimwiki_list = [ s:wiki_1, s:wiki_2 ]
 "}}}
 
