@@ -5,6 +5,7 @@ vimfiles/undo/
 vimfiles/view/
 vimfiles/thesaurus/
 vimfiles/dictionary/
+vimfiles/.netrwbook
 *.spl
 .netrwhist
 tags
@@ -16,3 +17,4 @@ vimfiles/pack/coc/
 # Jupyter Notebook
 .jupyter/migrated
 .jupyter/.mypy_cache
+.jupyter/lab/

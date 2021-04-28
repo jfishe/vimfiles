@@ -111,3 +111,19 @@
 	ignore = dirty
 	path = vimfiles/pack/dev/start/vim-ripgrep
 	url = https://github.com/jremmen/vim-ripgrep.git
+[submodule "vimfiles/pack/vimwiki/opt/taskwiki"]
+	ignore = dirty
+	path = vimfiles/pack/vimwiki/opt/taskwiki
+	url = https://github.com/tools-life/taskwiki.git
+[submodule "vimfiles/pack/vimwiki/opt/tagbar"]
+	ignore = dirty
+	path = vimfiles/pack/vimwiki/opt/tagbar
+	url = https://github.com/preservim/tagbar.git
+[submodule "vimfiles/pack/vimwiki/opt/vim-plugin-AnsiEsc"]
+	ignore = dirty
+	path = vimfiles/pack/vimwiki/opt/vim-plugin-AnsiEsc
+	url = https://github.com/powerman/vim-plugin-AnsiEsc.git
+[submodule "vimfiles/pack/vimwiki/opt/vim-taskwarrior"]
+	ignore = dirty
+	path = vimfiles/pack/vimwiki/opt/vim-taskwarrior
+	url = https://github.com/blindFS/vim-taskwarrior.git
