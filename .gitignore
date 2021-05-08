@@ -10,9 +10,6 @@ vimfiles/.netrwbook
 .netrwhist
 tags
 
-# coc.nvim
-vimfiles/pack/coc/
-
 ### Python ###
 # Jupyter Notebook
 .jupyter/migrated

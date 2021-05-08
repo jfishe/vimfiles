@@ -1,5 +1,5 @@
 if executable('node')
-  packadd coc.nvim-release
+  packadd coc.nvim
 else
   finish
 endif
