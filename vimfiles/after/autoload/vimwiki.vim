@@ -113,7 +113,11 @@ function! vimwiki#TitleJournal() abort "{{{
   " Creates a diary entry for today if calendar.vim started from future date.
   call vimwiki#diary#goto_prev_day()
 
-  let l:todoheader = search('^== Todo ==$\|^## Todo$','w', 0, 500 )
+  " Taskwiki heading for Todo
+  " let l:todoheader ='Todo | -COMPLETED -WAITING'
+  " let l:todoheader = '^== '..l:todoheader..' ==$\|^## '..l:todoheader..'$'
+  let l:todoheader = '^== Todo\|^## Todo'
+  let l:todoheader = search(l:todoheader,'w', 0, 500 )
   if l:todoheader
     silent ,$yank m
     VimwikiGoBackLink
