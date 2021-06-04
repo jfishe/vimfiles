@@ -1,8 +1,10 @@
 {
+  // Python
   "python.jediEnabled": false,
   "python.linting.pydocstyleEnabled": true,
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
+  // PowerShell
   "powershell.integratedConsole.showOnStartup": false,
   "powershell.codeFormatting.preset":"OTBS"
 }
