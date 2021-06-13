@@ -21,5 +21,11 @@
 *.xltm merge=excel
 *.xltx diff=excel
 *.xltx merge=excel
+#
 *.doc? diff=msword
 *.dot? diff=msword
+*.DOC? diff=msword
+*.DOT? diff=msword
+#
+*.pdf   diff=astextplain
+*.PDF   diff=astextplain
