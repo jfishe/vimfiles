@@ -6,9 +6,9 @@ let g:loaded_vimwiki_user = 1
 
 " Locate Documents folder or user home directory {{{
 if has('win32') || has('win64')
-    let s:my_docs = $USERPROFILE . '/Documents'
+  let s:my_docs = $USERPROFILE . '/Documents'
 else
-    let s:my_docs = $HOME
+  let s:my_docs = $HOME
 endif "}}}
 
 " Define g:vimwiki_list {{{
@@ -17,10 +17,10 @@ endif "}}}
 " 	\ '.mkd': 'markdown',
 "   \ '.wiki': 'media'}
 " Disable default function
-  " let g:vimwiki_ext2syntax =
-      " \ {'.md': 'markdown', '.mkdn': 'markdown',
-      " \  '.mdwn': 'markdown', '.mdown': 'markdown',
-      " \  '.markdown': 'markdown', '.mw': 'media'}},
+" let g:vimwiki_ext2syntax =
+" \ {'.md': 'markdown', '.mkdn': 'markdown',
+" \  '.mdwn': 'markdown', '.mdown': 'markdown',
+" \  '.markdown': 'markdown', '.mw': 'media'}},
 let g:vimwiki_ext2syntax = {}
 
 " Work vimwiki {{{
@@ -58,6 +58,12 @@ let g:vimwiki_folding='syntax'
 let g:vimwiki_tags_header_level = 2
 let g:vimwiki_links_header_level = 2
 
+let g:wiki2pandoc_settings = {
+      \ 'extra_args': [ '--shift-heading-level-by', '1',
+      \ '--data-dir', s:wiki_1.template_path
+      \ ],
+      \ 'format': 'docx'
+      \ }
 augroup VimwikiTitleJournal "{{{
   autocmd!
   " Create today's Journal and compare to previous day.
@@ -68,22 +74,28 @@ augroup VimwikiTitleJournal "{{{
 augroup END "}}}
 
 function! VimwikiLinkHandler(link) abort
-    let link = a:link
-    let islink = 0
-    if link =~ '^local:.*'
-        let islink = 1
-        let local_dir = matchstr(link, '^local:\zs.*')
-        let abs_dir = expand('%:p:h').'/'.local_dir
-    elseif link =~ '^file:.*'
-        let islink = 1
-        let abs_dir = matchstr(link, '^file:\zs.*')
-    endif
-    if islink == 1
-        exe "!start " . substitute(abs_dir,"/","\\\\",'g')
-        return 1
+  let link = a:link
+  let islink = 0
+  if link =~ '^local:.*'
+    let islink = 1
+    let local_dir = matchstr(link, '^local:\zs.*')
+    let abs_dir = expand('%:p:h').'/'.local_dir
+  elseif link =~ '^file:.*'
+    let islink = 1
+    let abs_dir = matchstr(link, '^file:\zs.*')
+  endif
+  if islink == 1
+    if has('win64') || has('win32')
+      execute "!start " . substitute(abs_dir,"/","\\\\",'g')
+    elseif executable('wslview')
+      execute system('wslview '..shellescape(link))
     else
-        return 0
+      return 0
     endif
+    return 1
+  else
+    return 0
+  endif
 endfunction
 
 " vim:tabstop=2:shiftwidth=2:expandtab:foldmethod=marker:textwidth=79
