@@ -128,5 +128,6 @@
 	path = vimfiles/pack/vimwiki/opt/vim-taskwarrior
 	url = https://github.com/blindFS/vim-taskwarrior.git
 [submodule "vimfiles/pack/coc/opt/coc.nvim"]
+	ignore = dirty
 	path = vimfiles/pack/coc/opt/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
