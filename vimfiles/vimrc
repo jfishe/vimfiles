@@ -15,7 +15,10 @@ if !empty($CONDA_PREFIX) && has('python3_dynamic')
   set pythonthreehome=$CONDA_PREFIX
 endif
 if has('python3')
-  packadd! vimwiki_docx
+  try
+    packadd! vimwiki_docx
+    catch /E919: Directory not found in 'packpath'/
+  endtry
   packadd! ultisnips
   packadd! vim-pydocstring
   packadd! vim-snippets
