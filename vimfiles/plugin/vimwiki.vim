@@ -64,6 +64,7 @@ let g:wiki2pandoc_settings = {
       \ ],
       \ 'format': 'docx'
       \ }
+
 augroup VimwikiTitleJournal "{{{
   autocmd!
   " Create today's Journal and compare to previous day.

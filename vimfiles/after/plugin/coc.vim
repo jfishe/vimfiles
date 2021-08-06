@@ -6,8 +6,11 @@ if exists('g:did_coc_loaded_user_after') || v:version < 800
 endif
 let g:did_coc_loaded_user_after = 1
 
-let g:coc_global_extensions = [ 'coc-python', 'coc-json', 'coc-snippets',
-  \ 'coc-vimlsp', 'coc-markdownlint', 'coc-powershell', 'coc-yaml', 'coc-sh' ]
+let g:coc_global_extensions = [
+      \ 'coc-python', 'coc-json', 'coc-snippets',
+      \ 'coc-vimlsp', 'coc-markdownlint', 'coc-powershell', 'coc-yaml', 'coc-sh',
+      \ 'coc-prettier'
+      \ ]
 
 " Highlight with coc-vimlsp
 let g:markdown_fenced_languages = [
