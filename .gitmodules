@@ -131,3 +131,7 @@
 	ignore = dirty
 	path = vimfiles/pack/coc/opt/coc.nvim
 	url = https://github.com/neoclide/coc.nvim.git
+[submodule "vimfiles/pack/python/opt/panvimwiki"]
+	ignore = dirty
+	path = vimfiles/pack/python/opt/panvimwiki
+	url = https://github.com/jfishe/panvimwiki.git

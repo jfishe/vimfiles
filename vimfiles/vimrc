@@ -16,7 +16,7 @@ if !empty($CONDA_PREFIX) && has('python3_dynamic')
 endif
 if has('python3')
   try
-    packadd! vimwiki_docx
+    packadd! panvimwiki
     catch /E919: Directory not found in 'packpath'/
   endtry
   packadd! ultisnips
