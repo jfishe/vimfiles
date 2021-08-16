@@ -134,3 +134,4 @@
 [submodule "panvimwiki"]
 	path = panvimwiki
 	url = https://github.com/jfishe/panvimwiki.git
+	branch = main
