@@ -3,22 +3,21 @@ channels:
   - defaults
 dependencies:
   - black
-  - python-dateutil
-  # - chardet
-  # - isort
-  # - lazy-object-proxy
+  - chardet # Added by conda-export
+  - lazy-object-proxy # Added by conda-export
   - mypy
   - nodejs
   - pandoc
   - panflute
   - pip
   - pydocstyle
-  # - pylint
+  - python-dateutil # Required by vimfiles/UltiSnips/vimwiki.snippets
   - python[version='>=3.10']
   - ripgrep
-  # - watchdog
-  # - wrapt
+  - watchdog # Added by conda-export
+  - wrapt # Added by conda-export
   - pip:
     - markdownpp
+    - pylint # conda-forge not updated yet.
     - vim-vint
 name: vim_python

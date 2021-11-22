@@ -119,12 +119,14 @@ See [Anaconda and Miniconda](#anaconda-and-miniconda) for installation
 instructions.
 
 ```powershell
-# Create python38 environment if it does not exist.
+# Create vim_python environment if it does not exist.
 Set-Location "$env:LOCALAPPDATA\vimfiles"
 Get-Item .\environment.yml -ErrorAction Stop
 
-if (-not (conda env list | Select-String -Pattern 'python38' -CaseSensitive)) {
+if (-not (conda env list | Select-String -Pattern 'vim_python' -CaseSensitive)) {
   conda env create --file environment.yml
+} else {
+  conda env update --file environment.yml
 }
 ```
 
@@ -142,6 +144,19 @@ if (-not $uservimcmd -and $globalvimcmd) {
   }
 
 & vim -c 'call condaactivate#AddConda2Vim() | :qa'
+```
+
+Rebuild the vim_python whenever the python minor version changes, e.g. from
+Python 3.9 to 3.10. Edit `environment.yml` to update the python version and
+move other packages to the `- pip:` group as needed. Conda packages typically
+lag python versions; the pip versions tend to update first.
+
+```powershell
+# Determine python3/dyn library linked to Vim, e.g., python310.dll.
+$VimVersion = vim --version |
+  Select-String -Pattern '-DDYNAMIC_PYTHON3_DLL=\\"(python\d{0,3}).dll\\"'
+# python[version='>=3.10'] matches python310.
+Write-Output $VimVersion.Matches.Groups[1].Value
 ```
 
 ### Anaconda and Miniconda
@@ -166,13 +181,13 @@ conda update -n base -c defaults conda
 # Initialize conda for the various shells on the computer
 conda init
 
-# Create a python38 environment compatible with the installed version of Vim.
+# Create a vim_python environment compatible with the installed version of Vim.
 $File = $env:LOCALAPPDATA\vimfiles\environment.yml
 conda env create --file $File
 
-# Periodically update the base and python38 environments.
+# Periodically update the base and vim_python environments.
 conda update -n base -c defaults conda
-conda update -n python38 --all
+conda update -n vim_python --all
 ```
 
 ### Windows Registry
