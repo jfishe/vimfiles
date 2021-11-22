@@ -1,19 +1,24 @@
-name: vim_python
 channels:
-- conda-forge
-- defaults
+  - conda-forge
+  - defaults
 dependencies:
-- python=3.9
-- black
-- isort
-- mypy
-- nodejs
-- pandoc
-- panflute
-- pip
-- pydocstyle
-- pylint
-- ripgrep
-- pip:
-  - MarkdownPP
-  - vim-vint
+  - black
+  - python-dateutil
+  # - chardet
+  # - isort
+  # - lazy-object-proxy
+  - mypy
+  - nodejs
+  - pandoc
+  - panflute
+  - pip
+  - pydocstyle
+  # - pylint
+  - python[version='>=3.10']
+  - ripgrep
+  # - watchdog
+  # - wrapt
+  - pip:
+    - markdownpp
+    - vim-vint
+name: vim_python
