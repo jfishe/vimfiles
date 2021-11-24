@@ -66,11 +66,13 @@ $dotfiles | ForEach-Object {
 
 # Link vimfiles and dotfiles to USERPROFILE
 Set-Location -Path "~"
-cmd /c "mklink /J .\vimfiles $vimfiles\vimfiles"
+cmd /c "mklink /D .\vimfiles $vimfiles\vimfiles"
 $dotfiles | ForEach-Object {
     $item = $_.name
     if ($_.PSIsContainer) {
-      cmd /c "mklink /J .\$item $_"
+      # Use Junction if symlink does not work.
+      # cmd /c "mklink /J .\$item $_"
+      cmd /c "mklink /D .\$item $_"
     } else {
       # Use hardlink if symlink does not work.
       # cmd /c "mklink /H .\$item $_"
