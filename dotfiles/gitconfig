@@ -79,6 +79,7 @@
 	showUntrackedFiles = no
 [init]
     templatedir = ~/.git_template
+    defaultbranch = main
 [alias]
     ; list files which have changed since review_base
     files = !git diff --name-only $(git merge-base HEAD \"${review_base:-master}\")

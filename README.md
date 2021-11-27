@@ -49,6 +49,8 @@ To install in Windows:
 # Set EOL so WSL works.
 git config --global core.eol lf
 git config --global core.autocrlf false
+git config --global core.symlinks true
+git config --global pull.rebase true
 
 # Clone vimfiles into LOCALAPPDATA
 Set-Location -Path "$env:LOCALAPPDATA"
