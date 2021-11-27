@@ -46,22 +46,27 @@ git submodule update --init --recursive
 To install in Windows:
 
 ```powershell
+# Set EOL so WSL works.
+git config --global core.eol lf
+git config --global core.autocrlf false
+
 # Clone vimfiles into LOCALAPPDATA
 Set-Location -Path "$env:LOCALAPPDATA"
 git clone https://github.com/jfishe/vimfiles.git vimfiles
+
 Set-Location -Path .\vimfiles
 git submodule update --init --recursive
 
 $vimfiles = "$env:LOCALAPPDATA\vimfiles"
-$dotfiles = Get-ChildItem -Path "$vimfiles\.*"
+$dotfiles = Get-ChildItem -Path "$vimfiles\dotfiles"
 
 # Backup old configuration, if needed. Mklink will fail if Target exists.
 Set-Location -Path "~"
 mkdir .\old
-Move-Item -Path .\vimfiles -Destination .\old
+Move-Item -Path .\vimfiles -Destination .\old -ErrorAction SilentlyContinue
 $dotfiles | ForEach-Object {
     $item = $_.name
-    Move-Item -Path .\$($item) -Destination .\old -ErrorAction SilentlyContinue
+    Move-Item -Path .\.$($item) -Destination .\old -ErrorAction SilentlyContinue
 }
 
 # Link vimfiles and dotfiles to USERPROFILE
@@ -71,12 +76,12 @@ $dotfiles | ForEach-Object {
     $item = $_.name
     if ($_.PSIsContainer) {
       # Use Junction if symlink does not work.
-      # cmd /c "mklink /J .\$item $_"
-      cmd /c "mklink /D .\$item $_"
+      # cmd /c "mklink /J .\.$item $_"
+      cmd /c "mklink /D .\.$item $_"
     } else {
       # Use hardlink if symlink does not work.
-      # cmd /c "mklink /H .\$item $_"
-      cmd /c "mklink .\$item $_"
+      # cmd /c "mklink /H .\.$item $_"
+      cmd /c "mklink .\.$item $_"
     }
 }
 ```
