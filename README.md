@@ -75,7 +75,9 @@ $dotfiles | ForEach-Object {
 Set-Location -Path "~"
 cmd /c "mklink /D .\vimfiles $vimfiles\vimfiles"
 $dotfiles | ForEach-Object {
-    $item = $_.name
+    $Link = ".\.$($_.Name)"
+    $Target = "$($_.FullName)"
+
     if ($_.PSIsContainer) {
       # Use Junction if symlink does not work.
       # cmd /c "mklink /J .\.$item $_"
