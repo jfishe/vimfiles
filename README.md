@@ -43,52 +43,28 @@ cd $HOME/.local/vimfiles
 git submodule update --init --recursive
 ```
 
-To install in Windows:
+To install in Windows under `$env:LOCALAPPDATA\vimfiles` and symbolic link to
+`$HOME`.
 
 ```powershell
-# Set EOL so WSL works.
-git config --global core.eol lf
-git config --global core.autocrlf false
-git config --global core.symlinks true
-git config --global pull.rebase true
+cd $env:TMP
+curl  --output Install-Vimfiles.ps1 `
+  https://raw.githubusercontent.com/jfishe/vimfiles/master/Install-Vimfiles.ps1
 
-# Clone vimfiles into LOCALAPPDATA
-Set-Location -Path "$env:LOCALAPPDATA"
-git clone https://github.com/jfishe/vimfiles.git vimfiles
-
-Set-Location -Path .\vimfiles
-git submodule update --init --recursive
-
-$vimfiles = "$env:LOCALAPPDATA\vimfiles"
-$dotfiles = Get-ChildItem -Path "$vimfiles\dotfiles"
-
-# Backup old configuration, if needed. Mklink will fail if Target exists.
-Set-Location -Path "~"
-mkdir .\old
-Move-Item -Path .\vimfiles -Destination .\old -ErrorAction SilentlyContinue
-$dotfiles | ForEach-Object {
-    $item = $_.name
-    Move-Item -Path .\.$($item) -Destination .\old -ErrorAction SilentlyContinue
-}
-
-# Link vimfiles and dotfiles to USERPROFILE
-Set-Location -Path "~"
-cmd /c "mklink /D .\vimfiles $vimfiles\vimfiles"
-$dotfiles | ForEach-Object {
-    $Link = ".\.$($_.Name)"
-    $Target = "$($_.FullName)"
-
-    if ($_.PSIsContainer) {
-      # Use Junction if symlink does not work.
-      # cmd /c "mklink /J .\.$item $_"
-      cmd /c "mklink /D .\.$item $_"
-    } else {
-      # Use hardlink if symlink does not work.
-      # cmd /c "mklink /H .\.$item $_"
-      cmd /c "mklink .\.$item $_"
-    }
-}
+# To change defaults:
+Get-Help .\Install-Vimfiles.ps1 -Full
 ```
+
+```powershell
+# Clone and install submodules.
+.\Install-Vimfiles.ps1 -Clone
+
+# Symlink vimfiles and dotfiles to $HOME.
+.\Install-Vimfiles.ps1 -Link
+```
+
+If you plan to share vimfiles with Windows Subsystem for Linux (WSL), ensure
+git uses line feed for EOL.
 
 ## Windows Environment
 
@@ -222,6 +198,9 @@ regedit /S GvimExt.reg
 Setup instructions are included in vimrc to install the
 [Moby Thesaurus List by Grady Ward](http://www.gutenberg.org/ebooks/3202) from
 Project Gutenberg. Use a browser; the site blocks scripted download.
+
+[Moby-thesaurus.org/](https://raw.githubusercontent.com/zeke/moby/master/words.txt)
+maintains [words.txt](https://raw.githubusercontent.com/zeke/moby/master/words.txt).
 
 ## Dictionary
 

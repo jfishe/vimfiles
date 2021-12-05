@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -32,47 +32,158 @@
 
 #>
 
-<# 
-
+<#
+.SYNOPSIS
+    Install and symlink vimfiles to $HOME
 .DESCRIPTION
- Symlink dotfiles and vimfiles to $HOME. Use Junction and Hardlink if
- SeCreateSymbolicLink permission denied.
+    Backup existing installation to BackupPath.
 
-#> 
+    Clone Repository to Path and update submodules.
+
+    Symlink dotfiles and vimfiles to LinkPath Use Junction and Hardlink if
+    SeCreateSymbolicLink permission denied.
+.EXAMPLE
+    PS> .\Install-Vimfiles.ps1 -Clone
+.EXAMPLE
+    PS> .\Install-Vimfiles.ps1 -Link
+#>
 [CmdletBinding()]
 Param(
-    # Clone repository to $env:LOCALAPPDATA\vimfiles and update submodules.
+    # Symlink dotfiles and vimfiles to $HOME. Use Junction and Hardlink if
+    # SeCreateSymbolicLink permission denied.
     [Parameter(
-      Mandatory = $false
+        Mandatory = $true,
+        ParameterSetName = 'Link',
+        HelpMessage = 'Symlink dotfiles and vimfiles to $HOME. Use Junction and Hardlink if SeCreateSymbolicLink permission denied.'
+    )]
+    [switch]
+    $Link
+    ,
+    # Clone Repository to Path and update submodules.
+    [Parameter(
+        Mandatory = $true,
+        ParameterSetName = 'Clone',
+        HelpMessage = 'Clone Repository to Path and update submodules.'
     )]
     [switch]
     $Clone
     ,
+    # Create/update Ubuntu wamerican dictionary.
     [Parameter(
-      Mandatory = $false
+        Mandatory = $true,
+        ParameterSetName = 'Dictionary',
+        HelpMessage = 'Create/update Ubuntu wamerican dictionary.'
     )]
+    [switch]
+    $Dictionary
+    ,
+    # Create/update Moby-thesaurus.
+    [Parameter(
+        Mandatory = $true,
+        ParameterSetName = 'Thesaurus',
+        HelpMessage = 'Create/update Moby-thesaurus.'
+    )]
+    [switch]
+    $Thesaurus
+    ,
     # Path to clone repository.
-    [Parameter(Mandatory=$false,
-               HelpMessage="Path to clone repository.")]
+    [Parameter(
+        Mandatory = $false,
+        ParameterSetName = 'Clone',
+        HelpMessage = 'Path to clone repository.'
+    )]
+    [Parameter(ParameterSetName = 'Link')]
+    [Parameter(ParameterSetName = 'Dictionary')]
+    [Parameter(ParameterSetName = 'Thesaurus')]
     [Alias("PSPath")]
     [ValidateNotNullOrEmpty()]
     [string]
     $Path = "$env:LOCALAPPDATA\vimfiles"
     ,
-    # Vimfiles repository (origin/remote)
+    # URI for git repository.
     [Parameter(
-      Mandatory = $false,
-      HelpMessage = "URI for git repository"
-      )]
+        Mandatory = $false,
+        ParameterSetName = 'Clone',
+        HelpMessage = 'URI for git repository'
+    )]
     [string]
     $Repository = 'https://github.com/jfishe/vimfiles.git'
     ,
     # Path for backups.
-    [Parameter(Mandatory=$false,
-               HelpMessage="Path for backups.")]
+    [Parameter(
+        Mandatory = $false,
+        ParameterSetName = 'Clone',
+        HelpMessage = 'Path for backups.'
+    )]
+    [Parameter(ParameterSetName = 'Link')]
     [string]
     $BackupPath = "$HOME\old"
-    )
+    ,
+    [Parameter(
+        Mandatory = $false,
+        ParameterSetName = 'Link',
+        HelpMessage = 'Path to directory to create symbolic links.'
+    )]
+    [string]
+    $LinkPath = "$HOME"
+)
+
+if ($Clone) {
+    Backup-Item -Link "$Path" -Destination "$BackupPath\repo" -ErrorAction Stop
+
+    git config --global core.eol lf
+    git config --global core.autocrlf false
+    $Output = git clone "$Repository" "$Path" 2>&1
+    $Output | Out-String | Write-Verbose
+
+    Push-Location -Path "$Path"
+    $Output = git submodule update --init --recursive 2>&1
+    $Output | Out-String | Write-Verbose
+    Pop-Location
+}
+
+if ($Link) {
+    [array] $Vimfiles = Get-Item -Path "$Path\vimfiles" | ForEach-Object -Process {
+        [PSCustomObject]@{
+            Link     = "$LinkPath\$($_.Name)"
+            Target   = "$($_.FullName)"
+            ItemType = '/D'
+        }
+    }
+    [array] $Vimfiles += Get-ChildItem -Path "$Path\dotfiles" | ForEach-Object -Process {
+        if ($_.PSIsContainer) {
+            $ItemType = '/D'
+        } else {
+            $ItemType = ''
+        }
+        [PSCustomObject]@{
+            Link     = "$LinkPath\.$($_.Name)"
+            Target   = "$($_.FullName)"
+            ItemType = "$ItemType"
+        }
+    }
+
+    $Vimfiles | Backup-Item -Destination "$BackupPath"
+
+    $Vimfiles | New-Symlink
+}
+
+if ($Dictionary) {
+    # Assume WSL defaults to Ubuntu.
+    $WslDictionary = '/usr/share/dict/words'
+    wsl --exec bash -c "[[ -f $WslDictionary ]] || sudo apt-get install wamerican"
+    $Words = wsl --exec bash -c "wslpath -w ``realpath $WslDictionary``"
+    $OutFile = "$Path\vimfiles\dictionary\words"
+    New-Item -Path (Split-Path $OutFile) -ItemType Directory -ErrorAction SilentlyContinue
+    Copy-Item -Path $Words -Destination $OutFile
+}
+
+if ($Thesaurus) {
+    $Uri = 'https://raw.githubusercontent.com/zeke/moby/master/words.txt'
+    $OutFile = "$Path\vimfiles\thesaurus\mthesaur.txt"
+    New-Item -Path (Split-Path $OutFile) -ItemType Directory -ErrorAction SilentlyContinue
+    Invoke-WebRequest -Uri $Uri -OutFile $OutFile
+}
 
 <#
 .SYNOPSIS
@@ -91,127 +202,91 @@ Param(
                 refers to.
 #>
 function New-Symlink {
-  [CmdletBinding()]
-  param (
-    [Parameter(
-      Mandatory = $false,
-      Position = 0,
-      ValueFromPipelineByPropertyName = $true
-    )]
-    [ValidateSet("", '/D', '/H', '/J')]
-    [string]
-    $ItemType = ""
-    ,
-    [Parameter(
-      Mandatory = $true,
-      Position = 1,
-      ValueFromPipelineByPropertyName = $true
-    )]
-    [string]
-    $Link
-    ,
-    [Parameter(
-      Mandatory = $true,
-      Position = 2,
-      ValueFromPipelineByPropertyName = $true
-    )]
-    [string]
-    $Target
-  )
-  
-  begin {
-  }
-  
-  process {
-    $Command = 'mklink '
-    $Command += "$ItemType $Link $Target"
-    Write-Verbose "cmd.exe /c mklink $ItemType $Link $Target"
-    $Output = cmd.exe /c mklink $ItemType $Link $Target 2>&1
-    Write-Verbose $Output
+    [CmdletBinding()]
+    param (
+        [Parameter(
+            Mandatory = $false,
+            Position = 0,
+            ValueFromPipelineByPropertyName = $true
+        )]
+        [ValidateSet("", '/D', '/H', '/J')]
+        [string]
+        $ItemType = ""
+        ,
+        [Parameter(
+            Mandatory = $true,
+            Position = 1,
+            ValueFromPipelineByPropertyName = $true
+        )]
+        [string]
+        $Link
+        ,
+        [Parameter(
+            Mandatory = $true,
+            Position = 2,
+            ValueFromPipelineByPropertyName = $true
+        )]
+        [string]
+        $Target
+    )
 
-    $ErrorMessage = "You do not have sufficient privilege to perform this operation."
-    if ("$Output" -eq "$ErrorMessage") {
-      Write-Verbose "Trying Junction and Hardlink instead."
-      if ( $ItemType -eq "/D" ) {
-        $OldItemType = "/J"
-      } else {
-        $OldItemType = "/H"
-      }
-      $Output = cmd.exe /c mklink $OldItemType $Link $Target 2>&1
-      Write-Verbose $Output
+    begin {
     }
-  }
-  
-  end {
-    
-  }
+
+    process {
+        $Command = 'mklink '
+        $Command += "$ItemType $Link $Target"
+        Write-Verbose "cmd.exe /c mklink $ItemType $Link $Target"
+        $Output = cmd.exe /c mklink $ItemType $Link $Target 2>&1
+        Write-Verbose $Output
+
+        $ErrorMessage = "You do not have sufficient privilege to perform this operation."
+        if ("$Output" -eq "$ErrorMessage") {
+            Write-Verbose "Trying Junction and Hardlink instead."
+            if ( $ItemType -eq "/D" ) {
+                $OldItemType = "/J"
+            } else {
+                $OldItemType = "/H"
+            }
+            $Output = cmd.exe /c mklink $OldItemType $Link $Target 2>&1
+            Write-Verbose $Output
+        }
+    }
+
+    end {
+
+    }
 }
 
 function Backup-Item {
-  [CmdletBinding()]
-  param (
-    [Parameter(
-      Mandatory = $true,
-      Position = 0,
-      ValueFromPipelineByPropertyName = $true
-    )]
-    [string]
-    $Link,
-    [Parameter(
-      Mandatory = $false
-    )]
-    [string]
-    $Destination = "$HOME\old"
-  )
-  
-  begin {
-    Write-Verbose "Validate/create $Destination"
-    New-Item -Path "$Destination" -ItemType Directory -ErrorAction SilentlyContinue
-    $Destination = Get-Item -Path "$Destination" -ErrorAction Stop
-  }
-  
-  process {
-    Move-Item -Path $Link -Destination "$Destination" `
-      -ErrorAction SilentlyContinue
-  }
-  
-  end {
-    Get-ChildItem -Path "$Destination" | Out-String | Write-Verbose
-  }
-}
+    [CmdletBinding()]
+    param (
+        [Parameter(
+            Mandatory = $true,
+            Position = 0,
+            ValueFromPipelineByPropertyName = $true
+        )]
+        [string]
+        $Link,
+        [Parameter(
+            Mandatory = $false
+        )]
+        [string]
+        $Destination = "$HOME\old"
+    )
 
-if ($Clone) {
-  $Vimfiles = Get-Item -Path $Path.FullName
-  Backup-Item -Link "$Vimfiles" -Destination $BackupPath -ErrorAction Stop
-  Get-Command -Name git -ErrorAction Stop
-  git config --global core.eol lf
-  git config --global core.autocrlf false
-  git clone "$Repository" "$Path"
-  Push-Location -Path "$Path"
-  git submodule update --init --recursive
-}
+    begin {
+        Write-Verbose "Validate/create $Destination"
+        New-Item -Path "$Destination" -ItemType Directory -ErrorAction SilentlyContinue
+        $Destination = Get-Item -Path "$Destination" -ErrorAction Stop
+    }
 
-[array] $Vimfiles = Get-Item -Path "$PSScriptRoot\vimfiles" | ForEach-Object -Process {
-  [PSCustomObject]@{
-  Link = "$HOME\$($_.Name)"
-  Target = "$($_.FullName)"
-  ItemType = '/D'
-  }
-}
-[array] $Dotfiles = Get-ChildItem -Path "$PSScriptRoot\dotfiles" | ForEach-Object -Process {
-  if ($_.PSIsContainer) {
-    $ItemType = '/D'
-  } else {
-    $ItemType = ''
-  }
-  [PSCustomObject]@{
-  Link = "$HOME\.$($_.Name)"
-  Target = "$($_.FullName)"
-  ItemType = "$ItemType"
-  }
-}
-[array] $Vimfiles += $Dotfiles
+    process {
+        Move-Item -Path $Link -Destination "$Destination" `
+            -ErrorAction SilentlyContinue
+    }
 
-$Vimfiles | Backup-Item
-
-$Vimfiles | New-Symlink
+    end {
+        Get-ChildItem -Path "$Destination" | Out-String | Write-Verbose
+    }
+}
