@@ -40,8 +40,14 @@
 
     Clone Repository to Path and update submodules.
 
-    Symlink dotfiles and vimfiles to LinkPath Use Junction and Hardlink if
+    Symlink dotfiles and vimfiles to LinkPath. Use Junction and Hardlink if
     SeCreateSymbolicLink permission denied.
+
+    Copy Ubuntu wamerican dictionary and Moby-thesaurus to the locations
+    specified in the vimrc.
+
+    Create/update compatible conda environment for Vim and modify Vim batch
+    files to activate the conda environment.
 .EXAMPLE
     PS> .\Install-Vimfiles.ps1 -Clone
 .EXAMPLE
@@ -86,6 +92,16 @@ Param(
     [switch]
     $Thesaurus
     ,
+    # Create/update conda environment for Vim (vim_python).
+    # Copy Vim batch files to UserAppDir.
+    [Parameter(
+        Mandatory = $true,
+        ParameterSetName = 'Conda',
+        HelpMessage = 'Create/update conda environment for Vim (vim_python).'
+    )]
+    [switch]
+    $Conda
+    ,
     # Path to clone repository.
     [Parameter(
         Mandatory = $false,
@@ -95,6 +111,7 @@ Param(
     [Parameter(ParameterSetName = 'Link')]
     [Parameter(ParameterSetName = 'Dictionary')]
     [Parameter(ParameterSetName = 'Thesaurus')]
+    [Parameter(ParameterSetName = 'Conda')]
     [Alias("PSPath")]
     [ValidateNotNullOrEmpty()]
     [string]
@@ -119,6 +136,7 @@ Param(
     [string]
     $BackupPath = "$HOME\old"
     ,
+    # Path to directory to create symbolic links.
     [Parameter(
         Mandatory = $false,
         ParameterSetName = 'Link',
@@ -126,64 +144,28 @@ Param(
     )]
     [string]
     $LinkPath = "$HOME"
+    ,
+    # Path to directory to copy user modified Vim batch files
+    # to activate conda environment vim_python.
+    # The directory should be in $Env:PATH.
+    [Parameter(
+        Mandatory = $false,
+        ParameterSetName = 'Conda',
+        HelpMessage = 'Path to directory to copy user modified Vim batch files.'
+    )]
+    [string]
+    $UserAppDir = "$env:LOCALAPPDATA\Microsoft\WindowsApps"
+    ,
+    # Path to directory where Vim installer placed batch files.
+    # Not used if UserAppDir already contains Vim batch files.
+    [Parameter(
+        Mandatory = $false,
+        ParameterSetName = 'Conda',
+        HelpMessage = 'Path to directory where Vim installer placed batch files.'
+    )]
+    [string]
+    $GlobalAppDir =  "$env:WINDIR"
 )
-
-if ($Clone) {
-    Backup-Item -Link "$Path" -Destination "$BackupPath\repo" -ErrorAction Stop
-
-    git config --global core.eol lf
-    git config --global core.autocrlf false
-    $Output = git clone "$Repository" "$Path" 2>&1
-    $Output | Out-String | Write-Verbose
-
-    Push-Location -Path "$Path"
-    $Output = git submodule update --init --recursive 2>&1
-    $Output | Out-String | Write-Verbose
-    Pop-Location
-}
-
-if ($Link) {
-    [array] $Vimfiles = Get-Item -Path "$Path\vimfiles" | ForEach-Object -Process {
-        [PSCustomObject]@{
-            Link     = "$LinkPath\$($_.Name)"
-            Target   = "$($_.FullName)"
-            ItemType = '/D'
-        }
-    }
-    [array] $Vimfiles += Get-ChildItem -Path "$Path\dotfiles" | ForEach-Object -Process {
-        if ($_.PSIsContainer) {
-            $ItemType = '/D'
-        } else {
-            $ItemType = ''
-        }
-        [PSCustomObject]@{
-            Link     = "$LinkPath\.$($_.Name)"
-            Target   = "$($_.FullName)"
-            ItemType = "$ItemType"
-        }
-    }
-
-    $Vimfiles | Backup-Item -Destination "$BackupPath"
-
-    $Vimfiles | New-Symlink
-}
-
-if ($Dictionary) {
-    # Assume WSL defaults to Ubuntu.
-    $WslDictionary = '/usr/share/dict/words'
-    wsl --exec bash -c "[[ -f $WslDictionary ]] || sudo apt-get install wamerican"
-    $Words = wsl --exec bash -c "wslpath -w ``realpath $WslDictionary``"
-    $OutFile = "$Path\vimfiles\dictionary\words"
-    New-Item -Path (Split-Path $OutFile) -ItemType Directory -ErrorAction SilentlyContinue
-    Copy-Item -Path $Words -Destination $OutFile
-}
-
-if ($Thesaurus) {
-    $Uri = 'https://raw.githubusercontent.com/zeke/moby/master/words.txt'
-    $OutFile = "$Path\vimfiles\thesaurus\mthesaur.txt"
-    New-Item -Path (Split-Path $OutFile) -ItemType Directory -ErrorAction SilentlyContinue
-    Invoke-WebRequest -Uri $Uri -OutFile $OutFile
-}
 
 <#
 .SYNOPSIS
@@ -234,8 +216,6 @@ function New-Symlink {
     }
 
     process {
-        $Command = 'mklink '
-        $Command += "$ItemType $Link $Target"
         Write-Verbose "cmd.exe /c mklink $ItemType $Link $Target"
         $Output = cmd.exe /c mklink $ItemType $Link $Target 2>&1
         Write-Verbose $Output
@@ -277,7 +257,7 @@ function Backup-Item {
 
     begin {
         Write-Verbose "Validate/create $Destination"
-        New-Item -Path "$Destination" -ItemType Directory -ErrorAction SilentlyContinue
+        New-Item -Path "$Destination" -ItemType Directory -ErrorAction SilentlyContinue | Out-String | Write-Verbose
         $Destination = Get-Item -Path "$Destination" -ErrorAction Stop
     }
 
@@ -289,4 +269,107 @@ function Backup-Item {
     end {
         Get-ChildItem -Path "$Destination" | Out-String | Write-Verbose
     }
+}
+
+if ($Clone) {
+    Backup-Item -Link "$Path" -Destination "$BackupPath\repo" -ErrorAction Stop
+
+    git config --global core.eol lf
+    git config --global core.autocrlf false
+    $Output = git clone "$Repository" "$Path" 2>&1
+    $Output | Out-String | Write-Verbose
+
+    Push-Location -Path "$Path"
+    $Output = git submodule update --init --recursive 2>&1
+    $Output | Out-String | Write-Verbose
+    vim -c 'packloadall | helptags ALL | qa'
+    Pop-Location
+}
+
+if ($Link) {
+    [array] $Vimfiles = Get-Item -Path "$Path\vimfiles" | ForEach-Object -Process {
+        # ~\vimfiles for Windows Vim
+        [PSCustomObject]@{
+            Link     = "$LinkPath\$($_.Name)"
+            Target   = "$($_.FullName)"
+            ItemType = '/D'
+        },
+        # ~\.vim for Mintty and git-scm Vim
+        [PSCustomObject]@{
+            Link     = "$LinkPath\.vim"
+            Target   = "$($_.FullName)"
+            ItemType = '/D'
+        }
+    }
+    [array] $Vimfiles += Get-Item -Path "$Path\mintty" | ForEach-Object -Process {
+        # Terminal config for Mintty and git-scm Vim
+        [PSCustomObject]@{
+            Link     = "$LinkPath\.config\$($_.Name)"
+            Target   = "$($_.FullName)"
+            ItemType = '/D'
+        }
+    }
+    [array] $Vimfiles += Get-ChildItem -Path "$Path\dotfiles" | ForEach-Object -Process {
+        if ($_.PSIsContainer) {
+            $ItemType = '/D'
+        } else {
+            $ItemType = ''
+        }
+        [PSCustomObject]@{
+            Link     = "$LinkPath\.$($_.Name)"
+            Target   = "$($_.FullName)"
+            ItemType = "$ItemType"
+        }
+    }
+
+    $Vimfiles | Backup-Item -Destination "$BackupPath"
+
+    $Vimfiles | New-Symlink
+}
+
+if ($Dictionary) {
+    # Assume WSL defaults to Ubuntu.
+    $WslDictionary = '/usr/share/dict/words'
+    wsl --exec bash -c "sudo apt-get update && sudo apt-get install wamerican"
+    $Words = wsl --exec bash -c "wslpath -w ``realpath $WslDictionary``"
+    $OutFile = "$Path\vimfiles\dictionary\words"
+    New-Item -Path (Split-Path $OutFile) -ItemType Directory -ErrorAction SilentlyContinue
+    Copy-Item -Path $Words -Destination $OutFile
+}
+
+if ($Thesaurus) {
+    $Uri = 'https://raw.githubusercontent.com/zeke/moby/master/words.txt'
+    $OutFile = "$Path\vimfiles\thesaurus\mthesaur.txt"
+    New-Item -Path (Split-Path $OutFile) -ItemType Directory -ErrorAction SilentlyContinue
+    Invoke-WebRequest -Uri $Uri -OutFile $OutFile
+}
+
+if ($Conda) {
+    Get-Command conda -ErrorAction Stop | Out-String | Write-Verbose
+
+    # Create or update conda env vim_python.
+    Push-Location "$Path"
+    Get-Item .\environment.yml -ErrorAction Stop | Out-String | Write-Verbose
+    if (-not (conda env list | Select-String -Pattern 'vim_python' -CaseSensitive)) {
+        conda env create --file environment.yml
+    } else {
+        conda env update --file environment.yml
+    }
+    Pop-Location
+
+    # Copy Vim batch files to userappdir.
+    $UserAppDir = Get-Item "$UserAppDir"
+    $GlobalAppDir = Get-Item "$GlobalAppDir"
+
+    $UserVimCmd = Join-Path $UserAppDir '*vim*' | Get-ChildItem
+    $GlobalVimCmd = Join-Path $GlobalAppDir '*vim*' | Get-ChildItem
+
+    if (-not $UserVimCmd -and $GlobalVimCmd) {
+        $GlobalVimCmd | Copy-Item -Destination $UserAppDir
+    }
+
+    # Activate conda environment when starting Vim via Batch files.
+    conda activate vim_python
+    vim -c 'call condaactivate#AddConda2Vim() | :qa'
+    conda deactivate
 }

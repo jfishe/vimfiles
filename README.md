@@ -28,7 +28,7 @@ configuration across environments.
 ### Install Vim on Windows
 
 [Vim-win32-installer](https://github.com/vim/vim-win32-installer/releases)
-includes `python3/dyn` currently linked to `Python 3.8`. Download and install
+includes `python3/dyn` currently linked to `Python 3.10`. Download and install
 or use `chocolatey`: `choco install vim`.
 
 ### `vimfiles` installation
@@ -61,10 +61,23 @@ Get-Help .\Install-Vimfiles.ps1 -Full
 
 # Symlink vimfiles and dotfiles to $HOME.
 .\Install-Vimfiles.ps1 -Link
+
+# Copy wsl -d Ubuntu /usr/share/dict/words to vimfiles/dictionary/words.
+# Install dictionary if needed.
+.\Install-Vimfiles.ps1 -Dictionary
+
+# Download Moby Thesaurus from
+# https://raw.githubusercontent.com/zeke/moby/master/words.txt
+.\Install-Vimfiles.ps1 -Thesaurus
+
+# Create/update conda environment compatible with `python3/dyn`.
+# Create/update Vim batch files to activate vim_python prior to starting Vim.
+.\Install-Vimfiles.ps1 -Conda
 ```
 
 If you plan to share vimfiles with Windows Subsystem for Linux (WSL), ensure
-git uses line feed for EOL.
+git uses line feed for EOL. `Install-Vimfiles.ps1` automates this by setting
+the global .gitconfig to override the system defaults.
 
 ## Windows Environment
 
@@ -104,34 +117,6 @@ batch files are in `$env:LOCALAPPDATA\Microsoft\WindowsApps` and calls a Vim
 function to activate a compatible conda envirionment.
 See [Anaconda and Miniconda](#anaconda-and-miniconda) for installation
 instructions.
-
-```powershell
-# Create vim_python environment if it does not exist.
-Set-Location "$env:LOCALAPPDATA\vimfiles"
-Get-Item .\environment.yml -ErrorAction Stop
-
-if (-not (conda env list | Select-String -Pattern 'vim_python' -CaseSensitive)) {
-  conda env create --file environment.yml
-} else {
-  conda env update --file environment.yml
-}
-```
-
-```powershell
-$userappdir = Get-Item $env:LOCALAPPDATA\Microsoft\WindowsApps
-$globalappdir = Get-Item $env:WINDIR
-
-
-$uservimcmd = Join-Path $userappdir '*vim*' | Get-ChildItem
-$globalvimcmd = Join-Path $globalappdir '*vim*' | Get-ChildItem
-
-if (-not $uservimcmd -and $globalvimcmd) {
-  foreach ($item in $globalvimcmd) {
-    Copy-Item $_ $userappdir
-  }
-
-& vim -c 'call condaactivate#AddConda2Vim() | :qa'
-```
 
 Rebuild the vim_python whenever the python minor version changes, e.g. from
 Python 3.9 to 3.10. Edit `environment.yml` to update the python version and
@@ -218,27 +203,13 @@ with WSL 2.
 3. Replace `<distro_name>` with the default WSL distro, e.g., `WLinux`,
    `Ubuntu`, etc.
 
-```powershell
-# Assume default WSL is a Debian derivative
-bash -c "sudo apt-get update"
-bash -c "sudo apt-get install wamerican-huge"
-
-# Assume dictionary path matches Debian.
-# Not needed if using Linux Vim
-cmd /c 'mklink words "\\wsl$\<distro_name>\usr\share\dict\american-english"'
-```
+`Install-Vimfiles.ps1 -Dictionary` assumes Ubuntu is the default and copies the
+dictionary since symlinks into WSL fail when the distro isn't started.
 
 ## grepprg and grepformat
 
 [`ripgrep`](https://github.com/BurntSushi/ripgrep) should be installed with
 `chocolatey` or `conda`.
-
-```powershell
-choco install ripgrep
-
-conda activate python38
-conda install ripgrep
-```
 
 ## Gutentags & Universal ctags
 
@@ -256,14 +227,6 @@ linting functions of [ALE](#asynchronous-lint-engine-ale).
 The script `after/plugin/coc.vim` installs extensions using
 `g:coc_global_extensions`. Install CoC under `opt` instead of `start` to allow
 disabling when `node.js` is unavailable.
-
-```bash
-# for vim8
-mkdir -p ~/.vim/pack/coc/opt
-cd ~/.vim/pack/coc/opt
-curl --fail -L \
-  https://github.com/neoclide/coc.nvim/archive/release.tar.gz | tar xzfv -
-```
 
 ## Asynchronous Lint Engine (ALE)
 
@@ -347,13 +310,6 @@ _Documents_ could be _My Documents_. Adjust the path for actual location of
 except Windows `cmd.exe`, that these files are located in `$HOME`. Soft-links
 allow pointing to the actual location.
 
-```powershell
-New-Item -ItemType Directory -Path $env:USERPROFILE\.config
-cmd /c "mklink /J %USERPROFILE%\.vim %LOCALAPPDATA%\vimfiles\vimfiles"
-cmd /c "mklink /J %USERPROFILE%\.config\mintty %LOCALAPPDATA%\vimfiles\mintty"
-cmd /c "mklink /J %USERPROFILE%\vimwiki %USERPROFILE%\Documents\vimwiki"
-```
-
 ### Git Hooks
 
 Tim Pope's [Effortless Ctags with Git](https://tbaggery.com/2011/08/08/effortless-ctags-with-git.html)
@@ -367,7 +323,7 @@ ln -s /mnt/c/Users/fishe/AppData/Local/vimfiles/.git_template ~/.git_template
 To make hooks available from Windows, if you have any .bat or .ps1 hooks:
 
 ```powershell
-cmd /c "mklink /J $env:USERPROFILE\.git_template $env:LOCALAPPDATA\vimfiles\.git_template"
+.\Install-Vimfiles.ps1 -Link
 ```
 
 ### The Case for Pull Rebase
