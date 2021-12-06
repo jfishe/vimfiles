@@ -11,6 +11,7 @@ dependencies:
   - panflute
   - pip
   - pydocstyle
+  - pylint
   - python-dateutil # Required by vimfiles/UltiSnips/vimwiki.snippets
   - python[version='>=3.10']
   - ripgrep
@@ -18,6 +19,5 @@ dependencies:
   - wrapt # Added by conda-export
   - pip:
     - markdownpp
-    - pylint # conda-forge not updated yet.
     - vim-vint
 name: vim_python
