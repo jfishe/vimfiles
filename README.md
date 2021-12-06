@@ -17,6 +17,22 @@ Several applications are assumed to be in the `PATH`, install
 See steps to add a local bin directory for
 the other applications referenced in the vim configuration files.
 
+```powershell
+$Software = @(
+  'Git.Git',
+  'vim.vim',
+  'Anaconda.Miniconda3',
+  # KeeAgent is not available.
+  'DominikReichl.KeePass',
+  'Microsoft.PowerToys',
+  'Microsoft.WindowsTerminal'
+  # Universal ctags is not available.
+)
+$Software |  ForEach-Object -Process {
+  winget install $_
+}
+```
+
 ### Install Vim on Windows Subsystem for Linux
 
 On Debian derivatives, like Ubuntu, the
@@ -375,18 +391,6 @@ On Windows install PowerToys or Uncap.
 - `choco install powertoys`
 - Open PowerToys Settings application.
 - In Keyboard Manager, map `Caps Lock` to `Esc`.
-
-### Install Uncap
-
-  [susam uncap](https://github.com/susam/uncap). The repository contains
-  additional instructions.
-
-- Place in `%USERPROFILE%\bin`.
-- Create a Shortcut.
-- Move the Shortcut to `Win-R shell:startup` (Win == Start Menu key).
-- See
-  [Change which apps run automatically at startup in Windows 10](https://support.microsoft.com/en-us/help/4026268/windows-10-change-startup-apps)
-  for more details.
 
 ## `vimfiles` Update
 
