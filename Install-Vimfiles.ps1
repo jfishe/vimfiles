@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0
+.VERSION 1.1
 
 .GUID e7b6d3ed-1459-4dee-9dcf-675756b14510
 
@@ -48,6 +48,8 @@
 
     Create/update compatible conda environment for Vim and modify Vim batch
     files to activate the conda environment.
+
+    Create Start Menu shortcuts for Vim batch files.
 .EXAMPLE
     PS> .\Install-Vimfiles.ps1 -Clone
 .EXAMPLE
@@ -102,6 +104,15 @@ Param(
     [switch]
     $Conda
     ,
+    # Create Start Menu folder and shortcuts for Vim batch files.
+    [Parameter(
+        Mandatory = $true,
+        ParameterSetName = 'Shortcut',
+        HelpMessage = 'Create Start Menu folder and shortcuts for Vim batch files.'
+    )]
+    [switch]
+    $Shortcut
+    ,
     # Path to clone repository.
     [Parameter(
         Mandatory = $false,
@@ -153,6 +164,7 @@ Param(
         ParameterSetName = 'Conda',
         HelpMessage = 'Path to directory to copy user modified Vim batch files.'
     )]
+    [Parameter(ParameterSetName = 'Shortcut')]
     [string]
     $UserAppDir = "$env:LOCALAPPDATA\Microsoft\WindowsApps"
     ,
@@ -164,7 +176,16 @@ Param(
         HelpMessage = 'Path to directory where Vim installer placed batch files.'
     )]
     [string]
-    $GlobalAppDir =  "$env:WINDIR"
+    $GlobalAppDir = "$env:WINDIR"
+    ,
+    # Path to Vim icon file, e.g., gvim.exe.
+    [Parameter(
+        Mandatory = $false,
+        ParameterSetName = 'Shortcut',
+        HelpMessage = 'Path to Vim icon file.'
+    )]
+    [string]
+    $IconLocation = '%SystemDrive%\tools\vim\vim82\gvim.exe'
 )
 
 <#
@@ -372,4 +393,35 @@ if ($Conda) {
     conda activate vim_python
     vim -c 'call condaactivate#AddConda2Vim() | :qa'
     conda deactivate
+}
+
+if ($Shortcut) {
+    # Locate Vim batch files.
+    $UserAppDir = Get-Item "$UserAppDir"
+    [array] $SourceFileLocation = Join-Path $UserAppDir '*vim*.bat' | Get-ChildItem
+    [array] $SourceFileLocation += Join-Path $UserAppDir '*view*.bat' | Get-ChildItem
+
+    # Destination directory needs to exist.
+    $ShortcutLocation = "$Env:AppData\Microsoft\Windows\Start Menu\Programs\Vim"
+    Get-Item "$ShortCutLocation"
+    if (-not $?) {
+        New-Item $ShortCutLocation -ItemType Directory
+    }
+
+    $WorkingDirectory = '%HOMEDRIVE%%HOMEPATH%'
+
+    $SourceFileLocation | ForEach-Object -Process {
+        $item = Join-Path $ShortcutLocation "$($_.BaseName).lnk"
+        # New-Object : Creates an instance of a Microsoft .NET Framework or COM object.
+        # -ComObject WScript.Shell: This creates an instance of the COM object that represents the WScript.Shell for invoke CreateShortCut
+        $WScriptShell = New-Object -ComObject WScript.Shell
+        $Newlink = $WScriptShell.CreateShortcut($item)
+        $Newlink.TargetPath = $_
+        $Newlink.WindowStyle = 7 # Minimized
+        $Newlink.IconLocation = "$IconLocation"
+        $Newlink.WorkingDirectory = "$WorkingDirectory"
+        $Newlink | Out-String | Write-Verbose
+        #Save the Shortcut to the TargetPath
+        $Newlink.Save()
+    }
 }

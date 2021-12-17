@@ -78,6 +78,9 @@ Get-Help .\Install-Vimfiles.ps1 -Full
 # Symlink vimfiles and dotfiles to $HOME.
 .\Install-Vimfiles.ps1 -Link
 
+# Create Start-Menu shortcuts.
+.\Install-Vimfiles.ps1 -Shortcut
+
 # Copy wsl -d Ubuntu /usr/share/dict/words to vimfiles/dictionary/words.
 # Install dictionary if needed.
 .\Install-Vimfiles.ps1 -Dictionary
