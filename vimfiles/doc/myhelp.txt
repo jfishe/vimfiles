@@ -1,4 +1,4 @@
-*myhelp.txt*	For Vim version 8.2	Last change: 2021 Feb 19
+*myhelp.txt*	For Vim version 8.2	Last change: 2021 Dec 29
 
 Cheat sheet of Vim stuff often forgotten
 
@@ -243,13 +243,26 @@ af		|n_coc-funcobj-a| |v_coc-funcobj-a|
 <space>p		 |:CocListResume|
 		Reopen last opened list
 
+							  *myhelp-coc-pyright*
+Coc-Pyright uses the shell associated with the Vim instance to call nodejs and
+locate the python environment. Install nodejs, black, etc. with conda and call
+Vim from the activated environment. The project directory should contain a
+pyrightconfig.json file: >
+
+{
+    "venvPath": "/home/jfishe/miniconda3/envs",
+    "venv": "pyedna",
+    "pythonVersion": "3.9"
+}
+<
+
 ==============================================================================
 8. Miscellaneous Functions					 *myhelp-misc*
 
 Command		Meaning ~
 ------------------------------------------------------------------------------
 call condaactivate#AddConda2Vim()
-		Update Windows Batch files to activate python38 environment
+		Update Windows Batch files to activate python environment
 		prior to starting Vim.
 
 `:Redir verbose map!`	Get listing of map assignments |Redir|: >
