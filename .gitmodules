@@ -139,3 +139,6 @@
 [submodule "vimfiles/pack/themes/start/vim-fontzoom"]
 	path = vimfiles/pack/themes/start/vim-fontzoom
 	url = https://github.com/thinca/vim-fontzoom.git
+[submodule "vimfiles/pack/dev/opt/vader.vim"]
+	path = vimfiles/pack/dev/opt/vader.vim
+	url = https://github.com/junegunn/vader.vim.git
