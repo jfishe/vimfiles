@@ -59,8 +59,8 @@ let g:vimwiki_tags_header_level = 2
 let g:vimwiki_links_header_level = 2
 
 let g:panvimwiki_settings = {
-      \ 'extra_args': [ '--shift-heading-level-by', '1',
-      \ '--data-dir', s:wiki_1.template_path
+      \ 'extra_args': [ '--shift-heading-level-by=1',
+      \ '--data-dir=' .. s:wiki_1.template_path
       \ ],
       \ 'format': 'docx'
       \ }
