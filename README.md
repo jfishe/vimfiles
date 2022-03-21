@@ -19,11 +19,13 @@ the other applications referenced in the vim configuration files.
 
 ```powershell
 $Software = @(
-  'Git.Git',
-  'vim.vim',
+  'Git.Git' --interactive,
+  # Use the native Windows Secure Channel library to manage firewall local
+  # certificates.
+  'vim.vim --interactive',
   'Anaconda.Miniconda3',
   # KeeAgent is not available.
-  'DominikReichl.KeePass',
+  # 'DominikReichl.KeePass', # Requires administrator rights.
   'Microsoft.PowerToys',
   'Microsoft.WindowsTerminal'
   # Universal ctags is not available.
@@ -31,6 +33,23 @@ $Software = @(
 $Software |  ForEach-Object -Process {
   winget install $_
 }
+```
+
+### SSL Error: 
+
+- [github: server certificate verification failed](https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed)
+  - `server certificate verification failed. CAfile: none CRLfile: none`
+  - `SSL certificate problem: unable to get local issuer certificate`
+- [How to fix ssl certificate problem unable to get local issuer certificate Git error](https://komodor.com/learn/how-to-fix-ssl-certificate-problem-unable-to-get-local-issuer-certificate-git-error/)
+
+``` bash
+openssl s_client -showcerts -servername github.com -connect github.com:443 `
+  </dev/null 2>/dev/null |
+  sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p'  > github-com.pem
+# On Linux
+cat github-com.pem | sudo tee -a /etc/ssl/certs/ca-certificates.crt
+# On windows C:\Program Files\Git\mingw64\ssl\certs\ or some variant.
+cat github-com.pem | tee -a /mingw64/ssl/certs/ca-bundle.crt
 ```
 
 ### Install Vim on Windows Subsystem for Linux
