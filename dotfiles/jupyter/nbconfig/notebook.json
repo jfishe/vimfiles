@@ -9,7 +9,8 @@
     "comment-uncomment/main": true,
     "spellchecker/main": true,
     "toc2/main": true,
-    "jupyter-black-master/jupyter-black": true
+    "jupyter-black-master/jupyter-black": true,
+    "nbdime/index": true
   },
   "comment_uncomment_keybinding": "alt-ctrl-c",
   "Cell": {
