@@ -1,7 +1,4 @@
 # http://timstaley.co.uk/posts/making-git-and-jupyter-notebooks-play-nice/
-*.ipynb filter=nbstrip_full
-*.ipynb	diff=jupyternotebook
-*.ipynb	merge=jupyternotebook
 # https://www.xltrail.com/blog/git-diff-spreadsheetcompare
 *.xla diff=excel
 *.xla merge=excel

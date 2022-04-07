@@ -23,29 +23,11 @@
 	default = simple
 [log]
 	decorate = auto
-[filter "nbstrip_full"]
-    clean = "jq --indent 1 \
-                '(.cells[] | select(has(\"outputs\")) | .outputs) = []  \
-                | (.cells[] | select(has(\"execution_count\")) | .execution_count) = null  \
-                | .metadata = {\"language_info\": {\"name\": \"python\", \"pygments_lexer\": \"ipython3\"}} \
-                | .cells[].metadata = {} \
-                '"
-    smudge = cat
-    required = true
 [diff "msword"]
   textconv = astextplain
   wordRegex = "\\w+"
 [diff "excel"]
 	command = xldiff.bat
-[diff "jupyternotebook"]
-	command = git-nbdiffdriver diff
-[merge "jupyternotebook"]
-	driver = git-nbmergedriver merge %O %A %B %L %P
-	name = jupyter notebook merge driver
-[difftool "nbdime"]
-	cmd = git-nbdifftool diff \"$LOCAL\" \"$REMOTE\"
-[mergetool "nbdime"]
-	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
 ; [difftool "vimdiff"]
 ;     trustExitCode = true
 ;     cmd = vim -d \"$LOCAL\" \"$REMOTE\"
@@ -128,3 +110,7 @@
     ; gitconfig is installation specific. Put the actual path in the file when cloning dotfiles.
     ; [credential]
     ; 	helper = /mnt/c/Program\\ Files/Git/mingw64/libexec/git-core/git-credential-wincred.exe
+[url "https://github.com/"]
+	insteadOf = git@github.com:
+[url "https://"]
+	insteadOf = git://

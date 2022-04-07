@@ -43,7 +43,7 @@ $Software |  ForEach-Object -Process {
 - [How to fix ssl certificate problem unable to get local issuer certificate Git error](https://komodor.com/learn/how-to-fix-ssl-certificate-problem-unable-to-get-local-issuer-certificate-git-error/)
 
 ``` bash
-openssl s_client -showcerts -servername github.com -connect github.com:443 `
+openssl s_client -showcerts -servername github.com -connect github.com:443 \
   </dev/null 2>/dev/null |
   sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p'  > github-com.pem
 # On Linux
