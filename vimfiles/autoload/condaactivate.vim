@@ -20,7 +20,7 @@ function! condaactivate#AddConda2Vim() abort
   silent execute 'vimgrep /rem -- Run Vim --/j ' l:apppath
   let l:bufflist = map(getqflist(), 'v:val.bufnr')
 
-  let l:python = 'call conda activate '..l:conda_prefix
+  let l:python = 'call conda activate --stack '..l:conda_prefix
 
   for l:buffer in l:bufflist
     silent execute 'buffer' l:buffer
