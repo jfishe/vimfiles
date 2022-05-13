@@ -1,3 +1,10 @@
+" UltiSnips {{{
+let g:UltiSnipsExpandTrigger = '<c-j>'
+let g:UltiSnipsListSnippets = '<c-a>'
+let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+" }}}
+
 " Split navigations {{{
 nnoremap <Down> <C-W><C-J>
 nnoremap <Up> <C-W><C-K>

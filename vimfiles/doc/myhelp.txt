@@ -256,6 +256,15 @@ pyrightconfig.json file: >
 }
 <
 
+				      *myhelp-coc-completion* *myhelp-UltiSnips*
+|coc-completion| and |UltiSnips-trigger-key-mappings| default key mapping
+conflict with Windows Terminal.
+
+g:UltiSnipsExpandTrigger		<c-j>
+g:UltiSnipsListSnippets			<c-a>
+g:UltiSnipsJumpForwardTrigger		<c-j>
+g:UltiSnipsJumpBackwardTrigger		<c-k>
+
 ==============================================================================
 8. Miscellaneous Functions					 *myhelp-misc*
 
