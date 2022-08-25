@@ -202,6 +202,8 @@ K		|coc-action-doHover| Show documentation of the current word in
 							   *myhelp-coc-object*
 if		|n_coc-funcobj-i| |v_coc-funcobj-i|
 af		|n_coc-funcobj-a| |v_coc-funcobj-a|
+ic		|n_coc-classobj-i| |v_coc-classobj-i|
+ac		|n_coc-classobj-a| |v_coc-classobj-a|
 		Select inside/around function.
 
 							   *myhelp-coc-format*
@@ -214,6 +216,7 @@ af		|n_coc-funcobj-a| |v_coc-funcobj-a|
 							      *myhelp-coc-fix*
 <leader>qf	|n_coc-fix-current| Try to run quickfix action for diagnostics
 		on the current line.
+<leader>cl	|CocAction('codeLensAction')| Invoke codeLens.
 
 							 *myhelp-coc-refactor*
 <leader>rn	|n_coc-rename| Rename symbol under cursor to a new word.
