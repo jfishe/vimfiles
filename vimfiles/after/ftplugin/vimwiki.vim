@@ -41,7 +41,7 @@ endif
 let b:undo_ftplugin ..= "delcommand VWS"
       \ .. " | delcommand VWT"
       \ .. " | unlet b:did_ftplugin_user_after b:ale_enabled"
-      \ .. ' | execute "nunmap <buffer> <F3>"'
+      \ .. ' | mapclear <buffer>'
       \ .. " | setlocal spell< spelllang<"
       \ .. " | autocmd! myvimwiki"
 
