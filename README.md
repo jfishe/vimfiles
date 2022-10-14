@@ -35,7 +35,7 @@ $Software |  ForEach-Object -Process {
 }
 ```
 
-### SSL Error: 
+### SSL Error
 
 - [github: server certificate verification failed](https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed)
   - `server certificate verification failed. CAfile: none CRLfile: none`
@@ -343,7 +343,7 @@ directories so use `mklink /J LINK TARGET`.
 
 The following assumes that git-bash has been configured to use `%USERPROFILE%`
 as home, which may be different than the default `%HOMEDRIVE%%HOMEPATH%`. Also,
-_Documents_ could be _My Documents_. Adjust the path for actual location of
+*Documents* could be *My Documents*. Adjust the path for actual location of
 `vimfiles` and `vimwiki`. The vim startup script assumes that for anything,
 except Windows `cmd.exe`, that these files are located in `$HOME`. Soft-links
 allow pointing to the actual location.
@@ -432,3 +432,4 @@ vim -c 'packloadall | helptags ALL | qa'
 git commit -am "chore: update submodules"
 git push
 ```
+

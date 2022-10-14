@@ -6,12 +6,12 @@
 " compatible.
 " The ! means the package won't be loaded right away but when plugins are
 " loaded during initialization.
-if has('syntax') && has('eval')
+if !has('nvim') && has('syntax') && has('eval')
   packadd! matchit
 endif
 " }}}
 " ================ Python 3 ====================== {{{
-if !empty($CONDA_PREFIX) && has('python3_dynamic')
+if !has('nvim') && !empty($CONDA_PREFIX) && has('python3_dynamic')
   set pythonthreehome=$CONDA_PREFIX
 endif
 if has('python3')
@@ -38,8 +38,13 @@ endif
 " ================ Windows & Defaults ================== {{{
 " Get the defaults that most users want.
 " defaults.vim invokes `filetype plugin indent on` after packadd! lines.
-source $VIMRUNTIME/defaults.vim
-source $VIMRUNTIME/mswin.vim
+if !has('nvim')
+  source $VIMRUNTIME/defaults.vim
+  source $VIMRUNTIME/mswin.vim
+else
+  command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_
+        \ | diffthis | wincmd p | diffthis
+endif
 
 " if has('win64')
 "     set shell=powershell
@@ -68,7 +73,7 @@ set statusline=\ %<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
 let s:vimfiles=fnamemodify(expand('$MYVIMRC'), ':p:h')
 
 " Based on https://begriffs.com/posts/2019-07-19-history-use-vim.html
-if has('persistent_undo') && !isdirectory(s:vimfiles . '/undo')
+if !has('nvim') && has('persistent_undo') && !isdirectory(s:vimfiles . '/undo')
   if has('win32') || has('win64') 
     silent exe '!mkdir ' . s:vimfiles . '\undo'
   else
@@ -76,8 +81,10 @@ if has('persistent_undo') && !isdirectory(s:vimfiles . '/undo')
   endif
 endif
 
-if has('persistent_undo')
+if !has('nvim') && has('persistent_undo')
   let &undodir=s:vimfiles . '/undo//,' . &undodir
+endif
+if has('nvim') || has('persistent_undo')
   set undofile
 endif
 
@@ -89,14 +96,16 @@ set undolevels=500
 set tags^=./.git/tags;
 
 " Cache swapfile instead of polluting project directories {{{
-if !isdirectory(s:vimfiles . '/swap')
+if !has('nvim') && !isdirectory(s:vimfiles . '/swap')
   if has('win32') || has('win64') 
     silent exe '!mkdir ' . s:vimfiles . '\swap'
   else
     silent exe '!mkdir ' . s:vimfiles . '/swap'
   endif
 endif
-let &directory=s:vimfiles . '/swap//,' . &directory
+if !has('nvim')
+  let &directory=s:vimfiles . '/swap//,' . &directory
+endif
 " }}}
 
 " Thesaurus and Dictionary {{{
