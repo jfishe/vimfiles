@@ -217,12 +217,8 @@ set smartcase       " ...unless we type a capital
 " Append bash to select terminal.
 if has('terminal')
   command! Vterm vertical terminal
-  if executable('pwsh')
-    command! Vpwsh vertical terminal pwsh -ExecutionPolicy Bypass
-  endif
-  if executable('powershell')
-    command! Vposh vertical terminal powershell -ExecutionPolicy Bypass
-  endif
+  command! Vpwsh vertical terminal pwsh -ExecutionPolicy Bypass
+  command! Vposh vertical terminal powershell -ExecutionPolicy Bypass
 endif
 " }}}
 " diff options {{{
