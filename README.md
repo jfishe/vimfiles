@@ -13,7 +13,7 @@ more portable.
 
 Several applications are assumed to be in the `PATH`, install
 [git-scm](https://git-scm.com/) and select
-*User Git and optional Unix tools from the Windows Command Prompt*.
+_User Git and optional Unix tools from the Windows Command Prompt_.
 See steps to add a local bin directory for
 the other applications referenced in the vim configuration files.
 
@@ -23,6 +23,7 @@ $Software = @(
   # Use the native Windows Secure Channel library to manage firewall local
   # certificates.
   'vim.vim --interactive',
+  'ChristianSchenk.MiKTeX',
   'Anaconda.Miniconda3',
   # KeeAgent is not available.
   # 'DominikReichl.KeePass', # Requires administrator rights.
@@ -35,6 +36,7 @@ $Software |  ForEach-Object -Process {
 }
 ```
 
+<<<<<<< HEAD
 ### SSL Error
 
 - [github: server certificate verification failed](https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed)
@@ -42,7 +44,7 @@ $Software |  ForEach-Object -Process {
   - `SSL certificate problem: unable to get local issuer certificate`
 - [How to fix ssl certificate problem unable to get local issuer certificate Git error](https://komodor.com/learn/how-to-fix-ssl-certificate-problem-unable-to-get-local-issuer-certificate-git-error/)
 
-``` bash
+```bash
 openssl s_client -showcerts -servername github.com -connect github.com:443 \
   </dev/null 2>/dev/null |
   sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p'  > github-com.pem
@@ -343,7 +345,7 @@ directories so use `mklink /J LINK TARGET`.
 
 The following assumes that git-bash has been configured to use `%USERPROFILE%`
 as home, which may be different than the default `%HOMEDRIVE%%HOMEPATH%`. Also,
-*Documents* could be *My Documents*. Adjust the path for actual location of
+_Documents_ could be _My Documents_. Adjust the path for actual location of
 `vimfiles` and `vimwiki`. The vim startup script assumes that for anything,
 except Windows `cmd.exe`, that these files are located in `$HOME`. Soft-links
 allow pointing to the actual location.
@@ -432,4 +434,3 @@ vim -c 'packloadall | helptags ALL | qa'
 git commit -am "chore: update submodules"
 git push
 ```
-
