@@ -5,7 +5,6 @@ set termencoding=utf-8
 if has('gui_gtk3') || has('gui_gtk2')
   set guifont+=CaskaydiaCove\ Nerd\ Font\ 12
   set guifont+=Cascadia\ Code\ PL\ 12
-  set guifont+=JetBrains\ Mono\ 12
   set guifont+=DejaVu\ Sans\ Mono\ 12
   set guifont+=Consolas\ 12
 elseif has('gui_win32')
@@ -14,7 +13,6 @@ elseif has('gui_win32')
   endif
   set guifont+=CaskaydiaCove_NF:h10:cDEFAULT:qDEFAULT
   set guifont+=Cascadia_Code_PL:h10:cDEFAULT:qDEFAULT
-  set guifont+=JetBrains_Mono:h10:cDEFAULT:qDEFAULT
   set guifont+=Consolas:h10:cDEFAULT:qDEFAULT
 endif
 
