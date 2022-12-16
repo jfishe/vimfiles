@@ -47,7 +47,7 @@ let s:wiki_1.auto_toc = 1
 let s:wiki_2 = copy(s:wiki_1)
 let s:wiki_2.path = s:my_docs . '/vimwiki_home/'
 let s:wiki_2.path_html = s:my_docs . '/vimwiki_home_html/html'
-let s:wiki_2.template_path = s:my_docs . '/vimwiki_home_html/templates/'
+let s:wiki_2.template_path = s:my_docs . '/vimwiki_home_html/templates'
 " }}}
 " Work & Home vimwiki {{{
 let s:wiki_1.name = 'work'
@@ -61,7 +61,7 @@ let g:vimwiki_links_header_level = 2
 
 let g:panvimwiki_settings = {
       \ 'extra_args': [ '--shift-heading-level-by=1',
-      \ '--data-dir=' .. s:wiki_1.template_path
+      \ '--data-dir=' .. '"' .. s:wiki_1.template_path .. '"',
       \ ],
       \ 'format': 'docx'
       \ }
