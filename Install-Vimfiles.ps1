@@ -322,14 +322,17 @@ if ($Link) {
             ItemType = '/D'
         }
     }
+
+    # Terminal config for Mintty and git-scm Vim
     [array] $Vimfiles += Get-Item -Path "$Path\mintty" | ForEach-Object -Process {
-        # Terminal config for Mintty and git-scm Vim
         [PSCustomObject]@{
             Link     = "$LinkPath\.config\$($_.Name)"
             Target   = "$($_.FullName)"
             ItemType = '/D'
         }
     }
+    New-Item -Path "$LinkPath\.config" -ItemType Directory -ErrorAction SilentlyContinue
+
     [array] $Vimfiles += Get-ChildItem -Path "$Path\dotfiles" | ForEach-Object -Process {
         if ($_.PSIsContainer) {
             $ItemType = '/D'
