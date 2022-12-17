@@ -4,16 +4,20 @@ set termencoding=utf-8
 " :help setting-guifont
 if has('gui_gtk3') || has('gui_gtk2')
   set guifont+=CaskaydiaCove\ Nerd\ Font\ 12
-  set guifont+=Cascadia\ Code\ PL\ 12
+  set guifont+=CaskaydiaCove\ NF\ 12
+  set guifont+=CaskaydiaCove\ Nerd\ Font\ Mono\ 12
   set guifont+=DejaVu\ Sans\ Mono\ 12
   set guifont+=Consolas\ 12
 elseif has('gui_win32')
   if has('directx')
     set renderoptions=type:directx
   endif
-  set guifont+=CaskaydiaCove_NF:h10:cDEFAULT:qDEFAULT
-  set guifont+=Cascadia_Code_PL:h10:cDEFAULT:qDEFAULT
-  set guifont+=Consolas:h10:cDEFAULT:qDEFAULT
+  set guifont+=CaskaydiaCove_Nerd_Font:h12:cDEFAULT:qDEFAULT
+  set guifont+=CaskaydiaCove_NF:h12:cDEFAULT:qDEFAULT
+  set guifont+=CaskaydiaCove_Nerd_Font_Mono:h12:cDEFAULT:qDEFAULT
+  set guifont+=Cascadia_Code:h12:cDEFAULT:qDEFAULT
+  set guifont+=Cascadia_Mono:h12:cDEFAULT:qDEFAULT
+  set guifont+=Consolas:h12:cDEFAULT:qDEFAULT
 endif
 
 " set background=dark
