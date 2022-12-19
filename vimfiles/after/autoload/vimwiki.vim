@@ -75,7 +75,9 @@ function! vimwiki#myvimwiki_normalize_mail_v() " {{{
     let l:rxStyle = ''
     let l:sub = vimwiki#base#apply_template(
           \ vimwiki#vars#get_global('WikiLinkTemplate2'),
-          \ l:rxUrl, l:rxDesc, l:rxStyle)
+          \ l:rxUrl, l:rxDesc, l:rxStyle,
+          \ vimwiki#vars#get_wikilocal('ext')
+          \ )
 
     " Put substitution in register " and change text
     call setreg('"', l:sub, 'v')
