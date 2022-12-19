@@ -35,7 +35,7 @@ let s:wiki_1.automatic_nested_syntaxes = 1
 let s:wiki_1.nested_syntaxes = {'python': 'python', 'bash': 'sh',
       \ 'vb': 'vb',
       \ 'DOS': 'dosbatch', 'powershell': 'ps1', 'snippets': 'snippets'}
-let s:wiki_1.template_path = s:my_docs . '/vimwiki_html/templates/'
+let s:wiki_1.template_path = s:my_docs . '/vimwiki_html/templates'
 let s:wiki_1.template_default = 'default'
 let s:wiki_1.template_ext = '.tpl'
 let s:wiki_1.css_name = '../css/style.css'
@@ -62,6 +62,7 @@ let g:vimwiki_links_header_level = 2
 let g:panvimwiki_settings = {
       \ 'extra_args': [ '--shift-heading-level-by=1',
       \ '--data-dir=' .. '"' .. s:wiki_1.template_path .. '"',
+      \ '--reference-doc', s:wiki_1.template_path .. '/reference.docx',
       \ ],
       \ 'format': 'docx'
       \ }
