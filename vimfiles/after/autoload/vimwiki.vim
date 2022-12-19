@@ -120,21 +120,20 @@ function! vimwiki#TitleJournal() abort "{{{
   let l:todoheader = search(l:todoheader,'w', 0, 500 )
   if l:todoheader
     silent ,$yank m
-    VimwikiGoBackLink
+    call vimwiki#base#go_back_link()
     silent put m
   else
-    VimwikiGoBackLink
+    call vimwiki#base#go_back_link()
   endif
 
   only
   vsplit
   call vimwiki#diary#goto_prev_day()
   diffthis
-  set foldmethod=syntax
-  execute 'normal! zR'
   wincmd p
   diffthis
   execute 'normal! gg'
+  wincmd p
 
   if empty('l:taskwiki_disable')
     unlet g:taskwiki_disable
