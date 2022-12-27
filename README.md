@@ -36,7 +36,6 @@ $Software |  ForEach-Object -Process {
 }
 ```
 
-<<<<<<< HEAD
 ### SSL Error
 
 - [github: server certificate verification failed](https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed)
@@ -65,8 +64,39 @@ configuration across environments.
 ### Install Vim on Windows
 
 [Vim-win32-installer](https://github.com/vim/vim-win32-installer/releases)
-includes `python3/dyn` currently linked to `Python 3.10`. Download and install
+includes `python3/dyn`. Download and install
 or use `chocolatey`: `choco install vim`.
+
+- Download the selected zip file and adjust the paths as needed.
+- Update python version specification in [environment.yml](environment.yml) to match
+  linked version in vim: `vim --version | grep python --color`
+- See `Get-Help .\Install-Vimfiles.ps1` for additional information.
+
+```powershell
+$DestinationPath = Get-Item -Path "$env:LOCALAPPDATA\Programs"
+$Path = Get-ChildItem -Path ~\Downloads\gvim_9.*_x64_signed.zip
+
+Move-Item -Path "$DestinationPath\Vim\vim90" -Destination "$DestinationPath\Vim\vim90.old" -ErrorAction SilentlyContinue
+
+Expand-Archive -Path $Path -DestinationPath $DestinationPath
+
+# Check vim works and remove old version.
+vim --version | grep python --color
+Remove-Item -Path "$DestinationPath\Vim\vim90.old" -Recurse -Force
+
+# If needed, create the batch files using the installer.
+& $(Get-Item -Path "$DestinationPath\Vim\vim90\install.exe")
+
+# If python/dyn version changes, update the YAML file, remove and re-create
+# the conda environment. Update batch files to activate conda environment.
+conda activate base
+conda env remove -n vim_python
+.\Install-Vimfiles.ps1 -Conda
+
+# Add/update Start Menu shortcuts.
+$IconLocation = Get-Item "$DestinationPath\Vim\vim90\gvim.exe"
+.\Install-Vimfiles.ps1 -Shortcut -IconLocation "$IconLocation"
+```
 
 ### `vimfiles` installation
 
