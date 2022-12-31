@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.1
+.VERSION 2.0
 
 .GUID e7b6d3ed-1459-4dee-9dcf-675756b14510
 
@@ -185,7 +185,16 @@ Param(
         HelpMessage = 'Path to Vim icon file.'
     )]
     [string]
-    $IconLocation = '%SystemDrive%\tools\vim\vim82\gvim.exe'
+    $IconLocation = (
+        "$env:ProgramFiles",
+        "${env:ProgramFiles(x86)}",
+        "$env:SystemDrive\tools",
+        "$env:LOCALAPPDATA\Programs"
+    ).ForEach(
+        {
+            Resolve-Path -Path "$_\Vim\*\gvim.exe" -ErrorAction SilentlyContinue
+        }
+    )
 )
 
 <#
@@ -406,10 +415,11 @@ if ($Shortcut) {
 
     # Destination directory needs to exist.
     $ShortcutLocation = "$Env:AppData\Microsoft\Windows\Start Menu\Programs\Vim"
-    Get-Item "$ShortCutLocation"
-    if (-not $?) {
-        New-Item $ShortCutLocation -ItemType Directory
-    }
+    New-Item $ShortCutLocation -ItemType Directory -ErrorAction SilentlyContinue
+
+    # Copy Visual Basic Script to open gv*.bat without cmd.exe window.
+    $BatLauncher = Get-Item -Path "$Path\pwsh\bat-launcher.vbs"
+    $BatLauncher = Copy-Item -Path $BatLauncher -Destination $UserAppDir -PassThru
 
     $WorkingDirectory = '%HOMEDRIVE%%HOMEPATH%'
 
@@ -419,7 +429,13 @@ if ($Shortcut) {
         # -ComObject WScript.Shell: This creates an instance of the COM object that represents the WScript.Shell for invoke CreateShortCut
         $WScriptShell = New-Object -ComObject WScript.Shell
         $Newlink = $WScriptShell.CreateShortcut($item)
-        $Newlink.TargetPath = $_
+        if ( $_.BaseName -match '^gv' ) {
+            $Newlink.TargetPath = "$BatLauncher"
+            $Newlink.Arguments =  "$($_.BaseName) --"
+        }
+        else {
+            $Newlink.TargetPath = "$_"
+        }
         $Newlink.WindowStyle = 7 # Minimized
         $Newlink.IconLocation = "$IconLocation"
         $Newlink.WorkingDirectory = "$WorkingDirectory"
@@ -428,3 +444,4 @@ if ($Shortcut) {
         $Newlink.Save()
     }
 }
+
