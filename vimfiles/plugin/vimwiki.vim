@@ -45,9 +45,11 @@ let s:wiki_1.auto_toc = 1
 " }}}
 " Home vimwiki {{{
 let s:wiki_2 = copy(s:wiki_1)
-let s:wiki_2.path = s:my_docs . '/vimwiki_home/'
-let s:wiki_2.path_html = s:my_docs . '/vimwiki_home_html/html'
-let s:wiki_2.template_path = s:my_docs . '/vimwiki_home_html/templates'
+let s:wiki_2.index = 'index'
+let s:wiki_2.path = s:my_docs .. '/vimwiki_home/'
+let s:wiki_2.path_html = s:wiki_2.path .. 'docs'
+let s:wiki_2.css_name = 'css/style.css'
+let s:wiki_2.template_path = s:wiki_2.path .. '/templates'
 " }}}
 " Work & Home vimwiki {{{
 let s:wiki_1.name = 'work'
