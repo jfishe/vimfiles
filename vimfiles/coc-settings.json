@@ -8,6 +8,7 @@
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
   // PowerShell
+  "powershell.scriptAnalysis.enable": true,
   "powershell.integratedConsole.showOnStartup": false,
   "powershell.codeFormatting.preset":"OTBS"
 }
