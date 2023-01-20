@@ -378,15 +378,15 @@ if ($Thesaurus) {
 }
 
 if ($Conda) {
-    Get-Command conda -ErrorAction Stop | Out-String | Write-Verbose
+    Get-Command Invoke-Conda -ErrorAction Stop | Out-String | Write-Verbose
 
     # Create or update conda env vim_python.
     Push-Location "$Path"
     Get-Item .\environment.yml -ErrorAction Stop | Out-String | Write-Verbose
-    if (-not (conda env list | Select-String -Pattern 'vim_python' -CaseSensitive)) {
+    if (-not (Invoke-Conda env list | Select-String -Pattern 'vim_python' -CaseSensitive)) {
         conda env create --file environment.yml
     } else {
-        conda env update --file environment.yml
+        Invoke-Conda env update --file environment.yml
     }
     Pop-Location
 
@@ -402,9 +402,9 @@ if ($Conda) {
     }
 
     # Activate conda environment when starting Vim via Batch files.
-    conda activate vim_python
+    Invoke-Conda activate vim_python
     vim -c 'call condaactivate#AddConda2Vim() | :qa'
-    conda deactivate
+    Invoke-Conda deactivate
 }
 
 if ($Shortcut) {
@@ -431,9 +431,8 @@ if ($Shortcut) {
         $Newlink = $WScriptShell.CreateShortcut($item)
         if ( $_.BaseName -match '^gv' ) {
             $Newlink.TargetPath = "$BatLauncher"
-            $Newlink.Arguments =  "$($_.BaseName) --"
-        }
-        else {
+            $Newlink.Arguments = "$($_.BaseName) --"
+        } else {
             $Newlink.TargetPath = "$_"
         }
         $Newlink.WindowStyle = 7 # Minimized
