@@ -384,7 +384,7 @@ if ($Conda) {
     Push-Location "$Path"
     Get-Item .\environment.yml -ErrorAction Stop | Out-String | Write-Verbose
     if (-not (Invoke-Conda env list | Select-String -Pattern 'vim_python' -CaseSensitive)) {
-        conda env create --file environment.yml
+        Invoke-Conda env create --file environment.yml
     } else {
         Invoke-Conda env update --file environment.yml
     }
