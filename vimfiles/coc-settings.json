@@ -1,7 +1,5 @@
 {
   // CoC
-  "suggest.noselect": false,
-  "suggest.enablePreselect": true,
   // Python
   "python.linting.flake8Enabled": true,
   "python.linting.pydocstyleEnabled": true,
