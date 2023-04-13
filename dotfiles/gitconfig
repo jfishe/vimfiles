@@ -103,6 +103,7 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   wdiff = diff --word-diff
 	ctags = !.git/hooks/ctags
+    sh = show --name-only
 [pull]
 	rebase = merges
 [include]
