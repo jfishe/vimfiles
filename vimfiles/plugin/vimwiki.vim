@@ -39,7 +39,7 @@ let s:wiki_1.template_path = s:my_docs . '/vimwiki_html/templates'
 let s:wiki_1.template_default = 'default'
 let s:wiki_1.template_ext = '.tpl'
 let s:wiki_1.css_name = '../css/style.css'
-let s:wiki_1.auto_tags = 1
+let s:wiki_1.auto_tags = 0
 let s:wiki_1.list_margin = 0
 let s:wiki_1.auto_toc = 1
 " }}}
