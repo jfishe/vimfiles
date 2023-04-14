@@ -18,7 +18,6 @@ dependencies:
   - pip:
     - markdownpp
     - panvimwiki
-    - vimwiki-cli
     - vim-vint
 name: vim_python
 
