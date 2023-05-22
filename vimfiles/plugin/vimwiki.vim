@@ -75,9 +75,9 @@ augroup VimwikiTitleJournal "{{{
   " Create today's Journal and compare to previous day.
   autocmd BufNewFile */diary/[0-9]\\\{-4\}*.wiki call vimwiki#TitleJournal()
   " Use Vimwiki foldmethod when &diff.
-  autocmd BufEnter,BufNew,BufLeave,BufWinEnter,BufWinLeave *.wiki if &diff |
-        \ set foldmethod=syntax |
-        \ foldopen! | endif
+  " autocmd BufEnter,BufNew,BufLeave,BufWinEnter,BufWinLeave *.wiki if &diff |
+  "       \ set foldmethod=syntax |
+  "       \ foldopen! | endif
 augroup END "}}}
 
 function! VimwikiLinkHandler(link) abort
