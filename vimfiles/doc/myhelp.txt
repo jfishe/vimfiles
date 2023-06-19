@@ -1,4 +1,4 @@
-*myhelp.txt*	For Vim version 8.2	Last change: 2021 Dec 29
+*myhelp.txt*	For Vim version 8.2	Last change: 2023 Apr 27
 
 Cheat sheet of Vim stuff often forgotten
 
@@ -41,6 +41,8 @@ gx		Open URL, etc. with default protocol. See |netrw-gx|
 		sip:9+1(509)531-5444
 gf		Open file under cursor in Vim. Visually select to open file
 		with spaces in name.
+<C-W>s<C-W>T	Split current window and move to a new tab page.
+
 |z| commands:
 z.		current line at the center
 z-		current line at the bottom
@@ -104,6 +106,8 @@ Command		Meaning ~
 `:Vposh`	PowerShell vertical terminal
 `:set relativenumber`
 		|'relativenumber'| |'rnu'|
+:tab sb[uffer] [+cmd] {bufname}
+					Open tab and edit buffer {bufname}.
 `:s/ <\p\{-}@\p\{-}>//cgi`
 		Remove email addresses.
 `:%s/\%VSEARCH/REPLACE/g`
