@@ -29,7 +29,7 @@ $Software = @(
   # 'DominikReichl.KeePass', # Requires administrator rights.
   'Microsoft.PowerToys',
   'Microsoft.WindowsTerminal'
-  # Universal ctags is not available.
+  UniversalCtags.Ctags
 )
 $Software |  ForEach-Object -Process {
   winget install $_
