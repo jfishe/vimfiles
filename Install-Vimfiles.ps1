@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 2.0
+.VERSION 2.1
 
 .GUID e7b6d3ed-1459-4dee-9dcf-675756b14510
 
@@ -9,7 +9,7 @@
 
 .COMPANYNAME
 
-.COPYRIGHT 2021 John D. Fisher
+.COPYRIGHT 2023 John D. Fisher
 
 .TAGS
 
@@ -400,11 +400,6 @@ if ($Conda) {
     if (-not $UserVimCmd -and $GlobalVimCmd) {
         $GlobalVimCmd | Copy-Item -Destination $UserAppDir
     }
-
-    # Activate conda environment when starting Vim via Batch files.
-    Invoke-Conda activate vim_python
-    vim -c 'call condaactivate#AddConda2Vim() | :qa'
-    Invoke-Conda deactivate
 }
 
 if ($Shortcut) {

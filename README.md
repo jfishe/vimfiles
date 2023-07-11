@@ -17,23 +17,31 @@ _User Git and optional Unix tools from the Windows Command Prompt_.
 See steps to add a local bin directory for
 the other applications referenced in the vim configuration files.
 
+[Manual installation steps for older versions of WSL](https://learn.microsoft.com/en-us/windows/wsl/install-manual)
+provides the steps automated by `wsl install`.
+
 ```powershell
 $Software = @(
   'Git.Git' --interactive,
   # Use the native Windows Secure Channel library to manage firewall local
   # certificates.
-  'vim.vim --interactive',
-  'ChristianSchenk.MiKTeX',
+  # 'vim.vim --interactive', # Requires administrator rights.
+  # 'ChristianSchenk.MiKTeX',
   'Anaconda.Miniconda3',
   # KeeAgent is not available.
   # 'DominikReichl.KeePass', # Requires administrator rights.
   'Microsoft.PowerToys',
-  'Microsoft.WindowsTerminal'
-  UniversalCtags.Ctags
+  'Microsoft.WindowsTerminal',
+  'UniversalCtags.Ctags',
+  'Canonical.Ubuntu.2204'
 )
 $Software |  ForEach-Object -Process {
   winget install $_
 }
+
+dism.exe /online /enable-feature `
+  /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+# wsl --install -d Ubuntu --web-download
 ```
 
 ### SSL Error
@@ -76,7 +84,9 @@ or use `chocolatey`: `choco install vim`.
 $DestinationPath = Get-Item -Path "$env:LOCALAPPDATA\Programs"
 $Path = Get-ChildItem -Path ~\Downloads\gvim_9.*_x64_signed.zip
 
-Move-Item -Path "$DestinationPath\Vim\vim90" -Destination "$DestinationPath\Vim\vim90.old" -ErrorAction SilentlyContinue
+Move-Item -Path "$DestinationPath\Vim\vim90" `
+  -Destination "$DestinationPath\Vim\vim90.old" `
+  -ErrorAction SilentlyContinue
 
 Expand-Archive -Path $Path -DestinationPath $DestinationPath
 
@@ -88,7 +98,7 @@ Remove-Item -Path "$DestinationPath\Vim\vim90.old" -Recurse -Force
 & $(Get-Item -Path "$DestinationPath\Vim\vim90\install.exe")
 
 # If python/dyn version changes, update the YAML file, remove and re-create
-# the conda environment. Update batch files to activate conda environment.
+# the conda environment.
 conda activate base
 conda env remove -n vim_python
 .\Install-Vimfiles.ps1 -Conda
