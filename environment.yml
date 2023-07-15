@@ -19,5 +19,4 @@ dependencies:
     - markdownpp
     - panvimwiki
     - vim-vint
-name: vim_python
-
+name: vim-python

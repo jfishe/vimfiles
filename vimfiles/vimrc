@@ -16,7 +16,7 @@ if !has('nvim') && !empty($CONDA_PREFIX) && has('python3_dynamic')
   " Enter-CondaEnvironment -Name vim_python &&
   "   Enter-CondaEnvironment -Stack -Name venv
   " Enter-CondaEnvironment -Name vim_python
-  let &pythonthreehome = expand("$CONDA_PREFIX_1/envs/vim_python")
+  let &pythonthreehome = expand("$HOME/miniconda3/envs/vim-python")
 endif
 if has('python3')
   try
