@@ -22,7 +22,7 @@ provides the steps automated by `wsl install`.
 
 ```powershell
 $Software = @(
-  'Git.Git' --interactive,
+  'Git.Git --interactive',
   # Use the native Windows Secure Channel library to manage firewall local
   # certificates.
   # 'vim.vim --interactive', # Requires administrator rights.
@@ -99,8 +99,13 @@ Remove-Item -Path "$DestinationPath\Vim\vim90.old" -Recurse -Force
 
 # If python/dyn version changes, update the YAML file, remove and re-create
 # the conda environment.
+# Update conda first, then create vim-python environment. Changes from v4 to
+# v23 may fail otherwise.
+conda update conda -n base
+conda update --all -n base
 conda activate base
-conda env remove -n vim_python
+
+conda env remove -n vim-python
 .\Install-Vimfiles.ps1 -Conda
 
 # Add/update Start Menu shortcuts.
@@ -151,7 +156,7 @@ Get-Help .\Install-Vimfiles.ps1 -Full
 .\Install-Vimfiles.ps1 -Thesaurus
 
 # Create/update conda environment compatible with `python3/dyn`.
-# Create/update Vim batch files to activate vim_python prior to starting Vim.
+# Create/update Vim batch files to activate vim-python prior to starting Vim.
 .\Install-Vimfiles.ps1 -Conda
 ```
 
@@ -198,7 +203,7 @@ function to activate a compatible conda envirionment.
 See [Anaconda and Miniconda](#anaconda-and-miniconda) for installation
 instructions.
 
-Rebuild the vim_python whenever the python minor version changes, e.g. from
+Rebuild the vim-python whenever the python minor version changes, e.g. from
 Python 3.9 to 3.10. Edit `environment.yml` to update the python version and
 move other packages to the `- pip:` group as needed. Conda packages typically
 lag python versions; the pip versions tend to update first.
@@ -232,14 +237,17 @@ conda update -n base -c defaults conda
 
 # Initialize conda for the various shells on the computer
 conda init
+# cmd.exe defaults to base environment.
+# Replace ` with ^ if running from cmd.exe.
+cmd /c 'reg add "HKCU\Software\Microsoft\Command Processor" /v AutoRun /t REG_EXPAND_SZ /d "%"USERPROFILE"%\.init.cmd" /f'
 
-# Create a vim_python environment compatible with the installed version of Vim.
-$File = $env:LOCALAPPDATA\vimfiles\environment.yml
-conda env create --file $File
+# Create a vim-python environment compatible with the installed version of Vim.
+# $File = $env:LOCALAPPDATA\vimfiles\environment.yml
+# conda env create --file $File
 
-# Periodically update the base and vim_python environments.
+# Periodically update the base and vim-python environments.
 conda update -n base -c defaults conda
-conda update -n vim_python --all
+conda update -n vim-python --all
 ```
 
 ### Windows Registry
@@ -270,7 +278,7 @@ maintains [words.txt](https://raw.githubusercontent.com/zeke/moby/master/words.t
 ## Dictionary
 
 Refer to `:help dictionary` and download or symlink
-[dictionary/words](dictionary/words). See below for symlink instrucitons.
+[dictionary/words](dictionary/words). See below for symlink instructions.
 
 On Windows 10, you can symlink to a dictionary in a WSL 1 Distro. It may work
 with WSL 2.

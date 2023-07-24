@@ -248,7 +248,7 @@ function New-Symlink {
     process {
         Write-Verbose "cmd.exe /c mklink $ItemType $Link $Target"
         $Output = cmd.exe /c mklink $ItemType $Link $Target 2>&1
-        Write-Verbose $Output
+        $Output | Out-String | Write-Verbose
 
         $ErrorMessage = "You do not have sufficient privilege to perform this operation."
         if ("$Output" -eq "$ErrorMessage") {
@@ -259,7 +259,7 @@ function New-Symlink {
                 $OldItemType = "/H"
             }
             $Output = cmd.exe /c mklink $OldItemType $Link $Target 2>&1
-            Write-Verbose $Output
+            $Output | Out-String | Write-Verbose
         }
     }
 
@@ -400,6 +400,9 @@ if ($Conda) {
     if (-not $UserVimCmd -and $GlobalVimCmd) {
         $GlobalVimCmd | Copy-Item -Destination $UserAppDir
     }
+
+    Write-Verbose 'reg add "HKCU\Software\Microsoft\Command Processor" /v AutoRun /t REG_EXPAND_SZ /d "%"USERPROFILE"%\.init.cmd" /f'
+    cmd /c 'reg add "HKCU\Software\Microsoft\Command Processor" /v AutoRun /t REG_EXPAND_SZ /d "%"USERPROFILE"%\.init.cmd" /f'
 }
 
 if ($Shortcut) {
