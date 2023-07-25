@@ -176,6 +176,24 @@ endif
 " Color and background {{{
 " set background=light
 set background=dark
+
+if has('cursorshape')
+  "Mode Settings
+
+  let &t_SI.="\<Esc>[5 q" "SI = INSERT mode
+  let &t_SR.="\<Esc>[4 q" "SR = REPLACE mode
+  let &t_EI.="\<Esc>[0 q" "EI = NORMAL mode (ELSE)
+
+  "Cursor settings:
+  "  0 -> DECSCUSR (terminal default)
+  "  1 -> blinking block
+  "  2 -> solid block 
+  "  3 -> blinking underscore
+  "  4 -> solid underscore
+  "  5 -> blinking vertical bar
+  "  6 -> solid vertical bar
+endif
+
 "colorscheme solarized
 " let g:solarized_extra_hi_groups=1
 " let g:solarized_use16=1
