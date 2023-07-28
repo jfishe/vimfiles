@@ -8,6 +8,8 @@
   // PowerShell
   "powershell.scriptAnalysis.enable": true,
   "powershell.integratedConsole.showOnStartup": false,
-  "powershell.codeFormatting.preset":"OTBS"
+  "powershell.codeFormatting.preset": "OTBS",
+  // Ultisnips
+  "snippets.ultisnips.pythonPrompt": true
 }
 
