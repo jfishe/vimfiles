@@ -4,16 +4,19 @@ channels:
 dependencies:
   - black
   - chardet
+  - condax
   - mypy
   - nodejs
   - panflute
   - pip
+  - pipx
   - pydocstyle
   - pylint
   - pypandoc
   - python-dateutil
   - python[version='>=3.11']
   - ripgrep
+  # - starship # Uncomment if not installed elsewhere.
   - watchdog
   - pip:
     - markdownpp
