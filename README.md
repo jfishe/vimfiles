@@ -27,7 +27,7 @@ $Software = @(
   # certificates.
   # 'vim.vim --interactive', # Requires administrator rights.
   # 'ChristianSchenk.MiKTeX',
-  'Anaconda.Miniconda3',
+  # 'Anaconda.Miniconda3', # Out of date version.
   # KeeAgent is not available.
   # 'DominikReichl.KeePass', # Requires administrator rights.
   'Microsoft.PowerToys',
@@ -164,25 +164,6 @@ If you plan to share vimfiles with Windows Subsystem for Linux (WSL), ensure
 git uses line feed for EOL. `Install-Vimfiles.ps1` automates this by setting
 the global .gitconfig to override the system defaults.
 
-## Windows Environment
-
-On Windows systems `%HOMEDRIVE%%HOMEPATH%`, e.g., `U:\.` may point to a
-different path than `%USERPROFILE%`—i.e., `C:\Users\<user name>`.
-`git-scm` defaults to `%HOMEDRIVE%%HOMEPATH%`. Defining `%HOME%`, overrides
-this behavior.
-
-1. Open `Control Panel`.
-2. Search for `environment`.
-3. Select `Edit environment variables for your account`
-4. Select New.
-5. Variable name: `HOME`
-6. Variable value: `%USERPROFILE%`
-7. Select OK.
-8. Select `Path` and `Edit`.
-9. Select `New` and enter `%USERPROFILE%\bin`.
-10. Select OK, twice.
-11. Open git-bash or git-cmd and confirm directory is `C:\Users\<user name>`.
-
 ## Windows Python Version
 
 On Windows `python3/dyn` may point to a later version of python than `conda`
@@ -221,11 +202,6 @@ Write-Output $VimVersion.Matches.Groups[1].Value
 Install Miniconda or Anaconda per the directions in the
 [Anaconda Documentation](https://docs.anaconda.com/anaconda/install/).
 
-Windows 10 includes a python executable in
-`$env:LOCALAPPDATA/Microsoft/WindowsApps/`, which interferes with
-[Conquer of Completion (CoC)]. Remove `python.exe` and `python3.exe` or run one
-of them to install Python 3 from the Microsoft Store.
-
 [environment.yml](environment.yml) lists the conda and pip packages
 needed for the Vim configuration.
 
@@ -248,22 +224,6 @@ cmd /c 'reg add "HKCU\Software\Microsoft\Command Processor" /v AutoRun /t REG_EX
 # Periodically update the base and vim-python environments.
 conda update -n base -c defaults conda
 conda update -n vim-python --all
-```
-
-### Windows Registry
-
-Vim's `install.exe` tries to add right-click menus to `explorer`, but usually
-fails, even when installing with administrator rights.
-`~\vim\vim82\GvimExt64\GvimExt.reg` provides an example but assumes the `dll`
-and executable are in the `PATH`. [`GvimExt.reg`](GvimExt.reg) provides a
-working version, assuming vim is installed in `%USERPROFILE%`.
-
-The following will request administrator permission and add the contents of
-`GvimExt.reg` to the Window Registry. Validate the file against the version
-included with Vim.
-
-```powershell
-regedit /S GvimExt.reg
 ```
 
 ## Thesaurus
@@ -335,21 +295,9 @@ pip install nbdime
 nbdime config-git --enable --global
 ```
 
-### Default Browser
-
-The default browser on Windows 7 and 10 needs to remain IE/Edge to avoid
-conflicts with various applications. ~/.jupyter/jupyter_notebook_config.py is
-modified to specify Chrome as the notebook and lab browser since IE is not
-compatible with notebook v. 5.
-
 ## Windows Setup
 
-### Console
-
-Download the latest release of ColorTool and extract into the PATH, e.g.,
-`~/bin`. Include the schemes directory and add any additional schemes, as
-desired. Create a hard-link `mklink /h` from `~/bin/schemes` to each of the
-`.itermcolors` files in `$env:PROFILE` directory.
+### ColorTool
 
 New schemes may be tested and exported to `iTerm2` format with
 [terminal.sexy](https://terminal.sexy/).

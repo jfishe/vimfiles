@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 2.1
+.VERSION 3.0
 
 .GUID e7b6d3ed-1459-4dee-9dcf-675756b14510
 
@@ -378,7 +378,28 @@ if ($Thesaurus) {
 }
 
 if ($Conda) {
-    Get-Command Invoke-Conda -ErrorAction Stop | Out-String | Write-Verbose
+    # Install Miniconda3 if needed.
+    try {
+        Get-Command Invoke-Conda -ErrorAction Stop
+    } catch [System.Management.Automation.CommandNotFoundException] {
+        $_ | Out-String | Write-Verbose
+        $webrequestParams = @{
+            Uri     = 'https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe'
+            OutFile = "$HOME\Downdloads\Miniconda3-latest-Windows-x86_64.exe"
+        }
+        Invoke-WebRequest @webrequestParams
+        & "$($webrequestParams.OutFile)"
+
+        # Miniconda3 may install in different locations.
+        "$env:LOCALAPPDATA", "$env:USERPROFILE" | ForEach-Object -Process {
+            if (Test-Path ($condaexe = Join-Path $_ "miniconda3\Scripts\conda.exe") -PathType Leaf) {
+                break
+            }
+        }
+        (& "$condaexe" "shell.powershell" "hook") | Out-String | ? {$_} | Invoke-Expression
+    } finally {
+        Get-Command Invoke-Conda -ErrorAction Stop | Out-String | Write-Verbose
+    }
 
     # Create or update conda env vim_python.
     Push-Location "$Path"

@@ -10,6 +10,6 @@
   "powershell.integratedConsole.showOnStartup": false,
   "powershell.codeFormatting.preset": "OTBS",
   // Ultisnips
-  "snippets.ultisnips.pythonPrompt": true
+  "snippets.ultisnips.pythonPrompt": false
 }
 
