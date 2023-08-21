@@ -105,6 +105,7 @@ Param(
     $Conda
     ,
     # Create Start Menu folder and shortcuts for Vim batch files.
+    # Create shortcut for default WSL gvim.
     [Parameter(
         Mandatory = $true,
         ParameterSetName = 'Shortcut',
@@ -427,6 +428,11 @@ if ($Conda) {
 }
 
 if ($Shortcut) {
+    # Copy WSL gvim script.
+    $Wslscript = Get-Item -Path "$Path\pwsh\gvim-wsl.bat"
+    $Wslscript = Copy-Item -Path $Wslscript -Destination $UserAppDir -PassThru
+    Write-Verbose "$Wslscript assumes default WSL add wsl --distro, as needed."
+
     # Locate Vim batch files.
     $UserAppDir = Get-Item "$UserAppDir"
     [array] $SourceFileLocation = Join-Path $UserAppDir '*vim*.bat' | Get-ChildItem
