@@ -9,4 +9,4 @@ REM reg delete "HKCU\Software\Microsoft\Command Processor" /v AutoRun
 
 @if exist "%USERPROFILE%\Miniconda3\condabin\conda_hook.bat" call "%USERPROFILE%\Miniconda3\condabin\conda_hook.bat"
 @if exist "%LOCALAPPDATA%\Miniconda3\condabin\conda_hook.bat" call "%LOCALAPPDATA%\Miniconda3\condabin\conda_hook.bat"
-@call "%CONDA_BAT%" activate vim-python
+@if exist "%CONDA_BAT%" call "%CONDA_BAT%" activate vim-python
