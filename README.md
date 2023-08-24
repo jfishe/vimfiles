@@ -346,22 +346,6 @@ _Documents_ could be _My Documents_. Adjust the path for actual location of
 except Windows `cmd.exe`, that these files are located in `$HOME`. Soft-links
 allow pointing to the actual location.
 
-### Git Hooks
-
-Tim Pope's [Effortless Ctags with Git](https://tbaggery.com/2011/08/08/effortless-ctags-with-git.html)
-shows how to rebuild Ctags with git hooks. Note they do not work under
-PowerShell or CMD but do not seem to cause problems either. To work under WSL:
-
-```bash
-ln -s /mnt/c/Users/fishe/AppData/Local/vimfiles/.git_template ~/.git_template
-```
-
-To make hooks available from Windows, if you have any .bat or .ps1 hooks:
-
-```powershell
-.\Install-Vimfiles.ps1 -Link
-```
-
 ### The Case for Pull Rebase
 
 [The Case for Pull Rebase](https://megakemp.com/2019/03/20/the-case-for-pull-rebase/)

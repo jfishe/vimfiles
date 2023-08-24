@@ -60,7 +60,7 @@
 [status]
 	showUntrackedFiles = no
 [init]
-    templatedir = ~/.git_template
+    ; templatedir = ~/.git_template
     defaultbranch = main
 [alias]
     ; list files which have changed since review_base
