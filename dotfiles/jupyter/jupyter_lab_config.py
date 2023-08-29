@@ -252,6 +252,7 @@
 ## Whether to open in a browser after starting.
 #  See also: ExtensionApp.open_browser
 # c.LabServerApp.open_browser = False
+c.LabServerApp.open_browser = True
 
 ## The optional location of the settings schemas directory. If given, a handler
 #  will be added for settings.
@@ -639,7 +640,7 @@
 import webbrowser, platform
 if platform.system() == 'Windows':
     webbrowser.register('chrome', None,
-            webbrowser.GenericBrowser('C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'))
+            webbrowser.GenericBrowser('C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'))
     c.ServerApp.browser = 'chrome'
 
 ## The full path to an SSL/TLS certificate file.
