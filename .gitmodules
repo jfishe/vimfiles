@@ -107,10 +107,6 @@
 	url = https://github.com/lervag/vimtex.git
 	active = true
 	path = vimfiles/pack/python/opt/vimtex
-[submodule "vimfiles/pack/dev/start/vim-ripgrep"]
-	ignore = dirty
-	path = vimfiles/pack/dev/start/vim-ripgrep
-	url = https://github.com/jremmen/vim-ripgrep.git
 [submodule "vimfiles/pack/vimwiki/opt/taskwiki"]
 	ignore = dirty
 	path = vimfiles/pack/vimwiki/opt/taskwiki

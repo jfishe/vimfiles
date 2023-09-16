@@ -52,10 +52,27 @@ let s:wiki_2.path_html = s:wiki_2.path .. 'docs'
 let s:wiki_2.css_name = 'css/style.css'
 let s:wiki_2.template_path = s:wiki_2.path .. '/templates'
 " }}}
+" Zettelkasten vimwiki {{{
+let s:wiki_3 = copy(s:wiki_1)
+let s:wiki_3.syntax = 'markdown'
+let s:wiki_3.ext = '.md'
+let s:wiki_3.index = 'index'
+let s:wiki_3.path = s:my_docs .. '/zk/'
+let s:wiki_3.path_html = s:wiki_3.path .. 'docs'
+let s:wiki_3.css_name = 'css/style.css'
+let s:wiki_3.template_path = s:wiki_3.path .. 'templates'
+
+let g:zettel_options = [{}, {},
+      \{"front_matter" : [["tags", ""], ["type","note"]], "disable_front_matter": 1,
+      \ "template" :  s:wiki_3.template_path .. "/note.tpl"}]
+
+let g:zettel_fzf_command = "rg --column --line-number --ignore-case --no-heading --color=always"
+" }}}
 " Work & Home vimwiki {{{
 let s:wiki_1.name = 'work'
 let s:wiki_2.name = 'home'
-let g:vimwiki_list = [ s:wiki_1, s:wiki_2 ]
+let s:wiki_2.name = 'zk'
+let g:vimwiki_list = [ s:wiki_1, s:wiki_2, s:wiki_3 ]
 "}}}
 
 let g:vimwiki_folding='syntax'
