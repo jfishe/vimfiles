@@ -71,7 +71,7 @@ let g:zettel_fzf_command = "rg --column --line-number --ignore-case --no-heading
 " Work & Home vimwiki {{{
 let s:wiki_1.name = 'work'
 let s:wiki_2.name = 'home'
-let s:wiki_2.name = 'zk'
+let s:wiki_3.name = 'zk'
 let g:vimwiki_list = [ s:wiki_1, s:wiki_2, s:wiki_3 ]
 "}}}
 
@@ -93,9 +93,12 @@ augroup VimwikiTitleJournal "{{{
   " Create today's Journal and compare to previous day.
   autocmd BufNewFile */diary/[0-9]\\\{-4\}*.wiki call vimwiki#TitleJournal()
   " Use Vimwiki foldmethod when &diff.
-  " autocmd BufEnter,BufNew,BufLeave,BufWinEnter,BufWinLeave *.wiki if &diff |
-  "       \ set foldmethod=syntax |
-  "       \ foldopen! | endif
+  if v:version < 900
+    autocmd BufEnter,BufNew,BufLeave,BufWinEnter,BufWinLeave *.wiki if &diff |
+          \ set foldmethod=syntax |
+          \ foldopen! |
+          \ endif
+  endif
 augroup END "}}}
 
 function! VimwikiLinkHandler(link) abort
