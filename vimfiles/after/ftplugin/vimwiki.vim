@@ -34,6 +34,9 @@ nnoremap <silent><buffer> <F3> :call vimwiki#TitleJournal()<CR>
 
 setlocal spell spelllang=en_us
 
+let b:pandoc_omnifunc_fallback = len(&omnifunc) ? function(&omnifunc) : ''
+setlocal omnifunc=vimwiki#Complete_pandoc
+
 let b:undo_ftplugin = get(b:, 'undo_ftplugin', '')
 if !empty('b:undo_ftplugin')
   let b:undo_ftplugin ..= " | "

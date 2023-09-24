@@ -4,6 +4,43 @@ if exists('g:loaded_vimwiki_user_after_auto') || &compatible
 endif
 let g:loaded_vimwiki_user_after_auto = 1
 
+" Helper: for omnicompletion {{{
+" omnifunc=pandoc#completion#Complete
+" taskwiki#CompleteOmni
+" Complete_wikifiles()
+function vimwiki#Complete_pandoc(findstart, base) abort
+  " Find line context
+  " Called: first time
+  if a:findstart == 1
+    let line = getline('.')[:col('.')-2]
+
+    " Check Citekey:
+    " @citekey
+    let citekey = pandoc#completion#Complete(a:findstart, a:base)
+    if citekey >= 0
+      let s:omni_method = 'citekey'
+      return citekey
+    endif
+
+    " Fallback to vimwiki's omnifunc
+    if type(b:pandoc_omnifunc_fallback) is v:t_func
+      let s:omni_method = 'fallback'
+      return b:pandoc_omnifunc_fallback(a:findstart, a:base)
+    else
+      let s:omni_method = ''
+      return -1
+    endif
+  else
+    if s:omni_method is 'citekey'
+      return pandoc#completion#Complete(a:findstart, a:base)
+    elseif s:omni_method is 'fallback'
+      return b:pandoc_omnifunc_fallback(a:findstart, a:base)
+    else
+      return []
+    endif
+  endif
+endfunction  " }}}
+
 " For commands VimwikiSearch and VWS {{{
 " Use Rg and QuickFixWindow instead of lvimgrep in VWS and VWT.
 function! vimwiki#searchRg(search_pattern) abort
