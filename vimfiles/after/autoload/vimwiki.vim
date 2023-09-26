@@ -41,7 +41,11 @@ function vimwiki#Complete_pandoc(findstart, base) abort
   endif
 endfunction  " }}}
 
-" For commands VimwikiSearch and VWS {{{
+" Insert Expanded BibLaTeX References: {{{
+function vimwiki#insert_references(infile) abort
+  return
+endfunction  " }}}
+" Commands: VimwikiSearch and VWS {{{
 " Use Rg and QuickFixWindow instead of lvimgrep in VWS and VWT.
 function! vimwiki#searchRg(search_pattern) abort
   if !exists(':Rg')
@@ -75,13 +79,20 @@ function! vimwiki#searchRg(search_pattern) abort
   " --smart-case -- ".fzf#shellescape(<q-args>), fzf#vim#with_preview(), <bang>0)
   call fzf#vim#grep(cmd, fzf#vim#with_preview(), 0)
 
-endfunction " }}}
+endfunction
 
-" Convert selected text to VimWikiLink {{{
+function vimwiki#generate_index() abort
+  ZettelGenerateLinks
+  ZettelBackLinks
+  ZettelInbox
+endfunction
+" }}}
+
+" Convert Email: selected text to VimWikiLink {{{
 " Todo: Limit the length of the URI to 2083 per
 "       https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers
 "       by splitting into multiple links.
-function! vimwiki#myvimwiki_normalize_mail_v() " {{{
+function! vimwiki#myvimwiki_normalize_mail_v()
   let l:sel_save = &selection
   let &selection = 'old'
   let l:rv = @"

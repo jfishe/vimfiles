@@ -80,6 +80,11 @@ let g:vimwiki_tags_header_level = 2
 let g:vimwiki_links_header_level = 2
 let g:vimwiki_toc_header_level = 2
 
+let g:zettel_generated_index_title_level = 2
+let g:zettel_backlinks_title_level = 2
+let g:zettel_unlinked_notes_title_level = 2
+let g:zettel_generated_tags_title_level = 2
+
 let g:panvimwiki_settings = {
       \ 'extra_args': [ '--shift-heading-level-by=1',
       \ '--data-dir=' .. '"' .. s:wiki_1.template_path .. '"',
