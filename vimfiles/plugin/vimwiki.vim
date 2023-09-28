@@ -61,30 +61,35 @@ let s:wiki_3.path = s:my_docs .. '/zk/'
 let s:wiki_3.path_html = s:wiki_3.path .. 'docs'
 let s:wiki_3.css_name = 'css/style.css'
 let s:wiki_3.template_path = s:wiki_3.path .. 'templates'
-
-let g:zettel_options = [{}, {},
-      \{"front_matter" : [["tags", ""], ["type","note"]], "disable_front_matter": 1,
-      \ "template" :  s:wiki_3.template_path .. "/note.tpl"}]
-
-let g:zettel_fzf_command = "rg --column --line-number --ignore-case --no-heading --color=always"
 " }}}
-" Work & Home vimwiki {{{
+" Initialize vimwiki {{{
 let s:wiki_1.name = 'work'
 let s:wiki_2.name = 'home'
 let s:wiki_3.name = 'zk'
 let g:vimwiki_list = [ s:wiki_1, s:wiki_2, s:wiki_3 ]
 "}}}
 
+" Vimwiki global options {{{
 let g:vimwiki_folding='syntax'
 let g:vimwiki_tags_header_level = 2
 let g:vimwiki_links_header_level = 2
 let g:vimwiki_toc_header_level = 2
+" }}}
 
+" Vim-zettel global options {{{
+let g:zettel_options = [{}, {},
+      \{"front_matter" : [["tags", ""], ["type","note"]], "disable_front_matter": 1,
+      \ "template" :  s:wiki_3.template_path .. "/note.tpl"}]
+
+let g:zettel_fzf_command = "rg --column --line-number --ignore-case --no-heading --color=always"
+let g:zettel_format = "%Y%m%d-%H%M"
 let g:zettel_generated_index_title_level = 2
 let g:zettel_backlinks_title_level = 2
 let g:zettel_unlinked_notes_title_level = 2
 let g:zettel_generated_tags_title_level = 2
+" }}}
 
+" Panvimiki global options {{{
 let g:panvimwiki_settings = {
       \ 'extra_args': [ '--shift-heading-level-by=1',
       \ '--data-dir=' .. '"' .. s:wiki_1.template_path .. '"',
@@ -92,6 +97,7 @@ let g:panvimwiki_settings = {
       \ ],
       \ 'format': 'docx'
       \ }
+" }}}
 
 augroup VimwikiTitleJournal "{{{
   autocmd!
