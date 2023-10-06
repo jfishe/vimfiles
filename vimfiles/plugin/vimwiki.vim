@@ -87,6 +87,7 @@ let g:zettel_generated_index_title_level = 2
 let g:zettel_backlinks_title_level = 2
 let g:zettel_unlinked_notes_title_level = 2
 let g:zettel_generated_tags_title_level = 2
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 " }}}
 
 " Panvimiki global options {{{
@@ -104,7 +105,7 @@ augroup VimwikiTitleJournal "{{{
   " Create today's Journal and compare to previous day.
   autocmd BufNewFile */diary/[0-9]\\\{-4\}*.wiki call vimwiki#TitleJournal()
   " Use Vimwiki foldmethod when &diff.
-  if v:version < 900
+  if v:version < 900 && !has('nvim')
     autocmd BufEnter,BufNew,BufLeave,BufWinEnter,BufWinLeave *.wiki if &diff |
           \ set foldmethod=syntax |
           \ foldopen! |
