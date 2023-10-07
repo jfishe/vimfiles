@@ -34,8 +34,50 @@ nnoremap <silent><buffer> <F3> :call vimwiki#TitleJournal()<CR>
 
 setlocal spell spelllang=en_us
 
-let b:pandoc_omnifunc_fallback = len(&omnifunc) ? function(&omnifunc) : ''
-setlocal omnifunc=vimwiki#Complete_pandoc
+" let b:pandoc_omnifunc_fallback = len(&omnifunc) ? function(&omnifunc) : ''
+" setlocal omnifunc=vimwiki#Complete_pandoc
+function s:get_bibfiles() abort
+  let save_dir = chdir(expand('%:p:h'))
+  let bibfiles = pandoc#bibliographies#Find_Bibliographies()
+  call chdir(save_dir)
+  let bibfiles = join(bibfiles, ' ')
+  return bibfiles
+endfunction
+
+function! s:bibtex_ls() abort
+  if exists('b:pandoc_biblio_bibs')
+    let source_cmd = 'bibtex-ls '..<sid>get_bibfiles()
+    return source_cmd
+  " let bibfiles = (
+  "     \ globpath('.', '*.bib', v:true, v:true) +
+  "     \ globpath('..', '*.bib', v:true, v:true) +
+  "     \ globpath('*/', '*.bib', v:true, v:true)
+  "     \ )
+  endif
+endfunction
+
+function! s:bibtex_markdown_sink(lines) abort
+  let r=system("bibtex-markdown "..<sid>get_bibfiles(), a:lines)
+  execute ':normal! a' . r
+endfunction
+
+function! s:bibtex_cite_sink_insert(lines) abort
+  let r=system("bibtex-cite ", a:lines)
+  execute ':normal! a' . r
+  call feedkeys('a', 'n')
+endfunction
+
+inoremap <silent><buffer> @@ <c-g>u<c-o>:call fzf#run({
+      \ 'source': <sid>bibtex_ls(),
+      \ 'sink*': function('<sid>bibtex_cite_sink_insert'),
+      \ 'up': '40%',
+      \ 'options': '--ansi --layout=reverse-list --multi --prompt "Cite> "'})<CR>
+
+nnoremap <silent><buffer> <leader>m :call fzf#run({
+      \ 'source': <sid>bibtex_ls(),
+      \ 'sink*': function('<sid>bibtex_markdown_sink'),
+      \ 'up': '40%',
+      \ 'options': '--ansi --layout=reverse-list --multi --prompt "Markdown> "'})<CR>
 
 let b:undo_ftplugin = get(b:, 'undo_ftplugin', '')
 if !empty('b:undo_ftplugin')
