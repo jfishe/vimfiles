@@ -41,7 +41,7 @@ function s:get_bibfiles() abort
   let bibfiles = pandoc#bibliographies#Find_Bibliographies()
   call chdir(save_dir)
   let bibfiles = join(bibfiles, ' ')
-  return bibfiles
+  return shellescape(bibfiles)
 endfunction
 
 function! s:bibtex_ls() abort
