@@ -24,24 +24,62 @@ vnoremap <expr> k (v:count > 4 ? "m'" . v:count . 'k' : 'gk')
 " }}}
 
 
-" Undo some mswin keymapping {{{
-silent! nunmap <C-F>
-silent! iunmap <C-F>
-silent! cunmap <C-F>
-silent! nunmap <C-H>
-silent! iunmap <C-H>
-silent! cunmap <C-H>
-silent! vunmap <C-X>
-silent! nunmap <C-S>
-silent! vunmap <C-S>
-silent! iunmap <C-S>
-silent! nunmap <C-A>
-silent! vunmap <C-A>
-silent! iunmap <C-A>
-silent! cunmap <C-A>
+" Curated settings from mswin keymapping {{{
+" set the 'cpoptions' to its Vim default
+if 1	" only do this when compiled with expression evaluation
+  let s:save_cpo = &cpoptions
+endif
+set cpo&vim
+
+" set 'selection', 'selectmode', 'mousemodel' and 'keymodel' for MS-Windows
+behave mswin
+
+" backspace and cursor keys wrap to previous/next line
+set backspace=indent,eol,start whichwrap+=<,>,[,]
+
+" backspace in Visual mode deletes selection
+vnoremap <BS> d
+
+if has("clipboard")
+
+    " CTRL-C and CTRL-Insert are Copy
+    vnoremap <C-C> "+y
+    vnoremap <C-Insert> "+y
+
+    " CTRL-V and SHIFT-Insert are Paste
+    map <C-V>		"+gP
+    map <S-Insert>		"+gP
+
+    cmap <C-V>		<C-R>+
+    cmap <S-Insert>		<C-R>+
+endif
+
+" Pasting blockwise and linewise selections is not possible in Insert and
+" Visual mode without the +virtualedit feature.  They are pasted as if they
+" were characterwise instead.
+" Uses the paste.vim autoload script.
+" Use CTRL-G u to have CTRL-Z only undo the paste.
+
+if 1
+    exe 'inoremap <script> <C-V> <C-G>u' . paste#paste_cmd['i']
+    exe 'vnoremap <script> <C-V> ' . paste#paste_cmd['v']
+endif
+
+imap <S-Insert>		<C-V>
+vmap <S-Insert>		<C-V>
+
+" Use CTRL-Q to do what CTRL-V used to do
+noremap <C-Q>		<C-V>
+
+" restore 'cpoptions'
+set cpo&
+if 1
+  let &cpoptions = s:save_cpo
+  unlet s:save_cpo
+endif
 " }}}
 
-" Delete inner line
+" Delete inner line {{{
 nmap dil ^d$
 nmap yil ^y$
 " }}}

@@ -49,7 +49,6 @@ endif
 " defaults.vim invokes `filetype plugin indent on` after packadd! lines.
 if !has('nvim')
   source $VIMRUNTIME/defaults.vim
-  source $VIMRUNTIME/mswin.vim
 else
   command DiffOrig vert new | set buftype=nofile | read ++edit # | 0d_
         \ | diffthis | wincmd p | diffthis
