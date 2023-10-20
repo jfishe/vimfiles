@@ -22,6 +22,9 @@ if !has('nvim') && !empty($CONDA_PREFIX) && has('python3_dynamic')
   elseif isdirectory(expand("$HOME" .. s:conda_env))
     let &pythonthreehome = expand("$HOME" .. s:conda_env)
   endif
+  if has('linux')
+    let &pythonthreedll=expand(&pythonthreehome .. "/lib/libpython3.so")
+  endif
 endif
 if has('python3')
   try
