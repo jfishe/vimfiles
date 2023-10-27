@@ -18,6 +18,7 @@
 	ignore = dirty
 	path = vimfiles/pack/vimwiki/start/vimwiki
 	url = https://github.com/vimwiki/vimwiki.git
+	branch = dev
 [submodule "vimfiles/pack/python/start/vim-pandoc"]
 	ignore = dirty
 	path = vimfiles/pack/python/start/vim-pandoc
