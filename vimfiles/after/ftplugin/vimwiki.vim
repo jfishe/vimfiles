@@ -14,6 +14,24 @@ augroup myvimwiki "{{{
   autocmd QuickFixCmdPost l*    lwindow
 augroup END "}}}
 
+" VimwikiRemaps {{{
+" [[https://github.com/vimwiki/vimwiki/issues/1093#issuecomment-876211106|anton-fomin]].
+" Unmap tab in insert mode.
+silent! iunmap <buffer> <Tab>
+" Remap table tab mappings to M-n M-p.
+inoremap <silent><expr><buffer> <M-n> vimwiki#tbl#kbd_tab()
+inoremap <silent><expr><buffer> <M-p> vimwiki#tbl#kbd_shift_tab()
+" On enter if completion is open, complete first element otherwise use
+" default vimwiki mapping.
+" Use coc#pum#visible() to prevent remapping by coc#ui#check_pum_keymappings().
+" inoremap <silent><expr><buffer> <cr> pumvisible() ? coc#_select_confirm()
+"       \: "<C-]><Esc>:VimwikiReturn 1 5<CR>"
+inoremap <silent><expr><buffer> <CR> coc#pum#visible() ? '<CR>'
+      \: '<C-]><Esc>:VimwikiReturn 3 5<CR>'
+inoremap <silent><expr><buffer> <S-CR> coc#pum#visible() ? '<CR>'
+      \: '<Esc>:VimwikiReturn 2 2<CR>'
+"}}}
+
 " Use vim-ripgrep for VimwikiSearch {{{
 command! -buffer -nargs=* VWS call vimwiki#searchRg(<q-args>)
 command! -buffer -nargs=* -complete=custom,vimwiki#tags#complete_tags
@@ -23,7 +41,7 @@ command! -buffer -nargs=* -complete=custom,vimwiki#tags#complete_tags
 " Convert selected text to VimWikiLink {{{
 let g:maplocalleader = ','
 vnoremap <silent><buffer> <localleader>m
-  \ :call vimwiki#myvimwiki_normalize_mail_v()<CR>
+      \ :call vimwiki#myvimwiki_normalize_mail_v()<CR>
 "}}}
 
 let b:ale_enabled=0
@@ -48,11 +66,11 @@ function! s:bibtex_ls() abort
   if exists('b:pandoc_biblio_bibs')
     let source_cmd = 'bibtex-ls '..<sid>get_bibfiles()
     return source_cmd
-  " let bibfiles = (
-  "     \ globpath('.', '*.bib', v:true, v:true) +
-  "     \ globpath('..', '*.bib', v:true, v:true) +
-  "     \ globpath('*/', '*.bib', v:true, v:true)
-  "     \ )
+    " let bibfiles = (
+    "     \ globpath('.', '*.bib', v:true, v:true) +
+    "     \ globpath('..', '*.bib', v:true, v:true) +
+    "     \ globpath('*/', '*.bib', v:true, v:true)
+    "     \ )
   endif
 endfunction
 
