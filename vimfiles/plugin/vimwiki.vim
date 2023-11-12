@@ -25,8 +25,8 @@ endif "}}}
 
 " Work vimwiki {{{
 let s:wiki_1 = {}
-let s:wiki_1.path = s:my_docs . '/vimwiki/'
-let s:wiki_1.path_html = s:my_docs . '/vimwiki_html/html'
+let s:wiki_1.path = expand(s:my_docs .. '/vimwiki/')
+let s:wiki_1.path_html = expand(s:my_docs .. '/vimwiki_html/html')
 let s:wiki_1.index = 'main'
 let s:wiki_1.diary_sort = 'asc'
 " let s:wiki_1.syntax = 'markdown'
@@ -36,10 +36,10 @@ let s:wiki_1.nested_syntaxes = {'python': 'python', 'bash': 'sh',
       \ 'vb': 'vb',
       \ 'html': 'html',
       \ 'DOS': 'dosbatch', 'powershell': 'ps1', 'snippets': 'snippets'}
-let s:wiki_1.template_path = s:my_docs . '/vimwiki_html/templates'
+let s:wiki_1.template_path = expand(s:my_docs .. '/vimwiki_html/templates')
 let s:wiki_1.template_default = 'default'
 let s:wiki_1.template_ext = '.tpl'
-let s:wiki_1.css_name = '../css/style.css'
+let s:wiki_1.css_name = expand('../css/style.css')
 let s:wiki_1.auto_tags = 0
 let s:wiki_1.list_margin = 0
 let s:wiki_1.auto_toc = 1
@@ -47,20 +47,20 @@ let s:wiki_1.auto_toc = 1
 " Home vimwiki {{{
 let s:wiki_2 = copy(s:wiki_1)
 let s:wiki_2.index = 'index'
-let s:wiki_2.path = s:my_docs .. '/vimwiki_home/'
-let s:wiki_2.path_html = s:wiki_2.path .. 'docs'
-let s:wiki_2.css_name = 'css/style.css'
-let s:wiki_2.template_path = s:wiki_2.path .. '/templates'
+let s:wiki_2.path = expand(s:my_docs .. '/vimwiki_home')
+let s:wiki_2.path_html = expand(s:wiki_2.path .. '/docs')
+let s:wiki_2.css_name = expand('css/style.css')
+let s:wiki_2.template_path = expand(s:wiki_2.path .. '/templates')
 " }}}
 " Zettelkasten vimwiki {{{
 let s:wiki_3 = copy(s:wiki_1)
 let s:wiki_3.syntax = 'markdown'
 let s:wiki_3.ext = '.md'
 let s:wiki_3.index = 'index'
-let s:wiki_3.path = s:my_docs .. '/zk/'
-let s:wiki_3.path_html = s:wiki_3.path .. 'docs'
-let s:wiki_3.css_name = 'css/style.css'
-let s:wiki_3.template_path = s:wiki_3.path .. 'templates'
+let s:wiki_3.path = expand(s:my_docs .. '/zk')
+let s:wiki_3.path_html = expand(s:wiki_3.path .. '/docs')
+let s:wiki_3.css_name = expand('css/style.css')
+let s:wiki_3.template_path = expand(s:wiki_3.path .. '/templates')
 " }}}
 " Initialize vimwiki {{{
 let s:wiki_1.name = 'work'
