@@ -6,6 +6,7 @@ vimfiles/view/
 vimfiles/thesaurus/
 vimfiles/dictionary/
 vimfiles/.netrwbook
+*.sw?
 *.spl
 .netrwhist
 tags
