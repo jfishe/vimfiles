@@ -14,12 +14,13 @@ let g:coc_global_extensions = [
       \ ]
 
 " Highlight with coc-vimlsp
-let g:markdown_fenced_languages = [
-      \ 'vim',
-      \ 'help',
-      \ 'powershell',
-      \ 'bash'
-      \]
+" Conflicts with vimwiki when markdown syntax is enabled.
+" let g:markdown_fenced_languages = [
+"       \ 'vim',
+"       \ 'help',
+"       \ 'powershell',
+"       \ 'bash'
+"       \]
 
 " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
 " utf-8 byte sequence
