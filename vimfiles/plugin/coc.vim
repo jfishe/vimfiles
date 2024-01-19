@@ -6,6 +6,7 @@ endif
 
 let g:coc_filetype_map = {
       \ 'powershell': 'ps1',
+      \ 'vimwiki': 'markdown',
       \ 'pandoc.markdown': 'markdown',
       \ 'pandoc': 'markdown'
       \ }
