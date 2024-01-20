@@ -117,6 +117,14 @@ let g:panvimwiki_settings = {
       \ }
 " }}}
 
+augroup VimwikiCocEnable "{{{
+  " Assuming g:coc_filetype_map enables CoC for Vimwiki markdown syntax,
+  " disable for Vimwiki default syntax.
+  autocmd!
+  autocmd BufAdd,BufEnter,BufNew,BufLeave,BufWinEnter,BufWinLeave  *.wiki
+        \ let b:coc_enabled=0
+augroup end "}}}
+
 augroup VimwikiTitleJournal "{{{
   autocmd!
   " Create today's Journal and compare to previous day.
