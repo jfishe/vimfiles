@@ -55,9 +55,13 @@ setlocal spell spelllang=en_us
 " let b:pandoc_omnifunc_fallback = len(&omnifunc) ? function(&omnifunc) : ''
 " setlocal omnifunc=vimwiki#Complete_pandoc
 function s:get_bibfiles() abort
-  let save_dir = chdir(expand('%:p:h'))
-  let bibfiles = pandoc#bibliographies#Find_Bibliographies()
-  call chdir(save_dir)
+  if empty(b:pandoc_biblio_bibs)
+    let save_dir = chdir(expand('%:p:h'))
+    let bibfiles = pandoc#bibliographies#Find_Bibliographies()
+    call chdir(save_dir)
+  else
+    let bibfiles = b:pandoc_biblio_bibs
+  endif
   let bibfiles = join(bibfiles, ' ')
   return shellescape(bibfiles)
 endfunction
