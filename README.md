@@ -84,18 +84,27 @@ or use `chocolatey`: `choco install vim`.
 $DestinationPath = Get-Item -Path "$env:LOCALAPPDATA\Programs"
 $Path = Get-ChildItem -Path ~\Downloads\gvim_9.*_x64_signed.zip
 
-Move-Item -Path "$DestinationPath\Vim\vim90" `
-  -Destination "$DestinationPath\Vim\vim90.old" `
+Move-Item -Path "$DestinationPath\Vim\vim91" `
+  -Destination "$DestinationPath\Vim\vim91.old" `
   -ErrorAction SilentlyContinue
+```
 
+```powershell
 Expand-Archive -Path $Path -DestinationPath $DestinationPath
+```
 
+```powershell
 # Check vim works and remove old version.
 vim --version | grep python --color
-Remove-Item -Path "$DestinationPath\Vim\vim90.old" -Recurse -Force
+```
 
+```powershell
+Remove-Item -Path "$DestinationPath\Vim\vim91.old" -Recurse -Force
+```
+
+```powershell
 # If needed, create the batch files using the installer.
-& $(Get-Item -Path "$DestinationPath\Vim\vim90\install.exe")
+& $(Get-Item -Path "$DestinationPath\Vim\vim91\install.exe")
 
 # If python/dyn version changes, update the YAML file, remove and re-create
 # the conda environment.
@@ -109,7 +118,7 @@ conda env remove -n vim-python
 .\Install-Vimfiles.ps1 -Conda
 
 # Add/update Start Menu shortcuts.
-$IconLocation = Get-Item "$DestinationPath\Vim\vim90\gvim.exe"
+$IconLocation = Get-Item "$DestinationPath\Vim\vim91\gvim.exe"
 .\Install-Vimfiles.ps1 -Shortcut -IconLocation "$IconLocation"
 ```
 
