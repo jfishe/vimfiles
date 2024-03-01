@@ -7,6 +7,10 @@ let b:did_ftplugin_user_after = 1  " Don't load another plugin for this buffer
 let s:save_cpo = &cpo
 set cpo&vim
 
+if vimwiki#vars#get_wikilocal('syntax') ==# 'markdown'
+  UltiSnipsAddFiletypes markdown.vimwiki
+endif
+
 augroup myvimwiki "{{{
   autocmd!
   " autocmd BufRead,BufNewFile *.wiki set filetype=vimwiki
