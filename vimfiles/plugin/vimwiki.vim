@@ -104,7 +104,6 @@ let g:zettel_generated_index_title_level = 2
 let g:zettel_backlinks_title_level = 2
 let g:zettel_unlinked_notes_title_level = 2
 let g:zettel_generated_tags_title_level = 2
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 " }}}
 
 " Panvimiki global options {{{

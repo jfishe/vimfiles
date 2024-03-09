@@ -1,4 +1,4 @@
-*myhelp.txt*	For Vim version 8.2	Last change: 2023 Apr 27
+*myhelp.txt*	For Vim version 9.0	Last change: 2024 Mar 09
 
 Cheat sheet of Vim stuff often forgotten
 
@@ -25,6 +25,7 @@ CONTENTS							      *myhelp*
 							 |myhelp-coc-refactor|
 							     |myhelp-coc-list|
   8. Miscellaneous Functions					 |myhelp-misc|
+  9. FZF Vim Integration					  |myhelp-fzf|
 
 ==============================================================================
 1. Normal Mode						       *myhelp-normal*
@@ -284,4 +285,15 @@ call condaactivate#AddConda2Vim()
 `:Redir verbose map!`	Get listing of map assignments |Redir|: >
 		:silent verbose map!
 <
+9. FZF Vim Integration						 *myhelp-fzf*
+
+Command		Meaning ~
+------------------------------------------------------------------------------
+<c-a>		Select all.
+<c-d>		Deselect all.
+<c-t>		Open selected in tab.
+<c-v>		Open selected in vertical split.
+<c-x>		Open selected in split.
+<c-w>		Toggle preview window
+
  vim:tw=78:isk=!-~,^*,^\|,^\":ts=8:noet:ft=help:norl:

@@ -68,16 +68,21 @@ function! vimwiki#searchRg(search_pattern) abort
     let pattern = shellescape(pattern)
   endif
 
-  " let path = fnameescape(vimwiki#vars#get_wikilocal('path'))
   let path = shellescape(vimwiki#vars#get_wikilocal('path'))
   let ext  = vimwiki#vars#get_wikilocal('ext')
 
   let cmd = g:zettel_fzf_command..' --glob '..shellescape('**/*'..ext)
   let cmd ..= ' -- '..pattern..' '..path
+  let opts ={
+    \   'options': [
+    \     '--bind',
+    \     'ctrl-a:select-all',
+    \     'ctrl-d:deselect-all',
+    \     'ctrl-w:toggle-preview'
+    \   ]
+    \ }
   " command (string), [spec (dict)], [fullscreen (bool)]
-  " call fzf#vim#grep("rg --column --line-number --no-heading --color=always
-  " --smart-case -- ".fzf#shellescape(<q-args>), fzf#vim#with_preview(), <bang>0)
-  call fzf#vim#grep(cmd, fzf#vim#with_preview(), 0)
+  call fzf#vim#grep(cmd, fzf#vim#with_preview(opts), 1)
 
 endfunction
 
