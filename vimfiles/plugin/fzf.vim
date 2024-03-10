@@ -9,8 +9,9 @@ set cpo&vim
 " https://github.com/junegunn/fzf.vim/issues/54#issuecomment-164488800
 let s:rg_cmd = "rg --column --line-number --no-heading --color=always --smart-case -- "
 let s:opts ={
-    \ 'options': [ '--bind', 'ctrl-a:select-all,ctrl-d:deselect-all,ctrl-w:toggle-preview' ]
-    \}
+    \ 'options':
+    \ ['--bind', 'ctrl-a:select-all,ctrl-d:deselect-all,ctrl-w:toggle-preview']
+    \ }
 if executable('awk')
     " Shorten ripgrep output path.
     let s:transformer = "| awk -F: 'BEGIN { OFS = FS } {\":\" $2 \":\" $3; print}'"

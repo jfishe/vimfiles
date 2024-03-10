@@ -73,13 +73,9 @@ function! vimwiki#searchRg(search_pattern) abort
 
   let cmd = g:zettel_fzf_command..' --glob '..shellescape('**/*'..ext)
   let cmd ..= ' -- '..pattern..' '..path
-  let opts ={
-    \   'options': [
-    \     '--bind',
-    \     'ctrl-a:select-all',
-    \     'ctrl-d:deselect-all',
-    \     'ctrl-w:toggle-preview'
-    \   ]
+  let s:opts ={
+    \ 'options':
+    \ ['--bind', 'ctrl-a:select-all,ctrl-d:deselect-all,ctrl-w:toggle-preview']
     \ }
   " command (string), [spec (dict)], [fullscreen (bool)]
   call fzf#vim#grep(cmd, fzf#vim#with_preview(opts), 1)
