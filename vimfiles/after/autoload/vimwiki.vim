@@ -73,7 +73,7 @@ function! vimwiki#searchRg(search_pattern) abort
 
   let cmd = g:zettel_fzf_command..' --glob '..shellescape('**/*'..ext)
   let cmd ..= ' -- '..pattern..' '..path
-  let s:opts ={
+  let opts ={
     \ 'options':
     \ ['--bind', 'ctrl-a:select-all,ctrl-d:deselect-all,ctrl-w:toggle-preview']
     \ }
