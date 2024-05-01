@@ -32,7 +32,6 @@ CRDA
 CSPM
 CTP
 CVI
-CVI
 CentralStore
 Chocolatey
 DIY
@@ -48,17 +47,18 @@ EPN's
 EPRI
 EPU
 EWIP
+FAS
 FFRD
 FME
 FMEA
 FOSS
 FSAR
 Fukushima
+GDAR
 GEH
 GFCI
 GNF
 GNF2
-GNF3
 GNF3
 HALEU
 HEAD
@@ -94,7 +94,6 @@ Lorri
 Lorri's
 MCFL
 MCO
-MCPR
 MCPR
 MCPRf
 MCPRp
@@ -149,7 +148,9 @@ README
 RG
 RIA
 RIS
+RMCS
 RMRC
+RPV
 RRC
 RTP
 RWCU
@@ -164,6 +165,7 @@ SFPs
 SLC
 SLO
 SNE
+SPC
 SRLR
 SRV's
 SSC's
@@ -179,7 +181,6 @@ TGV
 TRACG
 TREQ
 TSG
-Todo
 Todo
 Tri-Cities
 VFD
@@ -197,7 +198,6 @@ amperage
 ancho
 anchos
 annunciator
-annunciator
 application
 arils
 assignee
@@ -211,7 +211,6 @@ badging
 benchmarking
 burnup
 calculational
-cannellini
 cannellini
 canner
 castelvetrano
@@ -229,10 +228,7 @@ configurability
 coolability
 coolable
 criticality
-criticality
-criticality
 cyber
-databank
 databank
 daughtering
 decondition
@@ -307,7 +303,6 @@ pandoc
 parmesan
 pasilla
 passata
-passata
 pentaborate
 pertubation
 position
@@ -324,14 +319,11 @@ pureé
 purlin
 quadraplex
 radiological
-radiological
 radionuclide
-recirculation
 recirculation
 recordable
 refritos
 rehydrate
-reportability
 reportability
 reportable
 reproducibility
@@ -339,16 +331,13 @@ retrievability
 rulemaking
 sauté
 setpoint
-setpoint
 setpoints
 situ
 sparger
 strawman
 subcompartment
 subcritical
-subcritical
 subcriticality
-submittal
 submittal
 submodule
 surveillances
@@ -361,7 +350,6 @@ triages
 typer
 unanalyzed
 underlayment
-ungrounded
 ungrounded
 unordered
 unrecovered
