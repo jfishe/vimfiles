@@ -58,7 +58,7 @@ openssl s_client -showcerts -servername github.com -connect github.com:443 \
 # On Linux
 cat github-com.pem | sudo tee -a /etc/ssl/certs/ca-certificates.crt
 # On windows C:\Program Files\Git\mingw64\ssl\certs\ or some variant.
-cat github-com.pem | tee -a /mingw64/ssl/certs/ca-bundle.crt
+cat github-com.pem | tee -a /mingw64/etc/ssl/certs/ca-bundle.crt
 ```
 
 ### Install Vim on Windows Subsystem for Linux
