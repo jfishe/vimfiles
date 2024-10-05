@@ -10,6 +10,7 @@
 --exclude=.git
 --exclude=.matplotlib
 --exclude=.mypy_cache
+--exclude=.obsidian
 --exclude=.pyc
 --exclude=.pylint.d
 --exclude=.pyo

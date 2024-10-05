@@ -241,6 +241,7 @@ set wildignore+=log/**
 set wildignore+=tmp/**
 set wildignore+=Temp/**
 set wildignore+=*.png,*.jpg,*.gif
+set wildignore+=*.mypy_cache*
 " }}}
 " ================ Scrolling ======================== {{{
 set scrolloff=0
