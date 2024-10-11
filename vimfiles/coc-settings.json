@@ -1,15 +1,17 @@
 {
   // CoC
   // Python
-  "python.linting.flake8Enabled": true,
-  "python.linting.pydocstyleEnabled": true,
+  "python.linting.ruffEnabled": true,
+  // "python.linting.flake8Enabled": true,
+  // "python.linting.pydocstyleEnabled": true,
   "python.linting.mypyEnabled": true,
-  "python.formatting.provider": "black",
+  "python.formatting.provider": "ruff",
   // PowerShell
   "powershell.scriptAnalysis.enable": true,
   "powershell.integratedConsole.showOnStartup": false,
   "powershell.codeFormatting.preset": "OTBS",
+  // Ruff
+  "ruff.client.codeAction.showDocumantaion.enable": true,
   // Ultisnips
   "snippets.ultisnips.pythonPrompt": false
 }
-

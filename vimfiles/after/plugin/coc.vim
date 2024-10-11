@@ -7,10 +7,16 @@ endif
 let g:did_coc_loaded_user_after = 1
 
 let g:coc_global_extensions = [
+      \ 'coc-json',
+      \ 'coc-markdownlint',
+      \ 'coc-powershell',
+      \ 'coc-prettier',
       \ 'coc-pyright',
-      \ 'coc-json', 'coc-snippets',
-      \ 'coc-vimlsp', 'coc-markdownlint', 'coc-powershell', 'coc-yaml', 'coc-sh',
-      \ 'coc-prettier'
+      \ '@yaegassy/coc-ruff',
+      \ 'coc-sh',
+      \ 'coc-snippets',
+      \ 'coc-vimlsp',
+      \ 'coc-yaml'
       \ ]
 
 " Highlight with coc-vimlsp
