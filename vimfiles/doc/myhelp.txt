@@ -118,6 +118,8 @@ Command		Meaning ~
 		Remove all email address in line or selection.
 `:%s/[{;}]/&\r/g | norm! =gg`
 		Format css from one-line to multi-line.
+`%!iconv -f utf-8 -t ascii//translit`
+		Convert smart quotes to ASCI quotes.
 
 							      *myhelp-ex-list*
 Prompt for selection after showing list items.

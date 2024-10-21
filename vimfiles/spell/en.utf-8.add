@@ -65,6 +65,7 @@ HEAD
 HELB
 HMI
 HPCS
+HRT
 HVAC
 Holtec
 IER
@@ -86,6 +87,7 @@ LEFM
 LHGR
 LLRT
 LOCA
+LPAP
 LPRM
 LPSP
 LWR's
@@ -99,6 +101,7 @@ MCPRf
 MCPRp
 MELLLA
 MFLCPR
+MFLPD
 MROC
 MSBWP
 MSIV
@@ -118,6 +121,7 @@ Nuclides
 ODCM
 OLMCPR
 OOS
+OPL
 OPRM
 OneDrive
 OneNote
@@ -155,6 +159,7 @@ RRC
 RTP
 RWCU
 RWE
+RWM
 Richland
 Rodline
 Rulemaking
@@ -194,6 +199,7 @@ achiote
 actinides
 actuations
 adobo
+amendement
 amperage
 ancho
 anchos
@@ -209,6 +215,7 @@ backsplash
 backsplashes
 badging
 benchmarking
+bistable
 burnup
 calculational
 cannellini
@@ -224,6 +231,7 @@ chemistry
 chile
 chiles
 chipotle
+chorizo
 configurability
 coolability
 coolable
@@ -285,6 +293,7 @@ mislocated
 mispositioned
 neutronic
 nodalization
+nomogram
 noncondensable
 nuclide
 nuclides
@@ -312,6 +321,7 @@ ppb
 preapplication
 preparer
 preprocessor
+preselected
 proceduralized
 provence
 psid
@@ -320,6 +330,7 @@ purlin
 quadraplex
 radiological
 radionuclide
+radwaste
 recirculation
 recordable
 refritos
@@ -364,13 +375,3 @@ weatherhead
 wikilinks
 zettel
 καλαμάτα
-RWM
-preselected
-LPAP
-radwaste
-HRT
-MFLPD
-nomogram
-bistable
-amendement
-chorizo
