@@ -1,25 +1,22 @@
+# To recreate:
+#   conda env export --file environment.yml --from-history
+# Uv and pip should use requirements.txt.
+# Select python<3.12 to match vim --version.
+name: vim-python
 channels:
   - conda-forge
   - defaults
 dependencies:
-  - black
   - chardet
   - condax
-  - mypy
   - nodejs
   - panflute
-  - pip
-  - pipx
-  - pydocstyle
   - pylint
   - pypandoc
   - python-dateutil
-  - python[version='>=3.11']
-  - ripgrep
-  # - starship # Uncomment if not installed elsewhere.
-  - watchdog
-  - pip:
-    - markdownpp
-    - panvimwiki
-    - vim-vint
-name: vim-python
+  - python[version='<3.12']
+  # Uncomment if not installed elsewhere.
+  # - ruff
+  # - ripgrep
+  # - starship
+  # uv pip install --requirement requirements.txt
