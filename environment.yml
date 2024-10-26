@@ -7,13 +7,13 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  - bat
   - chardet
   - condax
+  - mypy
   - nodejs
   - panflute
-  - pylint
   - pypandoc
-  - python-dateutil
   - python[version='<3.12']
   # Uncomment if not installed elsewhere.
   # - ruff
