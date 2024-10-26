@@ -94,12 +94,12 @@ Param(
     [switch]
     $Thesaurus
     ,
-    # Create/update conda environment for Vim (vim_python).
+    # Create/update conda environment for Vim (vim-python).
     # Copy Vim batch files to UserAppDir.
     [Parameter(
         Mandatory = $true,
         ParameterSetName = 'Conda',
-        HelpMessage = 'Create/update conda environment for Vim (vim_python).'
+        HelpMessage = 'Create/update conda environment for Vim (vim-python).'
     )]
     [switch]
     $Conda
@@ -158,7 +158,7 @@ Param(
     $LinkPath = "$HOME"
     ,
     # Path to directory to copy user modified Vim batch files
-    # to activate conda environment vim_python.
+    # to activate conda environment vim-python.
     # The directory should be in $Env:PATH.
     [Parameter(
         Mandatory = $false,
@@ -364,7 +364,7 @@ if ($Link) {
 if ($Dictionary) {
     # Assume WSL defaults to Ubuntu.
     $WslDictionary = '/usr/share/dict/words'
-    wsl --exec bash -c "sudo apt-get update && sudo apt-get install wamerican"
+    wsl --exec bash -c "sudo apt-get update && sudo apt-get install wamerican-huge"
     $Words = wsl --exec bash -c "wslpath -w ``realpath $WslDictionary``"
     $OutFile = "$Path\vimfiles\dictionary\words"
     New-Item -Path (Split-Path $OutFile) -ItemType Directory -ErrorAction SilentlyContinue
@@ -402,10 +402,10 @@ if ($Conda) {
         Get-Command Invoke-Conda -ErrorAction Stop | Out-String | Write-Verbose
     }
 
-    # Create or update conda env vim_python.
+    # Create or update conda env vim-python.
     Push-Location "$Path"
     Get-Item .\environment.yml -ErrorAction Stop | Out-String | Write-Verbose
-    if (Invoke-Conda env list | Select-String -Pattern 'vim_python' -CaseSensitive) {
+    if (Invoke-Conda env list | Select-String -Pattern 'vim-python' -CaseSensitive) {
         Invoke-Conda env update --file environment.yml
     } else {
         Invoke-Conda env create --file environment.yml

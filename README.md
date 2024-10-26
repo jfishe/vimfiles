@@ -1,6 +1,6 @@
 # vimfiles
 
-Windows Vim 8 configuration files based on the recommendations of
+Windows Vim configuration files based on the recommendations of
 [Ruslan Osipov](http://www.rosipov.com/blog/vim-pathogen-and-git-submodules/),
 [Keep Your vimrc file clean](http://vim.wikia.com/wiki/Keep_your_vimrc_file_clean)
 and
@@ -23,17 +23,10 @@ provides the steps automated by `wsl install`.
 ```powershell
 $Software = @(
   'Git.Git --interactive',
-  # Use the native Windows Secure Channel library to manage firewall local
-  # certificates.
-  # 'vim.vim --interactive', # Requires administrator rights.
-  # 'ChristianSchenk.MiKTeX',
-  # 'Anaconda.Miniconda3', # Out of date version.
-  # KeeAgent is not available.
-  # 'DominikReichl.KeePass', # Requires administrator rights.
   'Microsoft.PowerToys',
   'Microsoft.WindowsTerminal',
   'UniversalCtags.Ctags',
-  'Canonical.Ubuntu.2204'
+  'astral-sh.uv'
 )
 $Software |  ForEach-Object -Process {
   winget install $_
@@ -108,10 +101,7 @@ Remove-Item -Path "$DestinationPath\Vim\vim91.old" -Recurse -Force
 
 # If python/dyn version changes, update the YAML file, remove and re-create
 # the conda environment.
-# Update conda first, then create vim-python environment. Changes from v4 to
-# v23 may fail otherwise.
 conda update conda -n base
-conda update --all -n base
 conda activate base
 
 conda env remove -n vim-python
@@ -123,16 +113,6 @@ $IconLocation = Get-Item "$DestinationPath\Vim\vim91\gvim.exe"
 ```
 
 ### `vimfiles` installation
-
-If you are not using WSL, to install in Unix based systems:
-
-```bash
-# Clone will fail if .local/ does not exist.
-git clone https://github.com/jfishe/vimfiles.git $HOME/.local/vimfiles
-ln -s $HOME/.local/vimfiles/vimfiles $HOME/.vim
-cd $HOME/.local/vimfiles
-git submodule update --init --recursive
-```
 
 To install in Windows under `$env:LOCALAPPDATA\vimfiles` and symbolic link to
 `$HOME`.
@@ -193,18 +173,10 @@ function to activate a compatible conda envirionment.
 See [Anaconda and Miniconda](#anaconda-and-miniconda) for installation
 instructions.
 
-Rebuild the vim-python whenever the python minor version changes, e.g. from
+Rebuild the vim-python whenever the python minor version changes, e.g., from
 Python 3.9 to 3.10. Edit `environment.yml` to update the python version and
-move other packages to the `- pip:` group as needed. Conda packages typically
+move other packages to `requirements.txt`. Conda packages typically
 lag python versions; the pip versions tend to update first.
-
-```powershell
-# Determine python3/dyn library linked to Vim, e.g., python310.dll.
-$VimVersion = vim --version |
-  Select-String -Pattern '-DDYNAMIC_PYTHON3_DLL=\\"(python\d{0,3}).dll\\"'
-# python[version='>=3.10'] matches python310.
-Write-Output $VimVersion.Matches.Groups[1].Value
-```
 
 ### Anaconda and Miniconda
 
@@ -217,21 +189,8 @@ needed for the Vim configuration.
 To add packages to the conda environment for use by Vim:
 
 ```powershell
-# Update conda. The installer is typically out of date.
-conda update -n base -c defaults conda
-
-# Initialize conda for the various shells on the computer
-conda init
-# cmd.exe defaults to base environment.
-# Replace ` with ^ if running from cmd.exe.
-cmd /c 'reg add "HKCU\Software\Microsoft\Command Processor" /v AutoRun /t REG_EXPAND_SZ /d "%"USERPROFILE"%\.init.cmd" /f'
-
-# Create a vim-python environment compatible with the installed version of Vim.
-# $File = $env:LOCALAPPDATA\vimfiles\environment.yml
-# conda env create --file $File
-
 # Periodically update the base and vim-python environments.
-conda update -n base -c defaults conda
+conda update -n base conda
 conda update -n vim-python --all
 ```
 
@@ -249,24 +208,13 @@ maintains [words.txt](https://raw.githubusercontent.com/zeke/moby/master/words.t
 Refer to `:help dictionary` and download or symlink
 [dictionary/words](dictionary/words). See below for symlink instructions.
 
-On Windows 10, you can symlink to a dictionary in a WSL 1 Distro. It may work
-with WSL 2.
-
-1. If needed, use the default WSL to install the dictionary. It should symlink
-   to `/usr/share/dict/words`, which [vimfiles/vimrc](vimfiles/vimrc) assumes
-   for non-Windows platforms.
-2. Adjust the path below, as needed. Windows does resolve nested symlinks, so
-   use the resolved path to the dictionary.
-3. Replace `<distro_name>` with the default WSL distro, e.g., `WLinux`,
-   `Ubuntu`, etc.
-
 `Install-Vimfiles.ps1 -Dictionary` assumes Ubuntu is the default and copies the
 dictionary since symlinks into WSL fail when the distro isn't started.
 
 ## grepprg and grepformat
 
 [`ripgrep`](https://github.com/BurntSushi/ripgrep) should be installed with
-`chocolatey` or `conda`.
+`chocolatey`, `conda` or `uv tool install ripgrep`.
 
 ## Gutentags & Universal ctags
 
@@ -290,8 +238,8 @@ disabling when `node.js` is unavailable.
 The [Asynchronous Lint Engine](https://github.com/dense-analysis/ale) supports
 various linting (ALELint) and formatting (ALEFix) tools. Many of these are
 Node.js packages. See [jfishe/ALE_Nodejs](https://github.com/jfishe/ALE_Nodejs)
-for a list and installation instructions. Others, such as `black` can be
-installed by `conda` or `pip`. See `environment.yml` for a list.
+for a list and installation instructions. Others can be installed by `conda` or
+`uv pip`. See `environment.yml` for a list.
 
 ## Jupyter Notebook
 
