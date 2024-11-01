@@ -1,0 +1,11 @@
+{
+  // PowerShell
+  // Use a custom PowerShell Script Analyzer settings file for this workspace.
+  // Relative paths for this setting are always relative to the workspace root dir.
+  "powershell.scriptAnalysis.settingsPath": "PSScriptAnalyzerSettings.psd1",
+  "powershell.scriptAnalysis.enable": true,
+  "powershell.enableProfileLoading": true,
+  "powershell.powerShellExePath": "pwsh",
+  "powershell.integratedConsole.showOnStartup": false,
+  "powershell.codeFormatting.preset":"OTBS"
+}
