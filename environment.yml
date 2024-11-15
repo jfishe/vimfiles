@@ -12,9 +12,10 @@ dependencies:
   - condax
   - mypy
   - nodejs
-  - panflute
+  - pandoc [version='>=3.5']
+  - panflute [version='<2.1']
   - pypandoc
-  - python[version='<3.12']
+  - python [version='<3.12']
   # Uncomment if not installed elsewhere.
   # - ruff
   # - ripgrep
