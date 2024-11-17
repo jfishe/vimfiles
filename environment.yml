@@ -10,14 +10,21 @@ dependencies:
   - bat
   - chardet
   - condax
-  - mypy
   - nodejs
   - pandoc [version='>=3.5']
   - panflute [version='<2.1']
   - pypandoc
-  - python [version='<3.12']
+  - python # [version='<3.12']
   # Uncomment if not installed elsewhere.
-  # - ruff
+  # - mypy
+  # - pls
+  # - perl
+  # - rich-cli
   # - ripgrep
+  # - ruff
   # - starship
+# Run the following to install:
   # uv pip install --requirement requirements.txt
+  # uv tool install mypy
+  # uv tool install pls
+  # uv tool install rich-cli
