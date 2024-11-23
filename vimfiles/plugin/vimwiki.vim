@@ -35,7 +35,8 @@ let s:wiki_1.automatic_nested_syntaxes = 1
 let s:wiki_1.nested_syntaxes = {'python': 'python', 'bash': 'sh',
       \ 'vb': 'vb',
       \ 'html': 'html',
-      \ 'DOS': 'dosbatch', 'powershell': 'ps1', 'snippets': 'snippets'}
+      \ 'DOS': 'dosbatch', 'ini': 'dosini',
+      \ 'powershell': 'ps1', 'snippets': 'snippets'}
 let s:wiki_1.template_path = expand(s:my_docs .. '/vimwiki_html/templates')
 let s:wiki_1.template_default = 'default'
 let s:wiki_1.template_ext = '.tpl'
@@ -74,6 +75,7 @@ let g:vimwiki_folding='syntax'
 let g:vimwiki_tags_header_level = 2
 let g:vimwiki_links_header_level = 2
 let g:vimwiki_toc_header_level = 2
+let g:vimwiki_valid_html_tags='iframe'
 " [[https://github.com/vimwiki/vimwiki/issues/1093#issuecomment-876211106|anton-fomin]].
 " Disable table mappings
 " Disable VimwikiReturn mapping to prevent coc.nvim applying to all filetypes.

@@ -32,6 +32,8 @@ CONTENTS							      *myhelp*
 
 Command		Meaning ~
 ------------------------------------------------------------------------------
+<leader>m	Insert reference(s) from bibliography database(s)
+<LocalLeader>t	|taskwiki_maplocalleader|
 ~		Uppercase a letter (works on ranges)
 /<C-R><C-W>	Pull word into command line (or search)
 dil		Delete inner line.
@@ -60,12 +62,14 @@ vab		Select a "block" (works differently in different langs)
 vat		Select a <tag> and its contents (use i instead of a for just
 		contents)
 date`		Insert today's date.
+<localleader>m	Convert ';' separated e-mail addresses to 'mailto:' URL.
 
 ==============================================================================
 3. Insert Mode						       *myhelp-insert*
 
 Command		Meaning ~
 ------------------------------------------------------------------------------
+@@		Complete bibliography citation(s)
 <C-N>		Complete word
 <C-N><C-P>	Complete word (?)
 <C-X><C-L>	Complete line (!!) |ins-completion|
@@ -80,7 +84,7 @@ char  digraph hex   dec   official name ~
 ¶     PI      0xb6  182   PILCROW SIGN
 ±     +-      0xb1  177   PLUS-MINUS SIGN
 …     ,.      2026  8230  HORIZONTAL ELLIPSIS
-–     -N      2013  8211  EN DASH `
+–     -N      2013  8211  EN DASH
 —     -M      2014  8212  EM DASH
 ∴     .:      2234  8756  THEREFORE
 ∵     :.      2235  8757  BECAUSE
@@ -93,9 +97,6 @@ char  digraph hex   dec   official name ~
 λ     l*      03BB  0955  GREEK SMALL LETTER LAMDA
 φ     f*      03C6  0966  GREEK SMALL LETTER PHI
 τ     t*      03C4  0964  GREEK SMALL LETTER TAU
-💲		    1F4B2 Heavy Dollar Sign
-＄		    FF04  Fullwidth Dollar Sign
-﹩		    FE69  Small Dollar Sign
 ℔		    2114  LB BAR SYMBOL
 
 ==============================================================================
@@ -103,22 +104,22 @@ char  digraph hex   dec   official name ~
 
 Command		Meaning ~
 ------------------------------------------------------------------------------
-`:Vterm`	Default vertical terminal. Append bash to specify.
-`:Vposh`	PowerShell vertical terminal
-`:set relativenumber`
-		|'relativenumber'| |'rnu'|
+:Vterm		Default vertical terminal. Append bash to specify.
+:Vposh		PowerShell vertical terminal
+:VWS		|:VimwikiSearch| using |fzf-vim| with |:Rg|
+:VWT		|:VimwikiSearchTags| using |fzf-vim| with |:Rg|
 :tab sb[uffer] [+cmd] {bufname}
 					Open tab and edit buffer {bufname}.
-`:s/ <\p\{-}@\p\{-}>//cgi`
+:s/ <\p\{-}@\p\{-}>//cgi
 		Remove email addresses.
-`:%s/\%VSEARCH/REPLACE/g`
+:%s/\%VSEARCH/REPLACE/g
 		Replace all occurrences in selection but not line. |/\%V|
 		limits the search.
 :%s/\%V <\p\{-}@\p\{-}>//g
 		Remove all email address in line or selection.
-`:%s/[{;}]/&\r/g | norm! =gg`
+:%s/[{;}]/&\r/g | norm! =gg
 		Format css from one-line to multi-line.
-`%!iconv -f utf-8 -t ascii//translit`
+%!iconv -f utf-8 -t ascii//translit
 		Convert smart quotes to ASCI quotes.
 
 							      *myhelp-ex-list*
@@ -126,20 +127,20 @@ Prompt for selection after showing list items.
 
 Command		Meaning ~
 ------------------------------------------------------------------------------
-`:changes`	Print the change list. |:changes|
-`:cl[ist]`	List all errors that are valid |quickfix-valid|.
+:changes	Print the change list. |:changes|
+:cl[ist]	List all errors that are valid |quickfix-valid|.
 		|:cl| |:clist|
-`:g[lobal]/pattern/#`
+:g[lobal]/pattern/#
 		Search 'pattern' and number report line number for in preview
 		window. |:g| |:global|
-`:ju[mps]`	Print the jump list. |:ju| |:jumps|
-`:lli[st]`	List all the entries in the location list for the
+:ju[mps]	Print the jump list. |:ju| |:jumps|
+:lli[st]	List all the entries in the location list for the
 		current window.|:lli| |:llist|
-`:ls[!] [flags]`Show all buffers. `:files` `:buffers` `:ls`
-`:marks`	List all the current marks. |:marks|
-`:old[files]`		List previously open files. |:oldfiles|
-`:reg[isters]`	List registers and paste from selected register.
-`:undol[ist]`	List the leafs in the tree of changes.
+:ls[!] [flags]	Show all buffers. |:files| |:buffers| |:ls|
+:marks		List all the current marks. |:marks|
+:old[files]	List previously open files. |:oldfiles|
+:reg[isters]	List registers and paste from selected register.
+:undol[ist]	List the leafs in the tree of changes.
 		|:undol| |:undolist|
 
 							      *myhelp-ex-pack*
@@ -149,10 +150,10 @@ runtime path.
 
 Command		Meaning ~
 ------------------------------------------------------------------------------
-`:packloadall`	Add pack/*/opt to runtime path. `:help foo` will work if tags
+:packloadall	Add pack/*/opt to runtime path. |:help foo| will work if tags
 		exist.
-`:helptags ALL`	Create/update helptags under opt.
-`:packadd foo`	Add foo/opt to runtime path, making `:help foo` work.
+:helptags ALL	Create/update helptags under opt.
+:packadd foo	Add foo/opt to runtime path, making |:help foo| work.
 
 ==============================================================================
 5. ALE								  *myhelp-ale*
@@ -284,7 +285,7 @@ call condaactivate#AddConda2Vim()
 		Update Windows Batch files to activate python environment
 		prior to starting Vim.
 
-`:Redir verbose map!`	Get listing of map assignments |Redir|: >
+:Redir verbose map!	Get listing of map assignments |Redir|: >
 		:silent verbose map!
 <
 9. FZF Vim Integration						 *myhelp-fzf*

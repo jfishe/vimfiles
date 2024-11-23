@@ -11,13 +11,6 @@ if vimwiki#vars#get_wikilocal('syntax') ==# 'markdown'
   UltiSnipsAddFiletypes markdown.vimwiki
 endif
 
-augroup myvimwiki "{{{
-  autocmd!
-  " autocmd BufRead,BufNewFile *.wiki set filetype=vimwiki
-  autocmd QuickFixCmdPost [^l]* cwindow
-  autocmd QuickFixCmdPost l*    lwindow
-augroup END "}}}
-
 " VimwikiRemaps {{{
 " [[https://github.com/vimwiki/vimwiki/issues/1093#issuecomment-876211106|anton-fomin]].
 " Unmap tab in insert mode.
@@ -49,9 +42,6 @@ vnoremap <silent><buffer> <localleader>m
 "}}}
 
 let b:ale_enabled=0
-
-" Create today's Journal and compare to previous day. {{{
-nnoremap <silent><buffer> <F3> :call vimwiki#TitleJournal()<CR>
 "}}}
 
 setlocal spell spelllang=en_us

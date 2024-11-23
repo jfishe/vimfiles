@@ -153,6 +153,54 @@ If you plan to share vimfiles with Windows Subsystem for Linux (WSL), ensure
 git uses line feed for EOL. `Install-Vimfiles.ps1` automates this by setting
 the global .gitconfig to override the system defaults.
 
+## Vimwiki
+
+### New Vimwiki Diary
+
+When creating a new diary (Journal) file, `VimwikiTitleJournal` creates the
+title heading and copies the previous diary entry from `Todo` second-level
+heading through the end of file.
+
+### VimwikiLinkHandler
+
+`VimwikiLinkHandler` opens `local:` and `file:` URLs with `wslview` or, on
+Windows, with `start!`.
+
+### Registered Wikis
+
+- Assume registered wikis, `g:vimwiki_list` are in the Windows Documents folder
+  or user home directory. You may need to link `%USERPROFILE%\Documents` to the
+  actual location, e.g., OneDrive.
+
+  If the `%USERPROFILE%\Documents` does not exit, either create it, or create a link to the Windows Documents folder.
+  - To locate the Windows Documents folder in `cmd.exe`:
+
+    ```DOS
+    set REG_PATH=HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\
+    set REG_PATH=%REG_PATH%User Shell Folders
+    reg query "%REG_PATH%" /v Personal
+    ```
+
+  - If you have administrator rights or PowerShell 7, create a symbolic link:
+
+    ```powershell
+    $Parameters = @{
+      Path = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\" +
+        "User Shell Folders"
+      Name = "Personal"
+    }
+    $Target = Get-ItemPropertyValue @Parameters
+    New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\Documents" `
+      -Target "$Target"
+    ```
+
+  - Otherwise create a Directory Junction by replacing `<Target>` with the path
+    reported by `reg query` above:
+
+    ```DOS
+    cmd /c "mklink /J %USERPROFILE%\Documents <Target>"
+    ```
+
 ## Windows Python Version
 
 On Windows `python3/dyn` may point to a later version of python than `conda`
