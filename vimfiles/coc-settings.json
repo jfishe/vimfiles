@@ -20,6 +20,7 @@
   "powershell.codeFormatting.preset": "OTBS",
   // "powershell.powerShellExePath": "pwsh",
   // Ruff
+  "ruff.nativeServer": true,
   "ruff.client.codeAction.showDocumantaion.enable": true,
   // Ultisnips
   "snippets.ultisnips.pythonPrompt": false
