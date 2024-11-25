@@ -97,7 +97,7 @@ let g:vimwiki_key_mappings = {
 
 " Vim-zettel global options {{{
 let g:zettel_options = [{}, {},
-      \{"front_matter" : [["tags", ""], ["type","note"]], "disable_front_matter": 1,
+      \ {"front_matter" : [["tags", ""], ["type","note"]], "disable_front_matter": 1,
       \ "template" :  s:wiki_3.template_path .. "/note.tpl"}]
 
 let g:zettel_fzf_command = "rg --column --line-number --ignore-case --no-heading --color=always"
@@ -133,13 +133,51 @@ augroup VimwikiTitleJournal "{{{
   " Use Vimwiki foldmethod when &diff.
   if v:version < 900 && !has('nvim')
     autocmd BufEnter,BufNew,BufLeave,BufWinEnter,BufWinLeave *.wiki if &diff |
-          \ set foldmethod=syntax |
+          \ let &foldmethod = 'syntax' |
           \ foldopen! |
           \ endif
-  endif
+    endif
 augroup end "}}}
 
-function! VimwikiLinkHandler(link) abort
+" Disable Taskwiki when Diff and Fugitive buffers exist. {{{
+function! s:disable_taskwiki() abort
+  let l:disable_status = [
+        \ get(g:, 'taskwiki_disable', ''),
+        \ get(g:, 'undo_taskwiki_disable', '')
+        \ ]
+  if empty(list2str(l:disable_status))
+    let g:undo_taskwiki_disable = 'empty'
+    let g:taskwiki_disable = 1
+  elseif l:disable_status[1] == 'empty'
+    let g:taskwiki_disable = 1
+  elseif ! empty(l:disable_status[0])
+    let g:undo_taskwiki_disable = g:taskwiki_disable
+  endif
+endfunction
+
+function! s:restore_disable_taskwiki() abort
+  let l:disable_status = [
+        \ get(g:, 'taskwiki_disable', ''),
+        \ get(g:, 'undo_taskwiki_disable', '')
+        \ ]
+  if empty(list2str(l:disable_status))
+    return
+  elseif l:disable_status[1] == 'empty'
+    unlet g:taskwiki_disable
+    unlet g:undo_taskwiki_disable
+  elseif ! empty(l:disable_status[1])
+    let g:taskwiki_disable = g:undo_taskwiki_disable
+    unlet g:undo_taskwiki_disable
+  endif
+endfunction
+
+augroup myTaskwiki
+  autocmd!
+  autocmd BufEnter,BufWinEnter,BufNew * if buffer_name() =~ 'fugitive:' | call s:disable_taskwiki() | endif
+  autocmd BufUnload,BufHidden * if buffer_name() =~ 'fugitive:' | call s:restore_disable_taskwiki() | endif
+augroup END " }}}
+
+function! VimwikiLinkHandler(link) abort " {{{
   let link = a:link
   let islink = 0
   if link =~ '^local:.*'
@@ -162,6 +200,5 @@ function! VimwikiLinkHandler(link) abort
   else
     return 0
   endif
-endfunction
-
+endfunction " }}}
 " vim:tabstop=2:shiftwidth=2:expandtab:foldmethod=marker:textwidth=79
