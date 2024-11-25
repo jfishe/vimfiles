@@ -12,3 +12,7 @@ augroup markdownpp "{{{
   autocmd!
   autocmd BufNewFile,BufFilePre,BufRead *.mdpp set filetype=markdown
 augroup END "}}}
+augroup mynetrw " {{{
+  autocmd!
+  autocmd FileType netrw nnoremap g? :<C-U>help netrw-quickmap<CR>
+augroup END " }}}

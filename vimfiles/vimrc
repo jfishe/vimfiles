@@ -76,9 +76,10 @@ endif
 "     set shellxquote= 
 " endif
 
-set fileformat=unix     "LF EOL only
-"set fileformats-=dos   "Force LF EOL only on all; won't handle dos
-"files gracefully
+" Managed by EditorConfig
+  " set fileformat=unix     "LF EOL only
+" set fileformats-=dos   "Force LF EOL only on all; won't handle dos
+" files gracefully
 set visualbell          "No sounds
 
 "Turn off keep backup files unless write fails
@@ -150,23 +151,25 @@ endif
 " }}}
 
 " ================ Indentation ====================== {{{
-" Commented lines relocated to sensible.vim
+" Commented lines relocated to plugins
 
-"set autoindent
-" set autochdir  " change directory to the file in the current
+" Managed by polyglot-vim-plugin
+  " set autoindent
+  " set smarttab
+" Managed by keymap.vim
+  " set backspace=indent,eol,start " Proper backspace behavior.
+" Managed by EditorConfig:
+  " set shiftwidth=4
+  " set softtabstop=4
+  " set tabstop=4
+  " set expandtab
 set smartindent
-"set smarttab
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
-set expandtab
 set nowrap
-"set backspace=indent,eol,start " Proper backspace behavior.
 " }}}
 " ================ Buffers ====================== {{{
 " Commented lines relocated to sensible.vim
 set hidden  " Possibility to have more than one unsaved buffers.
-"set ruler  " Shows the current line number at the bottom right of the screen.
+" set ruler  " Shows the current line number at the bottom right of the screen.
 set switchbuf+=split
 set switchbuf+=useopen
 augroup mybuffers
@@ -250,7 +253,7 @@ set sidescroll=1
 " }}}
 " ================ Search =========================== {{{
 " Commented lines relocated to sensible.vim
-"set incsearch       " Find the next match as we type the search
+" set incsearch       " Find the next match as we type the search
 if &t_Co > 2 || has('gui_running')
   " Switch on highlighting the last used search pattern.
   set hlsearch

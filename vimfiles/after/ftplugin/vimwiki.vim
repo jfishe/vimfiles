@@ -12,9 +12,6 @@ if vimwiki#vars#get_wikilocal('syntax') ==# 'markdown'
 endif
 
 " VimwikiRemaps {{{
-" [[https://github.com/vimwiki/vimwiki/issues/1093#issuecomment-876211106|anton-fomin]].
-" Unmap tab in insert mode.
-silent! iunmap <buffer> <Tab>
 " Remap table tab mappings to M-n M-p.
 inoremap <silent><expr><buffer> <M-n> vimwiki#tbl#kbd_tab()
 inoremap <silent><expr><buffer> <M-p> vimwiki#tbl#kbd_shift_tab()
