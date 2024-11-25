@@ -172,7 +172,8 @@ Windows, with `start!`.
   or user home directory. You may need to link `%USERPROFILE%\Documents` to the
   actual location, e.g., OneDrive.
 
-  If the `%USERPROFILE%\Documents` does not exit, either create it, or create a link to the Windows Documents folder.
+  If the `%USERPROFILE%\Documents` does not exit, either create it, or create a
+  link to the Windows Documents folder.
   - To locate the Windows Documents folder in `cmd.exe`:
 
     ```DOS
