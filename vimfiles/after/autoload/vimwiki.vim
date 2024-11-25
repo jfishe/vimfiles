@@ -1,14 +1,14 @@
-" Vimwiki User Autoload {{{
+" Vimwiki User Autoload
 if exists('g:loaded_vimwiki_user_after_auto') || &compatible
   finish
 endif
 let g:loaded_vimwiki_user_after_auto = 1
 
-" Helper: for omnicompletion {{{
-" omnifunc=pandoc#completion#Complete
-" taskwiki#CompleteOmni
-" Complete_wikifiles()
-function vimwiki#Complete_pandoc(findstart, base) abort
+function vimwiki#Complete_pandoc(findstart, base) abort " {{{
+  " Helper: for omnicompletion
+  " omnifunc=pandoc#completion#Complete
+  " taskwiki#CompleteOmni
+  " Complete_wikifiles()
   " Find line context
   " Called: first time
   if a:findstart == 1
@@ -41,13 +41,14 @@ function vimwiki#Complete_pandoc(findstart, base) abort
   endif
 endfunction  " }}}
 
-" Insert Expanded BibLaTeX References: {{{
-function vimwiki#insert_references(infile) abort
+function vimwiki#insert_references(infile) abort " {{{
+" Insert Expanded BibLaTeX References:
   return
 endfunction  " }}}
-" Commands: VimwikiSearch and VWS {{{
-" Use Rg and QuickFixWindow instead of lvimgrep in VWS and VWT.
-function! vimwiki#searchRg(search_pattern) abort
+
+function! vimwiki#searchRg(search_pattern) abort " {{{
+  " Commands: VimwikiSearch and VWS
+  " Use Rg and QuickFixWindow instead of lvimgrep in VWS and VWT.
   if !exists(':Rg')
     call vimwiki#base#search(a:search_pattern)
     return
@@ -79,21 +80,19 @@ function! vimwiki#searchRg(search_pattern) abort
     \ }
   " command (string), [spec (dict)], [fullscreen (bool)]
   call fzf#vim#grep(cmd, fzf#vim#with_preview(opts), 1)
+endfunction " }}}
 
-endfunction
-
-function vimwiki#generate_index() abort
+function vimwiki#generate_index() abort " {{{
   ZettelGenerateLinks
   ZettelBackLinks
   ZettelInbox
-endfunction
-" }}}
+endfunction " }}}
 
-" Convert Email: selected text to VimWikiLink {{{
-" Todo: Limit the length of the URI to 2083 per
-"       https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers
-"       by splitting into multiple links.
-function! vimwiki#myvimwiki_normalize_mail_v()
+function! vimwiki#myvimwiki_normalize_mail_v() abort " {{{
+  " Convert Email: selected text to VimWikiLink
+  " Todo: Limit the length of the URI to 2083 per
+      " https://stackoverflow.com/questions/417142/what-is-the-maximum-length-of-a-url-in-different-browsers
+      " by splitting into multiple links.
   let l:sel_save = &selection
   let &selection = 'old'
   let l:rv = @"
@@ -141,20 +140,19 @@ function! vimwiki#myvimwiki_normalize_mail_v()
     let &selection = l:sel_save
   endtry
 endfunction " }}}
-" }}}
 
-" Create today's Journal and compare to previous day. {{{
-" Create a title header for Journal with date.
-" Copy previous diary day Todo header through EOF.
-" Diff today and previous day.
-function! vimwiki#TitleJournal() abort "{{{
+function! vimwiki#TitleJournal() abort " {{{
+  " Create today's Journal and compare to previous day.
+  " Create a title header for Journal with date.
+  " Copy previous diary day Todo header through EOF.
+  " Diff today and previous day.
   if search('^= Journal.* =$', 'w', 0, 500)
     return
   endif
 
   " help taskwiki_disable
   let l:undo_taskwiki_disable = get(g:, 'taskwiki_disable', '')
-  if empty('l:taskwiki_disable')
+  if empty(l:undo_taskwiki_disable)
     let g:taskwiki_disable = 'disable'
   endif
   set filetype=vimwiki
@@ -191,12 +189,9 @@ function! vimwiki#TitleJournal() abort "{{{
   execute 'normal! gg'
   wincmd p
 
-  if empty('l:taskwiki_disable')
+  if empty(l:undo_taskwiki_disable)
     unlet g:taskwiki_disable
   endif
 
 endfunction "}}}
-" }}}
-" }}}
-
 " vim:tabstop=2:shiftwidth=2:expandtab:foldmethod=marker:textwidth=79
