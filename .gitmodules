@@ -143,11 +143,18 @@
 	path = vimfiles/pack/dev/opt/vader.vim
 	url = https://github.com/junegunn/vader.vim.git
 [submodule "vimfiles/pack/vimwiki/start/vim-zettel"]
+	ignore = dirty
 	path = vimfiles/pack/vimwiki/start/vim-zettel
 	url = https://github.com/michal-h21/vim-zettel
 [submodule "vimfiles/pack/vimwiki/start/fzf.vim"]
+	ignore = dirty
 	path = vimfiles/pack/vimwiki/start/fzf.vim
 	url = https://github.com/junegunn/fzf.vim
 [submodule "vimfiles/pack/vimwiki/start/fzf"]
+	ignore = dirty
 	path = vimfiles/pack/vimwiki/start/fzf
 	url = https://github.com/junegunn/fzf
+[submodule "vimfiles/pack/vimwiki/start/vim-titlecase"]
+	ignore = dirty
+	path = vimfiles/pack/vimwiki/start/vim-titlecase
+	url = https://github.com/christoomey/vim-titlecase.git
