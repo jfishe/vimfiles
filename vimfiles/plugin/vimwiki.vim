@@ -136,7 +136,7 @@ augroup VimwikiTitleJournal "{{{
           \ let &foldmethod = 'syntax' |
           \ foldopen! |
           \ endif
-    endif
+  endif
 augroup end "}}}
 
 " Disable Taskwiki when Diff and Fugitive buffers exist. {{{
