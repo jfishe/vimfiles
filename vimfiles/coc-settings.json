@@ -13,7 +13,7 @@
   "python.formatting.provider": "ruff",
   // PyRight
   "pyright.organizeimports.provider": "ruff",
-  "pyright.testing.provider":"pytest",
+  "pyright.testing.provider": "pytest",
   // PowerShell
   "powershell.scriptAnalysis.enable": true,
   "powershell.integratedConsole.showOnStartup": false,
