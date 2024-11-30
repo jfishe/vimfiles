@@ -10,9 +10,13 @@ augroup html5_setup "{{{
 augroup END "}}}
 augroup markdownpp "{{{
   autocmd!
-  autocmd BufNewFile,BufFilePre,BufRead *.mdpp set filetype=markdown
+  autocmd BufNewFile,BufFilePre,BufRead *.mdpp set filetype=vimwiki
 augroup END "}}}
 augroup mynetrw " {{{
   autocmd!
-  autocmd FileType netrw nnoremap g? :<C-U>help netrw-quickmap<CR>
+  autocmd FileType netrw nnoremap <silent><buffer> g? :<C-U>help netrw-quickmap<CR>
+augroup END " }}}
+augroup myfugitive " {{{
+  autocmd!
+  autocmd FileType fugitive nmap <silent><buffer> cnv :<C-U>Git commit --no-verify<CR>
 augroup END " }}}
