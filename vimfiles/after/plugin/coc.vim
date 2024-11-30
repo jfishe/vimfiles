@@ -12,6 +12,7 @@ let g:coc_global_extensions = [
       \ 'coc-powershell',
       \ 'coc-prettier',
       \ 'coc-pyright',
+      \ '@yaegassy/coc-marksman',
       \ '@yaegassy/coc-ruff',
       \ 'coc-sh',
       \ 'coc-snippets',
