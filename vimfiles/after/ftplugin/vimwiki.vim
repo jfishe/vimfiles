@@ -20,10 +20,11 @@ inoremap <silent><expr><buffer> <M-p> vimwiki#tbl#kbd_shift_tab()
 " Use coc#pum#visible() to prevent remapping by coc#ui#check_pum_keymappings().
 " inoremap <silent><expr><buffer> <cr> pumvisible() ? coc#_select_confirm()
 "       \: "<C-]><Esc>:VimwikiReturn 1 5<CR>"
-inoremap <silent><expr><buffer> <CR> coc#pum#visible() ? '<CR>'
-      \: '<C-]><Esc>:VimwikiReturn 3 5<CR>'
-inoremap <silent><expr><buffer> <S-CR> coc#pum#visible() ? '<CR>'
-      \: '<Esc>:VimwikiReturn 2 2<CR>'
+"
+"   https://github.com/vimwiki/vimwiki/issues/1405#issuecomment-2126374520
+inoremap <silent><expr><buffer> <CR> coc#pum#visible() ? coc#pum#confirm()
+      \: "\<C-]>\<Esc>:VimwikiReturn 3 5\<CR>"
+inoremap <silent><expr><buffer> <S-CR> "\<Esc>:VimwikiReturn 2 2\<CR>"
 "}}}
 
 " Use vim-ripgrep for VimwikiSearch {{{
