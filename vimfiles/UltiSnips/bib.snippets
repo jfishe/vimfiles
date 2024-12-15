@@ -1,0 +1,34 @@
+snippet techreport "TechReport reference" b
+@TechReport{${1:name},
+	author       = {${2:author and author2}},
+	title        = {${3:title}},
+	institution  = {${4:institution}},
+	year         = {${5:year}},
+	date         = {${6:YYYY-MM-DD}},
+	type         = {techreport},
+	number       = {${7:number, revision}},
+	address      = {${8:address}},
+	note         = {${9:note}},
+	crossref     = {${10:crossref}},
+	keywords     = {${11:keyword, keyword2}},
+	timestamp    = {${12:`date --iso-8601`}},
+	url          = {${13:url}},
+}
+$0
+endsnippet
+
+snippet misc "Misc reference" b
+@Misc{${1:name},
+	author       = {${2:author and author2}},
+	title        = {${3:title}},
+	year         = {${4:year}},
+	date         = {${5:YYYY-MM-DD}},
+	subtitle     = {${6:subtitle}},
+	organization = {${7:organization}},
+	pubstate     = {${8:Published}: ${9:Personal Correspondence}},
+	url          = {${10:url}},
+	keywords     = {${11:keyword, keyword2}},
+	timestamp    = {${12:`date --iso-8601`}},
+}
+$0
+endsnippet
