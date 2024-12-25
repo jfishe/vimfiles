@@ -33,6 +33,7 @@ CONTENTS							      *myhelp*
 Command		Meaning ~
 ------------------------------------------------------------------------------
 <leader>m	Insert reference(s) from bibliography database(s)
+<leader><tab>	List normal mode maps
 <LocalLeader>t	|taskwiki_maplocalleader|
 ~		Uppercase a letter (works on ranges)
 /<C-R><C-W>	Pull word into command line (or search)
@@ -72,7 +73,9 @@ Command		Meaning ~
 @@		Complete bibliography citation(s)
 <C-N>		Complete word
 <C-N><C-P>	Complete word (?)
-<C-X><C-L>	Complete line (!!) |ins-completion|
+<C-x><C-f>	Fzf complete file/path
+<C-x><C-k>	Fzf complete word
+<C-x><C-L>	Complete line (!!) |ins-completion|
 CTRL-K {char1} {char2}
 		Insert digraphs. |i_CTRL-K| |digraphs-use| |digraph-table|
 CTRL-QU{hexidecimal}
