@@ -141,18 +141,24 @@ augroup end "}}}
 
 " Disable Taskwiki when Diff and Fugitive buffers exist. {{{
 function! s:disable_taskwiki() abort
+  " Remember taskwiki_disable value
   let l:disable_status = [
         \ get(g:, 'taskwiki_disable', ''),
         \ get(g:, 'undo_taskwiki_disable', '')
         \ ]
   if empty(list2str(l:disable_status))
     let g:undo_taskwiki_disable = 'empty'
-    let g:taskwiki_disable = 1
-  elseif l:disable_status[1] == 'empty'
-    let g:taskwiki_disable = 1
   elseif ! empty(l:disable_status[0])
     let g:undo_taskwiki_disable = g:taskwiki_disable
   endif
+
+  for l:bufnr in range(1, bufnr('$'))
+    if !empty(getbufvar(l:bufnr, 'fugitive_type'))
+      let g:taskwiki_disable = 1
+      return
+    endif
+  endfor
+  call s:restore_disable_taskwiki()
 endfunction
 
 function! s:restore_disable_taskwiki() abort
@@ -173,8 +179,10 @@ endfunction
 
 augroup myTaskwiki
   autocmd!
-  autocmd BufEnter,BufWinEnter,BufNew * if buffer_name() =~ 'fugitive:' | call s:disable_taskwiki() | endif
-  autocmd BufUnload,BufHidden * if buffer_name() =~ 'fugitive:' | call s:restore_disable_taskwiki() | endif
+  " Taskwiki causes vim-Fugitive to write the Git index path to disk:
+  "   fugitive://*/.git/*//
+  " So disable when fugitive buffer exists.
+  autocmd BufEnter,BufWinEnter,BufNew * call s:disable_taskwiki()
 augroup END " }}}
 
 function! VimwikiLinkHandler(link) abort " {{{
