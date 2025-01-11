@@ -45,6 +45,11 @@ gx		Open URL, etc. with default protocol. See |netrw-gx|
 		sip:9+1(509)531-5444
 gf		Open file under cursor in Vim. Visually select to open file
 		with spaces in name.
+*Titlecase*       *myhelp-titlecase*
+gzi'            <Plug>Titlecase inside single quotes.
+gzap            <Plug>Titlecase around paragraph.
+gzz             <Plug>Titlecase current line.
+
 <C-W>s<C-W>T	Split current window and move to a new tab page.
 
 |z| commands:
