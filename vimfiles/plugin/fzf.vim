@@ -9,16 +9,7 @@ set cpo&vim
 let g:fzf_action = {
       \ 'alt-t': 'tab split',
       \ 'alt-x': 'split',
-      \ 'alt-v': 'vsplit',
-      \ 'alt-a': 'select-all',
-      \ 'alt-d': 'deselect-all',
-      \ 'alt-w': 'toggle-preview' }
-if has('gui_running')
-  let g:fzf_action = extend( g:fzf_action, {
-        \ 'ctrl-a': 'select-all',
-        \ 'ctrl-d': 'deselect-all',
-        \ 'ctrl-w': 'toggle-preview' })
-endif
+      \ 'alt-v': 'vsplit' }
 " https://github.com/junegunn/fzf.vim/issues/54#issuecomment-164488800
 let s:rg_cmd = "rg --column --line-number --no-heading --color=always --smart-case -- "
 command! -bang -nargs=* Rg call fzf#vim#grep(
