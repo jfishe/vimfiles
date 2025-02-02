@@ -17,6 +17,19 @@
 	autocrlf = input
 	attributesfile = ~/.gitattributes_global
 	excludesfile = ~/.gitignore_global
+  pager = delta
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  # https://dandavison.github.io/delta/
+  navigate = true    # use n and N to move between diff sections
+
+  # delta detects terminal colors automatically; set one of these to disable auto-detection
+  # dark = true
+  # light = true
+
 [gui]
 	displayuntracked = false
 [push]
@@ -47,6 +60,7 @@
     ; https://vimways.org/2018/vim-and-git/
     prompt = false
 [merge]
+    conflictstyle = zdiff3
     ; tool = vimdiff3
     tool = fugitive
 [mergetool]

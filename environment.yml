@@ -7,7 +7,13 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  # Vim 
+  #   :h fzf-vim-dependencies
   - bat
+  - git-delta
+  # - perl
+  # - ripgrep
+  # END fzf-vim-dependencies
   - chardet
   - condax
   - nodejs
@@ -18,9 +24,7 @@ dependencies:
   # Uncomment if not installed elsewhere.
   # - mypy
   # - pls
-  # - perl
   # - rich-cli
-  # - ripgrep
   # - ruff
   # - starship
 # Run the following to install:

@@ -229,19 +229,35 @@ lag python versions; the pip versions tend to update first.
 
 ### Anaconda and Miniconda
 
-Install Miniconda or Anaconda per the directions in the
-[Anaconda Documentation](https://docs.anaconda.com/anaconda/install/).
+[Kaa Mi](https://dev.to/kaamisan/using-miniconda-with-conda-forge-to-avoid-anaconda-licensing-issues-5hkj).
+Posted on 2024-06-19. _Using Miniconda with Conda-Forge to Avoid Anaconda
+Licensing Issues_.
 
-[environment.yml](environment.yml) lists the conda and pip packages
-needed for the Vim configuration.
+1. Download and Install [[https://docs.anaconda.com/miniconda/|Miniconda]].
+2. Initialize Conda with `conda init`.
+3. Add Conda-Forge as the Default Channel.
 
-To add packages to the conda environment for use by Vim:
+   ```powershell
+   conda config --remove channels defaults
+   conda config --add channels conda-forge
+   conda config --set channel_priority strict
+   ```
 
-```powershell
-# Periodically update the base and vim-python environments.
-conda update -n base conda
-conda update -n vim-python --all
-```
+4. Create a New Environment. [environment.yml](environment.yml) lists the
+   conda and pip packages needed for the Vim configuration.
+
+   ```powershell
+   conda env create -f environment.yml
+   conda activate vim-python
+   conda config --show channels
+   ```
+
+5. Periodically update the base and vim-python environments.
+
+   ```powershell
+   conda update -n base conda
+   conda update -n vim-python --all
+   ```
 
 ## Thesaurus
 
