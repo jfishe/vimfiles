@@ -21,16 +21,8 @@ the other applications referenced in the vim configuration files.
 provides the steps automated by `wsl install`.
 
 ```powershell
-$Software = @(
-  'Git.Git --interactive',
-  'Microsoft.PowerToys',
-  'Microsoft.WindowsTerminal',
-  'UniversalCtags.Ctags',
-  'astral-sh.uv'
-)
-$Software |  ForEach-Object -Process {
-  winget install $_
-}
+# winget export --output=winget.json
+winget import --import-file=winget.json
 
 dism.exe /online /enable-feature `
   /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
@@ -233,7 +225,7 @@ lag python versions; the pip versions tend to update first.
 Posted on 2024-06-19. _Using Miniconda with Conda-Forge to Avoid Anaconda
 Licensing Issues_.
 
-1. Download and Install [[https://docs.anaconda.com/miniconda/|Miniconda]].
+1. Download and Install [Miniconda](https://docs.anaconda.com/miniconda/).
 2. Initialize Conda with `conda init`.
 3. Add Conda-Forge as the Default Channel.
 

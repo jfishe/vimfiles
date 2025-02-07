@@ -1,6 +1,5 @@
 channels:
   - conda-forge
-  - defaults
 ssl_verify: true
 report_errors: true
 pip_interop_enabled: true
@@ -11,3 +10,4 @@ remote_read_timeout_secs: 120.0
 # #   initialization.
 # #
 auto_activate_base: false
+channel_priority: strict

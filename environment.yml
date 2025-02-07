@@ -5,9 +5,8 @@
 name: vim-python
 channels:
   - conda-forge
-  - defaults
 dependencies:
-  # Vim 
+  # Vim
   #   :h fzf-vim-dependencies
   - bat
   - git-delta
