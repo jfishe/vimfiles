@@ -15,9 +15,6 @@ vim configuration files.
 
 [Chocolatey] and [winget] provide package managers.
 
-git pull --rebase=preserve \# When local merge commit preserved, like Pull Request.
-git config --global pull.rebase preserve
-
 ```powershell
 # winget export --output=winget.json
 winget import --import-file=winget.json
@@ -51,22 +48,20 @@ cat github-com.pem | tee -a /mingw64/etc/ssl/certs/ca-bundle.crt
 
 ### Install Vim on Windows Subsystem for Linux
 
-On Debian derivatives, like Ubuntu, the
-[dotfiles]
-repository provides an installation script for a compatible version of Vim with
-GTK3. It also links `~/.vim/` to Windows `$USERPROFILE/vimfiles/` to share
-configuration across environments.
+On Debian derivatives, like Ubuntu, the [dotfiles] repository provides an
+installation script for a compatible version of Vim with GTK3. It also links
+`~/.vim/` to Windows `$USERPROFILE/vimfiles/` to share configuration across
+environments.
 
 ### Install Vim on Windows
 
-[Vim-win32-installer]
-includes `python3/dyn`. Download and install
-or use [Chocolatey]: `choco install vim`.
+[Vim-win32-installer] includes `python3/dyn`. Download and install or use
+[Chocolatey]: `choco install vim`.
 
 - Download the selected zip file and adjust the paths as needed.
-- Update python version specification in [environment.yml] to match
-  linked version in vim: `vim --version | grep python --color`
-- See `Get-Help .\Install-Vimfiles.ps1` for additional information.
+- Not needed for recent versions of Vim 9. If needed, update the python version
+  specification in [environment.yml] to match linked version in:
+  `vim --version | grep python --color`
 
 ```powershell
 $DestinationPath = Get-Item -Path "$env:LOCALAPPDATA\Programs"
@@ -90,21 +85,11 @@ vim --version | grep python --color
 Remove-Item -Path "$DestinationPath\Vim\vim91.old" -Recurse -Force
 ```
 
+If they don't already exist, create the batch files using the installer. They
+are needed to activate the vim-python conda environment, prior to starting Vim.
+
 ```powershell
-# If needed, create the batch files using the installer.
 & $(Get-Item -Path "$DestinationPath\Vim\vim91\install.exe")
-
-# If python/dyn version changes, update the YAML file, remove and re-create
-# the conda environment.
-conda update conda -n base
-conda activate base
-
-conda env remove -n vim-python
-.\Install-Vimfiles.ps1 -Conda
-
-# Add/update Start Menu shortcuts.
-$IconLocation = Get-Item "$DestinationPath\Vim\vim91\gvim.exe"
-.\Install-Vimfiles.ps1 -Shortcut -IconLocation "$IconLocation"
 ```
 
 ### `vimfiles` installation
@@ -138,9 +123,19 @@ Get-Help .\Install-Vimfiles.ps1 -Full
 # Download Moby Thesaurus from
 # https://raw.githubusercontent.com/zeke/moby/master/words.txt
 .\Install-Vimfiles.ps1 -Thesaurus
+```
 
-# Create/update conda environment compatible with `python3/dyn`.
-# Create/update Vim batch files to activate vim-python prior to starting Vim.
+- Create/update a conda environment compatible with `python3/dyn`.
+- Install [Miniconda] if needed, and create or update conda env vim-python.
+- Copy Vim batch files to `$env:LOCALAPPDATA\Microsoft\WindowsApps`:
+  - They are needed to activate the vim-python conda environment, prior to
+    starting Vim.
+  - If they don't already exist, create the batch files using the Vim
+    installer, usually `*\Vim\vim*\install.exe`.
+- Add Windows Registry entry to run `%USERPROFILE%\.init.cmd` when starting
+  `cmd.exe`. `.init.cmd` activates `vim-python` environment for use by Vim.
+
+```powershell
 .\Install-Vimfiles.ps1 -Conda
 ```
 
@@ -198,41 +193,13 @@ Windows, with `start!`.
     cmd /c "mklink /J %USERPROFILE%\Documents <Target>"
     ```
 
-## Windows Python Version
+## Anaconda and Miniconda
 
-On Windows `python3/dyn` may point to a later version of python than `conda`
-supports in the base environment. Copy or update `gvim.bat`. The usual
-locations are:
-
-- `%LOCALAPPDATA%\Microsoft\WindowsApps\gvim.bat`
-- `%WINDIR%\gvim.bat`
-
-Adding a call to `conda` and creating a Start-Menu shortcut can resolve the
-issue, e.g:
-
-Installing with [Chocolatey] will clobber the Vim batch files because it
-replaces any it finds in `$env:WINDIR` and
-`$env:LOCALAPPDATA\Microsoft\WindowsApps`. The following snippet ensures the
-batch files are in `$env:LOCALAPPDATA\Microsoft\WindowsApps` and calls a Vim
-function to activate a compatible conda envirionment.
-See [Anaconda and Miniconda] for installation
-instructions.
-
-Rebuild the vim-python whenever the python minor version changes, e.g., from
-Python 3.9 to 3.10. Edit [environment.yml] to update the python version and
-move other packages to `requirements.txt`. Conda packages typically
-lag python versions; the pip versions tend to update first.
-
-### Anaconda and Miniconda
-
-[Kaa Mi].
-Posted on 2024-06-19. _Using Miniconda with Conda-Forge to Avoid Anaconda
-Licensing Issues_.
+[Kaa Mi]. Posted on 2024-06-19. _Using Miniconda with Conda-Forge to Avoid
+Anaconda Licensing Issues_.
 
 1. Download and Install [Miniconda].
-
 2. Initialize Conda with `conda init`.
-
 3. Add Conda-Forge as the Default Channel.
 
    ```powershell
@@ -259,9 +226,9 @@ Licensing Issues_.
 
 ## Thesaurus
 
-Setup instructions are included in vimrc to install the
-[Moby Thesaurus List by Grady Ward] from Project Gutenberg. Use a browser; the
-site blocks scripted download.
+Setup instructions are included in vimrc to install the [Moby Thesaurus List by
+Grady Ward] from Project Gutenberg. Use a browser; the site blocks scripted
+download.
 
 [Moby-thesaurus.org/] maintains [words.txt][Moby-thesaurus.org/].
 
@@ -319,8 +286,7 @@ nbdime config-git --enable --global
 
 ## Setup Python Project
 
-<!-- TODO:  <07-02-25, yourname> -->
-<!-- TODO: \<07-02-25, jfishe\> Update for pyscaffold and uv. -->
+<!-- TODO: <07-02-25, jfishe> Update for pyscaffold and uv. -->
 
 ```bash
 cookiecutter cookiecutter-pypackage
@@ -439,7 +405,6 @@ git push
 [dotfiles]: https://github.com/jfishe/dotfiles
 [Vim-win32-installer]: https://github.com/vim/vim-win32-installer/releases
 [environment.yml]: environment.yml
-[Anaconda and Miniconda]: #anaconda-and-miniconda
 [Kaa Mi]: https://dev.to/kaamisan/using-miniconda-with-conda-forge-to-avoid-anaconda-licensing-issues-5hkj
 [Miniconda]: https://docs.anaconda.com/miniconda/
 [Moby Thesaurus List by Grady Ward]: http://www.gutenberg.org/ebooks/3202
