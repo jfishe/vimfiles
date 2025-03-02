@@ -9,7 +9,6 @@ AR's
 ARO
 ASD
 ATWS
-Armenta
 BDR
 BOC
 BOM
@@ -93,8 +92,6 @@ LPRM
 LPSP
 LWR's
 LaTeX
-Lorri
-Lorri's
 MCFL
 MCO
 MCPR
@@ -110,7 +107,6 @@ MUR
 MWe
 MWt
 MikTeX
-Misposition
 NCHR
 NDR
 NEI
@@ -118,7 +114,6 @@ NFI
 NSR
 NUREG
 NucHost
-Nuclides
 ODCM
 OLMCPR
 OOS
@@ -142,8 +137,6 @@ PWROG
 PeopleSoft
 PowerShell
 PowerToys
-Praetorious
-Praetorius
 RADTRAD
 RAI
 RBM
@@ -163,7 +156,6 @@ RWE
 RWM
 Radwaste
 Richland
-Rodline
 Rulemaking
 SCBL
 SDM
@@ -202,7 +194,6 @@ achiote
 actinides
 actuations
 adobo
-amendement
 amperage
 ancho
 anchos
@@ -289,15 +280,18 @@ inservice
 installable
 inverter
 isolator
+isolators
 leaker
 linter
 masa
 memoranda
 miniconda
+miniforge
 minimizer
 misloaded
 misloading
 mislocated
+misposition
 mispositioned
 nameserver
 neutronic
@@ -305,6 +299,7 @@ nodalization
 nomogram
 noncondensable
 nuclide
+nuclides
 nuclides
 octant
 octothorpe
@@ -349,6 +344,7 @@ reportability
 reportable
 reproducibility
 retrievability
+rodline
 rulemaking
 sauté
 setpoint
@@ -388,4 +384,3 @@ weatherhead
 wikilinks
 zettel
 καλαμάτα
-isolators
