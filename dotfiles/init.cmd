@@ -7,6 +7,6 @@ REM reg delete "HKCU\Software\Microsoft\Command Processor" /v AutoRun
 
 @IF DEFINED CONDA_SHLVL GOTO :EOF
 
-@if exist "%USERPROFILE%\Miniconda3\condabin\conda_hook.bat" call "%USERPROFILE%\Miniconda3\condabin\conda_hook.bat"
-@if exist "%LOCALAPPDATA%\Miniconda3\condabin\conda_hook.bat" call "%LOCALAPPDATA%\Miniconda3\condabin\conda_hook.bat"
+@if exist "%USERPROFILE%\Miniforge3\condabin\conda_hook.bat" call "%USERPROFILE%\Miniforge3\condabin\conda_hook.bat"
+@if exist "%LOCALAPPDATA%\Miniforge3\condabin\conda_hook.bat" call "%LOCALAPPDATA%\Miniforge3\condabin\conda_hook.bat"
 @if exist "%CONDA_BAT%" call "%CONDA_BAT%" activate vim-python

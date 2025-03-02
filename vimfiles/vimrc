@@ -16,7 +16,7 @@ if !has('nvim') && !empty($CONDA_PREFIX) && has('python3_dynamic')
   " Enter-CondaEnvironment -Name vim_python &&
   "   Enter-CondaEnvironment -Stack -Name venv
   " Enter-CondaEnvironment -Name vim_python
-  let s:conda_env = '/miniconda3/envs/vim-python'
+  let s:conda_env = '/miniforge3/envs/vim-python'
   if isdirectory(expand("$LOCALAPPDATA" .. s:conda_env))
     let &pythonthreehome = expand("$LOCALAPPDATA" .. s:conda_env)
   elseif isdirectory(expand("$HOME" .. s:conda_env))
@@ -25,18 +25,6 @@ if !has('nvim') && !empty($CONDA_PREFIX) && has('python3_dynamic')
   if has('linux')
     let &pythonthreedll=expand(&pythonthreehome .. "/lib/libpython3.so")
   endif
-elseif !has('nvim') && !empty($CONDA_PREFIX) && has('linux')
-  " https://peps.python.org/pep-0668
-  " Conda not treated as a venv so site-packages don't load automatically.
-  let s:conda_env = '/miniconda3/envs/vim-python/lib/python3.1?/site-packages'
-  if isdirectory(expand("$LOCALAPPDATA" .. s:conda_env))
-    let s:conda_env = expand("$LOCALAPPDATA" .. s:conda_env)
-  elseif isdirectory(expand("$HOME" .. s:conda_env))
-    let s:conda_env = expand("$HOME" .. s:conda_env)
-  endif
-  let s:conda_env = 'python3 site.addsitedir("' .. s:conda_env .. '")'
-  python3 import site
-  execute s:conda_env
 endif
 if has('python3')
   try

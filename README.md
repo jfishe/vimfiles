@@ -126,7 +126,7 @@ Get-Help .\Install-Vimfiles.ps1 -Full
 ```
 
 - Create/update a conda environment compatible with `python3/dyn`.
-- Install [Miniconda] if needed, and create or update conda env vim-python.
+- Install [Miniforge] if needed, and create or update conda env vim-python.
 - Copy Vim batch files to `$env:LOCALAPPDATA\Microsoft\WindowsApps`:
   - They are needed to activate the vim-python conda environment, prior to
     starting Vim.
@@ -193,16 +193,26 @@ Windows, with `start!`.
     cmd /c "mklink /J %USERPROFILE%\Documents <Target>"
     ```
 
-## Anaconda and Miniconda
+## Conda
 
-[Kaa Mi]. Posted on 2024-06-19. _Using Miniconda with Conda-Forge to Avoid
-Anaconda Licensing Issues_.
+[Kaa Mi]. Posted on 2024-06-19. _Using Miniforge with Conda-Forge to Avoid
+Anaconda Licensing Issues_. The [conda-forge community] maintains [Miniforge]
+that comes configured for use with the conda-forge channel.
 
-1. Download and Install [Miniconda].
+1. Download and Install [Miniforge].
 2. Initialize Conda with `conda init`.
 3. Add Conda-Forge as the Default Channel.
 
    ```powershell
+   # Install with Winget.
+   winget install CondaForge.Miniforge3 --exact
+
+   # Download from Github releases.
+   $Uri = 'https://github.com/conda-forge/miniforge/releases/latest/download'
+   $Exe = 'Miniforge3-Windows-x86_64.exe'
+   Invoke-WebRequest -Uri "$Uri/$Exe" -OutFile "~\Downloads\$Exe"
+
+   # Default configuration for Miniforge.
    conda config --remove channels defaults
    conda config --add channels conda-forge
    conda config --set channel_priority strict
@@ -393,34 +403,35 @@ git commit -am "chore: update submodules"
 git push
 ```
 
-[Ruslan Osipov]: http://www.rosipov.com/blog/vim-pathogen-and-git-submodules/
-[Keep Your vimrc file clean]: http://vim.wikia.com/wiki/Keep_your_vimrc_file_clean
-[The musings of bluz71]: https://bluz71.github.io/2017/05/15/vim-tips-tricks.html
-[git-scm]: https://git-scm.com/
-[Chocolatey]: https://chocolatey.org/
-[winget]: https://learn.microsoft.com/en-us/windows/package-manager/winget/
-[Manual installation steps for older versions of WSL]: https://learn.microsoft.com/en-us/windows/wsl/install-manual
-[github: server certificate verification failed]: https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed
-[How to fix ssl certificate problem unable to get local issuer certificate Git error]: https://komodor.com/learn/how-to-fix-ssl-certificate-problem-unable-to-get-local-issuer-certificate-git-error/
-[dotfiles]: https://github.com/jfishe/dotfiles
-[Vim-win32-installer]: https://github.com/vim/vim-win32-installer/releases
-[environment.yml]: environment.yml
-[Kaa Mi]: https://dev.to/kaamisan/using-miniconda-with-conda-forge-to-avoid-anaconda-licensing-issues-5hkj
-[Miniconda]: https://docs.anaconda.com/miniconda/
-[Moby Thesaurus List by Grady Ward]: http://www.gutenberg.org/ebooks/3202
-[Moby-thesaurus.org/]: https://raw.githubusercontent.com/zeke/moby/master/words.txt
-[dictionary/words]: dictionary/words
-[ripgrep]: https://github.com/BurntSushi/ripgrep
-[Gutentags]: https://github.com/ludovicchabant/vim-gutentags
-[universal-ctags]: https://github.com/universal-ctags/ctags
-[Conquer of Completion]: https://github.com/neoclide/coc.nvim
+[3 steps to make Spreadsheet Compare work with git diff]: https://www.xltrail.com/blog/git-diff-spreadsheetcompare
 [ALE]: #asynchronous-lint-engine-ale
 [Asynchronous Lint Engine]: https://github.com/dense-analysis/ale
+[Chocolatey]: https://chocolatey.org/
+[ColorTool]: https://github.com/microsoft/terminal/tree/main/src/tools/ColorTool
+[Conquer of Completion]: https://github.com/neoclide/coc.nvim
+[ElateralLtd git commit template]: https://github.com/ElateralLtd/git-commit-template
+[Gutentags]: https://github.com/ludovicchabant/vim-gutentags
+[How to fix ssl certificate problem unable to get local issuer certificate Git error]: https://komodor.com/learn/how-to-fix-ssl-certificate-problem-unable-to-get-local-issuer-certificate-git-error/
+[Kaa Mi]: https://dev.to/kaamisan/using-miniconda-with-conda-forge-to-avoid-anaconda-licensing-issues-5hkj
+[KeeAgent]: https://gist.github.com/strarsis/e533f4bca5ae158481bbe53185848d49
+[Keep Your vimrc file clean]: http://vim.wikia.com/wiki/Keep_your_vimrc_file_clean
+[Manual installation steps for older versions of WSL]: https://learn.microsoft.com/en-us/windows/wsl/install-manual
+[Miniforge]: https://docs.conda.io/projects/conda
+[Moby Thesaurus List by Grady Ward]: http://www.gutenberg.org/ebooks/3202
+[Moby-thesaurus.org/]: https://raw.githubusercontent.com/zeke/moby/master/words.txt
+[Ruslan Osipov]: http://www.rosipov.com/blog/vim-pathogen-and-git-submodules/
+[The Case for Pull Rebase]: https://megakemp.com/2019/03/20/the-case-for-pull-rebase/
+[The musings of bluz71]: https://bluz71.github.io/2017/05/15/vim-tips-tricks.html
+[Vim-win32-installer]: https://github.com/vim/vim-win32-installer/releases
+[conda-forge community]: https://conda-forge.org/
+[dictionary/words]: dictionary/words
+[dotfiles]: https://github.com/jfishe/dotfiles
+[environment.yml]: environment.yml
+[git-scm]: https://git-scm.com/
+[github: server certificate verification failed]: https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed
 [jfishe/ALE_Nodejs]: https://github.com/jfishe/ALE_Nodejs
 [nbdime]: http://nbdime.readthedocs.io/en/latest/
+[ripgrep]: https://github.com/BurntSushi/ripgrep
 [terminal.sexy]: https://terminal.sexy/
-[ColorTool]: https://github.com/microsoft/terminal/tree/main/src/tools/ColorTool
-[ElateralLtd git commit template]: https://github.com/ElateralLtd/git-commit-template
-[The Case for Pull Rebase]: https://megakemp.com/2019/03/20/the-case-for-pull-rebase/
-[3 steps to make Spreadsheet Compare work with git diff]: https://www.xltrail.com/blog/git-diff-spreadsheetcompare
-[KeeAgent]: https://gist.github.com/strarsis/e533f4bca5ae158481bbe53185848d49
+[universal-ctags]: https://github.com/universal-ctags/ctags
+[winget]: https://learn.microsoft.com/en-us/windows/package-manager/winget/

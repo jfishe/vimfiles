@@ -6,20 +6,10 @@ name: vim-python
 channels:
   - conda-forge
 dependencies:
-  # Vim
-  #   :h fzf-vim-dependencies
-  - bat
-  - git-delta
-  # - perl
-  # - ripgrep
-  # END fzf-vim-dependencies
-  - chardet
   - condax
   - nodejs
-  - pandoc [version='>=3.5']
-  - panflute [version='<2.1']
-  - pypandoc
   - python # [version='<3.12']
+  - vim
   # Uncomment if not installed elsewhere.
   # - mypy
   # - pls
@@ -31,3 +21,10 @@ dependencies:
   # uv tool install mypy
   # uv tool install pls
   # uv tool install rich-cli
+  # Vim
+  #   :h fzf-vim-dependencies
+  # uv tool install bat
+  # uv tool install git-delta
+  # uv tool install ripgrep
+  # condax install perl
+  # END fzf-vim-dependencies
