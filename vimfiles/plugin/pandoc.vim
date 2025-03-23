@@ -14,6 +14,7 @@ let g:pandoc#syntax#codeblocks#embeds#langs = [
       \ 'DOS=dosbatch'
       \ ]
 
-let g:pandoc#formatting#extra_equalprg='--atx-headers --standalone --reference-links'
+" let g:pandoc#formatting#extra_equalprg='--atx-headers --standalone --reference-links'
+let g:pandoc#formatting#extra_equalprg='--markdown-headings=atx --standalone --reference-links'
 
 let g:pandoc#syntax#conceal#urls = 1
