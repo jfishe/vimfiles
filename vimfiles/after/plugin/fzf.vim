@@ -15,9 +15,10 @@ if executable('fdfind')
   inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fdfind')
 elseif executable('fd')
   inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd')
-else
-  " imap <c-x><c-f> <plug>(fzf-complete-path)
+elseif executable('rg')
   inoremap <expr> <c-x><c-f> fzf#vim#complete#path('rg --files')
+else
+  imap <c-x><c-f> <plug>(fzf-complete-path)
 endif
 
 let &cpo = s:cpo_save
