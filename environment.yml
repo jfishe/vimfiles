@@ -23,8 +23,7 @@ dependencies:
   # uv tool install rich-cli
   # Vim
   #   :h fzf-vim-dependencies
-  # uv tool install bat
-  # uv tool install git-delta
-  # uv tool install ripgrep
-  # condax install perl
+  #   :h fzf-vim-completion-functions
+  # winget import --import-file winget.json
+  # winget export --output=winget.json
   # END fzf-vim-dependencies

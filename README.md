@@ -17,6 +17,7 @@ vim configuration files.
 
 ```powershell
 # winget export --output=winget.json
+# winget import --import-file=winget.json --no-upgrade
 winget import --import-file=winget.json
 ```
 
