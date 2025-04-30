@@ -1,6 +1,7 @@
 defaulthtml5|--to html --standalone --template=pandoc.html5 --highlight-style=breezedark --toc --css=pandoc.css
 html5grid_table|--to html --standalone --template=pandoc.html5 --highlight-style=breezedark --toc --css=pandoc.css --from=markdown+grid_tables
 printable_links|pdf --lua-filter task-list.lua --lua-filter task-orderedlist.lua --variable fontsize=12pt --variable geometry=''top=0.5in,bottom=0.5in,left=0.5in,right=0.5in'' --variable papersize=letter --variable links-as-notes --variable colorlinks --table-of-contents --number-sections --pdf-engine=xelatex --template pandoc.tex --variable documentclass=scrartcl
-expand_citations|gfm --citeproc --metadata='link-citations:true' --from=markdown+wikilinks_title_after_pipe-citations-task_lists --standalone
+expand_citations|gfm --citeproc --metadata='link-citations:true' --from=markdown+wikilinks_title_after_pipe-citations-task_lists --standalone --wrap=preserve
+expand_citeproc|gfm --citeproc --metadata='link-citations:true' --from=markdown+wikilinks_title_after_pipe-task_lists --standalone --wrap=preserve
 wikilink_md|markdown --from=markdown-task_lists+wikilinks_title_after_pipe --standalone --wrap=none
 reference_links|markdown --from=markdown --wrap=preserve --reference-links=true

@@ -131,7 +131,7 @@ augroup VimwikiTitleJournal "{{{
   " Create today's Journal and compare to previous day.
   autocmd BufNewFile */diary/[0-9]\\\{-4\}*.wiki call vimwiki#TitleJournal()
   " Use Vimwiki foldmethod when &diff.
-  if v:version < 900 && !has('nvim')
+  if !has('nvim')
     autocmd BufEnter,BufNew,BufLeave,BufWinEnter,BufWinLeave *.wiki if &diff |
           \ let &foldmethod = 'syntax' |
           \ foldopen! |
