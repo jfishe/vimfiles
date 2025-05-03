@@ -102,6 +102,7 @@ let g:zettel_options = [{}, {},
 
 let g:zettel_fzf_command = "rg --column --line-number --ignore-case --no-heading --color=always"
 let g:zettel_format = "%Y%m%d-%H%M"
+let g:zettel_date_format = "%Y-%m-%d"
 let g:zettel_generated_index_title_level = 2
 let g:zettel_backlinks_title_level = 2
 let g:zettel_unlinked_notes_title_level = 2
