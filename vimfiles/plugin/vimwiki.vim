@@ -36,7 +36,8 @@ let s:wiki_1.nested_syntaxes = {'python': 'python', 'bash': 'sh',
       \ 'vb': 'vb',
       \ 'html': 'html',
       \ 'DOS': 'dosbatch', 'ini': 'dosini',
-      \ 'powershell': 'ps1', 'snippets': 'snippets'}
+      \ 'powershell': 'ps1', 'snippets': 'snippets',
+      \ 'markdown': 'markdown'}
 let s:wiki_1.template_path = expand(s:my_docs .. '/vimwiki_html/templates')
 let s:wiki_1.template_default = 'default'
 let s:wiki_1.template_ext = '.tpl'
