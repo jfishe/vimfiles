@@ -22,6 +22,8 @@ CompilerSet errorformat=%E⛔️\ %f:%l\ %m
 CompilerSet errorformat+=%E⛔️\ %f\ %m
 
 " ⚠  0x26a0 0xfe0f is a composite character; it doesn't display in Vim.
+" ⚠️  20250519-1011.md:75:37 Could not link citation with label "FSAR-01".
+CompilerSet errorformat+=%W⚠️\ %f:%l:%c\ %m
 " ⚠️  20230929-1034.md:27 Linking "index-structure-or-hub-notes" to an implicit heading reference, best practice is to create an explicit reference.
 "    Explicit references do not break when you update the title to a section, they are preferred over using the implicit HTML ID created for headers.
 CompilerSet errorformat+=%W⚠️\ %f:%l\ %m
