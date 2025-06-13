@@ -173,7 +173,7 @@ set mouse=n
 " }}}
 " Display tabs and trailing spaces visually {{{
 if has('multi_byte')
-  if &termencoding ==? ''
+  if &termencoding ==? '' && !has('nvim')
     let &termencoding = &encoding
   endif
   set encoding=utf-8
