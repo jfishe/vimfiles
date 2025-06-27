@@ -136,7 +136,7 @@ augroup VimwikiTitleJournal "{{{
   if !has('nvim')
     autocmd BufEnter,BufNew,BufLeave,BufWinEnter,BufWinLeave *.wiki if &diff |
           \ let &foldmethod = 'syntax' |
-          \ foldopen! |
+          \ silent! foldopen! |
           \ endif
   endif
 augroup end "}}}
