@@ -15,10 +15,16 @@ let g:pandoc#syntax#codeblocks#embeds#langs = [
       \ ]
 
 " let g:pandoc#formatting#extra_equalprg='--atx-headers --standalone --reference-links'
-let g:pandoc#formatting#extra_equalprg='--markdown-headings=atx --standalone --reference-links'
-let g:pandoc#compiler#arguments = "--to=markdown "
-      \ .. "--from=markdown-header_attributes"
-      \ ..    "+wikilinks_title_after_pipe-task_lists-citations "
-      \ .. "--wrap=preserve --standalone"
+let g:pandoc#formatting#extra_equalprg='--markdown-headings=atx '
+      \ .. '--standalone --reference-links --wrap=preserve'
+
+let s:pandoc_compiler = ' --from=markdown-header_attributes'
+      \ .. '+wikilinks_title_after_pipe-task_lists'
+      \ .. ' --wrap=preserve --standalone'
+let g:pandoc#compiler#arguments = '--to=markdown' .. s:pandoc_compiler
+
+" Expand citations.
+" let g:pandoc#compiler#arguments = '--to=markdown-citations'
+"       \ .. " --citeproc --metadata='link-citations:true' " .. s:pandoc_compiler
 
 let g:pandoc#syntax#conceal#urls = 1
