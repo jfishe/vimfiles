@@ -48,6 +48,9 @@ let b:ale_enabled=0
 "}}}
 
 setlocal spell spelllang=en_us
+" Remove possiblly duplicate ctags files.
+" fzf-vim reports duplicate results with `:Tags`.
+setlocal tags-=./tags tags-=./tags; tags-=tags tags-=./TAGS tags-=TAGS
 
 " let b:pandoc_omnifunc_fallback = len(&omnifunc) ? function(&omnifunc) : ''
 " setlocal omnifunc=vimwiki#Complete_pandoc

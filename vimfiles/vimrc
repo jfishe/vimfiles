@@ -106,10 +106,6 @@ endif
 set undolevels=500
 " }}}
 
-" Required by vim-fugitive
-" Fugitive .git/tags support removed in favor of `:set tags^=./.git/tags;`
-set tags^=./.git/tags;
-
 " Cache swapfile instead of polluting project directories {{{
 if !has('nvim') && !isdirectory(s:vimfiles . '/swap')
   if has('win32') || has('win64') 
