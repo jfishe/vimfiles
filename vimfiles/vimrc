@@ -221,9 +221,11 @@ set relativenumber
 " }}}
 " ================ Completion ======================= {{{
 set completeopt+=longest
-set wildmode=list:longest
-set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
-set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
+set wildmode=noselect:lastused,full
+set wildmenu wildoptions=pum,fuzzy  "enable ctrl-n and ctrl-p to scroll thru matches
+set wildcharm=<C-Z>  "Start completion in search.
+
+set wildignore=*.o,*.obj,*~  "stuff to ignore when tab completing
 set wildignore+=*vim/backups*
 set wildignore+=*sass-cache*
 set wildignore+=*DS_Store*
@@ -232,6 +234,15 @@ set wildignore+=tmp/**
 set wildignore+=Temp/**
 set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=*.mypy_cache*
+
+if exists('*wildtrigger')
+  augroup cmdcomplete
+    autocmd!
+    autocmd CmdlineChanged : call wildtrigger()
+    autocmd CmdlineChanged / call wildtrigger()
+    autocmd CmdlineChanged ? call wildtrigger()
+  augroup END
+endif
 " }}}
 " ================ Scrolling ======================== {{{
 set scrolloff=0
