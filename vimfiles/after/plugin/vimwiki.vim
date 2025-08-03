@@ -4,6 +4,9 @@ if exists('g:loaded_vimwiki_user_after') || &compatible
 endif
 let g:loaded_vimwiki_user_after = 1
 
+" Set wn.zk as default for :ZettelOpen :ZettelInsertNote.
+silent ZettelSetActiveWiki 2
+
 " Return: list of extension known by vimwiki
 function! s:vimwiki_get_known_extensions() abort " {{{
   " Getting all extensions that different wikis could have
