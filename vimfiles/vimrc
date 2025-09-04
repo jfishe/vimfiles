@@ -221,8 +221,14 @@ set relativenumber
 " }}}
 " ================ Completion ======================= {{{
 set completeopt+=longest
-set wildmode=noselect:lastused,full
-set wildmenu wildoptions=pum,fuzzy  "enable ctrl-n and ctrl-p to scroll thru matches
+if v:version < 900
+  set completeopt+=noselect
+  set wildmode=lastused,full
+else
+  set wildmode=noselect:lastused,full
+  set wildoptions=pum,fuzzy  "enable ctrl-n and ctrl-p to scroll thru matches
+endif
+set wildmenu
 set wildcharm=<C-Z>  "Start completion in search.
 
 set wildignore=*.o,*.obj,*~  "stuff to ignore when tab completing
