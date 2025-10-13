@@ -34,6 +34,7 @@ if has('python3')
   packadd! ultisnips
   packadd! vim-pydocstring
   packadd! vim-snippets
+  packadd! latex-snippets
   packadd! vimtex
 endif
 " }}}
@@ -222,10 +223,11 @@ set relativenumber
 " ================ Completion ======================= {{{
 set completeopt+=longest
 if v:version < 900
-  set completeopt+=noselect
+  " set completeopt+=noselect
   set wildmode=lastused,full
 else
-  set wildmode=noselect:lastused,full
+  " set wildmode=noselect:lastused,full
+  set wildmode=full,lastused,longest
   set wildoptions=pum,fuzzy  "enable ctrl-n and ctrl-p to scroll thru matches
 endif
 set wildmenu
@@ -241,14 +243,14 @@ set wildignore+=Temp/**
 set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=*.mypy_cache*
 
-if exists('*wildtrigger')
-  augroup cmdcomplete
-    autocmd!
-    autocmd CmdlineChanged : call wildtrigger()
-    autocmd CmdlineChanged / call wildtrigger()
-    autocmd CmdlineChanged ? call wildtrigger()
-  augroup END
-endif
+" if exists('*wildtrigger')
+"   augroup cmdcomplete
+"     autocmd!
+"     autocmd CmdlineChanged : call wildtrigger()
+"     autocmd CmdlineChanged / call wildtrigger()
+"     autocmd CmdlineChanged ? call wildtrigger()
+"   augroup END
+" endif
 " }}}
 " ================ Scrolling ======================== {{{
 set scrolloff=0
