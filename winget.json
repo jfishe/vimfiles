@@ -10,6 +10,12 @@
 					"PackageIdentifier" : "astral-sh.uv"
 				},
 				{
+					"PackageIdentifier" : "JohnMacFarlane.Pandoc"
+				},
+				{
+					"PackageIdentifier" : "BurntSushi.ripgrep.GNU"
+				},
+				{
 					"PackageIdentifier" : "dandavison.delta"
 				},
 				{
@@ -17,9 +23,6 @@
 				},
 				{
 					"PackageIdentifier" : "Microsoft.PowerToys"
-				},
-				{
-					"PackageIdentifier" : "BurntSushi.ripgrep.MSVC"
 				},
 				{
 					"PackageIdentifier" : "CondaForge.Miniforge3"
