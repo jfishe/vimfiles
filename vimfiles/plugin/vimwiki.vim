@@ -63,6 +63,7 @@ let s:wiki_3.path = expand(s:my_docs .. '/zk')
 let s:wiki_3.path_html = expand(s:wiki_3.path .. '/docs')
 let s:wiki_3.css_name = expand('css/style.css')
 let s:wiki_3.template_path = expand(s:wiki_3.path .. '/templates')
+let s:wiki_3.exclude_files = [ '_build/**/*.md']
 " }}}
 " Initialize vimwiki {{{
 let s:wiki_1.name = 'work'
