@@ -187,6 +187,16 @@ endif
 " set background=light
 set background=dark
 
+"colorscheme solarized
+if has('termguicolors')
+  " let &t_Co = 256
+  try
+    set termguicolors
+  catch /E954: 24-bit colors are not supported on this environment: termguicolors/
+  endtry
+endif
+colorscheme solarized8
+
 if has('cursorshape')
   "Mode Settings
   " termcap-cursor-shape termcap-cursor-color
@@ -203,19 +213,16 @@ if has('cursorshape')
     let &t_SI ..= "\<Esc>[5 q" "SI = INSERT mode
     let &t_SR ..= "\<Esc>[3 q" "SR = REPLACE mode
     let &t_EI ..= "\<Esc>[0 q" "EI = NORMAL mode (ELSE)
-    let &t_ti ..= "\e[1 q"     "ti = put terminal into termcap mode
-    let &t_te ..= "\e[0 q"     "te = end of termcap mode
+    let &t_ti ..= "\<Esc>[1 q"     "ti = put terminal into termcap mode
+    let &t_te ..= "\<Esc>[0 q"     "te = end of termcap mode
+    " let &t_TI ..= &t_ti .. "\<Esc>[1 q"  "ti = put terminal into termcap mode
+    " let &t_TE ..= &t_te .. "\<Esc>[0 q"  "te = end of termcap mode
+    " let &t_ti = ""  "ti = put terminal into termcap mode
+    " let &t_te = ""  "te = end of termcap mode
   endif
 
 endif
 
-"colorscheme solarized
-" let g:solarized_extra_hi_groups=1
-" let g:solarized_use16=1
-if has('termguicolors')
-  set termguicolors
-endif
-colorscheme solarized8
 " }}}
 " ================ Jump ============================= {{{
 set relativenumber

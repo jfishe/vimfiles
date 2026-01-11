@@ -6,7 +6,6 @@ name: vim-python
 channels:
   - conda-forge
 dependencies:
-  - condax
   - nodejs
   - python # [version='<3.12']
   - vim

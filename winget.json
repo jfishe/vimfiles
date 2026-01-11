@@ -1,34 +1,43 @@
 {
 	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2025-04-11T10:50:42.337-00:00",
+	"CreationDate" : "2026-01-11T08:50:20.811-00:00",
 	"Sources" :
 	[
 		{
 			"Packages" :
 			[
 				{
-					"PackageIdentifier" : "astral-sh.uv"
+					"PackageIdentifier" : "Git.Git"
 				},
 				{
 					"PackageIdentifier" : "JohnMacFarlane.Pandoc"
 				},
 				{
-					"PackageIdentifier" : "BurntSushi.ripgrep.GNU"
+					"PackageIdentifier" : "Starship.Starship"
 				},
 				{
-					"PackageIdentifier" : "dandavison.delta"
-				},
-				{
-					"PackageIdentifier" : "Git.Git"
-				},
-				{
-					"PackageIdentifier" : "Microsoft.PowerToys"
+					"PackageIdentifier" : "BurntSushi.ripgrep.MSVC"
 				},
 				{
 					"PackageIdentifier" : "CondaForge.Miniforge3"
 				},
 				{
+					"PackageIdentifier" : "UniversalCtags.Ctags"
+				},
+				{
+					"PackageIdentifier" : "astral-sh.uv"
+				},
+				{
 					"PackageIdentifier" : "dandavison.delta"
+				},
+				{
+					"PackageIdentifier" : "eza-community.eza"
+				},
+				{
+					"PackageIdentifier" : "junegunn.fzf"
+				},
+				{
+					"PackageIdentifier" : "prefix-dev.pixi"
 				},
 				{
 					"PackageIdentifier" : "sharkdp.bat"
@@ -37,10 +46,10 @@
 					"PackageIdentifier" : "sharkdp.fd"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.WindowsTerminal"
+					"PackageIdentifier" : "Microsoft.PowerToys"
 				},
 				{
-					"PackageIdentifier" : "UniversalCtags.Ctags"
+					"PackageIdentifier" : "Microsoft.WindowsTerminal"
 				}
 			],
 			"SourceDetails" :
@@ -52,5 +61,5 @@
 			}
 		}
 	],
-	"WinGetVersion" : "1.10.340"
+	"WinGetVersion" : "1.12.350"
 }
