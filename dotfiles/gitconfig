@@ -60,8 +60,7 @@
     ; https://vimways.org/2018/vim-and-git/
     prompt = false
 [merge]
-    conflictstyle = zdiff3
-    ; tool = vimdiff3
+    conflictstyle = diff3
     tool = fugitive
 [mergetool]
 	prompt = false

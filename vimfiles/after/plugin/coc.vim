@@ -14,11 +14,14 @@ let g:coc_global_extensions = [
       \ 'coc-pyright',
       \ '@yaegassy/coc-marksman',
       \ '@yaegassy/coc-ruff',
-      \ 'coc-sh',
       \ 'coc-snippets',
       \ 'coc-vimlsp',
       \ 'coc-yaml'
       \ ]
+
+if !has('win32')
+  let g:coc_global_extensions += ['coc-sh']
+endif
 
 " Highlight with coc-vimlsp
 " Conflicts with vimwiki when markdown syntax is enabled.
