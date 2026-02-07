@@ -6,6 +6,11 @@ let g:loaded_fzf_vim_user = 1
 let s:cpo_save = &cpo
 set cpo&vim
 
+if executable('rg')
+    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
 let g:fzf_action = {
       \ 'alt-t': 'tab split',
       \ 'alt-x': 'split',
