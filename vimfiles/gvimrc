@@ -13,13 +13,13 @@ elseif has('gui_win32')
   if has('directx')
     set renderoptions=type:directx
   endif
-  set guifont+=CaskaydiaCove_Nerd_Font:h12:cDEFAULT:qDEFAULT
-  set guifont+=CaskaydiaCove_NF:h12:cDEFAULT:qDEFAULT
-  set guifont+=CaskaydiaCove_Nerd_Font_Mono:h12:cDEFAULT:qDEFAULT
-  set guifont+=CaskaydiaCove_NF_Mono:h12:cDEFAULT:qDEFAULT
-  set guifont+=Cascadia_Code:h12:cDEFAULT:qDEFAULT
-  set guifont+=Cascadia_Mono:h12:cDEFAULT:qDEFAULT
-  set guifont+=Consolas:h12:cDEFAULT:qDEFAULT
+  set guifont+=CaskaydiaCove_Nerd_Font:h10:cDEFAULT:qDEFAULT
+  set guifont+=CaskaydiaCove_NF:h10:cDEFAULT:qDEFAULT
+  set guifont+=CaskaydiaCove_Nerd_Font_Mono:h10:cDEFAULT:qDEFAULT
+  set guifont+=CaskaydiaCove_NF_Mono:h10:cDEFAULT:qDEFAULT
+  set guifont+=Cascadia_Code:h10:cDEFAULT:qDEFAULT
+  set guifont+=Cascadia_Mono:h10:cDEFAULT:qDEFAULT
+  set guifont+=Consolas:h10:cDEFAULT:qDEFAULT
 endif
 
 " set background=dark

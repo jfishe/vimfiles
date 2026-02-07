@@ -25,8 +25,21 @@ if !has('nvim') && !empty($CONDA_PREFIX) && has('python3_dynamic')
   if has('linux')
     let &pythonthreedll=expand(&pythonthreehome .. "/lib/libpython3.so")
   endif
+elseif exists('$VIMPYTHONHOME')
+  " let g:python3_host_prog=expand($VIMPYTHONHOME .. "/python3")
+  let &pythonthreedll = expand($VIMPYTHONHOME .. "/python3??.dll")
+  " let &pythonthreedll = expand("$APPDATA/uv/python/cpython-3.14.2-windows-x86_64-none/python314.dll")
+  " let &pythonthreedll = expand(&pythonthreehome .. "/python314.dll")
+  " let &pythonthreehome = expand($VIRTUAL_ENV)
+  let s:venv = [$HOME .. '\.venv', $HOME .. '\.venv\Lib\site-packages']
+  " let s:venv = [$LOCALAPPDATA .. '\vimfiles' .. '\.venv', $LOCALAPPDATA .. '\vimfiles' .. '\.venv\Lib\site-packages']
+  if !empty($PYTHONPATH)
+    let s:venv += [$PYTHONPATH]
+  endif
+  let $PYTHONPATH = join(s:venv, ';')
 endif
 if has('python3')
+  " packadd! vim-python-virtualenv
   try
     packadd! panvimwiki
     catch /E919: Directory not found in 'packpath'/
@@ -58,12 +71,10 @@ else
         \ | diffthis | wincmd p | diffthis
 endif
 
-" if has('win64')
-"     set shell=powershell
-"     set shellcmdflag=-command
-"     set shellquote=\"
-"     set shellxquote= 
-" endif
+if has('win64') && executable('pwsh')
+  " :he dos-pwsh
+  set shell=pwsh
+endif
 
 " Managed by EditorConfig
   " set fileformat=unix     "LF EOL only
