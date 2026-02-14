@@ -25,7 +25,7 @@ if !has('nvim') && !empty($CONDA_PREFIX) && has('python3_dynamic')
   if has('linux')
     let &pythonthreedll=expand(&pythonthreehome .. "/lib/libpython3.so")
   endif
-elseif exists('$VIMPYTHONHOME')
+elseif !has('nvim') && exists('$VIMPYTHONHOME')
   " let g:python3_host_prog=expand($VIMPYTHONHOME .. "/python3")
   let &pythonthreedll = expand($VIMPYTHONHOME .. "/python3??.dll")
   " let &pythonthreedll = expand("$APPDATA/uv/python/cpython-3.14.2-windows-x86_64-none/python314.dll")
@@ -71,9 +71,10 @@ else
         \ | diffthis | wincmd p | diffthis
 endif
 
-if has('win64') && executable('pwsh')
+if has('win64') && !has('nvim')
   " :he dos-pwsh
-  set shell=pwsh
+  let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
+  let &shellcmdflag = '-NoLogo -NoProfile -NonInteractive ' .. &shellcmdflag
 endif
 
 " Managed by EditorConfig
