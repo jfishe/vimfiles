@@ -73,7 +73,7 @@ endif
 
 " if has('win64') && !has('nvim')
 "   " :he dos-pwsh
-"   Not compatible with fzf.vim: https://github.com/junegunn/fzf.vim/issues/883
+"   " Not compatible with fzf.vim: https://github.com/junegunn/fzf.vim/issues/883
 "   let &shell = executable('pwsh') ? 'pwsh' : 'powershell'
 "   let &shellcmdflag = '-NoLogo -NoProfile -NonInteractive ' .. &shellcmdflag
 " endif
