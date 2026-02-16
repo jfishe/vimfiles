@@ -102,10 +102,12 @@ let g:zettel_options = [{}, {},
       \ {"front_matter" : [["tags", ""], ["type","note"]], "disable_front_matter": 1,
       \ "template" :  s:wiki_3.template_path .. "/note.tpl"}]
 
-" Zsh tries to evaluate pattern and glob, unless quoted.
-let g:zettel_wikigrep_command = 'rg -l '
-      \ .. shellescape('%pattern')
-      \ .. ' %path --glob=' .. shellescape('*%ext')
+if &shell =~# 'zsh'
+  " Zsh tries to evaluate glob, unless quoted.
+  let g:zettel_wikigrep_command = 'rg -l '
+        \ .. '%pattern'
+        \ .. ' %path --glob=' .. shellescape('*%ext')
+endif
 
 let g:zettel_fzf_command = "rg --column --line-number --smart-case --no-heading --color=always"
 let g:zettel_format = "%Y%m%d-%H%M"
