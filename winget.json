@@ -18,9 +18,9 @@
 				{
 					"PackageIdentifier" : "BurntSushi.ripgrep.MSVC"
 				},
-				{
-					"PackageIdentifier" : "CondaForge.Miniforge3"
-				},
+				// {
+				// 	"PackageIdentifier" : "CondaForge.Miniforge3"
+				// },
 				{
 					"PackageIdentifier" : "UniversalCtags.Ctags"
 				},

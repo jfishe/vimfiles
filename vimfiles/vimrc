@@ -11,28 +11,9 @@ if !has('nvim') && has('syntax') && has('eval')
 endif
 " }}}
 " ================ Python 3 ====================== {{{
-if !has('nvim') && !empty($CONDA_PREFIX) && has('python3_dynamic')
-  " Do not depend on stacked environment. Both should work:
-  " Enter-CondaEnvironment -Name vim_python &&
-  "   Enter-CondaEnvironment -Stack -Name venv
-  " Enter-CondaEnvironment -Name vim_python
-  let s:conda_env = '/miniforge3/envs/vim-python'
-  if isdirectory(expand("$LOCALAPPDATA" .. s:conda_env))
-    let &pythonthreehome = expand("$LOCALAPPDATA" .. s:conda_env)
-  elseif isdirectory(expand("$HOME" .. s:conda_env))
-    let &pythonthreehome = expand("$HOME" .. s:conda_env)
-  endif
-  if has('linux')
-    let &pythonthreedll=expand(&pythonthreehome .. "/lib/libpython3.so")
-  endif
-elseif !has('nvim') && exists('$VIMPYTHONHOME')
-  " let g:python3_host_prog=expand($VIMPYTHONHOME .. "/python3")
+if !has('nvim') && exists('$VIMPYTHONHOME')
   let &pythonthreedll = expand($VIMPYTHONHOME .. "/python3??.dll")
-  " let &pythonthreedll = expand("$APPDATA/uv/python/cpython-3.14.2-windows-x86_64-none/python314.dll")
-  " let &pythonthreedll = expand(&pythonthreehome .. "/python314.dll")
-  " let &pythonthreehome = expand($VIRTUAL_ENV)
-  let s:venv = [$HOME .. '\.venv', $HOME .. '\.venv\Lib\site-packages']
-  " let s:venv = [$LOCALAPPDATA .. '\vimfiles' .. '\.venv', $LOCALAPPDATA .. '\vimfiles' .. '\.venv\Lib\site-packages']
+  let s:venv = [$LOCALAPPDATA .. '\vimfiles' .. '\.venv', $LOCALAPPDATA .. '\vimfiles' .. '\.venv\Lib\site-packages']
   if !empty($PYTHONPATH)
     let s:venv += [$PYTHONPATH]
   endif
