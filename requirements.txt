@@ -1,3 +1,0 @@
-# uv pip install --requirement requirements.txt
-ansicolor
-panvimwiki
