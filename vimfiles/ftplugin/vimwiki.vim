@@ -6,6 +6,7 @@ let b:did_ftplugin_user = 1  " Don't load another plugin for this buffer
 let s:save_cpo = &cpo
 set cpo&vim
 
+" Taskwarrior Taskwiki TASKRC TASKDATA {{{1
 let b:undo_taskwiki_taskrc_location = get(g:, 'taskwiki_taskrc_location', '')
 let b:undo_taskwiki_data_location  = get(g:, 'taskwiki_data_location', '')
 
@@ -18,7 +19,7 @@ let g:taskwiki_data_location = vimwiki#path#path_norm(
   \ vimwiki#vars#get_wikilocal('path'), '.task'
   \ ))
 
-function s:undo_set_var_taskwiki() abort " {{{
+function s:undo_set_var_taskwiki() abort " {{{2
   if !empty(b:undo_taskwiki_taskrc_location)
     let g:taskwiki_taskrc_location = b:undo_taskwiki_taskrc_location
   else
@@ -39,6 +40,11 @@ endif
 let b:undo_ftplugin ..= 'call '..string(function('<SID>undo_set_var_taskwiki'))..'()'
       \ .. " | unlet b:did_ftplugin_user"
       \ .. " | mapclear <buffer>"
+" }}}
+
+" Commands {{{
+command! -buffer VimwikiRemoveTaskwiki call vimwiki#RemoveTaskwikiViewport()
+" }}}
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

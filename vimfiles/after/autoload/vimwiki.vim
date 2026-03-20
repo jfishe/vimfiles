@@ -194,4 +194,15 @@ function! vimwiki#TitleJournal() abort " {{{
   endif
 
 endfunction "}}}
+
+function! vimwiki#RemoveTaskwikiViewport() abort " {{{
+  " Save cursor position
+  let l:save = winsaveview()
+  " Remove | taskwiki viewport
+  %substitute/^\(=[^|]*\)|[^=]*\(=*\)$/\1\2/e
+    %s/\s\+$//e
+  " Move cursor to original position
+  call winrestview(l:save)
+endfunction " }}}
+
 " vim:tabstop=2:shiftwidth=2:expandtab:foldmethod=marker:textwidth=79
