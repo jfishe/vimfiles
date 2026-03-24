@@ -19,16 +19,15 @@ vim configuration files.
 # winget export --output=winget.json
 # winget import --import-file=winget.json --no-upgrade
 winget import --import-file=winget.json
+
+# powershell -ExecutionPolicy Bypass
+# Invoke-RestMethod -UseBasicParsing https://pixi.sh/install.ps1 | Invoke-Expression
+
+pixi global install nodejs starship
 ```
 
 [Manual installation steps for older versions of WSL] provides the steps
 automated by `wsl install`.
-
-```powershell
-dism.exe /online /enable-feature `
-  /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-# wsl --install -d Ubuntu --web-download
-```
 
 ### SSL Error
 
@@ -60,16 +59,13 @@ environments.
 [Chocolatey]: `choco install vim`.
 
 - Download the selected zip file and adjust the paths as needed.
-- Not needed for recent versions of Vim 9. If needed, update the python version
-  specification in [environment.yml] to match linked version in:
-  `vim --version | grep python --color`
 
 ```powershell
 $DestinationPath = Get-Item -Path "$env:LOCALAPPDATA\Programs"
 $Path = Get-ChildItem -Path ~\Downloads\gvim_9.*_x64_signed.zip
 
-Move-Item -Path "$DestinationPath\Vim\vim91" `
-  -Destination "$DestinationPath\Vim\vim91.old" `
+Move-Item -Path "$DestinationPath\Vim\vim92" `
+  -Destination "$DestinationPath\Vim\vim92.old" `
   -ErrorAction SilentlyContinue
 ```
 
@@ -83,14 +79,13 @@ vim --version | grep python --color
 ```
 
 ```powershell
-Remove-Item -Path "$DestinationPath\Vim\vim91.old" -Recurse -Force
+Remove-Item -Path "$DestinationPath\Vim\vim92.old" -Recurse -Force
 ```
 
-If they don't already exist, create the batch files using the installer. They
-are needed to activate the vim-python conda environment, prior to starting Vim.
+If they don't already exist, create the batch files using the installer.
 
 ```powershell
-& $(Get-Item -Path "$DestinationPath\Vim\vim91\install.exe")
+& $(Get-Item -Path "$DestinationPath\Vim\vim92\install.exe")
 ```
 
 ### `vimfiles` installation
@@ -194,47 +189,6 @@ Windows, with `start!`.
     cmd /c "mklink /J %USERPROFILE%\Documents <Target>"
     ```
 
-## Conda
-
-[Kaa Mi]. Posted on 2024-06-19. _Using Miniforge with Conda-Forge to Avoid
-Anaconda Licensing Issues_. The [conda-forge community] maintains [Miniforge]
-that comes configured for use with the conda-forge channel.
-
-1. Download and Install [Miniforge].
-2. Initialize Conda with `conda init`.
-3. Add Conda-Forge as the Default Channel.
-
-   ```powershell
-   # Install with Winget.
-   winget install CondaForge.Miniforge3 --exact
-
-   # Download from Github releases.
-   $Uri = 'https://github.com/conda-forge/miniforge/releases/latest/download'
-   $Exe = 'Miniforge3-Windows-x86_64.exe'
-   Invoke-WebRequest -Uri "$Uri/$Exe" -OutFile "~\Downloads\$Exe"
-
-   # Default configuration for Miniforge.
-   conda config --remove channels defaults
-   conda config --add channels conda-forge
-   conda config --set channel_priority strict
-   ```
-
-4. Create a New Environment. [environment.yml] lists the conda and pip packages
-   needed for the Vim configuration.
-
-   ```powershell
-   conda env create -f environment.yml
-   conda activate vim-python
-   conda config --show channels
-   ```
-
-5. Periodically update the base and vim-python environments.
-
-   ```powershell
-   conda update -n base conda
-   conda update -n vim-python --all
-   ```
-
 ## Thesaurus
 
 Setup instructions are included in vimrc to install the [Moby Thesaurus List by
@@ -275,7 +229,7 @@ disabling when `node.js` is unavailable.
 The [Asynchronous Lint Engine] supports various linting (ALELint) and
 formatting (ALEFix) tools. Many of these are `node.js` packages. See
 [jfishe/ALE_Nodejs] for a list and installation instructions. Others can be
-installed by `conda` or `uv pip`. See [environment.yml] for a list.
+installed by `pixi` or `uv pip`.
 
 ## Jupyter Notebook
 
@@ -427,7 +381,6 @@ git push
 [conda-forge community]: https://conda-forge.org/
 [dictionary/words]: dictionary/words
 [dotfiles]: https://github.com/jfishe/dotfiles
-[environment.yml]: environment.yml
 [git-scm]: https://git-scm.com/
 [github: server certificate verification failed]: https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed
 [jfishe/ALE_Nodejs]: https://github.com/jfishe/ALE_Nodejs
