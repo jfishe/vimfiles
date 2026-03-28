@@ -18,7 +18,7 @@
   "powershell.scriptAnalysis.enable": true,
   "powershell.integratedConsole.showOnStartup": false,
   "powershell.codeFormatting.preset": "OTBS",
-  // "powershell.powerShellExePath": "pwsh",
+  "powershell.powerShellExePath": "pwsh",
   // Ruff
   "ruff.nativeServer": true,
   "ruff.client.codeAction.showDocumantaion.enable": true,

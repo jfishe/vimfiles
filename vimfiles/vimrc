@@ -12,7 +12,7 @@ endif
 " }}}
 " ================ Python 3 ====================== {{{
 if !has('nvim') && exists('$VIMPYTHONHOME')
-  let &pythonthreedll = expand($VIMPYTHONHOME .. "/python3??.dll")
+  let &pythonthreedll = expand(escape($VIMPYTHONHOME, ' \') .. "/python3??.dll")
   let s:venv = [$LOCALAPPDATA .. '\vimfiles\vimfiles' .. '\.venv',
         \ $LOCALAPPDATA .. '\vimfiles\vimfiles' .. '\.venv\Lib\site-packages']
   if !empty($PYTHONPATH)

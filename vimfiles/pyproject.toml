@@ -1,7 +1,7 @@
 [project]
 name = "vimfiles"
 version = "0.1.0"
-requires-python = "==3.13.*"
+requires-python = ">=3.13"
 dependencies = [
     "mdformat-pyproject>=0.1.1",
     "mdformat-ruff>=0.1.3",
