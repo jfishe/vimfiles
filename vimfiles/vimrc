@@ -1,4 +1,9 @@
-" ================ packadd! ====================== {{{
+" ================ PATH Separator ================ {{{
+let s:is_windows = has('win32') || has('win64')
+let s:path_separator = s:is_windows ? ';' : ':'
+" let $PATH = join(['C:\bin', 'C:\tools'], s:path_separator)
+" }}}
+" ================ packadd! ====================== {{{1
 " defaults.vim invokes `filetype plugin indent on` after packadd! lines.
 
 " The matchit plugin {{{
@@ -11,17 +16,40 @@ if !has('nvim') && has('syntax') && has('eval')
 endif
 " }}}
 " ================ Python 3 ====================== {{{
-if !has('nvim') && exists('$VIMPYTHONHOME')
-  let &pythonthreedll = expand(escape($VIMPYTHONHOME, ' \') .. "/python3??.dll")
-  let s:venv = [$LOCALAPPDATA .. '\vimfiles\vimfiles' .. '\.venv',
-        \ $LOCALAPPDATA .. '\vimfiles\vimfiles' .. '\.venv\Lib\site-packages']
+if !has('nvim')
+  if s:is_windows
+    let s:pythonpath = '$HOME/vimfiles'
+    let s:venv = ['', '/.venv', '/.venv/Lib/site-packages']
+  elseif has('linux')
+    " System vim is typically linked to a particular python version.
+    " Use the same version or modify PYTHONPATH as needed,
+    " to locate dist-packages.
+    " uv venv --system-site-packages --python-preference=system
+    let s:pythonpath = '$HOME/.vim'
+    let s:venv = ['', '/.venv', '/.venv/lib/python3.??/site-packages']
+  endif
+  call map(s:venv, {i, v -> expand(s:pythonpath .. v)})
+  if s:is_windows && has('python3_dynamic')
+    function! s:ExtractHomeFromPyvenv(cfg_path)
+      if !filereadable(a:cfg_path)
+        return ''
+      endif
+      for line in readfile(a:cfg_path)
+        if line =~ '^home\s*='
+          return matchstr(line, '=\s*\zs.*')
+        endif
+      endfor
+      return ''
+    endfunction
+    let s:pythonpath = s:ExtractHomeFromPyvenv(expand(s:venv[1] .. '/pyvenv.cfg'))
+    let &pythonthreedll = expand(s:pythonpath .. '/python3??.dll')
+  endif
   if !empty($PYTHONPATH)
     let s:venv += [$PYTHONPATH]
   endif
-  let $PYTHONPATH = join(s:venv, ';')
+  let $PYTHONPATH = join(s:venv, s:path_separator)
 endif
 if has('python3')
-  " packadd! vim-python-virtualenv
   try
     packadd! panvimwiki
     catch /E919: Directory not found in 'packpath'/
@@ -33,7 +61,7 @@ if has('python3')
   packadd! vimtex
 endif
 " }}}
-" ================ Taskwarrior ====================== {{{
+" ================ Taskwarrior =================== {{{
 if executable('task')
   packadd! tagbar
   packadd! taskwiki
@@ -41,7 +69,7 @@ if executable('task')
   packadd! vim-taskwarrior
 endif
 " }}}
-" }}}
+" 1}}}
 
 " ================ Windows & Defaults ================== {{{
 " Get the defaults that most users want.
@@ -85,7 +113,7 @@ let s:vimfiles=fnamemodify(expand('$MYVIMRC'), ':p:h')
 
 " Based on https://begriffs.com/posts/2019-07-19-history-use-vim.html
 if !has('nvim') && has('persistent_undo') && !isdirectory(s:vimfiles . '/undo')
-  if has('win32') || has('win64') 
+  if s:is_windows
     silent exe '!mkdir ' . s:vimfiles . '\undo'
   else
     silent exe '!mkdir ' . s:vimfiles . '/undo'
@@ -104,7 +132,7 @@ set undolevels=500
 
 " Cache swapfile instead of polluting project directories {{{
 if !has('nvim') && !isdirectory(s:vimfiles . '/swap')
-  if has('win32') || has('win64') 
+  if s:is_windows
     silent exe '!mkdir ' . s:vimfiles . '\swap'
   else
     silent exe '!mkdir ' . s:vimfiles . '/swap'
@@ -122,7 +150,7 @@ if isdirectory(s:vimfiles . '/thesaurus')
   let &thesaurus = s:vimfiles . '/thesaurus/mthesaur.txt'
 endif
 
-if has('win32') || has('win64')
+if s:is_windows
   let s:dictionary = s:vimfiles . '/dictionary/words'
   if filereadable(s:dictionary)
     let &dictionary = s:dictionary . ',' . &dictionary
