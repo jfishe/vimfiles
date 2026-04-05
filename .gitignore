@@ -16,3 +16,4 @@ tags
 .jupyter/migrated
 .jupyter/.mypy_cache
 .jupyter/lab/
+uv.lock
