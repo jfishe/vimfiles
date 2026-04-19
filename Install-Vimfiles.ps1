@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 3.0
+.VERSION 4.0
 
 .GUID e7b6d3ed-1459-4dee-9dcf-675756b14510
 
@@ -9,7 +9,7 @@
 
 .COMPANYNAME
 
-.COPYRIGHT 2023 John D. Fisher
+.COPYRIGHT 2026 John D. Fisher
 
 .TAGS
 
@@ -43,11 +43,8 @@
     Symlink dotfiles and vimfiles to LinkPath. Use Junction and Hardlink if
     SeCreateSymbolicLink permission denied.
 
-    Copy Ubuntu wamerican dictionary and Moby-thesaurus to the locations
-    specified in the vimrc.
-
-    Create/update compatible conda environment for Vim and modify Vim batch
-    files to activate the conda environment.
+    Copy WSL dictionary (assumes one installed)
+    and Moby-thesaurus to the locations specified in the vimrc.
 
     Create Start Menu shortcuts for Vim batch files.
 .EXAMPLE
@@ -76,11 +73,11 @@ Param(
     [switch]
     $Clone
     ,
-    # Create/update Ubuntu wamerican dictionary.
+    # Create/update WSL dictionary.
     [Parameter(
         Mandatory = $true,
         ParameterSetName = 'Dictionary',
-        HelpMessage = 'Create/update Ubuntu wamerican dictionary.'
+        HelpMessage = 'Create/update WSL dictionary.'
     )]
     [switch]
     $Dictionary
@@ -93,16 +90,6 @@ Param(
     )]
     [switch]
     $Thesaurus
-    ,
-    # Create/update conda environment for Vim (vim-python).
-    # Copy Vim batch files to UserAppDir.
-    [Parameter(
-        Mandatory = $true,
-        ParameterSetName = 'Conda',
-        HelpMessage = 'Create/update conda environment for Vim (vim-python).'
-    )]
-    [switch]
-    $Conda
     ,
     # Create Start Menu folder and shortcuts for Vim batch files.
     # Create shortcut for default WSL gvim.
@@ -123,7 +110,6 @@ Param(
     [Parameter(ParameterSetName = 'Link')]
     [Parameter(ParameterSetName = 'Dictionary')]
     [Parameter(ParameterSetName = 'Thesaurus')]
-    [Parameter(ParameterSetName = 'Conda')]
     [Alias("PSPath")]
     [ValidateNotNullOrEmpty()]
     [string]
@@ -157,27 +143,15 @@ Param(
     [string]
     $LinkPath = "$HOME"
     ,
-    # Path to directory to copy user modified Vim batch files
-    # to activate conda environment vim-python.
+    # Path to directory to copy user modified Vim batch files.
     # The directory should be in $Env:PATH.
     [Parameter(
         Mandatory = $false,
-        ParameterSetName = 'Conda',
+        ParameterSetName = 'Shortcut',
         HelpMessage = 'Path to directory to copy user modified Vim batch files.'
     )]
-    [Parameter(ParameterSetName = 'Shortcut')]
     [string]
     $UserAppDir = "$env:LOCALAPPDATA\Microsoft\WindowsApps"
-    ,
-    # Path to directory where Vim installer placed batch files.
-    # Not used if UserAppDir already contains Vim batch files.
-    [Parameter(
-        Mandatory = $false,
-        ParameterSetName = 'Conda',
-        HelpMessage = 'Path to directory where Vim installer placed batch files.'
-    )]
-    [string]
-    $GlobalAppDir = "$env:WINDIR"
     ,
     # Path to Vim icon file, e.g., gvim.exe.
     [Parameter(
@@ -364,7 +338,6 @@ if ($Link) {
 if ($Dictionary) {
     # Assume WSL defaults to Ubuntu.
     $WslDictionary = '/usr/share/dict/words'
-    wsl --exec bash -c "sudo apt-get update && sudo apt-get install wamerican-huge"
     $Words = wsl --exec bash -c "wslpath -w ``realpath $WslDictionary``"
     $OutFile = "$Path\vimfiles\dictionary\words"
     New-Item -Path (Split-Path $OutFile) -ItemType Directory -ErrorAction SilentlyContinue
@@ -376,55 +349,6 @@ if ($Thesaurus) {
     $OutFile = "$Path\vimfiles\thesaurus\mthesaur.txt"
     New-Item -Path (Split-Path $OutFile) -ItemType Directory -ErrorAction SilentlyContinue
     Invoke-WebRequest -Uri $Uri -OutFile $OutFile
-}
-
-if ($Conda) {
-    # Install Miniconda3 if needed.
-    try {
-        Get-Command Invoke-Conda -ErrorAction Stop
-    } catch [System.Management.Automation.CommandNotFoundException] {
-        $_ | Out-String | Write-Verbose
-        $webrequestParams = @{
-            Uri     = 'https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe'
-            OutFile = "$HOME\Downdloads\Miniconda3-latest-Windows-x86_64.exe"
-        }
-        Invoke-WebRequest @webrequestParams
-        & "$($webrequestParams.OutFile)"
-
-        # Miniconda3 may install in different locations.
-        "$env:LOCALAPPDATA", "$env:USERPROFILE" | ForEach-Object -Process {
-            if (Test-Path ($condaexe = Join-Path $_ "miniconda3\Scripts\conda.exe") -PathType Leaf) {
-                break
-            }
-        }
-        (& "$condaexe" "shell.powershell" "hook") | Out-String | ? {$_} | Invoke-Expression
-    } finally {
-        Get-Command Invoke-Conda -ErrorAction Stop | Out-String | Write-Verbose
-    }
-
-    # Create or update conda env vim-python.
-    Push-Location "$Path"
-    Get-Item .\environment.yml -ErrorAction Stop | Out-String | Write-Verbose
-    if (Invoke-Conda env list | Select-String -Pattern 'vim-python' -CaseSensitive) {
-        Invoke-Conda env update --file environment.yml
-    } else {
-        Invoke-Conda env create --file environment.yml
-    }
-    Pop-Location
-
-    # Copy Vim batch files to userappdir.
-    $UserAppDir = Get-Item "$UserAppDir"
-    $GlobalAppDir = Get-Item "$GlobalAppDir"
-
-    $UserVimCmd = Join-Path $UserAppDir '*vim*' | Get-ChildItem
-    $GlobalVimCmd = Join-Path $GlobalAppDir '*vim*' | Get-ChildItem
-
-    if (-not $UserVimCmd -and $GlobalVimCmd) {
-        $GlobalVimCmd | Copy-Item -Destination $UserAppDir
-    }
-
-    Write-Verbose 'reg add "HKCU\Software\Microsoft\Command Processor" /v AutoRun /t REG_EXPAND_SZ /d "%"USERPROFILE"%\.init.cmd" /f'
-    cmd /c 'reg add "HKCU\Software\Microsoft\Command Processor" /v AutoRun /t REG_EXPAND_SZ /d "%"USERPROFILE"%\.init.cmd" /f'
 }
 
 if ($Shortcut) {
