@@ -19,7 +19,24 @@ vim configuration files.
 # winget export --output=winget.json
 # winget import --import-file=winget.json --no-upgrade
 winget import --import-file=winget.json
+```
 
+[Git for Windows silent or unattended installation]
+allows changes from the default options,
+supported by `winget import`.
+
+```powershell
+winget install --exact Git.Git --source winget --scope user `
+  --location "$env:LOCALAPPDATA\Programs\Git" `
+  --custom /LOADINF="$(Resolve-Path git_options.ini)" `
+  --interactive
+```
+
+[Pixi] supports [conda-forge] packages
+without activating an environment,
+like [Miniforge].
+
+```powershell
 # powershell -ExecutionPolicy Bypass
 # Invoke-RestMethod -UseBasicParsing https://pixi.sh/install.ps1 | Invoke-Expression
 
@@ -160,7 +177,6 @@ Windows, with `start!`.
 
   If the `%USERPROFILE%\Documents` does not exit, either create it, or create a
   link to the Windows Documents folder.
-
   - To locate the Windows Documents folder in `cmd.exe`:
 
     ```dos
@@ -367,7 +383,6 @@ git push
 [ElateralLtd git commit template]: https://github.com/ElateralLtd/git-commit-template
 [Gutentags]: https://github.com/ludovicchabant/vim-gutentags
 [How to fix ssl certificate problem unable to get local issuer certificate Git error]: https://komodor.com/learn/how-to-fix-ssl-certificate-problem-unable-to-get-local-issuer-certificate-git-error/
-[Kaa Mi]: https://dev.to/kaamisan/using-miniconda-with-conda-forge-to-avoid-anaconda-licensing-issues-5hkj
 [KeeAgent]: https://gist.github.com/strarsis/e533f4bca5ae158481bbe53185848d49
 [Keep Your vimrc file clean]: http://vim.wikia.com/wiki/Keep_your_vimrc_file_clean
 [Manual installation steps for older versions of WSL]: https://learn.microsoft.com/en-us/windows/wsl/install-manual
@@ -378,7 +393,6 @@ git push
 [The Case for Pull Rebase]: https://megakemp.com/2019/03/20/the-case-for-pull-rebase/
 [The musings of bluz71]: https://bluz71.github.io/2017/05/15/vim-tips-tricks.html
 [Vim-win32-installer]: https://github.com/vim/vim-win32-installer/releases
-[conda-forge community]: https://conda-forge.org/
 [dictionary/words]: dictionary/words
 [dotfiles]: https://github.com/jfishe/dotfiles
 [git-scm]: https://git-scm.com/
@@ -389,3 +403,6 @@ git push
 [terminal.sexy]: https://terminal.sexy/
 [universal-ctags]: https://github.com/universal-ctags/ctags
 [winget]: https://learn.microsoft.com/en-us/windows/package-manager/winget/
+[git for windows silent or unattended installation]: https://gitforwindows.org/silent-or-unattended-installation.html
+[pixi]: https://pixi.prefix.dev/latest/
+[conda-forge]: https://conda-forge.org/

@@ -6,9 +6,9 @@
 		{
 			"Packages" :
 			[
-				{
-					"PackageIdentifier" : "Git.Git"
-				},
+				// {
+				// 	"PackageIdentifier" : "Git.Git"
+				// },
 				{
 					"PackageIdentifier" : "JohnMacFarlane.Pandoc"
 				},
