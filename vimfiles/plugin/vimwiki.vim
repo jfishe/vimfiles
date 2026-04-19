@@ -5,23 +5,53 @@ endif
 let g:loaded_vimwiki_user = 1
 
 " Locate Documents folder or user home directory {{{
-if has('win32') || has('win64')
-  let s:my_docs = $USERPROFILE . '/Documents'
-else
-  let s:my_docs = $HOME
-endif "}}}
+let s:is_windows = has('win32') || has('win64')
+
+" Returns the Windows Documents folder (OneDrive-aware)
+function! s:GetWindowsDocumentsPath() abort
+  if !s:is_windows
+    return $HOME
+  endif
+
+  " Detect shell type
+  let l:shell = &shell
+
+  if l:shell =~? 'pwsh\|powershell'
+    let l:cmd =
+          \ '[Environment]::GetFolderPath(' ..
+          \ '[Environment+SpecialFolder]::MyDocuments)'
+    let l:out = system(l:shell .
+          \ ' -NoProfile -NonInteractive -Command ' ..
+          \ shellescape(l:cmd))
+
+  else
+    " cmd.exe fallback (use powershell explicitly)
+    let l:cmd =
+          \ '[Environment]::GetFolderPath(' ..
+          \ '[Environment+SpecialFolder]::MyDocuments)'
+    let l:out = system(
+          \ 'powershell -NoProfile -NonInteractive -Command ' ..
+          \ shellescape(l:cmd))
+  endif
+
+  return substitute(l:out, '\r\?\n$', '', '')
+endfunction
+
+let s:my_docs = s:GetWindowsDocumentsPath()
+"}}}
 
 " Define g:vimwiki_list {{{
 " let g:vimwiki_ext2syntax = {
 "   \ '.md': 'markdown',
-" 	\ '.mkd': 'markdown',
+"   \ '.mkd': 'markdown',
 "   \ '.wiki': 'media'}
-" Disable default function
-" let g:vimwiki_ext2syntax =
-" \ {'.md': 'markdown', '.mkdn': 'markdown',
-" \  '.mdwn': 'markdown', '.mdown': 'markdown',
-" \  '.markdown': 'markdown', '.mw': 'media'}},
+" " Disable default function
+" let g:vimwiki_ext2syntax = {
+"   \ '.md': 'markdown', '.mkdn': 'markdown',
+"   \  '.mdwn': 'markdown', '.mdown': 'markdown',
+"   \  '.markdown': 'markdown', '.mw': 'media'}
 " let g:vimwiki_ext2syntax = {}
+"}}}
 
 " Work vimwiki {{{
 let s:wiki_1 = {}
@@ -37,7 +67,8 @@ let s:wiki_1.nested_syntaxes = {'python': 'python', 'bash': 'sh',
       \ 'html': 'html',
       \ 'DOS': 'dosbatch', 'ini': 'dosini',
       \ 'powershell': 'ps1', 'snippets': 'snippets',
-      \ 'markdown': 'markdown'}
+      \ 'markdown': 'pandoc',
+      \ 'yaml': 'yaml'}
 let s:wiki_1.template_path = expand(s:my_docs .. '/vimwiki_html/templates')
 let s:wiki_1.template_default = 'default'
 let s:wiki_1.template_ext = '.tpl'
@@ -207,7 +238,7 @@ function! VimwikiLinkHandler(link) abort " {{{
     let abs_dir = matchstr(link, '^file:\zs.*')
   endif
   if islink == 1
-    if has('win64') || has('win32')
+    if s:is_windows
       execute "!start " . substitute(abs_dir,"/","\\\\",'g')
     elseif executable('wslview')
       execute system('wslview '..shellescape(link))
