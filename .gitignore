@@ -1,3 +1,6 @@
+### UltiSnips ###
+UltiSnips_private/
+
 ### Vim ###
 vimfiles/gutentags/
 vimfiles/swap/
