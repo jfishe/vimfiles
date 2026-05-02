@@ -11,6 +11,19 @@ let s:path_separator = s:is_windows ? ';' : ':'
 " compatible.
 " The ! means the package won't be loaded right away but when plugins are
 " loaded during initialization.
+
+" vim-plug plugins
+if executable('copilot')
+  let s:vimfiles_dir = split(&runtimepath, ',')[0]
+  call plug#begin(expand(s:vimfiles_dir .. '/plugged'))
+  let g:copilot_no_maps = v:true
+  let g:copilot_filetypes = {
+        \ 'vimwiki': v:false,
+        \ }
+  Plug 'github/copilot.vim'
+  call plug#end()
+endif
+
 if !has('nvim') && has('syntax') && has('eval')
   packadd! matchit
 endif
@@ -29,6 +42,14 @@ if !has('nvim')
     let s:venv = ['', '/.venv', '/.venv/lib/python3.??/site-packages']
   endif
   call map(s:venv, {i, v -> expand(s:pythonpath .. v)})
+  if !empty($PIXI_IN_SHELL)
+     " If PIXI_IN_SHELL is set, then we are in a pixi shell and should add
+     " the dist-packages path for the system python.
+     " This is needed for plugins that use the system python, such as
+     " taskwiki.
+     let s:venv += [expand('/usr/local/lib/python3.??/dist-packages')]
+     let s:venv += ['/usr/lib/python3/dist-packages']
+  endif
   if s:is_windows && has('python3_dynamic')
     function! s:ExtractHomeFromPyvenv(cfg_path)
       if !filereadable(a:cfg_path)

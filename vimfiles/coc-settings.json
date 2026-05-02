@@ -1,5 +1,6 @@
 {
   // CoC
+  "suggest.noselect": true,
   // Python
   "python.linting.ruffEnabled": true,
   "python.linting.mypyEnabled": true,

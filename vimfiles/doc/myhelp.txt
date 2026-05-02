@@ -25,6 +25,7 @@ CONTENTS							      *myhelp*
 							      |myhelp-coc-fix|
 							 |myhelp-coc-refactor|
 							     |myhelp-coc-list|
+							   |myhelp-copilot|
   8. Miscellaneous Functions					 |myhelp-misc|
   9. FZF Vim Integration					  |myhelp-fzf|
 
@@ -82,6 +83,7 @@ Command		Meaning ~
 <C-x><C-f>	Fzf complete file/path
 <C-x><C-k>	Fzf complete word
 <C-x><C-L>	Complete line (!!) |ins-completion|
+<C-L>		Accept GitHub Copilot inline suggestion.
 CTRL-K {char1} {char2}
 		Insert digraphs. |i_CTRL-K| |digraphs-use| |digraph-table|
 CTRL-QU{hexidecimal}
@@ -205,9 +207,12 @@ VimwikiRemoveTaskwiki		Remove |:taskwiki| Viewports from |vimwiki-syntax-headers
 
 Command		Meaning ~
 ------------------------------------------------------------------------------
-<TAB>		Trigger completion.  |n_coc-range-select| |v_coc-range-select|
-		Select next selection range.
-<cr>		Confirm completion.
+<TAB>		Trigger/navigate CoC popup completion.
+<cr>		Confirm selected CoC completion.
+
+							   *myhelp-copilot*
+<C-L>		|copilot#Accept()| Accept GitHub Copilot inline suggestion.
+		Copilot does not own <Tab>; CoC keeps popup completion keys.
 
 						       *myhelp-coc-diagnostic*
 [g		|n_coc-diagnostic-prev|
