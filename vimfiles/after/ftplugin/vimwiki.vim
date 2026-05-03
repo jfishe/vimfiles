@@ -7,6 +7,14 @@ let b:did_ftplugin_user_after = 1  " Don't load another plugin for this buffer
 let s:save_cpo = &cpo
 set cpo&vim
 
+if exists('b:taskwiki_temp_wiki_disable')
+  if empty(b:taskwiki_temp_wiki_disable)
+    unlet! g:taskwiki_disable
+  else
+    let g:taskwiki_disable = b:taskwiki_temp_wiki_disable
+  endif
+endif
+
 if exists(':UltiSnipsAddFiletypes') == 2 && vimwiki#vars#get_wikilocal('syntax') ==# 'markdown'
   UltiSnipsAddFiletypes markdown.vimwiki
 endif

@@ -180,7 +180,7 @@ augroup VimwikiTitleJournal "{{{
   endif
 augroup end "}}}
 
-" Disable Taskwiki when Diff and Fugitive buffers exist. {{{
+" Disable Taskwiki when Fugitive buffers exist. {{{
 function! s:disable_taskwiki() abort
   " Remember taskwiki_disable value
   let l:disable_status = [
@@ -222,7 +222,7 @@ augroup myTaskwiki
   autocmd!
   " Taskwiki causes vim-Fugitive to write the Git index path to disk:
   "   fugitive://*/.git/*//
-  " So disable when fugitive buffer exists.
+  " So disable when a fugitive buffer exists.
   autocmd BufEnter,BufWinEnter,BufNew * call s:disable_taskwiki()
 augroup END " }}}
 
