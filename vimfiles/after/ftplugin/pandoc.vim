@@ -1,11 +1,3 @@
-let b:commentary_format = '<!-- %s -->'
-
-let b:ale_fixers = {
-\   'markdown': [
-\       'prettier'
-\   ],
-\}
-
 if pandoc#zk_makefile_settings()
   let b:undo_ftplugin = get(b:, 'undo_ftplugin', '')
   if !empty(b:undo_ftplugin)

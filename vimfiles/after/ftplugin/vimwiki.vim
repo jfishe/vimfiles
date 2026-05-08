@@ -109,6 +109,8 @@ nnoremap <silent><buffer> <leader>m :call fzf#run({
       \ 'up': '40%',
       \ 'options': '--ansi --layout=reverse-list --multi --prompt "Markdown> "'})<CR>
 
+call pandoc#zk_makefile_settings()
+
 let b:undo_ftplugin = get(b:, 'undo_ftplugin', '')
 if ! empty(b:undo_ftplugin)
   let b:undo_ftplugin ..= " | "
@@ -117,6 +119,7 @@ let b:undo_ftplugin ..= "delcommand VWS"
       \ .. " | delcommand VWT"
       \ .. " | unlet b:did_ftplugin_user_after b:ale_enabled"
       \ .. ' | mapclear <buffer>'
+      \ .. " | setlocal makeprg< errorformat<"
       \ .. " | setlocal spell< spelllang<"
       \ .. " | autocmd! myvimwiki"
 
