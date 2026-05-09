@@ -196,11 +196,15 @@ v$,m		Convert selected e-mail addresses in Visual
 		selection into valid URI in |vimwiki-syntax-links|. Addresses
 		should be comma separated or semi-colon separated, if they
 		contain commas.
-%s/\[\[diary\//\[\[..\/diary\//
-		|:VimwikiGenerateTags| diary path correction so that links
-		work in |:Vimwiki2HTML| and |:VimwikiFollowLink| when the
-		file does not start in the root directory.
-VimwikiRemoveTaskwiki		Remove |:taskwiki| Viewports from |vimwiki-syntax-headers|.
+:VimwikiRemoveTaskwiki		Remove |:taskwiki| Viewports from |vimwiki-syntax-headers|.
+:make {target}	Convert to {target} from current buffer using pandoc if Makefile exists.
+								{target} can be docx, html, etc, as specified in the Makefile.
+:compiler pandoc	Expects output file extension, say `:make html` or `:make pdf`.
+									Passes additional arguments to pandoc, say
+									`:make html --self-contained`.
+									Adjust command-line flags by buffer-local/global variable
+									*b:pandoc_compiler_args* and *g:pandoc_compiler_args* which
+									default to empty.
 
 ==============================================================================
 7. Conquer of Completion					  *myhelp-coc*
