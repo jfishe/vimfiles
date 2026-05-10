@@ -1,4 +1,4 @@
-*myhelp.txt*	For Vim version 9.1	Last change: 2025 May 03
+*myhelp.txt*	For Vim version 9.1	Last change: 2026 May 10
 
 Cheat sheet of Vim stuff often forgotten
 
@@ -167,11 +167,16 @@ Command		Meaning ~
 :packadd foo	Add foo/opt to runtime path, making |:help foo| work.
 
 							*myhelp-ex-compiler*
-MYST						*quickfix-myst* *compiler-myst*
+:compiler myst						*quickfix-myst* *compiler-myst*
 
 The MyST compiler expects `:make file(s)` or `:make to myst build --site`
 MyST <https://mystmd.org/> extends Markdown for technical, scientific
 communication and publication.
+
+							*compiler-prek* *compiler-pre-commit*
+
+:cexpr system('prek run codespell')
+:cexpr system('pre-commit run --files ' .. expand('%'))
 
 ==============================================================================
 5. ALE								  *myhelp-ale*
