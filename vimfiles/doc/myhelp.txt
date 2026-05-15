@@ -25,7 +25,7 @@ CONTENTS							      *myhelp*
 							      |myhelp-coc-fix|
 							 |myhelp-coc-refactor|
 							     |myhelp-coc-list|
-							   |myhelp-copilot|
+							      |myhelp-copilot|
   8. Miscellaneous Functions					 |myhelp-misc|
   9. FZF Vim Integration					  |myhelp-fzf|
 
@@ -287,19 +287,6 @@ ac		|n_coc-classobj-a| |v_coc-classobj-a|
 <space>p		 |:CocListResume|
 		Reopen last opened list
 
-							  *myhelp-coc-pyright*
-Coc-Pyright uses the shell associated with the Vim instance to call nodejs and
-locate the python environment. Install nodejs, black, etc. with conda and call
-Vim from the activated environment. The project directory should contain a
-pyrightconfig.json file: >
-
-{
-    "venvPath": "/home/jfishe/miniconda3/envs",
-    "venv": "pyedna",
-    "pythonVersion": "3.9"
-}
-<
-
 				      *myhelp-coc-completion* *myhelp-UltiSnips*
 |coc-completion| and |UltiSnips-trigger-key-mappings| default key mapping
 conflict with Windows Terminal.
@@ -314,9 +301,6 @@ g:UltiSnipsJumpBackwardTrigger		<c-k>
 
 Command		Meaning ~
 ------------------------------------------------------------------------------
-call condaactivate#AddConda2Vim()
-		Update Windows Batch files to activate python environment
-		prior to starting Vim.
 :Redir verbose map!
 		Get listing of map assignments |Redir|: >
 		:silent verbose map!

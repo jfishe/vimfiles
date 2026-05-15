@@ -14,14 +14,20 @@ let g:pandoc#syntax#codeblocks#embeds#langs = [
       \ 'DOS=dosbatch'
       \ ]
 
-" let g:pandoc#formatting#extra_equalprg='--atx-headers --standalone --reference-links'
+let g:pandoc#formatting#equalprg = 'pandoc'
+      \ .. ' --from=commonmark_x'
+      \ .. '+wikilinks_title_after_pipe-task_lists'
+      \ .. ' --to=commonmark_x'
+
 let g:pandoc#formatting#extra_equalprg='--markdown-headings=atx '
       \ .. '--standalone --reference-links --wrap=preserve'
+      \ .. ' --lua-filter=reorder_metadata.lua'
 
-let s:pandoc_compiler = ' --from=markdown-header_attributes'
+let s:pandoc_compiler = ' --from=commonmark_x'
       \ .. '+wikilinks_title_after_pipe-task_lists'
       \ .. ' --wrap=preserve --standalone'
-let g:pandoc#compiler#arguments = '--to=markdown' .. s:pandoc_compiler
+
+let g:pandoc#compiler#arguments = '--to=commonmark_x' .. s:pandoc_compiler
 
 " Expand citations.
 " let g:pandoc#compiler#arguments = '--to=markdown-citations'
