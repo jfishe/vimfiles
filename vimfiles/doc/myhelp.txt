@@ -1,4 +1,4 @@
-*myhelp.txt*	For Vim version 9.1	Last change: 2026 May 10
+*myhelp.txt*	For Vim version 9.1	Last change: 2026 May 15
 
 Cheat sheet of Vim stuff often forgotten
 
@@ -117,8 +117,6 @@ Command		Meaning ~
 ------------------------------------------------------------------------------
 :Vterm		Default vertical terminal. Append bash to specify.
 :Vposh		PowerShell vertical terminal
-:VWS		|:VimwikiSearch| using |fzf-vim| with |:Rg|
-:VWT		|:VimwikiSearchTags| using |fzf-vim| with |:Rg|
 :tab sb[uffer] [+cmd] {bufname}
 					Open tab and edit buffer {bufname}.
 :s/ <\p\{-}@\p\{-}>//cgi
@@ -166,14 +164,14 @@ Command		Meaning ~
 :helptags ALL	Create/update helptags under opt.
 :packadd foo	Add foo/opt to runtime path, making |:help foo| work.
 
-							*myhelp-ex-compiler*
-:compiler myst						*quickfix-myst* *compiler-myst*
+							  *myhelp-ex-compiler*
+:compiler myst					 *quickfix-myst* *compiler-myst*
 
 The MyST compiler expects `:make file(s)` or `:make to myst build --site`
 MyST <https://mystmd.org/> extends Markdown for technical, scientific
 communication and publication.
 
-							*compiler-prek* *compiler-pre-commit*
+					   *compiler-prek* *compiler-pre-commit*
 
 :cexpr system('prek run codespell')
 :cexpr system('pre-commit run --files ' .. expand('%'))
@@ -201,15 +199,22 @@ v$,m		Convert selected e-mail addresses in Visual
 		selection into valid URI in |vimwiki-syntax-links|. Addresses
 		should be comma separated or semi-colon separated, if they
 		contain commas.
-:VimwikiRemoveTaskwiki		Remove |:taskwiki| Viewports from |vimwiki-syntax-headers|.
-:make {target}	Convert to {target} from current buffer using pandoc if Makefile exists.
-								{target} can be docx, html, etc, as specified in the Makefile.
-:compiler pandoc	Expects output file extension, say `:make html` or `:make pdf`.
-									Passes additional arguments to pandoc, say
-									`:make html --self-contained`.
-									Adjust command-line flags by buffer-local/global variable
-									*b:pandoc_compiler_args* and *g:pandoc_compiler_args* which
-									default to empty.
+:VWS		|:VimwikiSearch| using |fzf-vim| with |:Rg|
+:VWT		|:VimwikiSearchTags| using |fzf-vim| with |:Rg|
+:VimwikiRemoveTaskwiki
+		Remove |:taskwiki| Viewports from |vimwiki-syntax-headers|.
+:make {target}	Convert to {target} from current buffer using pandoc
+		if Makefile exists.
+		{target} can be docx, html, etc, as specified in the
+		Makefile.
+:compiler pandoc
+		Expects output file extension, say `:make html` or
+		`:make pdf`.
+		Passes additional arguments to pandoc, say
+		`:make html --self-contained`.
+		Adjust command-line flags by buffer-local/global variable
+		*b:pandoc_compiler_args* and *g:pandoc_compiler_args* which
+		default to empty.
 
 ==============================================================================
 7. Conquer of Completion					  *myhelp-coc*
@@ -219,7 +224,7 @@ Command		Meaning ~
 <TAB>		Trigger/navigate CoC popup completion.
 <cr>		Confirm selected CoC completion.
 
-							   *myhelp-copilot*
+							      *myhelp-copilot*
 <C-L>		|copilot#Accept()| Accept GitHub Copilot inline suggestion.
 		Copilot does not own <Tab>; CoC keeps popup completion keys.
 
@@ -312,8 +317,8 @@ Command		Meaning ~
 call condaactivate#AddConda2Vim()
 		Update Windows Batch files to activate python environment
 		prior to starting Vim.
-
-:Redir verbose map!	Get listing of map assignments |Redir|: >
+:Redir verbose map!
+		Get listing of map assignments |Redir|: >
 		:silent verbose map!
 <
 9. FZF Vim Integration						 *myhelp-fzf*
@@ -327,4 +332,4 @@ Command		Meaning ~
 <c-x>		Open selected in split.
 <c-w>		Toggle preview window
 
- vim:tw=78:isk=!-~,^*,^\|,^\":ts=8:noet:ft=help:norl:
+ vim:tw=75:isk=!-~,^*,^\|,^\":ts=8:noet:ft=help:norl:
