@@ -26,3 +26,27 @@ let g:coc_filetype_map = {
       \ 'pandoc.markdown': 'markdown',
       \ 'pandoc': 'markdown'
       \ }
+
+function! s:is_coc_ignored_buffer() abort
+  let l:bufname = bufname('%')
+  if l:bufname =~# '^fugitive:'
+    return 1
+  endif
+
+  let l:fullpath = expand('%:p')
+  return !empty(l:fullpath)
+        \ && l:fullpath =~# '\%(^\|[\/\\]\)\.git\%([\/\\]\|$\)'
+endfunction
+
+function! s:disable_coc_for_special_buffers() abort
+  if s:is_coc_ignored_buffer()
+    let b:coc_enabled = 0
+  endif
+endfunction
+
+augroup CocSpecialBuffers
+  autocmd!
+  autocmd BufReadCmd fugitive://* let b:coc_enabled = 0
+  autocmd BufAdd,BufEnter,BufNew,BufRead,BufWinEnter fugitive://*,*/.git/*
+        \ call s:disable_coc_for_special_buffers()
+augroup END
