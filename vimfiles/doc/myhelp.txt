@@ -1,4 +1,4 @@
-*myhelp.txt*	For Vim version 9.1	Last change: 2026 May 15
+*myhelp.txt*	For Vim version 9.1	Last change: 2026 May 16
 
 Cheat sheet of Vim stuff often forgotten
 
@@ -211,7 +211,7 @@ v$,m		Convert selected e-mail addresses in Visual
 		Expects output file extension, say `:make html` or
 		`:make pdf`.
 		Passes additional arguments to pandoc, say
-		`:make html --self-contained`.
+		`:make html --embed-resources --standalone`.
 		Adjust command-line flags by buffer-local/global variable
 		*b:pandoc_compiler_args* and *g:pandoc_compiler_args* which
 		default to empty.
@@ -307,13 +307,16 @@ Command		Meaning ~
 <
 9. FZF Vim Integration						 *myhelp-fzf*
 
-Command		Meaning ~
-------------------------------------------------------------------------------
-<c-a>		Select all.
-<c-d>		Deselect all.
-<c-t>		Open selected in tab.
-<c-v>		Open selected in vertical split.
-<c-x>		Open selected in split.
-<c-w>		Toggle preview window
+<C-W> preview.
+<C-A>, <M-A>	Select all.
+<C-D>, <M-D>	Deselect all.
+<C-T>		Open selected in tab.
+<C-V>		Open selected in vertical split.
+<C-W>		Toggle preview window
+<C-X>		Open selected in horizontal split.
+<C-E>		Edits selected item. See |:History| :, /.
+
+See |myfzf| for the effective local fzf key bindings and the
+command-by-command reference.
 
  vim:tw=75:isk=!-~,^*,^\|,^\":ts=8:noet:ft=help:norl:

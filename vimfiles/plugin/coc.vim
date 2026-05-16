@@ -47,6 +47,6 @@ endfunction
 augroup CocSpecialBuffers
   autocmd!
   autocmd BufReadCmd fugitive://* let b:coc_enabled = 0
-  autocmd BufAdd,BufEnter,BufNew,BufRead,BufWinEnter fugitive://*,*/.git/*
+  autocmd BufAdd,BufEnter,BufNew,BufRead,BufWinEnter fugitive://*
         \ call s:disable_coc_for_special_buffers()
 augroup END

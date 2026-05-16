@@ -140,7 +140,7 @@ if &shell =~# 'zsh'
         \ .. ' %path --glob=' .. shellescape('*%ext')
 endif
 
-let g:zettel_fzf_command = "rg --column --line-number --smart-case --no-heading --color=always"
+let g:zettel_fzf_command = vim#RgCommandPrefix()
 let g:zettel_format = "%Y%m%d-%H%M"
 let g:zettel_date_format = "%Y-%m-%d"
 let g:zettel_generated_index_title_level = 2

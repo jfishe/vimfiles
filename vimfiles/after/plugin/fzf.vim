@@ -15,8 +15,6 @@ if executable('fdfind')
   inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fdfind --hidden')
 elseif executable('fd')
   inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd --hidden')
-elseif executable('rg')
-  inoremap <expr> <c-x><c-f> fzf#vim#complete#path('rg --files --hidden')
 else
   imap <c-x><c-f> <plug>(fzf-complete-path)
 endif

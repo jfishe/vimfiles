@@ -74,12 +74,8 @@ function! vimwiki#searchRg(search_pattern) abort " {{{
 
   let cmd = g:zettel_fzf_command..' --glob '..shellescape('**/*'..ext)
   let cmd ..= ' -- '..pattern..' '..path
-  let opts ={
-    \ 'options':
-    \ ['--bind', 'ctrl-a:select-all,ctrl-d:deselect-all,ctrl-w:toggle-preview']
-    \ }
   " command (string), [spec (dict)], [fullscreen (bool)]
-  call fzf#vim#grep(cmd, fzf#vim#with_preview(opts), 1)
+  call fzf#vim#grep(cmd, fzf#vim#with_preview(), 1)
 endfunction " }}}
 
 function vimwiki#generate_index() abort " {{{

@@ -1,0 +1,86 @@
+*myfzf.txt*	For Vim version 9.1	Last change: 2026 May 16
+
+Local fzf.vim reference
+
+Author: John D. Fisher <https://github.com/jfishe>
+License: Same terms as Vim itself (see |license|)
+
+==============================================================================
+CONTENTS						      *myfzf*
+
+  1. Overview						      |myfzf-overview|
+  2. Effective Bindings					      |myfzf-bindings|
+  3. Local Wrappers						 |myfzf-local|
+
+==============================================================================
+1. Overview						      *myfzf-overview*
+
+This file documents the effective bindings for the local |fzf-vim| setup.
+It reflects the current Vim configuration in |myhelp-fzf|.
+
+The standard |fzf| navigation and editing keys still apply.
+Examples include <CR> to accept, <Esc> to abort, and the usual movement keys.
+
+Environment overrides are currently empty:
+
+Command			Value ~
+------------------------------------------------------------------------------
+$FZF_DEFAULT_OPTS	(empty)
+$FZF_DEFAULT_COMMAND	(empty)
+
+==============================================================================
+2. Effective Bindings					      *myfzf-bindings*
+
+Command		Enter		Extra keys ~
+------------------------------------------------------------------------------
+:Files		open file	<C-T> <C-X> <C-V> <C-W>
+:GFiles		open file	<C-T> <C-X> <C-V> <C-W>
+:GFiles?	open file	<C-T> <C-X> <C-V> <C-W>
+:Buffers	switch buffer	<C-T> <C-X> <C-V> <C-W>
+:Colors		apply theme	focus previews theme
+:Ag		open match	<C-T> <C-X> <C-V> <M-A> <M-D> <C-W>
+:Rg		open match	<C-T> <C-X> <C-V> <C-A> <C-D> <C-W>
+:RG		open match	<C-T> <C-X> <C-V> <C-A> <C-D> <C-W>
+:Lines		jump to line	<C-T> <C-X> <C-V>
+:BLines		jump to line	<C-T> <C-X> <C-V>
+:Tags		open tag	<C-T> <C-X> <C-V> <C-W>
+:BTags		open tag	<C-T> <C-X> <C-V> <C-W>
+:Changes	jump to change	<C-T> <C-X> <C-V>
+:Marks		jump to mark	<C-T> <C-X> <C-V>
+:BMarks		jump to mark	<C-T> <C-X> <C-V>
+:Jumps		jump to entry	<C-T> <C-X> <C-V> <C-W>
+:Windows	switch window	<C-W>
+:Locate		open file	<C-T> <C-X> <C-V> <C-W>
+:History	open file	<C-T> <C-X> <C-V> <C-A> <C-D> <C-W>
+:History:	run command	<C-E>
+:History/	run search	<C-E>
+:Snippets	insert snippet	(none)
+:Commits	open commit	<C-T> <C-X> <C-V> <C-S> <C-Y> [<C-W>]
+:BCommits	open commit	<C-T> <C-X> <C-V> <C-D> <C-S> <C-Y> [<C-W>]
+:Commands	edit on :	<C-X> execute now
+:Maps		replay map	(none)
+:Helptags	open help	<C-W>
+:Filetypes	:setf type	(none)
+
+Notes: ~
+1. <C-W> toggles the preview window when preview is enabled for that picker.
+2. :Commits and :BCommits only get preview when upstream fzf.vim enables it.
+   That requires a non-Windows build and a sufficiently wide Vim window.
+3. Grep-style multi-select opens the first match and fills quickfix for the
+   rest.
+4. :History: and :History/ are single-select pickers.
+
+==============================================================================
+3. Local Wrappers						 *myfzf-local*
+
+Local commands built on the same fzf settings:
+
+Command		Meaning ~
+------------------------------------------------------------------------------
+:VWS		|:VimwikiSearch| using |fzf-vim| with |:Rg|
+:VWT		|:VimwikiSearchTags| using |fzf-vim| with |:Rg|
+
+These wrappers inherit the local |:Rg| bindings:
+<C-T>, <C-X>, <C-V>, <C-A>, <C-D>, and <C-W>.
+
+vim:tw=75:isk=!-~,^*,^\|,^\":ts=8:noet:ft=help:norl:
