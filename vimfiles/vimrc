@@ -29,11 +29,11 @@ if !has('nvim') && has('syntax') && has('eval')
 endif
 " }}}
 " ================ Python 3 ====================== {{{
-if !has('nvim')
+if !has('nvim') && !has('win32unix')
   if s:is_windows
     let s:pythonpath = '$HOME/vimfiles'
     let s:venv = ['', '/.venv', '/.venv/Lib/site-packages']
-  elseif has('linux')
+  else
     " System vim is typically linked to a particular python version.
     " Use the same version or modify PYTHONPATH as needed,
     " to locate dist-packages.
@@ -42,7 +42,7 @@ if !has('nvim')
     let s:venv = ['', '/.venv', '/.venv/lib/python3.??/site-packages']
   endif
   call map(s:venv, {i, v -> expand(s:pythonpath .. v)})
-  if !empty($PIXI_IN_SHELL)
+  if has('linux') && !empty($PIXI_IN_SHELL)
      " If PIXI_IN_SHELL is set, then we are in a pixi shell and should add
      " the dist-packages path for the system python.
      " This is needed for plugins that use the system python, such as
