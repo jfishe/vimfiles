@@ -232,6 +232,13 @@ dictionary since symlinks into WSL fail when the distro isn't started.
 - [Gutentags]
 - [universal-ctags]
 
+Universal Ctags reads `~/.ctags.d/*.ctags`, not `~/.ctags`.
+`Install-Vimfiles.ps1 -Link` symlinks `dotfiles/ctags.d` to `~/.ctags.d`,
+so `dotfiles/ctags.d/default.ctags` provides the default global excludes.
+`dotfiles/ctags.d/windows_home.ctags` adds extra excludes so
+`ctags -R %USERPROFILE%` stays usable on Windows.
+Use a project-local `.gutctags` only for project-specific overrides.
+
 ## Conquer of Completion (CoC)
 
 [Conquer of Completion] does not depend on the python compiled with Vim. It

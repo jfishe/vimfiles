@@ -4,7 +4,6 @@
 --exclude=spell
 --exclude=thesaurus
 --exclude=undo
---exclude=pack
---exclude=plugged
+# --exclude=pack
+# --exclude=plugged
 --exclude=.mypy_cache
-
