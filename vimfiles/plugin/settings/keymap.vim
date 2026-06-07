@@ -1,4 +1,5 @@
 " UltiSnips {{{
+let g:UltiSnipsAutoTrigger = 0
 " let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsExpandOrJumpTrigger = '<c-j>'
 let g:UltiSnipsListSnippets = '<c-a>'
