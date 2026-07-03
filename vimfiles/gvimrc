@@ -1,26 +1,56 @@
-set termencoding=utf-8
-
-" :help gui-font
-" :help setting-guifont
-if has('gui_gtk3') || has('gui_gtk2')
-  set guifont+=CaskaydiaCove\ NF\ 11
-  set guifont+=CaskaydiaCove\ NF\ Mono\ 11
-  set guifont+=CaskaydiaCove\ Nerd\ Font\ 11
-  set guifont+=CaskaydiaCove\ Nerd\ Font\ Mono\ 11
-  set guifont+=DejaVu\ Sans\ Mono\ 11
-  set guifont+=Consolas\ 11
-elseif has('gui_win32')
-  if has('directx')
-    set renderoptions=type:directx
-  endif
-  set guifont+=CaskaydiaCove_Nerd_Font:h10:cDEFAULT:qDEFAULT
-  set guifont+=CaskaydiaCove_NF:h10:cDEFAULT:qDEFAULT
-  set guifont+=CaskaydiaCove_Nerd_Font_Mono:h10:cDEFAULT:qDEFAULT
-  set guifont+=CaskaydiaCove_NF_Mono:h10:cDEFAULT:qDEFAULT
-  set guifont+=Cascadia_Code:h10:cDEFAULT:qDEFAULT
-  set guifont+=Cascadia_Mono:h10:cDEFAULT:qDEFAULT
-  set guifont+=Consolas:h10:cDEFAULT:qDEFAULT
+if has('directx')
+  set renderoptions=type:directx
 endif
+
+" Cross‑platform font selection with auto‑detection {{{
+function! SelectBestGuiFont() " {{{
+  " Preferred fonts in order (GTK/macOS names)
+  let gtk_fonts = [
+        \ 'CaskaydiaCove\ Nerd\ Font\ Mono',
+        \ 'CaskaydiaCove\ Nerd\ Font',
+        \ 'Cascadia\ Code',
+        \ 'Cascadia\ Mono',
+        \ 'DejaVu\ Sans\ Mono',
+        \ 'Consolas'
+        \ ]
+
+  " Preferred fonts in order (Windows GDI names)
+  let win_fonts = [
+        \ 'CaskaydiaCove_NFM',
+        \ 'CaskaydiaCove_Nerd_Font_Mono',
+        \ 'CaskaydiaCove_Nerd_Font',
+        \ 'Cascadia_Code',
+        \ 'Cascadia_Mono',
+        \ 'Consolas'
+        \ ]
+
+  " Platform-specific size and flags
+  if has('gui_win32')
+    let fonts = win_fonts
+    let size = ':h10'
+    let flags = ':cANSI:qCLEARTYPE'
+  elseif has('gui_gtk3') || has('gui_gtk2') || has('gui_macvim')
+    let fonts = gtk_fonts
+    let size = '\ 11'
+    let flags = ''
+  else
+    return
+  endif
+
+  " Try each font until one succeeds
+  for f in fonts
+    try
+      execute 'set guifont=' .. f .. size .. flags
+      if &guifont =~ substitute(f, '\\ ', ' ', 'g')
+        return
+      endif
+    catch
+    endtry
+  endfor
+endfunction " }}}
+
+autocmd GUIEnter * call SelectBestGuiFont()
+" }}}
 
 " set background=dark
 let g:solarized_use16=0
