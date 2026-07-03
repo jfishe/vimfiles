@@ -157,3 +157,6 @@
 [submodule "vimfiles/pack/python/opt/latex-snippets"]
 	path = vimfiles/pack/python/opt/latex-snippets
 	url = https://github.com/jfishe/latex-snippets.git
+[submodule "vimfiles/pack/dev/opt/direnv.vim"]
+	path = vimfiles/pack/dev/opt/direnv.vim
+	url = https://github.com/direnv/direnv.vim.git
