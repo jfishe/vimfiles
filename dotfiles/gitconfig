@@ -49,16 +49,15 @@
 ;     cmd = vim -d \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '$wincmd w' -c 'wincmd J'
 [difftool "fugitive"]
     cmd = vim -c \"Gdiff\" \"$REMOTE\"
+    trustExitCode = true
+    ; https://vimways.org/2018/vim-and-git/
+    prompt = false
 [mergetool "fugitive"]
     ; cmd = vim -c \"Gmerge\" \"$MERGED\"
     cmd = vim -c \"Gmerge\" \"$REMOTE\"
 [diff]
     ; tool = vimdiff3
     tool = fugitive
-[difftool]
-    trustExitCode = true
-    ; https://vimways.org/2018/vim-and-git/
-    prompt = false
 [merge]
     conflictstyle = diff3
     tool = fugitive
