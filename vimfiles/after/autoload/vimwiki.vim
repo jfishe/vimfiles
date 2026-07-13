@@ -201,4 +201,22 @@ function! vimwiki#RemoveTaskwikiViewport() abort " {{{
   call winrestview(l:save)
 endfunction " }}}
 
+function! vimwiki#mygenerate_tags() abort " {{{
+  call cursor(1,1)
+  let l:tags = ''
+  while search('^:.*:$', 'W')
+    let l:tags ..= getline('.') .. "\n"
+  endwhile
+
+  let l:tags = substitute(l:tags, ':', "\n", 'g')
+  let l:list = split(l:tags, '\n')
+  call filter(l:list, 'v:val !=# ""')
+  call sort(l:list)
+  call uniq(l:list)
+
+  " let @" = 'VimwikiGenerateTagLinks ' .. join(l:list, " ")
+  call insert(l:list, 1)
+  call function('vimwiki#tags#generate_tags', l:list)()
+endfunction " }}}
+
 " vim:tabstop=2:shiftwidth=2:expandtab:foldmethod=marker:textwidth=79
