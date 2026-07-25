@@ -1,4 +1,4 @@
-*myhelp.txt*	For Vim version 9.1	Last change: 2026 May 16
+*myhelp.txt*	For Vim version 9.1	Last change: 2026 Jul 25
 
 Cheat sheet of Vim stuff often forgotten
 
@@ -172,9 +172,15 @@ MyST <https://mystmd.org/> extends Markdown for technical, scientific
 communication and publication.
 
 					   *compiler-prek* *compiler-pre-commit*
-
 :cexpr system('prek run codespell')
 :cexpr system('pre-commit run --files ' .. expand('%'))
+
+:compiler quickfix			   *compiler-quickfix* *quickfix-quickfix*
+:compiler zizmor					       *compiler-zizmor*
+
+Zizmor <https://docs.zizmor.sh/> can find and fix security issues in common
+CI/CD setups, including GitHub Actions, Dependabot, and pre-commit.
+
 
 ==============================================================================
 5. ALE								  *myhelp-ale*
