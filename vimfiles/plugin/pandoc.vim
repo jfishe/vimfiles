@@ -27,7 +27,7 @@ let s:pandoc_compiler = ' --from=commonmark_x'
       \ .. '+wikilinks_title_after_pipe-task_lists'
       \ .. ' --wrap=preserve --standalone'
 
-let g:pandoc#compiler#arguments = '--to=commonmark_x' .. s:pandoc_compiler
+" let g:pandoc#compiler#arguments = '--to=commonmark_x' .. s:pandoc_compiler
 
 " Expand citations.
 " let g:pandoc#compiler#arguments = '--to=markdown-citations'
