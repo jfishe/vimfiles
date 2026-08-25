@@ -6,9 +6,12 @@
 		{
 			"Packages" :
 			[
-				// {
-				// 	"PackageIdentifier" : "Git.Git"
-				// },
+				{
+					"PackageIdentifier" : "Git.Git"
+				},
+				{
+					"PackageIdentifier" : "prefix-dev.pixi"
+				},
 				{
 					"PackageIdentifier" : "JohnMacFarlane.Pandoc"
 				},
@@ -18,11 +21,11 @@
 				{
 					"PackageIdentifier" : "BurntSushi.ripgrep.MSVC"
 				},
-				// {
-				// 	"PackageIdentifier" : "CondaForge.Miniforge3"
-				// },
 				{
 					"PackageIdentifier" : "UniversalCtags.Ctags"
+				},
+				{
+					"PackageIdentifier" : "vim.vim"
 				},
 				{
 					"PackageIdentifier" : "astral-sh.uv"
@@ -34,10 +37,10 @@
 					"PackageIdentifier" : "eza-community.eza"
 				},
 				{
-					"PackageIdentifier" : "junegunn.fzf"
+					"PackageIdentifier" : "jstarks.npiperelay"
 				},
 				{
-					"PackageIdentifier" : "prefix-dev.pixi"
+					"PackageIdentifier" : "junegunn.fzf"
 				},
 				{
 					"PackageIdentifier" : "sharkdp.bat"

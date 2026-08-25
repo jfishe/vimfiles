@@ -9,13 +9,29 @@ more portable.
 ## Installation
 
 Several applications are assumed to be in the `PATH`, install [git-scm] and
-select *User Git and optional Unix tools from the Windows Command Prompt*. See
+select _User Git and optional Unix tools from the Windows Command Prompt_. See
 steps to add a local bin directory for the other applications referenced in the
 vim configuration files.
 
 [Chocolatey] and [winget] provide package managers.
+Some application defaults should be overridden
+with an interactive installation, the first time.
 
-``` powershell
+```powershell
+winget install --exact Git.Git --source winget --scope user `
+  --location "$env:LOCALAPPDATA\Programs\Git" `
+  --custom /LOADINF="$(Resolve-Path git_options.ini)" `
+  --interactive
+
+# Select CLI options and add to PATH.
+# The installer does not create/update batch files.
+winget install --exact vim.vim --scope user --interactive
+```
+
+1. Edit Environment Variables for your account.
+2. Move Vim up in the `PATH`, so that `git` does not conflict.
+
+```powershell
 # winget export --output=winget.json
 # winget import --import-file=winget.json --no-upgrade
 winget import --import-file=winget.json
@@ -25,18 +41,11 @@ winget import --import-file=winget.json
 allows changes from the default options,
 supported by `winget import`.
 
-``` powershell
-winget install --exact Git.Git --source winget --scope user `
-  --location "$env:LOCALAPPDATA\Programs\Git" `
-  --custom /LOADINF="$(Resolve-Path git_options.ini)" `
-  --interactive
-```
-
 [Pixi] supports [conda-forge] packages
 without activating an environment,
 like [Miniforge].
 
-``` powershell
+```powershell
 # powershell -ExecutionPolicy Bypass
 # Invoke-RestMethod -UseBasicParsing https://pixi.sh/install.ps1 | Invoke-Expression
 
@@ -53,7 +62,7 @@ automated by `wsl install`.
   - `SSL certificate problem: unable to get local issuer certificate`
 - [How to fix ssl certificate problem unable to get local issuer certificate Git error]
 
-``` bash
+```bash
 openssl s_client -showcerts -servername github.com -connect github.com:443 \
   </dev/null 2>/dev/null |
   sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p'  > github-com.pem
@@ -66,51 +75,14 @@ cat github-com.pem | tee -a /mingw64/etc/ssl/certs/ca-bundle.crt
 ### Install Vim on Windows Subsystem for Linux
 
 On Debian derivatives, like Ubuntu, the [dotfiles] repository provides an
-installation script for a compatible version of Vim with GTK3. It also links
-`~/.vim/` to Windows `$USERPROFILE/vimfiles/` to share configuration across
-environments.
-
-### Install Vim on Windows
-
-[Vim-win32-installer] includes `python3/dyn`. Download and install or use
-[Chocolatey][]: `choco install vim`.
-
-- Download the selected zip file and adjust the paths as needed.
-
-``` powershell
-$DestinationPath = Get-Item -Path "$env:LOCALAPPDATA\Programs"
-$Path = Get-ChildItem -Path ~\Downloads\gvim_9.*_x64_signed.zip
-
-Move-Item -Path "$DestinationPath\Vim\vim92" `
-  -Destination "$DestinationPath\Vim\vim92.old" `
-  -ErrorAction SilentlyContinue
-```
-
-``` powershell
-Expand-Archive -Path $Path -DestinationPath $DestinationPath
-```
-
-``` powershell
-# Check vim works and remove old version.
-vim --version | grep python --color
-```
-
-``` powershell
-Remove-Item -Path "$DestinationPath\Vim\vim92.old" -Recurse -Force
-```
-
-If they don't already exist, create the batch files using the installer.
-
-``` powershell
-& $(Get-Item -Path "$DestinationPath\Vim\vim92\install.exe")
-```
+installation script for a compatible version of Vim with GTK3.
 
 ### `vimfiles` installation
 
 To install in Windows under `$env:LOCALAPPDATA\vimfiles` and symbolic link to
 `$HOME`.
 
-``` powershell
+```powershell
 cd $env:TMP
 curl  --output Install-Vimfiles.ps1 `
   https://raw.githubusercontent.com/jfishe/vimfiles/master/Install-Vimfiles.ps1
@@ -119,7 +91,7 @@ curl  --output Install-Vimfiles.ps1 `
 Get-Help .\Install-Vimfiles.ps1 -Full
 ```
 
-``` powershell
+```powershell
 # Clone and install submodules.
 .\Install-Vimfiles.ps1 -Clone
 
@@ -148,7 +120,7 @@ Get-Help .\Install-Vimfiles.ps1 -Full
 - Add Windows Registry entry to run `%USERPROFILE%\.init.cmd` when starting
   `cmd.exe`. `.init.cmd` activates `vim-python` environment for use by Vim.
 
-``` powershell
+```powershell
 .\Install-Vimfiles.ps1 -Conda
 ```
 
@@ -177,10 +149,9 @@ Windows, with `start!`.
 
   If the `%USERPROFILE%\Documents` does not exit, either create it, or create a
   link to the Windows Documents folder.
-
   - To locate the Windows Documents folder in `cmd.exe`:
 
-    ``` dos
+    ```dos
     set REG_PATH=HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\
     set REG_PATH=%REG_PATH%User Shell Folders
     reg query "%REG_PATH%" /v Personal
@@ -188,7 +159,7 @@ Windows, with `start!`.
 
   - If you have administrator rights or PowerShell 7, create a symbolic link:
 
-    ``` powershell
+    ```powershell
     $Parameters = @{
       Path = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\" +
         "User Shell Folders"
@@ -202,7 +173,7 @@ Windows, with `start!`.
   - Otherwise create a Directory Junction by replacing `<Target>` with the path
     reported by `reg query` above:
 
-    ``` dos
+    ```dos
     cmd /c "mklink /J %USERPROFILE%\Documents <Target>"
     ```
 
@@ -261,7 +232,7 @@ installed by `pixi` or `uv pip`.
 
 [nbdime] is configured by:
 
-``` bash
+```bash
 pip install nbdime
 nbdime config-git --enable --global
 ```
@@ -273,34 +244,7 @@ nbdime config-git --enable --global
 [ColorTool] schemes may be tested and exported to `iTerm2` format with
 [terminal.sexy].
 
-## Setup Python Project
-
-<!-- TODO: <07-02-25, jfishe> Update for pyscaffold and uv. -->
-
-``` bash
-cookiecutter cookiecutter-pypackage
-```
-
-Change to the pypackage directory you created and make initial commit to source
-control.
-
-``` bash
-git init
-git add .
-git commit -m "Initial project scaffold"
-git status
-```
-
-``` bash
-virtualenv env
-# Use env/bin/activate on Linux
-env\Scripts\activate
-pip install -e .
-```
-
 ## Git
-
-<!--  TODO: \<07-02-25, jfishe\> Add git-lint.  -->
 
 [ElateralLtd git commit template] provides a template and installation script
 for standard git commit messages.
@@ -313,7 +257,7 @@ directories so use `mklink /J LINK TARGET`.
 
 The following assumes that git-bash has been configured to use `%USERPROFILE%`
 as home, which may be different than the default `%HOMEDRIVE%%HOMEPATH%`. Also,
-*Documents* could be *My Documents*. Adjust the path for actual location of
+_Documents_ could be _My Documents_. Adjust the path for actual location of
 `vimfiles` and `vimwiki`. The vim startup script assumes that for anything,
 except Windows `cmd.exe`, that these files are located in `$HOME`. Soft-links
 allow pointing to the actual location.
@@ -323,7 +267,7 @@ allow pointing to the actual location.
 [The Case for Pull Rebase] recommends avoiding merge commits, except when
 they're useful, such as for Pull Request merges.
 
-``` bash
+```bash
 git pull --rebase # Normal to avoid merge commits.
 
 # if you're on Git 2.18 or later
@@ -338,7 +282,7 @@ proposed DOS batch script does not work with Microsoft Office 2016 because
 `spreadsheetcompare` is not an installed application. Install a modified
 version, which uses `AppVLP.exe`, as follows:
 
-``` powershell
+```powershell
 cmd /c "mklink $env:USERPROFILE\bin\xldiff.bat $env:LOCALAPPDATA\vimfiles\xldiff.bat"
 ```
 
@@ -367,7 +311,7 @@ On Windows install PowerToys or Uncap.
 
 Install the plugins in the Git repository.
 
-``` powershell
+```powershell
 git pull
 git submodule update --init --recursive
 vim -c 'packloadall | helptags ALL | qa'
@@ -375,43 +319,41 @@ vim -c 'packloadall | helptags ALL | qa'
 
 Update to the latest versions and commit the changes, if any.
 
-``` powershell
+```powershell
 git submodule update --init --recursive --remote
 vim -c 'packloadall | helptags ALL | qa'
 git commit -am "chore: update submodules"
 git push
 ```
 
-  [Ruslan Osipov]: http://www.rosipov.com/blog/vim-pathogen-and-git-submodules/
-  [Keep Your vimrc file clean]: http://vim.wikia.com/wiki/Keep_your_vimrc_file_clean
-  [The musings of bluz71]: https://bluz71.github.io/2017/05/15/vim-tips-tricks.html
-  [git-scm]: https://git-scm.com/
-  [Chocolatey]: https://chocolatey.org/
-  [winget]: https://learn.microsoft.com/en-us/windows/package-manager/winget/
-  [Git for Windows silent or unattended installation]: https://gitforwindows.org/silent-or-unattended-installation.html
-  [Pixi]: https://pixi.prefix.dev/latest/
-  [conda-forge]: https://conda-forge.org/
-  [Miniforge]: https://docs.conda.io/projects/conda
-  [Manual installation steps for older versions of WSL]: https://learn.microsoft.com/en-us/windows/wsl/install-manual
-  [github: server certificate verification failed]: https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed
-  [How to fix ssl certificate problem unable to get local issuer certificate Git error]: https://komodor.com/learn/how-to-fix-ssl-certificate-problem-unable-to-get-local-issuer-certificate-git-error/
-  [dotfiles]: https://github.com/jfishe/dotfiles
-  [Vim-win32-installer]: https://github.com/vim/vim-win32-installer/releases
-  [Moby Thesaurus List by
-  Grady Ward]: http://www.gutenberg.org/ebooks/3202
-  [Moby-thesaurus.org/]: https://raw.githubusercontent.com/zeke/moby/master/words.txt
-  [dictionary/words]: dictionary/words
-  [ripgrep]: https://github.com/BurntSushi/ripgrep
-  [Gutentags]: https://github.com/ludovicchabant/vim-gutentags
-  [universal-ctags]: https://github.com/universal-ctags/ctags
-  [Conquer of Completion]: https://github.com/neoclide/coc.nvim
-  [ALE]: #asynchronous-lint-engine-ale
-  [Asynchronous Lint Engine]: https://github.com/dense-analysis/ale
-  [jfishe/ALE_Nodejs]: https://github.com/jfishe/ALE_Nodejs
-  [nbdime]: http://nbdime.readthedocs.io/en/latest/
-  [ColorTool]: https://github.com/microsoft/terminal/tree/main/src/tools/ColorTool
-  [terminal.sexy]: https://terminal.sexy/
-  [ElateralLtd git commit template]: https://github.com/ElateralLtd/git-commit-template
-  [The Case for Pull Rebase]: https://megakemp.com/2019/03/20/the-case-for-pull-rebase/
-  [3 steps to make Spreadsheet Compare work with git diff]: https://www.xltrail.com/blog/git-diff-spreadsheetcompare
-  [KeeAgent]: https://gist.github.com/strarsis/e533f4bca5ae158481bbe53185848d49
+[Ruslan Osipov]: http://www.rosipov.com/blog/vim-pathogen-and-git-submodules/
+[Keep Your vimrc file clean]: http://vim.wikia.com/wiki/Keep_your_vimrc_file_clean
+[The musings of bluz71]: https://bluz71.github.io/2017/05/15/vim-tips-tricks.html
+[git-scm]: https://git-scm.com/
+[Chocolatey]: https://chocolatey.org/
+[winget]: https://learn.microsoft.com/en-us/windows/package-manager/winget/
+[Git for Windows silent or unattended installation]: https://gitforwindows.org/silent-or-unattended-installation.html
+[Pixi]: https://pixi.prefix.dev/latest/
+[conda-forge]: https://conda-forge.org/
+[Miniforge]: https://docs.conda.io/projects/conda
+[Manual installation steps for older versions of WSL]: https://learn.microsoft.com/en-us/windows/wsl/install-manual
+[github: server certificate verification failed]: https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed
+[How to fix ssl certificate problem unable to get local issuer certificate Git error]: https://komodor.com/learn/how-to-fix-ssl-certificate-problem-unable-to-get-local-issuer-certificate-git-error/
+[dotfiles]: https://github.com/jfishe/dotfiles
+[Moby Thesaurus List by Grady Ward]: http://www.gutenberg.org/ebooks/3202
+[Moby-thesaurus.org/]: https://raw.githubusercontent.com/zeke/moby/master/words.txt
+[dictionary/words]: dictionary/words
+[ripgrep]: https://github.com/BurntSushi/ripgrep
+[Gutentags]: https://github.com/ludovicchabant/vim-gutentags
+[universal-ctags]: https://github.com/universal-ctags/ctags
+[Conquer of Completion]: https://github.com/neoclide/coc.nvim
+[ALE]: #asynchronous-lint-engine-ale
+[Asynchronous Lint Engine]: https://github.com/dense-analysis/ale
+[jfishe/ALE_Nodejs]: https://github.com/jfishe/ALE_Nodejs
+[nbdime]: http://nbdime.readthedocs.io/en/latest/
+[ColorTool]: https://github.com/microsoft/terminal/tree/main/src/tools/ColorTool
+[terminal.sexy]: https://terminal.sexy/
+[ElateralLtd git commit template]: https://github.com/ElateralLtd/git-commit-template
+[The Case for Pull Rebase]: https://megakemp.com/2019/03/20/the-case-for-pull-rebase/
+[3 steps to make Spreadsheet Compare work with git diff]: https://www.xltrail.com/blog/git-diff-spreadsheetcompare
+[KeeAgent]: https://gist.github.com/strarsis/e533f4bca5ae158481bbe53185848d49
