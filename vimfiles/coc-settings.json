@@ -6,10 +6,11 @@
   "python.linting.mypyEnabled": true,
   "python.linting.mypyArgs": [
     "--no-pretty",
-    "--ignore-missing-imports",
+    // "--ignore-missing-imports",
     "--follow-imports=silent",
     "--show-column-numbers",
-    "--show-error-codes"
+    "--show-error-codes",
+    "--config-file=pyproject.toml"
   ],
   "python.formatting.provider": "ruff",
   // PyRight
