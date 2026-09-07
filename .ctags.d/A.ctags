@@ -1,4 +1,0 @@
---recurse=yes
-
-# Relative tags allow tests to be path insensitive.
---tag-relative=always

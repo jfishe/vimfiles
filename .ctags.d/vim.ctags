@@ -1,3 +1,4 @@
+--exclude=
 --exclude=swap
 --exclude=gutentags
 --exclude=dictionary
@@ -7,3 +8,5 @@
 # --exclude=pack
 # --exclude=plugged
 --exclude=.mypy_cache
+--exclude=vimfiles/plugged/copilot.vim/copilot-language-server/dist
+--exclude=vimfiles/pack/coc/opt/coc.nvim/build
