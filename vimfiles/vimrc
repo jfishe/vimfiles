@@ -165,7 +165,7 @@ endif
 " }}}
 
 " Thesaurus and Dictionary {{{
-" Thesaurus from http://www.gutenberg.org/files/3202/files.zip
+" Thesaurus from https://www.gutenberg.org/files/3202/files.zip
 " Extract files from zip and put in the following location.
 if isdirectory(s:vimfiles . '/thesaurus')
   let &thesaurus = s:vimfiles . '/thesaurus/mthesaur.txt'

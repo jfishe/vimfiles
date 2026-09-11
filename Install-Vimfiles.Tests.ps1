@@ -118,16 +118,7 @@ Describe 'Install-Vimfiles.ps1' {
             Mock -CommandName Get-Item -MockWith {
                 param($Path)
                 if ($Path -like '*\\vimfiles') { [pscustomobject]@{ Name = 'vimfiles'; FullName = 'C:\repo\vimfiles'; PSIsContainer = $true } }
-                elseif ($Path -like '*\\mintty') { [pscustomobject]@{ Name = 'mintty'; FullName = 'C:\repo\mintty'; PSIsContainer = $true } }
                 else { return $Path }
-            }
-
-            # Mock dotfiles to include a directory and a file
-            Mock -CommandName Get-ChildItem -MockWith {
-                param($Path)
-                $dir = [pscustomobject]@{ Name = 'configdir'; FullName = Join-Path $Path 'configdir'; PSIsContainer = $true }
-                $file = [pscustomobject]@{ Name = 'bashrc'; FullName = Join-Path $Path 'bashrc'; PSIsContainer = $false }
-                return @($dir, $file)
             }
 
             Mock -CommandName New-Item -MockWith { return $null }
@@ -142,22 +133,20 @@ Describe 'Install-Vimfiles.ps1' {
             function New-Symlink { process { if (-not (Test-Path Variable:SavedVimfiles)) { Set-Variable -Name SavedVimfiles -Value @() -Scope Global } foreach ($i in $input) { $global:SavedVimfiles += $i } } }
         }
 
-        It 'creates .config, backs up and calls New-Symlink with expected entries' {
+        It 'backs up and calls New-Symlink with vimfiles and .vim entries' {
             $Path = 'C:\repo'
             $LinkPath = 'C:\Users\me'
             $BackupPath = 'C:\backup'
             # Simulate the actions the Link block would perform without re-dot-sourcing the full script
-            New-Item -Path "$LinkPath\.config" -ItemType Directory
             Backup-Item -Link "$Path\vimfiles" -Destination $BackupPath
-            $sample = [pscustomobject]@{ Link = "$LinkPath\.bashrc"; Target = 'C:\repo\dotfiles\bashrc'; ItemType = '' }
+            $sample = [pscustomobject]@{ Link = "$LinkPath\.vim"; Target = 'C:\repo\vimfiles'; ItemType = '/D' }
             $sample | New-Symlink
 
-            Assert-MockCalled -CommandName New-Item -ParameterFilter { $Path -eq "$LinkPath\.config" -and $ItemType -eq 'Directory' } -Times 1
             ($global:SavedVimfiles.Count -gt 0) | Should Be $true
             $global:BackupCalls | Should BeGreaterThan 0
-            # find the file entry and ensure ItemType is empty for files
-            $fileEntry = $global:SavedVimfiles | Where-Object { $_.Link -eq "$LinkPath\.bashrc" }
-            $fileEntry.ItemType | Should Be ''
+            # find the .vim entry and ensure ItemType is /D for directories
+            $dirEntry = $global:SavedVimfiles | Where-Object { $_.Link -eq "$LinkPath\.vim" }
+            $dirEntry.ItemType | Should Be '/D'
         }
     }
 
@@ -213,15 +202,15 @@ Describe 'Install-Vimfiles.ps1' {
             Mock -CommandName Resolve-Path -MockWith { return 'C:\ProgramFiles\Vim\gvim.exe' }
         }
 
-        It 'uses BatLauncher for gv* shortcuts and sets IconLocation' {
+        It 'sets TargetPath directly to the batch file and sets IconLocation' {
             $UserAppDir = 'C:\UserApp'
             $IconLocation = 'C:\ProgramFiles\Vim\gvim.exe'
             . $ScriptPath -Shortcut -UserAppDir $UserAppDir
 
             # At least one shortcut should be saved
             $global:SavedShortcuts.Count | Should BeGreaterThan 0
-            # gvim entry should have been saved with Arguments set
-            $gv = $global:SavedShortcuts | Where-Object { $_.Arguments -ne $null }
+            # gvim entry should target the batch file directly, with no launcher indirection
+            $gv = $global:SavedShortcuts | Where-Object { $_.TargetPath -like '*gvim.bat' }
             ($gv -ne $null) | Should Be $true
             # IconLocation should be set from Resolve-Path
             ( $global:SavedShortcuts | ForEach-Object { $_.IconLocation } | Where-Object { $_ -ne $null } ).Count | Should BeGreaterThan 0

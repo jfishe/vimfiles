@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 4.0
+.VERSION 5.0
 
 .GUID e7b6d3ed-1459-4dee-9dcf-675756b14510
 
@@ -40,7 +40,7 @@
 
     Clone Repository to Path and update submodules.
 
-    Symlink dotfiles and vimfiles to LinkPath. Use Junction and Hardlink if
+    Symlink vimfiles to LinkPath. Use Junction and Hardlink if
     SeCreateSymbolicLink permission denied.
 
     Copy WSL dictionary (assumes one installed)
@@ -54,12 +54,12 @@
 #>
 [CmdletBinding()]
 Param(
-    # Symlink dotfiles and vimfiles to $HOME. Use Junction and Hardlink if
+    # Symlink vimfiles to $HOME. Use Junction and Hardlink if
     # SeCreateSymbolicLink permission denied.
     [Parameter(
         Mandatory = $true,
         ParameterSetName = 'Link',
-        HelpMessage = 'Symlink dotfiles and vimfiles to $HOME. Use Junction and Hardlink if SeCreateSymbolicLink permission denied.'
+        HelpMessage = 'Symlink vimfiles to $HOME. Use Junction and Hardlink if SeCreateSymbolicLink permission denied.'
     )]
     [switch]
     $Link
@@ -307,29 +307,6 @@ if ($Link) {
         }
     }
 
-    # Terminal config for Mintty and git-scm Vim
-    [array] $Vimfiles += Get-Item -Path "$Path\mintty" | ForEach-Object -Process {
-        [PSCustomObject]@{
-            Link     = "$LinkPath\.config\$($_.Name)"
-            Target   = "$($_.FullName)"
-            ItemType = '/D'
-        }
-    }
-    New-Item -Path "$LinkPath\.config" -ItemType Directory -ErrorAction SilentlyContinue
-
-    [array] $Vimfiles += Get-ChildItem -Path "$Path\dotfiles" | ForEach-Object -Process {
-        if ($_.PSIsContainer) {
-            $ItemType = '/D'
-        } else {
-            $ItemType = ''
-        }
-        [PSCustomObject]@{
-            Link     = "$LinkPath\.$($_.Name)"
-            Target   = "$($_.FullName)"
-            ItemType = "$ItemType"
-        }
-    }
-
     $Vimfiles | Backup-Item -Destination "$BackupPath"
 
     $Vimfiles | New-Symlink
@@ -337,8 +314,7 @@ if ($Link) {
 
 if ($Dictionary) {
     # Assume WSL defaults to Ubuntu.
-    $WslDictionary = '/usr/share/dict/words'
-    $Words = wsl --exec bash -c "wslpath -w ``realpath $WslDictionary``"
+    $Words = wsl --exec bash -c "wslpath -aw /usr/share/dict/words"
     $OutFile = "$Path\vimfiles\dictionary\words"
     New-Item -Path (Split-Path $OutFile) -ItemType Directory -ErrorAction SilentlyContinue
     Copy-Item -Path $Words -Destination $OutFile
@@ -352,11 +328,6 @@ if ($Thesaurus) {
 }
 
 if ($Shortcut) {
-    # Copy WSL gvim script.
-    $Wslscript = Get-Item -Path "$Path\pwsh\gvim-wsl.bat"
-    $Wslscript = Copy-Item -Path $Wslscript -Destination $UserAppDir -PassThru
-    Write-Verbose "$Wslscript assumes default WSL add wsl --distro, as needed."
-
     # Locate Vim batch files.
     $UserAppDir = Get-Item "$UserAppDir"
     [array] $SourceFileLocation = Join-Path $UserAppDir '*vim*.bat' | Get-ChildItem
@@ -366,10 +337,6 @@ if ($Shortcut) {
     $ShortcutLocation = "$Env:AppData\Microsoft\Windows\Start Menu\Programs\Vim"
     New-Item $ShortCutLocation -ItemType Directory -ErrorAction SilentlyContinue
 
-    # Copy Visual Basic Script to open gv*.bat without cmd.exe window.
-    $BatLauncher = Get-Item -Path "$Path\pwsh\bat-launcher.vbs"
-    $BatLauncher = Copy-Item -Path $BatLauncher -Destination $UserAppDir -PassThru
-
     $WorkingDirectory = '%HOMEDRIVE%%HOMEPATH%'
 
     $SourceFileLocation | ForEach-Object -Process {
@@ -378,12 +345,7 @@ if ($Shortcut) {
         # -ComObject WScript.Shell: This creates an instance of the COM object that represents the WScript.Shell for invoke CreateShortCut
         $WScriptShell = New-Object -ComObject WScript.Shell
         $Newlink = $WScriptShell.CreateShortcut($item)
-        if ( $_.BaseName -match '^gv' ) {
-            $Newlink.TargetPath = "$BatLauncher"
-            $Newlink.Arguments = "$($_.BaseName) --"
-        } else {
-            $Newlink.TargetPath = "$_"
-        }
+        $Newlink.TargetPath = "$_"
         $Newlink.WindowStyle = 7 # Minimized
         $Newlink.IconLocation = "$IconLocation"
         $Newlink.WorkingDirectory = "$WorkingDirectory"

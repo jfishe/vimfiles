@@ -8,74 +8,16 @@ more portable.
 
 ## Installation
 
-Several applications are assumed to be in the `PATH`, install [git-scm] and
-select _User Git and optional Unix tools from the Windows Command Prompt_. See
-steps to add a local bin directory for the other applications referenced in the
-vim configuration files.
-
-[Chocolatey] and [winget] provide package managers.
-Some application defaults should be overridden
-with an interactive installation, the first time.
+Several applications are assumed to be in the `PATH`.
+[chezmoi] manages the Windows applications and configuration
+needed by the Vim configuration.
+[dotfiles-chezmoi] provides details.
 
 ```powershell
-winget install --exact Git.Git --source winget --scope user `
-  --location "$env:LOCALAPPDATA\Programs\Git" `
-  --custom /LOADINF="$(Resolve-Path git_options.ini)" `
-  --interactive
+winget install --Id twpayne.chezmoi
 
-# Select CLI options and add to PATH.
-# The installer does not create/update batch files.
-winget install --exact vim.vim --scope user --interactive
+chezmoi init --apply jfishe/dotfiles-chezmoi
 ```
-
-1. Edit Environment Variables for your account.
-2. Move Vim up in the `PATH`, so that `git` does not conflict.
-
-```powershell
-# winget export --output=winget.json
-# winget import --import-file=winget.json --no-upgrade
-winget import --import-file=winget.json
-```
-
-[Git for Windows silent or unattended installation]
-allows changes from the default options,
-supported by `winget import`.
-
-[Pixi] supports [conda-forge] packages
-without activating an environment,
-like [Miniforge].
-
-```powershell
-# powershell -ExecutionPolicy Bypass
-# Invoke-RestMethod -UseBasicParsing https://pixi.sh/install.ps1 | Invoke-Expression
-
-pixi global install nodejs starship
-```
-
-[Manual installation steps for older versions of WSL] provides the steps
-automated by `wsl install`.
-
-### SSL Error
-
-- [github: server certificate verification failed]
-  - `server certificate verification failed. CAfile: none CRLfile: none`
-  - `SSL certificate problem: unable to get local issuer certificate`
-- [How to fix ssl certificate problem unable to get local issuer certificate Git error]
-
-```bash
-openssl s_client -showcerts -servername github.com -connect github.com:443 \
-  </dev/null 2>/dev/null |
-  sed -n -e '/BEGIN\ CERTIFICATE/,/END\ CERTIFICATE/ p'  > github-com.pem
-# On Linux
-cat github-com.pem | sudo tee -a /etc/ssl/certs/ca-certificates.crt
-# On windows C:\Program Files\Git\mingw64\ssl\certs\ or some variant.
-cat github-com.pem | tee -a /mingw64/etc/ssl/certs/ca-bundle.crt
-```
-
-### Install Vim on Windows Subsystem for Linux
-
-On Debian derivatives, like Ubuntu, the [dotfiles] repository provides an
-installation script for a compatible version of Vim with GTK3.
 
 ### `vimfiles` installation
 
@@ -95,7 +37,7 @@ Get-Help .\Install-Vimfiles.ps1 -Full
 # Clone and install submodules.
 .\Install-Vimfiles.ps1 -Clone
 
-# Symlink vimfiles and dotfiles to $HOME.
+# Symlink vimfiles to $HOME.
 .\Install-Vimfiles.ps1 -Link
 
 # Create Start-Menu shortcuts.
@@ -110,202 +52,10 @@ Get-Help .\Install-Vimfiles.ps1 -Full
 .\Install-Vimfiles.ps1 -Thesaurus
 ```
 
-- Create/update a conda environment compatible with `python3/dyn`.
-- Install [Miniforge] if needed, and create or update conda env vim-python.
-- Copy Vim batch files to `$env:LOCALAPPDATA\Microsoft\WindowsApps`:
-  - They are needed to activate the vim-python conda environment, prior to
-    starting Vim.
-  - If they don't already exist, create the batch files using the Vim
-    installer, usually `*\Vim\vim*\install.exe`.
-- Add Windows Registry entry to run `%USERPROFILE%\.init.cmd` when starting
-  `cmd.exe`. `.init.cmd` activates `vim-python` environment for use by Vim.
+### Install Vim on Windows Subsystem for Linux
 
-```powershell
-.\Install-Vimfiles.ps1 -Conda
-```
-
-If you plan to share vimfiles with Windows Subsystem for Linux (WSL), ensure
-git uses line feed for EOL. `Install-Vimfiles.ps1` automates this by setting
-the global .gitconfig to override the system defaults.
-
-## Vimwiki
-
-### New Vimwiki Diary
-
-When creating a new diary (Journal) file, `VimwikiTitleJournal` creates the
-title heading and copies the previous diary entry from `Todo` second-level
-heading through the end of file.
-
-### VimwikiLinkHandler
-
-`VimwikiLinkHandler` opens `local:` and `file:` URLs with `wslview` or, on
-Windows, with `start!`.
-
-### Registered Wikis
-
-- Assume registered wikis, `g:vimwiki_list` are in the Windows Documents folder
-  or user home directory. You may need to link `%USERPROFILE%\Documents` to the
-  actual location, e.g., OneDrive.
-
-  If the `%USERPROFILE%\Documents` does not exit, either create it, or create a
-  link to the Windows Documents folder.
-  - To locate the Windows Documents folder in `cmd.exe`:
-
-    ```dos
-    set REG_PATH=HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\
-    set REG_PATH=%REG_PATH%User Shell Folders
-    reg query "%REG_PATH%" /v Personal
-    ```
-
-  - If you have administrator rights or PowerShell 7, create a symbolic link:
-
-    ```powershell
-    $Parameters = @{
-      Path = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\" +
-        "User Shell Folders"
-      Name = "Personal"
-    }
-    $Target = Get-ItemPropertyValue @Parameters
-    New-Item -ItemType SymbolicLink -Path "$env:USERPROFILE\Documents" `
-      -Target "$Target"
-    ```
-
-  - Otherwise create a Directory Junction by replacing `<Target>` with the path
-    reported by `reg query` above:
-
-    ```dos
-    cmd /c "mklink /J %USERPROFILE%\Documents <Target>"
-    ```
-
-## Thesaurus
-
-Setup instructions are included in vimrc to install the [Moby Thesaurus List by
-Grady Ward] from Project Gutenberg. Use a browser; the site blocks scripted
-download.
-
-[Moby-thesaurus.org/] maintains [words.txt][Moby-thesaurus.org/].
-
-## Dictionary
-
-Refer to `:help dictionary` and download or symlink [dictionary/words]. See
-below for symlink instructions.
-
-`Install-Vimfiles.ps1 -Dictionary` assumes Ubuntu is the default and copies the
-dictionary since symlinks into WSL fail when the distro isn't started.
-
-## grepprg and grepformat
-
-[ripgrep] should be installed with [Chocolatey], `conda` or
-`uv tool install ripgrep`.
-
-## Gutentags & Universal ctags
-
-- [Gutentags]
-- [universal-ctags]
-
-Universal Ctags reads `~/.ctags.d/*.ctags`, not `~/.ctags`.
-`Install-Vimfiles.ps1 -Link` symlinks `dotfiles/ctags.d` to `~/.ctags.d`,
-so `dotfiles/ctags.d/default.ctags` provides the default global excludes.
-`dotfiles/ctags.d/windows_home.ctags` adds extra excludes so
-`ctags -R %USERPROFILE%` stays usable on Windows.
-Use a project-local `.gutctags` only for project-specific overrides.
-
-## Conquer of Completion (CoC)
-
-[Conquer of Completion] does not depend on the python compiled with Vim. It
-supports `node.js` modules that perform the linting functions of [ALE].
-
-The script `after/plugin/coc.vim` installs extensions using
-`g:coc_global_extensions`. Install CoC under `opt` instead of `start` to allow
-disabling when `node.js` is unavailable.
-
-## Asynchronous Lint Engine (ALE)
-
-The [Asynchronous Lint Engine] supports various linting (ALELint) and
-formatting (ALEFix) tools. Many of these are `node.js` packages. See
-[jfishe/ALE_Nodejs] for a list and installation instructions. Others can be
-installed by `pixi` or `uv pip`.
-
-## Jupyter Notebook
-
-### git configuration
-
-[nbdime] is configured by:
-
-```bash
-pip install nbdime
-nbdime config-git --enable --global
-```
-
-## Windows Setup
-
-### ColorTool
-
-[ColorTool] schemes may be tested and exported to `iTerm2` format with
-[terminal.sexy].
-
-## Git
-
-[ElateralLtd git commit template] provides a template and installation script
-for standard git commit messages.
-
-The Vim that ships with Git-bash can use the same profile as Gvim. Using WSL
-bash is the easiest method to create soft-links. Git-bash won't and recommends
-using mklink, but mklink usually has complex ACL issues, especially in
-a corporate environment. PowerShell and CMD do not recognize soft-linked
-directories so use `mklink /J LINK TARGET`.
-
-The following assumes that git-bash has been configured to use `%USERPROFILE%`
-as home, which may be different than the default `%HOMEDRIVE%%HOMEPATH%`. Also,
-_Documents_ could be _My Documents_. Adjust the path for actual location of
-`vimfiles` and `vimwiki`. The vim startup script assumes that for anything,
-except Windows `cmd.exe`, that these files are located in `$HOME`. Soft-links
-allow pointing to the actual location.
-
-### The Case for Pull Rebase
-
-[The Case for Pull Rebase] recommends avoiding merge commits, except when
-they're useful, such as for Pull Request merges.
-
-```bash
-git pull --rebase # Normal to avoid merge commits.
-
-# if you're on Git 2.18 or later
-git pull --rebase=merges
-git config --global pull.rebase merges
-```
-
-### Git diff for Excel Files
-
-Xltrail suggested [3 steps to make Spreadsheet Compare work with git diff]. The
-proposed DOS batch script does not work with Microsoft Office 2016 because
-`spreadsheetcompare` is not an installed application. Install a modified
-version, which uses `AppVLP.exe`, as follows:
-
-```powershell
-cmd /c "mklink $env:USERPROFILE\bin\xldiff.bat $env:LOCALAPPDATA\vimfiles\xldiff.bat"
-```
-
-`.gitconfig` defines `[diff "excel"]` and `.gitattributes_global` sets
-`diff=excel` for all Excel file extensions. The batch script pauses git so that
-it does not delete any temporary files it creates. Press `<Enter>` in the shell
-after exiting `spreadsheetcompare`.
-
-## KeePass2, KeeAgent and SSH
-
-[KeeAgent] (for KeePass) on Bash on Windows / WSL provides a howto. Git-bash
-only requires `export SSH_AUTH_SOCK=~/keeagent_msys.socket` in .bash_profile,
-depending on the KeeAgent settings in KeePass2.
-
-## Map Caps Lock to Escape, or any key to any key
-
-On Windows install PowerToys or Uncap.
-
-### Install PowerToys
-
-- Install with [Chocolatey] or [winget].
-- Open PowerToys Settings application.
-- In Keyboard Manager, map `Caps Lock` to `Esc`.
+On Debian derivatives, like Ubuntu, the [dotfiles] repository provides an
+installation script for a compatible version of Vim with GTK3.
 
 ## `vimfiles` Update
 
@@ -326,34 +76,107 @@ git commit -am "chore: update submodules"
 git push
 ```
 
+## Vimwiki
+
+### New Vimwiki Diary
+
+When creating a new diary (Journal) file, `VimwikiTitleJournal` creates the
+title heading and copies the previous diary entry from `Todo` second-level
+heading through the end of file.
+
+### VimwikiLinkHandler
+
+`VimwikiLinkHandler` opens `local:` and `file:` URLs with `wslview` or, on
+Windows, with `start!`.
+
+### Registered Wikis
+
+- Assume registered wikis, `g:vimwiki_list` are in the Windows Documents folder
+  or user home directory.
+- To locate the Windows Documents folder in `cmd.exe`:
+
+```dos
+set REG_PATH=HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\
+set REG_PATH=%REG_PATH%User Shell Folders
+reg query "%REG_PATH%" /v Personal
+```
+
+- or with PowerShell:
+
+```powershell
+powershell -NoProfile -NonInteractive -Command `
+'[Environment]::GetFolderPath([Environment+SpecialFolder]::MyDocuments)'
+```
+
+## Thesaurus
+
+[Moby Thesaurus List by Grady Ward] maintains [Project Gutenberg files.zip].
+Use a browser; the site blocks scripted download.
+Copy `mthesaur.txt` to `vimfiles/thesaurus/`.
+
+## Dictionary
+
+Refer to `:help dictionary` and download or symlink [dictionary/words]. See
+below for symlink instructions.
+
+`Install-Vimfiles.ps1 -Dictionary` assumes '/usr/share/dict/words'
+points to a compatible file.
+
+## Vim Dependencies
+
+Vim configuration depends on [junegunn fzf.vim].
+
+- [fzf] a general-purpose command-line fuzzy finder and an interactive terminal toolkit
+- [bat] for syntax-highlighted preview
+- If [delta] is available, `GF?`, `Commits` and `BCommits` will use it to
+  format `git diff` output.
+- `Rg` requires [ripgrep (rg)] as do `:he grepprg` and `:he grepformat`.
+- `Tags` and `Helptags` require Perl
+- `Tags PREFIX` requires `readtags` command from [Universal Ctags]
+
+## Gutentags & Universal ctags
+
+- [Gutentags]
+- [Universal Ctags]
+
+Universal Ctags reads `~/ctags.d/*.ctags` and project-root `.ctags.d`.
+[chezmoi] installs `~/.ctags.d/default.ctags` from [dotfiles-chezmoi], which
+provides the default global excludes.
+Use a project-local `.gutctags` only for project-specific overrides.
+
+## Conquer of Completion (CoC)
+
+[Conquer of Completion] does not depend on the python compiled with Vim. It
+supports `node.js` modules that perform the linting functions of [ALE].
+
+The script `after/plugin/coc.vim` installs extensions using
+`g:coc_global_extensions`. Install CoC under `opt` instead of `start` to allow
+disabling when `node.js` is unavailable.
+
+## Asynchronous Lint Engine (ALE)
+
+The [Asynchronous Lint Engine] supports various linting (ALELint) and
+formatting (ALEFix) tools. Many of these are `node.js` packages. See
+[jfishe/ALE_Nodejs] for a list and installation instructions. Others can be
+installed by `pixi` or `uv pip`.
+
 [Ruslan Osipov]: http://www.rosipov.com/blog/vim-pathogen-and-git-submodules/
 [Keep Your vimrc file clean]: http://vim.wikia.com/wiki/Keep_your_vimrc_file_clean
 [The musings of bluz71]: https://bluz71.github.io/2017/05/15/vim-tips-tricks.html
-[git-scm]: https://git-scm.com/
-[Chocolatey]: https://chocolatey.org/
-[winget]: https://learn.microsoft.com/en-us/windows/package-manager/winget/
-[Git for Windows silent or unattended installation]: https://gitforwindows.org/silent-or-unattended-installation.html
-[Pixi]: https://pixi.prefix.dev/latest/
-[conda-forge]: https://conda-forge.org/
-[Miniforge]: https://docs.conda.io/projects/conda
-[Manual installation steps for older versions of WSL]: https://learn.microsoft.com/en-us/windows/wsl/install-manual
-[github: server certificate verification failed]: https://stackoverflow.com/questions/35821245/github-server-certificate-verification-failed
-[How to fix ssl certificate problem unable to get local issuer certificate Git error]: https://komodor.com/learn/how-to-fix-ssl-certificate-problem-unable-to-get-local-issuer-certificate-git-error/
+[chezmoi]: https://www.chezmoi.io/
+[dotfiles-chezmoi]: https://github.com/jfishe/dotfiles-chezmoi
 [dotfiles]: https://github.com/jfishe/dotfiles
-[Moby Thesaurus List by Grady Ward]: http://www.gutenberg.org/ebooks/3202
-[Moby-thesaurus.org/]: https://raw.githubusercontent.com/zeke/moby/master/words.txt
+[Moby Thesaurus List by Grady Ward]: https://www.gutenberg.org/ebooks/3202
+[Project Gutenberg files.zip]: http://www.gutenberg.org/files/3202/files.zip
 [dictionary/words]: dictionary/words
-[ripgrep]: https://github.com/BurntSushi/ripgrep
-[Gutentags]: https://github.com/ludovicchabant/vim-gutentags
-[universal-ctags]: https://github.com/universal-ctags/ctags
+[junegunn fzf.vim]: https://github.com/junegunn/fzf.vim
+[fzf]: https://github.com/junegunn/fzf
+[bat]: https://github.com/sharkdp/bat
+[delta]: https://github.com/dandavison/delta
+[ripgrep (rg)]: https://github.com/BurntSushi/ripgrep
+[Universal Ctags]: https://ctags.io/
 [Conquer of Completion]: https://github.com/neoclide/coc.nvim
+[Gutentags]: https://github.com/ludovicchabant/vim-gutentags
 [ALE]: #asynchronous-lint-engine-ale
 [Asynchronous Lint Engine]: https://github.com/dense-analysis/ale
 [jfishe/ALE_Nodejs]: https://github.com/jfishe/ALE_Nodejs
-[nbdime]: http://nbdime.readthedocs.io/en/latest/
-[ColorTool]: https://github.com/microsoft/terminal/tree/main/src/tools/ColorTool
-[terminal.sexy]: https://terminal.sexy/
-[ElateralLtd git commit template]: https://github.com/ElateralLtd/git-commit-template
-[The Case for Pull Rebase]: https://megakemp.com/2019/03/20/the-case-for-pull-rebase/
-[3 steps to make Spreadsheet Compare work with git diff]: https://www.xltrail.com/blog/git-diff-spreadsheetcompare
-[KeeAgent]: https://gist.github.com/strarsis/e533f4bca5ae158481bbe53185848d49
