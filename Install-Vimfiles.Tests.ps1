@@ -1,5 +1,7 @@
 Describe 'Install-Vimfiles.ps1' {
-    $ScriptPath = 'C:\Users\jdfen\AppData\Local\vimfiles\Install-Vimfiles.ps1'
+    BeforeAll {
+        $ScriptPath = 'C:\Users\jdfen\AppData\Local\vimfiles\Install-Vimfiles.ps1'
+    }
 
     Context 'Backup-Item' {
         BeforeEach {
@@ -16,8 +18,8 @@ Describe 'Install-Vimfiles.ps1' {
         It 'creates destination directory and moves item' {
             Backup-Item -Link 'C:\source\file' -Destination 'C:\dest'
 
-            Assert-MockCalled -CommandName New-Item -Times 1 -ParameterFilter { $Path -eq 'C:\dest' -and $ItemType -eq 'Directory' }
-            Assert-MockCalled -CommandName Move-Item -Times 1 -ParameterFilter { $Path -eq 'C:\source\file' -and $Destination -eq 'C:\dest' }
+            Should -Invoke -CommandName New-Item -Times 1 -ParameterFilter { $Path -eq 'C:\dest' -and $ItemType -eq 'Directory' }
+            Should -Invoke -CommandName Move-Item -Times 1 -ParameterFilter { $Path -eq 'C:\source\file' -and $Destination -eq 'C:\dest' }
         }
     }
 
@@ -34,7 +36,7 @@ Describe 'Install-Vimfiles.ps1' {
         It 'calls mklink once on success' {
             Mock -CommandName 'cmd.exe' -MockWith { 'symbolic link created' }
             New-Symlink -ItemType '/D' -Link 'C:\link' -Target 'C:\target'
-            Assert-MockCalled -CommandName 'cmd.exe' -Times 1
+            Should -Invoke -CommandName 'cmd.exe' -Times 1
         }
 
         It 'falls back to alternate link type on privilege error and logs verbose message' {
@@ -43,17 +45,17 @@ Describe 'Install-Vimfiles.ps1' {
                 if ($global:mk -eq 0) { $global:mk = 1; 'You do not have sufficient privilege to perform this operation.' } else { 'linked' }
             }
             New-Symlink -ItemType '/D' -Link 'C:\link' -Target 'C:\target'
-            Assert-MockCalled -CommandName 'cmd.exe' -Times 2
-            Assert-MockCalled -CommandName 'Write-Verbose' -ParameterFilter { $Message -like '*Junction and Hardlink*' } -Times 1
+            Should -Invoke -CommandName 'cmd.exe' -Times 2
+            Should -Invoke -CommandName 'Write-Verbose' -ParameterFilter { $Message -like '*Junction and Hardlink*' } -Times 1
         }
 
         It 'exposes ValidateSet on ItemType parameter' {
             $cmd = Get-Command New-Symlink -CommandType Function
             $attr = $cmd.Parameters['ItemType'].Attributes | Where-Object { $_.GetType().Name -eq 'ValidateSetAttribute' }
-            ($attr.ValidValues -contains '/D') | Should Be $true
-            ($attr.ValidValues -contains '/H') | Should Be $true
-            ($attr.ValidValues -contains '/J') | Should Be $true
-            ($attr.ValidValues -contains '')   | Should Be $true
+            ($attr.ValidValues -contains '/D') | Should -Be $true
+            ($attr.ValidValues -contains '/H') | Should -Be $true
+            ($attr.ValidValues -contains '/J') | Should -Be $true
+            ($attr.ValidValues -contains '')   | Should -Be $true
         }
 
         It 'falls back to hardlink when creating file link without privileges' {
@@ -62,7 +64,7 @@ Describe 'Install-Vimfiles.ps1' {
                 if ($global:mk -eq 0) { $global:mk = 1; 'You do not have sufficient privilege to perform this operation.' } else { 'linked' }
             }
             New-Symlink -ItemType '' -Link 'C:\filelink' -Target 'C:\filetarget'
-            Assert-MockCalled -CommandName 'cmd.exe' -Times 2
+            Should -Invoke -CommandName 'cmd.exe' -Times 2
         }
     }
 
@@ -90,9 +92,9 @@ Describe 'Install-Vimfiles.ps1' {
             git submodule update --init --recursive
             vim -c 'packloadall | helptags ALL | qa'
 
-            $global:BackupCalls | Should Be 1
-            $global:GitCalls | Should Be 2
-            $global:VimCalls | Should Be 1
+            $global:BackupCalls | Should -Be 1
+            $global:GitCalls | Should -Be 2
+            $global:VimCalls | Should -Be 1
         }
     }
 
@@ -108,7 +110,7 @@ Describe 'Install-Vimfiles.ps1' {
             . $ScriptPath -Dictionary -Path $Path
 
             $ExpectedOutFile = Join-Path $Path 'vimfiles\dictionary\words'
-            Assert-MockCalled -CommandName Copy-Item -Times 1 -ParameterFilter { $Destination -eq $ExpectedOutFile }
+            Should -Invoke -CommandName Copy-Item -Times 1 -ParameterFilter { $Destination -eq $ExpectedOutFile }
         }
     }
 
@@ -142,11 +144,11 @@ Describe 'Install-Vimfiles.ps1' {
             $sample = [pscustomobject]@{ Link = "$LinkPath\.vim"; Target = 'C:\repo\vimfiles'; ItemType = '/D' }
             $sample | New-Symlink
 
-            ($global:SavedVimfiles.Count -gt 0) | Should Be $true
-            $global:BackupCalls | Should BeGreaterThan 0
+            ($global:SavedVimfiles.Count -gt 0) | Should -Be $true
+            $global:BackupCalls | Should -BeGreaterThan 0
             # find the .vim entry and ensure ItemType is /D for directories
             $dirEntry = $global:SavedVimfiles | Where-Object { $_.Link -eq "$LinkPath\.vim" }
-            $dirEntry.ItemType | Should Be '/D'
+            $dirEntry.ItemType | Should -Be '/D'
         }
     }
 
@@ -208,12 +210,12 @@ Describe 'Install-Vimfiles.ps1' {
             . $ScriptPath -Shortcut -UserAppDir $UserAppDir
 
             # At least one shortcut should be saved
-            $global:SavedShortcuts.Count | Should BeGreaterThan 0
+            $global:SavedShortcuts.Count | Should -BeGreaterThan 0
             # gvim entry should target the batch file directly, with no launcher indirection
             $gv = $global:SavedShortcuts | Where-Object { $_.TargetPath -like '*gvim.bat' }
-            ($gv -ne $null) | Should Be $true
+            @($gv).Count | Should -BeGreaterThan 0
             # IconLocation should be set from Resolve-Path
-            ( $global:SavedShortcuts | ForEach-Object { $_.IconLocation } | Where-Object { $_ -ne $null } ).Count | Should BeGreaterThan 0
+            ( $global:SavedShortcuts | ForEach-Object { $_.IconLocation } | Where-Object { $_ -ne $null } ).Count | Should -BeGreaterThan 0
         }
     }
 
@@ -223,13 +225,13 @@ Describe 'Install-Vimfiles.ps1' {
             Mock -CommandName Invoke-WebRequest -MockWith { throw 'Network error' }
             $th = $false
             try { . $ScriptPath -Thesaurus -Path 'C:\p' } catch { $th = $true }
-            $th | Should Be $true
+            $th | Should -Be $true
         }
 
         It 'errors when incompatible parameter sets are provided' {
             $th = $false
             try { . $ScriptPath -Link -Clone } catch { $th = $true }
-            $th | Should Be $true
+            $th | Should -Be $true
         }
     }
 }
