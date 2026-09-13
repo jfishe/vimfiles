@@ -238,14 +238,16 @@ function! VimwikiLinkHandler(link) abort " {{{
     let abs_dir = matchstr(link, '^file:\zs.*')
   endif
   if islink == 1
-    if s:is_windows
-      execute "!start " . substitute(abs_dir,"/","\\\\",'g')
-    elseif executable('wslview')
-      execute system('wslview '..shellescape(link))
-    else
-      return 0
-    endif
-    return 1
+    " if s:is_windows
+    "   call dist#vim9#Open(abs_dir)
+    "   " execute "!start " . substitute(abs_dir,"/","\\\\",'g')
+    " elseif executable('wslview')
+    "   " execute system('wslview '..shellescape(link))
+    "   call dist#vim9#Open(link)
+    " else
+    "   return 0
+    " endif
+    call dist#vim9#Open(link)
   else
     return 0
   endif
