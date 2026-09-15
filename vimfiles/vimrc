@@ -119,9 +119,6 @@ set visualbell          "No sounds
 set writebackup
 set nobackup
 
-if exists('$WSL_DISTRO_NAME')
-  let g:netrw_browsex_viewer = 'wslview'
-endif
 " }}}
 " ================ Statusline ================== {{{
 set statusline=\ %<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
