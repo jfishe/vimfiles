@@ -241,7 +241,6 @@ colorscheme solarized8
 if has('cursorshape')
   "Mode Settings
   " termcap-cursor-shape termcap-cursor-color
-
   if &term =~ 'xterm' || &term == 'win32'
     "Cursor settings:
     "  0 -> DECSCUSR (terminal default)
@@ -261,9 +260,33 @@ if has('cursorshape')
     " let &t_ti = ""  "ti = put terminal into termcap mode
     " let &t_te = ""  "te = end of termcap mode
   endif
-
 endif
-
+" Windows Terminal's shift+enter/ctrl+enter keybindings (settings.json)
+" sendInput raw CSI-u sequences ("\e[13;2u" / "\e[13;5u") so WSL's Vim can
+" decode <S-CR>/<C-CR>. Native Windows Vim goes through ConPTY's
+" win32-input-mode instead, which does not reinterpret those injected
+" bytes as a key event: they arrive as literal characters, so Esc drops
+" out of Insert mode and the trailing "...2u"/"...5u" replays as a
+" Normal-mode command (undo).
+"
+" <S-CR>/<C-CR> are not part of Vim's fixed set of individually-settable
+" named keys (unlike <F1>, <Up>, etc: `:set <S-CR>=...` fails with E518),
+" so define the raw sequences as arbitrary termcap codes instead (see
+" :h :set-termcap) and remap those onto the symbolic key names, which
+" then dispatch through to whatever <S-CR>/<C-CR>/<C-S-CR> are already mapped
+" to (VimwikiReturn in Insert mode, VimwikiSplitLink and VimwikiTabDropLink in
+" Normal mode, etc).
+if !has('nvim')
+  execute "set t_zu=\<Esc>[13;2u"
+  execute "set t_zv=\<Esc>[13;5u"
+  execute "set t_zw=\<Esc>[13;6u"
+  map  <t_zu> <S-CR>
+  imap <t_zu> <S-CR>
+  map  <t_zv> <C-CR>
+  imap <t_zv> <C-CR>
+  map  <t_zw> <C-S-CR>
+  imap <t_zw> <C-S-CR>
+endif
 " }}}
 " ================ Jump ============================= {{{
 set relativenumber
