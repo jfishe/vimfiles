@@ -79,7 +79,9 @@ if has('python3')
   packadd! vim-pydocstring
   packadd! vim-snippets
   packadd! latex-snippets
-  packadd! vimtex
+  if has('nvim-0.12.4') || has('patch-9.2.0')
+    packadd! vimtex
+  endif
 endif
 " }}}
 " ================ Taskwarrior =================== {{{

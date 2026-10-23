@@ -23,6 +23,11 @@ if !has('win32')
   let g:coc_global_extensions += ['coc-sh']
 endif
 
+" Match VimTeX's own version check (see vimtex ftplugin/tex.vim)
+if has('python3') && (has('nvim-0.12.4') || has('patch-9.2.0'))
+  let g:coc_global_extensions += ['coc-vimtex']
+endif
+
 " Highlight with coc-vimlsp
 " Conflicts with vimwiki when markdown syntax is enabled.
 " let g:markdown_fenced_languages = [
