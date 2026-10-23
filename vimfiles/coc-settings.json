@@ -1,19 +1,9 @@
 {
   // CoC
   "suggest.noselect": true,
-  // Python
-  "python.linting.ruffEnabled": true,
-  "python.linting.mypyEnabled": true,
-  "python.linting.mypyArgs": [
-    "--no-pretty",
-    // "--ignore-missing-imports",
-    "--follow-imports=silent",
-    "--show-column-numbers",
-    "--show-error-codes",
-    "--config-file=pyproject.toml"
-  ],
-  "python.formatting.provider": "ruff",
-  // PyRight
+  // Pyright: type checking, completion, hover (ruff owns lint/format)
+  "python.formatting.provider": "none",
+  "python.analysis.typeCheckingMode": "standard",
   "pyright.organizeimports.provider": "ruff",
   "pyright.testing.provider": "pytest",
   // PowerShell
@@ -21,8 +11,8 @@
   "powershell.integratedConsole.showOnStartup": false,
   "powershell.codeFormatting.preset": "OTBS",
   "powershell.powerShellExePath": "pwsh",
-  // Ruff
-  "ruff.nativeServer": true,
+  // Ruff (native server: lint + format + organize imports)
+  // sic: key is misspelled upstream
   "ruff.client.codeAction.showDocumantaion.enable": true,
   // Ultisnips
   "snippets.ultisnips.pythonPrompt": false

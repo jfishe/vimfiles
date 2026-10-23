@@ -15,6 +15,7 @@ let g:coc_global_extensions = [
       \ '@yaegassy/coc-marksman',
       \ '@yaegassy/coc-ruff',
       \ 'coc-snippets',
+      \ 'coc-toml',
       \ 'coc-vimlsp',
       \ 'coc-yaml'
       \ ]
