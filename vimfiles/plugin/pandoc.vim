@@ -11,7 +11,9 @@ let g:pandoc#syntax#codeblocks#embeds#langs = [
       \ 'literatehaskell=lhaskell',
       \ 'bash=sh',
       \ 'powershell=ps1',
-      \ 'DOS=dosbatch'
+      \ 'DOS=dosbatch',
+      \ 'toml=toml',
+      \ 'zsh=zsh'
       \ ]
 
 let g:pandoc#formatting#equalprg = 'pandoc'
