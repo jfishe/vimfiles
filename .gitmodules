@@ -70,7 +70,7 @@
 [submodule "vimfiles/pack/themes/opt/solarized8"]
 	ignore = dirty
 	path = vimfiles/pack/themes/opt/solarized8
-	url = https://github.com/lifepillar/vim-solarized8.git
+	url = https://codeberg.org/lifepillar/vim-solarized8.git
 [submodule "vimfiles/pack/tpope/start/vim-obsession"]
 	ignore = dirty
 	path = vimfiles/pack/tpope/start/vim-obsession
