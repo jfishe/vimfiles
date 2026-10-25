@@ -227,10 +227,8 @@ else
 endif
 " }}}
 " Color and background {{{
-" set background=light
 set background=dark
 
-"colorscheme solarized
 if has('termguicolors')
   " let &t_Co = 256
   try
@@ -238,6 +236,9 @@ if has('termguicolors')
   catch /E954: 24-bit colors are not supported on this environment: termguicolors/
   endtry
 endif
+
+let g:solarized_visibility = "high"
+let g:solarized_termtrans = 1
 colorscheme solarized8
 
 if has('cursorshape')
@@ -247,7 +248,7 @@ if has('cursorshape')
     "Cursor settings:
     "  0 -> DECSCUSR (terminal default)
     "  1 -> blinking block
-    "  2 -> solid block 
+    "  2 -> solid block
     "  3 -> blinking underscore
     "  4 -> solid underscore
     "  5 -> blinking vertical bar
