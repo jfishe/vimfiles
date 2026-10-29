@@ -52,8 +52,7 @@ endfunction " }}}
 autocmd GUIEnter * call SelectBestGuiFont()
 " }}}
 
-" set background=dark
-let g:solarized_use16=0
+set background=dark
 
 " Disable: Left-hand scrollbar is present when there is a vertically split
 " window.

@@ -227,18 +227,6 @@ else
 endif
 " }}}
 " Color and background {{{
-set background=dark
-
-if !has('nvim') && &term =~# 'xterm'
-  " terminfo specifies Cs (cursor color) which Vim confuses for t_Cs.
-  " Vim has no builtin codes for the other underline styles.
-  let &t_Ce = "\e[4:0m"
-  let &t_Us = "\e[4:2m"
-  let &t_Cs = "\e[4:3m"
-  let &t_ds = "\e[4:4m"
-  let &t_Ds = "\e[4:5m"
-endif
-
 if has('termguicolors')
   " let &t_Co = 256
   try
@@ -247,7 +235,18 @@ if has('termguicolors')
   endtry
 endif
 
-let g:solarized_visibility = "high"
+if !has('nvim') && !has("gui_running") && &term =~# 'xterm'
+  " terminfo specifies Cs (cursor color) which Vim confuses for t_Cs.
+  " Vim has no builtin codes for the other underline styles.
+  let &t_Ce = "\e[4:0m"
+  let &t_Us = "\e[4:2m"
+  let &t_Cs = "\e[4:3m"
+  let &t_ds = "\e[4:4m"
+  let &t_Ds = "\e[4:5m"
+
+  let g:solarized_visibility = "high"
+endif
+
 let g:solarized_termtrans = 1
 colorscheme solarized8
 
