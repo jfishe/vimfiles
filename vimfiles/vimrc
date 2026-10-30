@@ -243,7 +243,9 @@ if !has('nvim') && !has("gui_running") && &term =~# 'xterm'
   let &t_Cs = "\e[4:3m"
   let &t_ds = "\e[4:4m"
   let &t_Ds = "\e[4:5m"
+endif
 
+if !has('nvim') && !has("gui_running")
   let g:solarized_visibility = "high"
 endif
 
