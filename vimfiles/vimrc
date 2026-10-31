@@ -249,6 +249,16 @@ if !has('nvim') && !has("gui_running")
   let g:solarized_visibility = "high"
 endif
 
+" solarized8 dark maps bright black (ANSI 8) to base03 = the background,
+" which hides eza's punctuation/symlink arrow in :terminal.
+" Use base01, matching tinted8-solarized8-dark's color08.
+augroup solarized8_terminal
+  autocmd!
+  autocmd ColorScheme solarized8* if &background ==# 'dark'
+        \ && exists('g:terminal_ansi_colors')
+        \ | let g:terminal_ansi_colors[8] = '#586e75' | endif
+augroup END
+
 let g:solarized_termtrans = 1
 colorscheme solarized8
 
