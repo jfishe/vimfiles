@@ -62,7 +62,7 @@ setlocal tags-=./tags tags-=./tags; tags-=tags tags-=./TAGS tags-=TAGS
 
 " let b:pandoc_omnifunc_fallback = len(&omnifunc) ? function(&omnifunc) : ''
 " setlocal omnifunc=vimwiki#Complete_pandoc
-function s:get_bibfiles() abort
+function! s:get_bibfiles() abort
   if empty(b:pandoc_biblio_bibs)
     let save_dir = chdir(expand('%:p:h'))
     let bibfiles = pandoc#bibliographies#Find_Bibliographies()
@@ -70,7 +70,11 @@ function s:get_bibfiles() abort
   else
     let bibfiles = b:pandoc_biblio_bibs
   endif
-  let bibfiles = join(bibfiles, ' ')
+
+  if type(bibfiles) == v:t_list
+    return join(map(copy(bibfiles), 'shellescape(v:val)'), ' ')
+  endif
+
   return shellescape(bibfiles)
 endfunction
 
