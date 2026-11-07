@@ -181,6 +181,21 @@ elseif filereadable('/usr/share/dict/words')
 endif
 " }}}
 
+" Spellfile {{{
+" 1zg/zg -> shared, tracked list; 2zg -> machine-local list under stdpath('data')
+let s:spell_name = 'en.' .. &encoding .. '.add'
+let s:spell_local = (exists('*stdpath') ? stdpath('data') : vim#XdgSubdir('data', 'vim'))
+      \ .. '/spell'
+if !isdirectory(s:spell_local)
+  call mkdir(s:spell_local, 'p')
+endif
+let &spellfile = join([
+      \ expand('<sfile>:p:h') .. '/spell/' .. s:spell_name,
+      \ s:spell_local .. '/' .. s:spell_name,
+      \ ], ',')
+unlet s:spell_name s:spell_local
+" }}}
+
 " ================ Indentation ====================== {{{
 " Commented lines relocated to plugins
 
