@@ -244,6 +244,7 @@ cookiecutter
 coolability
 coolable
 criticality
+crypto
 cyber
 databank
 daughtering
@@ -274,6 +275,7 @@ et al.
 evaluators
 exchanger
 exchangers
+executables
 feedwater
 fissions
 fluence
@@ -301,9 +303,11 @@ isolator
 isolators
 leaker
 linter
+linters
 masa
 materiels
 memoranda
+metadata
 miniconda
 miniforge
 minimizer
@@ -389,11 +393,13 @@ surveillances
 symlink
 symlinks
 tapanade
+theming
 traceability
 transuranics
 triages
 typer
 unanalyzed
+undercurl
 underlayment
 ungrounded
 unordered
