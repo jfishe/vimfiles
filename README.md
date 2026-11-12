@@ -116,7 +116,7 @@ Copy `mthesaur.txt` to `vimfiles/thesaurus/`.
 
 ## Dictionary
 
-Refer to `:help dictionary` and download or symlink [dictionary/words]. See
+Refer to `:help dictionary` and download or symlink `dictionary/words`. See
 below for symlink instructions.
 
 `Install-Vimfiles.ps1 -Dictionary` assumes '/usr/share/dict/words'
@@ -158,7 +158,7 @@ disabling when `node.js` is unavailable.
 The [Asynchronous Lint Engine] supports various linting (ALELint) and
 formatting (ALEFix) tools. Many of these are `node.js` packages. See
 [jfishe/ALE_Nodejs] for a list and installation instructions. Others can be
-installed by `pixi` or `uv pip`.
+installed by `pixi` or `uv`.
 
 [Ruslan Osipov]: http://www.rosipov.com/blog/vim-pathogen-and-git-submodules/
 [Keep Your vimrc file clean]: http://vim.wikia.com/wiki/Keep_your_vimrc_file_clean
@@ -168,7 +168,6 @@ installed by `pixi` or `uv pip`.
 [dotfiles]: https://github.com/jfishe/dotfiles
 [Moby Thesaurus List by Grady Ward]: https://www.gutenberg.org/ebooks/3202
 [Project Gutenberg files.zip]: http://www.gutenberg.org/files/3202/files.zip
-[dictionary/words]: dictionary/words
 [junegunn fzf.vim]: https://github.com/junegunn/fzf.vim
 [fzf]: https://github.com/junegunn/fzf
 [bat]: https://github.com/sharkdp/bat

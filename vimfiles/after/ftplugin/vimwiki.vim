@@ -52,7 +52,14 @@ vnoremap <silent><buffer> <localleader>m
       \ :call vimwiki#myvimwiki_normalize_mail_v()<CR>
 "}}}
 
-let b:ale_enabled=0
+" Lint markdown-syntax wikis with rumdl; disable ALE for native vimwiki syntax.
+if vimwiki#vars#get_wikilocal('syntax') ==# 'markdown'
+  let b:ale_linter_aliases = ['markdown']
+  let b:ale_linters = ['rumdl']
+  let b:ale_fixers = ['rumdl']
+else
+  let b:ale_enabled = 0
+endif
 "}}}
 
 setlocal spell spelllang=en_us
@@ -121,7 +128,8 @@ if ! empty(b:undo_ftplugin)
 endif
 let b:undo_ftplugin ..= "delcommand VWS"
       \ .. " | delcommand VWT"
-      \ .. " | unlet b:did_ftplugin_user_after b:ale_enabled"
+      \ .. " | unlet! b:did_ftplugin_user_after b:ale_enabled"
+      \ .. " b:ale_linters b:ale_linter_aliases b:ale_fixers"
       \ .. ' | mapclear <buffer>'
       \ .. " | setlocal makeprg< errorformat<"
       \ .. " | setlocal spell< spelllang<"

@@ -8,7 +8,6 @@ let g:did_coc_loaded_user_after = 1
 
 let g:coc_global_extensions = [
       \ 'coc-json',
-      \ 'coc-markdownlint',
       \ 'coc-powershell',
       \ 'coc-prettier',
       \ 'coc-pyright',
