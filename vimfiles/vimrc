@@ -29,48 +29,32 @@ if !has('nvim') && has('syntax') && has('eval')
 endif
 " }}}
 " ================ Python 3 ====================== {{{
-if !has('nvim') && !has('win32unix')
-  if s:is_windows
-    let s:pythonpath = '$HOME/vimfiles'
-    let s:venv = ['', '/.venv', '/.venv/Lib/site-packages']
-  else
-    " System vim is typically linked to a particular python version.
-    " Use the same version or modify PYTHONPATH as needed,
-    " to locate dist-packages.
-    " uv venv --system-site-packages --python-preference=system
-    let s:pythonpath = '$HOME/.vim'
-    let s:venv = ['', '/.venv', '/.venv/lib/python3.??/site-packages']
-  endif
-  call map(s:venv, {i, v -> expand(s:pythonpath .. v)})
-  if has('linux') && !empty($PIXI_IN_SHELL)
-     " If PIXI_IN_SHELL is set, then we are in a pixi shell and should add
-     " the dist-packages path for the system python.
-     " This is needed for plugins that use the system python, such as
-     " taskwiki.
-     let s:venv += [expand('/usr/local/lib/python3.??/dist-packages')]
-     let s:venv += ['/usr/lib/python3/dist-packages']
-  endif
-  if s:is_windows && has('python3_dynamic')
-    function! s:ExtractHomeFromPyvenv(cfg_path)
-      if !filereadable(a:cfg_path)
-        return ''
-      endif
-      for line in readfile(a:cfg_path)
-        if line =~ '^home\s*='
-          return matchstr(line, '=\s*\zs.*')
-        endif
-      endfor
+if has('python3_dynamic')
+  function! s:ExtractHomeFromPyvenv(cfg_path)
+    if !filereadable(a:cfg_path)
       return ''
-    endfunction
-    let s:pythonpath = s:ExtractHomeFromPyvenv(expand(s:venv[1] .. '/pyvenv.cfg'))
-    let &pythonthreedll = expand(s:pythonpath .. '/python3??.dll')
-  endif
-  if !empty($PYTHONPATH)
-    let s:venv += [$PYTHONPATH]
-  endif
-  let $PYTHONPATH = join(s:venv, s:path_separator)
+    endif
+    for line in readfile(a:cfg_path)
+      if line =~ '^home\s*='
+        return matchstr(line, '=\s*\zs.*')
+      endif
+    endfor
+    return ''
+  endfunction
+  function! s:NormalizePath(path) abort
+        return tr(resolve(fnamemodify(a:path, ':p')), '\', '/')
+  endfunction
+  let s:pythonpath = s:NormalizePath(s:ExtractHomeFromPyvenv(expand('~/vimfiles/.venv/pyvenv.cfg')))
+  let &pythonthreedll = expand(s:pythonpath .. '/python3??.dll')
 endif
 if has('python3')
+  if s:is_windows
+    " Windows:
+    let g:panvimwiki_python_path = '~/vimfiles/.venv/Lib/site-packages'
+  else
+    " Linux and macOS:
+    let g:panvimwiki_python_path = '~/.vim/.venv/lib/python3.*/site-packages'
+  endif
   try
     packadd! panvimwiki
     catch /E919: Directory not found in 'packpath'/
