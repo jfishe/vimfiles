@@ -105,6 +105,13 @@ set visualbell          "No sounds
 set writebackup
 set nobackup
 
+" $VIMRUNTIME/**/autoload/dist/vim9.vim :79-93:
+" g:Openprg defaults to 'explorer.exe' on Windows and WSL if it's in PATH,
+" 'xdg-open' on Linux, and 'open' on MacOS.
+if has('unix') && !has('macunix') && executable('xdg-open')
+  " Linux or other Unix-like system (excluding macOS)
+  let g:Openprg = 'xdg-open'
+endif
 " }}}
 " ================ Statusline ================== {{{
 set statusline=\ %<%f\ %h%m%r%{FugitiveStatusline()}%=%-14.(%l,%c%V%)\ %P
