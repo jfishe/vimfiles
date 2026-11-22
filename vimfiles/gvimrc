@@ -6,8 +6,8 @@ endif
 function! SelectBestGuiFont() " {{{
   " Preferred fonts in order (GTK/macOS names)
   let gtk_fonts = [
-        \ 'CaskaydiaCove\ Nerd\ Font\ Mono',
         \ 'CaskaydiaCove\ Nerd\ Font',
+        \ 'CaskaydiaCove\ Nerd\ Font\ Mono',
         \ 'Cascadia\ Code',
         \ 'Cascadia\ Mono',
         \ 'DejaVu\ Sans\ Mono',

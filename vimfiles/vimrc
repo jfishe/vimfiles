@@ -303,7 +303,7 @@ let g:wwdc16_transp_bg = 1
 
 " set background=dark
 " colorscheme solarized8
-colorscheme gruvbox8
+colorscheme solarized8
 
 if has('cursorshape')
   "Mode Settings
