@@ -250,10 +250,16 @@ if !has('nvim') && !has("gui_running") && &term =~# 'xterm'
   let &t_Cs = "\e[4:3m"
   let &t_ds = "\e[4:4m"
   let &t_Ds = "\e[4:5m"
-endif
-
-if !has('nvim') && !has("gui_running")
-  let g:solarized_visibility = "high"
+  " Underline color in colon form. ConPTY (WSL in Windows Terminal) misparses
+  " the semicolon forms ESC[58;2;R;G;Bm / ESC[58;5;Nm as SGR 2 (faint) /
+  " SGR 5 (blink) + stray codes.
+  let &t_8u = "\e[58:2::%lu:%lu:%lum"
+  let &t_AU = "\e[58:5:%dm"
+  " ConPTY: the cursor-position reply to t_u7 (ESC[r;cR) can arrive late and
+  " leak into the buffer as garbage.
+  if exists('$WT_SESSION')
+    let &t_u7 = ''
+  endif
 endif
 
 " solarized8 dark maps bright black (ANSI 8) to base03 = the background,
@@ -266,8 +272,38 @@ augroup solarized8_terminal
         \ | let g:terminal_ansi_colors[8] = '#586e75' | endif
 augroup END
 
+" wwdc16/gruvbox8 use cterm=underline for Spell* (undercurl only for gui).
+" With termguicolors + t_Cs/t_8u the terminal can draw the colored undercurl;
+" add bold to match the visual weight of gvim.
+function! s:SpellUndercurl() abort
+  if has('gui_running') || empty(&t_Cs)
+    return
+  endif
+  for l:group in ['SpellBad', 'SpellCap', 'SpellLocal', 'SpellRare']
+    let l:id = synIDtrans(hlID(l:group))
+    let l:attrs = filter(['italic', 'reverse', 'standout'],
+          \ {_, a -> synIDattr(l:id, a, 'cterm') ==# '1'})
+    execute 'hi' l:group 'cterm=' . join(['undercurl', 'bold'] + l:attrs, ',')
+  endfor
+endfunction
+
+augroup spell_undercurl
+  autocmd!
+  autocmd ColorScheme wwdc1*,gruvbox8*,solarized8* call s:SpellUndercurl()
+augroup END
+
 let g:solarized_termtrans = 1
-colorscheme solarized8
+let g:solarized_extra_hi_groups = 1
+
+let g:gruvbox_transp_bg = 0
+let g:gruvbox_filetype_hi_groups = 1
+let g:gruvbox_plugin_hi_groups = 1
+
+let g:wwdc16_transp_bg = 1
+
+" set background=dark
+" colorscheme solarized8
+colorscheme gruvbox8
 
 if has('cursorshape')
   "Mode Settings
