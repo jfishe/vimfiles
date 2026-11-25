@@ -257,9 +257,9 @@ if !has('nvim') && !has("gui_running") && &term =~# 'xterm'
   let &t_AU = "\e[58:5:%dm"
   " ConPTY: the cursor-position reply to t_u7 (ESC[r;cR) can arrive late and
   " leak into the buffer as garbage.
-  if exists('$WT_SESSION')
-    let &t_u7 = ''
-  endif
+  " if exists('$WT_SESSION')
+  "   let &t_u7 = ''
+  " endif
 endif
 
 " solarized8 dark maps bright black (ANSI 8) to base03 = the background,
