@@ -133,7 +133,6 @@ let b:undo_ftplugin ..= "delcommand VWS"
       \ .. ' | mapclear <buffer>'
       \ .. " | setlocal makeprg< errorformat<"
       \ .. " | setlocal spell< spelllang<"
-      \ .. " | autocmd! myvimwiki"
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

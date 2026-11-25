@@ -70,11 +70,14 @@ let s:wiki_1.index = 'main'
 let s:wiki_1.diary_sort = 'asc'
 " let s:wiki_1.syntax = 'markdown'
 " let s:wiki_1.ext = '.md'
-let s:wiki_1.automatic_nested_syntaxes = 1
-let s:wiki_1.nested_syntaxes = {'python': 'python', 'bash': 'sh',
+" Code fence language -> Vim syntax (lowercase keys). syntax/vimwiki.vim loads
+" only the languages whose fences appear in the buffer, for every wiki
+" including temporary ones.
+let g:vimwiki_nested_syntax_aliases = {
+      \ 'python': 'python', 'bash': 'sh',
       \ 'vb': 'vb',
       \ 'html': 'html',
-      \ 'DOS': 'dosbatch', 'ini': 'dosini',
+      \ 'dos': 'dosbatch', 'ini': 'dosini',
       \ 'powershell': 'ps1', 'snippets': 'snippets',
       \ 'markdown': 'pandoc',
       \ 'yaml': 'yaml'}
