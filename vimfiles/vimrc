@@ -273,8 +273,7 @@ augroup solarized8_terminal
 augroup END
 
 " wwdc16/gruvbox8 use cterm=underline for Spell* (undercurl only for gui).
-" With termguicolors + t_Cs/t_8u the terminal can draw the colored undercurl;
-" add bold to match the visual weight of gvim.
+" With termguicolors + t_Cs/t_8u the terminal can draw the colored undercurl.
 function! s:SpellUndercurl() abort
   if has('gui_running') || empty(&t_Cs)
     return
@@ -283,7 +282,7 @@ function! s:SpellUndercurl() abort
     let l:id = synIDtrans(hlID(l:group))
     let l:attrs = filter(['italic', 'reverse', 'standout'],
           \ {_, a -> synIDattr(l:id, a, 'cterm') ==# '1'})
-    execute 'hi' l:group 'cterm=' . join(['undercurl', 'bold'] + l:attrs, ',')
+    execute 'hi' l:group 'cterm=' . join(['undercurl'] + l:attrs, ',')
   endfor
 endfunction
 
@@ -302,7 +301,6 @@ let g:gruvbox_plugin_hi_groups = 1
 let g:wwdc16_transp_bg = 1
 
 " set background=dark
-" colorscheme solarized8
 colorscheme solarized8
 
 if has('cursorshape')
