@@ -242,7 +242,7 @@ if has('termguicolors')
   endtry
 endif
 
-if !has('nvim') && !has("gui_running") && &term =~# 'xterm'
+if !has('nvim') && !has("gui_running")
   " terminfo specifies Cs (cursor color) which Vim confuses for t_Cs.
   " Vim has no builtin codes for the other underline styles.
   let &t_Ce = "\e[4:0m"
