@@ -29,7 +29,7 @@ if !has('nvim') && has('syntax') && has('eval')
 endif
 " }}}
 " ================ Python 3 ====================== {{{
-if has('python3_dynamic')
+if !has('nvim') && has('python3_dynamic')
   function! s:ExtractHomeFromPyvenv(cfg_path)
     if !filereadable(a:cfg_path)
       return ''

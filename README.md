@@ -126,7 +126,8 @@ points to a compatible file.
 
 Vim configuration depends on [junegunn fzf.vim].
 
-- [fzf] a general-purpose command-line fuzzy finder and an interactive terminal toolkit
+- [fzf] a general-purpose command-line fuzzy finder and
+  an interactive terminal toolkit
 - [bat] for syntax-highlighted preview
 - If [delta] is available, `GF?`, `Commits` and `BCommits` will use it to
   format `git diff` output.
