@@ -96,6 +96,7 @@ let s:wiki_2.path = s:my_docs .. '/vimwiki_home'
 let s:wiki_2.path_html = s:wiki_2.path .. '/docs'
 let s:wiki_2.css_name = 'css/style.css'
 let s:wiki_2.template_path = s:wiki_2.path .. '/templates'
+let s:wiki_2.base_url = 'https://jfishe.github.io/vimwiki/'
 " }}}
 " Zettelkasten vimwiki {{{
 let s:wiki_3 = copy(s:wiki_1)
